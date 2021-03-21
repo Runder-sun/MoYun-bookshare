@@ -1,0 +1,65 @@
+tr
+{line-height:20px}
+
+tr.s_item
+{
+	overflow: hidden;
+	list-style-type:none;
+	border-top: 1px dashed rgb(192,192,192);
+	padding: 20px 0px 10px;
+	}
+td.pic
+{
+	float: left;
+	margin-right:20px;
+	margin-top:20px;
+}
+td.td_row
+{
+	float: left;
+	margin-left:20px;
+}
+.tr_row
+{
+	width:60%;
+	float: left;
+	margin-left:20px;
+}
+tr.s_item.pub
+{
+	margin: 6px 0px 8px;
+}
+tr.s_item2
+{
+	overflow: hidden;
+	list-style-type:none;
+	padding-bottom:5px;
+}
+.tdstyle
+{
+	padding-top:10px;
+	padding-left:50px;
+}
+.tdstyle2
+{
+	padding-top:10px;
+	padding-left:70px;
+	padding-bottom:10px;
+}
+.tbstyle
+{
+	margin-top:0px;
+}
+.td_pad
+{
+	float:left;
+	padding-left:20px;
+	margin-top:20px;
+	width:60%;
+}
+.td_bunengren
+{
+    width: 40%;
+    top: 0px; 
+    left: 0px;
+}

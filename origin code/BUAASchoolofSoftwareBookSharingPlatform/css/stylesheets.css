@@ -1,0 +1,297 @@
+@import "bootstrap/bootstrap.min.css";
+@import "bootstrap/bootstrap-responsive.min.css";
+@import "bootstrap/bootstrap-fileupload.css";
+@import "jquery/ui.css";
+@import "epiechart/jquery.easy-pie-chart.css";
+@import "fancybox/jquery.fancybox.css";
+@import "uniform/uniform.css";
+@import "select/select.css";
+@import "tagsinput/jquery.tagsinput.css";
+@import "multiselect/multiselect.css";
+@import "validation/validationEngine.jquery.css";
+@import "stepywizard/jquery.stepy.css";
+@import "mcustomscrollbar/mCustomScrollbar.css";
+@import "cleditor/cleditor.css";
+@import "shbrush/shCoreDefault.css";
+@import "shbrush/shThemeDefault.css";
+@import "../js/plugins/plupload/jquery.plupload.queue/css/jquery.plupload.queue.css";
+@import "icons.css";
+@import "styling.css";
+@import "stylesheet.css";
+@import "opera.css";
+@import "mystyles.css";
+@import "renstyle.css";
+
+html { height: 100%; }
+body { min-height: 100%; font-family: "Segoe UI", arial, sans-serif; font-size: 12px; position: relative; background: url('../img/backgrounds/default.jpg') left top repeat;}
+
+
+/*~Smartphones (portrait and landscape)~*/
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {    
+    .data, .data-fluid{ overflow: hidden; overflow-x: scroll; }    
+}
+
+/*~Smartphones (landscape)~*/
+@media only screen and (min-width : 321px) {
+    
+}
+
+/*~Smartphones (portrait)~*/
+@media only screen and (max-width : 320px) {
+    
+}
+
+@media only screen and (max-width: 767px){
+    .body .navigation > li{position: relative;}
+    .body .navigation > li .sub{left: 0px; top: 70px; z-index: 100; padding: 0px;}
+        .body .navigation > li .sub li{float: left; background: #F5F5F5; margin: 0px;}
+        .body .navigation > li .sub li a{padding: 5px 10px; width: 180px; float: left;}
+    .popup.active{position: fixed; left: 50%; margin-left: -150px;}        
+}
+
+@media only screen and (max-width: 768px){
+    body{padding: 0px;}
+        
+        .body .navigation .button{width: 55px; height: 55px; }
+        .body .navigation .arrow{display: none;}
+        .body .navigation .button .icon{width: 55px; height: 44px; margin: 0px; border: 0px;}
+        .body .navigation .button .name{font-size: 10px;}
+    
+    .data, .data-fluid{ overflow: hidden; overflow-x: scroll; }
+    .body .content .widget{margin-bottom: 0px;}
+    .body .content .widget:nth-child(1n){margin-right: 3px;}
+    
+}
+
+@media only screen and (max-width: 1023px) {    
+    
+    .body .navigation .button{width: 55px; height: 55px; }
+    .body .navigation .arrow{display: none;}
+    .body .navigation .button .icon{width: 55px; height: 44px; margin: 0px; border: 0px;}
+    .body .navigation .button .name{font-size: 10px;}        
+    
+}
+
+/*~iPads (portrait and landscape)~*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+    .body .navigation .button .icon{padding-top: 4px; height: 41px;}    
+    .body .content .widget{margin-bottom: 0px;}
+    .body .content .widget:nth-child(2n){margin-right: 0px;}
+}
+
+
+
+@media only screen and (max-width: 1024px) {
+    .wrapper{margin: 0px 10px;}
+    .body{margin-left: 0px; padding-left: 0px; margin-top: 0px; z-index: 10;}
+    
+    .sidebar{left: 0px; top: 10px; width: 100%; z-index: 20; display: none; background: url('../img/wpoint8.png') left top repeat;}
+    .sidebar .close{display: block;}
+        .sidebar .top, .sidebar .widget{display: none;}        
+        .sidebar .navigation{float: left; width: 100%;}
+            .sidebar .navigation li{padding: 3px 10px; width: 100%; }
+            .sidebar .navigation > li > a, .sidebar .navigation li ul,
+            .sidebar .navigation li ul li,.sidebar .navigation li ul li a{width: 100%;}
+                .sidebar .navigation li ul{display: none;}
+                    .sidebar .navigation li.active ul{display: block; float: left;}
+                .sidebar .navigation li ul li{clear: both;}
+          
+    .body .navigation{height: auto;}
+    .body .navigation .buttons .sbutton.navButton{display: inline-block;}
+    
+}
+
+@media only screen and (max-width: 1279px) {
+    .wrapper.fixed{width: auto; margin: 0px 10px;}
+}
+.wrapper .sidebar .nContainer .navigation .active .blblue {
+	font-family: 微软雅黑, 仿宋;
+}
+.wrapper .sidebar .nContainer .navigation li .blyellow {
+	font-family: 微软雅黑, 仿宋;
+}
+.wrapper .sidebar .nContainer .navigation li .blgreen {
+	font-family: 微软雅黑, 仿宋;
+}
+.wrapper .sidebar .nContainer .navigation li .blpurple {
+	font-family: 微软雅黑, 仿宋;
+}
+.wrapper .sidebar .nContainer .navigation li .blorange {
+	font-family: 微软雅黑, 仿宋;
+}
+
+
+.body .arti_content {
+	position: relative;
+	border-width: 0px 0px 1px;
+	margin-bottom: 15px;
+	vertical-align: top;
+	padding-left: 65px;
+	min-height: 88px;
+	overflow: hidden;
+	list-style-type: none;
+	border-top: 1px dashed rgb(192,192,192);
+	border-bottom: 1px dashed rgb(192,192,192);
+	border-left:1px dashed rgb(192,192,192);
+	border-right:1px dashed rgb(192,192,192);
+}
+.body .f_side {
+	padding-bottom: 20px;
+	position: absolute;
+	text-align: center;
+	top: 5px;
+	left: 0px;
+}
+.body .box{
+	margin: 0px;
+	padding-left:10px;
+	padding-bottom:5px;
+	padding-top:5px;
+	font-size:11pt;
+	color:#333;
+}
+.body .box_small{
+	margin: 0px;
+	padding-top:8px;
+	padding-left:20px;
+	font-size:9pt;
+}
+}
+.body  .f_detail {
+    line-height: 22px;
+    margin-bottom: 5px;
+    position: relative;
+	
+}
+.body  .c_tx3 {
+	font-size:11pt;
+	margin-right: 10px;
+    color: rgb(155, 155, 155);
+	}
+.body .ui_mr10 {
+    margin-right: 15px;
+	color:#DAA569;
+}
+.body.img_box{
+	margin-top: 10px;
+	margin-left:25px;
+	padding-bottom: 3px;	
+}
+.body .img_style{
+	display: block;
+	border: 0px none;
+	font-size: 0px;
+	width: 50px;
+	height: 50px;
+	overflow: hidden;
+	vertical-align: top;
+	border-radius: 4px 4px 4px 4px;
+}
+
+.body.info
+{
+	overflow: hidden;
+	color: rgb(102, 102, 102);	
+}
+.date
+{
+	width: 8em;
+}
+.tags{
+line-height: 1.2;
+}
+.p_style
+{
+	margin-left:20px;
+	padding:20px 0px 10px;
+}
+.a_style
+{
+	font-size:16px;
+	color:rgb(0, 154, 215);
+	font-family: 微软雅黑;
+}
+.a_style2
+{
+	margin-left:10px;
+	font-size:14px;
+	color:#fff;
+	font-family: 微软雅黑;
+}
+.a_style3
+{
+	margin-left:10px;
+	font-size:14px;
+	color:#808A87;
+	font-family: 微软雅黑;
+}
+.write_comment
+{
+	float:right;
+	margin-right:30px;
+	margin-top:20px;
+	padding-top:5px;
+	background-color:#FF9912;
+	font-size:13px;
+	width: 60px;
+	height: 30px;
+	border-radius: 4px 4px 4px 4px;
+}
+.list_items
+{
+	overflow: hidden;
+	border-top: 1px dashed rgb(221, 221, 221);
+	padding: 5px 0px 5px;
+}
+.list_comment
+{
+	float: left;    color: rgb(155, 155, 155);	
+}
+.list_date
+{
+	float: right;    color: rgb(155, 155, 155);	
+	font-family: 微软雅黑;
+	margin-left:10px;
+	font-size:14px;
+	color:#808A87;
+}
+.table_style
+{
+	font-size: 18px;
+	font-family: 微软雅黑;
+	margin-top: 10px;	
+	border-collapse: collapse;
+	border-spacing: 0px;
+	width:100%;
+}
+.td_style
+{
+	padding-top:10px;
+	padding-left:20px;
+	width:18%;
+}
+.td_style2
+{
+	padding-top:10px;
+	padding-left:10px;
+}
+.td_style3
+{
+	padding-top:10px;
+	padding-left:250px;
+}
+.row_block
+{
+	float: left;
+	width: 100%;
+}
+.block_blue
+{
+	background: none repeat scroll 0% 0% rgb(0, 154, 215) !important;
+	height:40px;
+	border-radius: 5px 5px 0px 0px;
+	font-family: 微软雅黑;
+	font-size:12pt;
+	color:#FFF;
+	padding-top:3px;
+}

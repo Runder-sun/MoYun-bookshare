@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BookSharing" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=JEANY-DELL;Initial Catalog=BookSharing;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="BookSharingConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.A" Member="A">
+    <Type Name="A">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Blog" Member="Blog">
+    <Type Name="Blog">
+      <Column Name="BlogID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="VisitNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Blog_BlogComment" Member="BlogComment" ThisKey="BlogID" OtherKey="BlogID" Type="BlogComment" />
+      <Association Name="User_Blog" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BlogComment" Member="BlogComment">
+    <Type Name="BlogComment">
+      <Column Name="BlogCommentID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BlogID" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="Blog_BlogComment" Member="Blog" ThisKey="BlogID" OtherKey="BlogID" Type="Blog" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Book" Member="Book">
+    <Type Name="Book">
+      <Column Name="BookID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Author" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ISBN" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Publisher" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DoubanLink" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CoverImagePath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="SourcePath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="BriefIntroduction" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Score" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="EvaluationNumbers" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Book_BookReview" Member="BookReview" ThisKey="BookID" OtherKey="BookID" Type="BookReview" />
+      <Association Name="Book_BookWarehouse" Member="BookWarehouse" ThisKey="BookID" OtherKey="BookID" Type="BookWarehouse" />
+      <Association Name="User_Book" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BookReview" Member="BookReview">
+    <Type Name="BookReview">
+      <Column Name="BookReviewID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BookID" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Score" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="EvaluationNumbers" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BookName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="BookReview_BookReviewComment" Member="BookReviewComment" ThisKey="BookReviewID" OtherKey="BookReviewID" Type="BookReviewComment" />
+      <Association Name="Book_BookReview" Member="Book" ThisKey="BookID" OtherKey="BookID" Type="Book" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_BookReview" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BookReviewComment" Member="BookReviewComment">
+    <Type Name="BookReviewComment">
+      <Column Name="BookReviewCommentID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BookReviewID" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="BookReview_BookReviewComment" Member="BookReview" ThisKey="BookReviewID" OtherKey="BookReviewID" Type="BookReview" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_BookReviewComment" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BookWarehouse" Member="BookWarehouse">
+    <Type Name="BookWarehouse">
+      <Column Name="BookWareHouseID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="QuanZiID" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="BookID" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Book_BookWarehouse" Member="Book" ThisKey="BookID" OtherKey="BookID" Type="Book" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="QuanZi_BookWarehouse" Member="QuanZi" ThisKey="QuanZiID" OtherKey="QuanZiID" Type="QuanZi" IsForeignKey="true" />
+      <Association Name="User_BookWarehouse" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Forum" Member="Forum">
+    <Type Name="Forum">
+      <Column Name="ForumID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Theme" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="QuanZiID" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Association Name="Forum_Participant" Member="Participant" ThisKey="ForumID" OtherKey="ForumID" Type="Participant" />
+      <Association Name="QuanZi_Forum" Member="QuanZi" ThisKey="QuanZiID" OtherKey="QuanZiID" Type="QuanZi" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_Forum" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LeaveMessage" Member="LeaveMessage">
+    <Type Name="LeaveMessage">
+      <Column Name="LeaveMessageID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="HostID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="LeaveMessage_LeaveMessageReply" Member="LeaveMessageReply" ThisKey="LeaveMessageID" OtherKey="LeaveMessageID" Type="LeaveMessageReply" />
+      <Association Name="User_LeaveMessage" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LeaveMessageReply" Member="LeaveMessageReply">
+    <Type Name="LeaveMessageReply">
+      <Column Name="LeaveMessageReplyID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LeaveMessageID" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="LeaveMessage_LeaveMessageReply" Member="LeaveMessage" ThisKey="LeaveMessageID" OtherKey="LeaveMessageID" Type="LeaveMessage" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_LeaveMessageReply" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Letter" Member="Letter">
+    <Type Name="Letter">
+      <Column Name="LetterID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="HyperLink" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="User_Letter" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.News" Member="News">
+    <Type Name="News">
+      <Column Name="NewsID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="QuanZiID" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="HyperLink" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Association Name="QuanZi_News" Member="QuanZi" ThisKey="QuanZiID" OtherKey="QuanZiID" Type="QuanZi" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="User_News" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Participant" Member="Participant">
+    <Type Name="Participant">
+      <Column Name="ParticipantID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ForumID" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="Forum_Participant" Member="Forum" ThisKey="ForumID" OtherKey="ForumID" Type="Forum" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="User_Participant" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QuanZi" Member="QuanZi">
+    <Type Name="QuanZi">
+      <Column Name="QuanZiID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="DateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="QuanZiName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatorCourse" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CreatorTel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CreatorAddress" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="QuanZi_BookWarehouse" Member="BookWarehouse" ThisKey="QuanZiID" OtherKey="QuanZiID" Type="BookWarehouse" />
+      <Association Name="QuanZi_Forum" Member="Forum" ThisKey="QuanZiID" OtherKey="QuanZiID" Type="Forum" />
+      <Association Name="QuanZi_News" Member="News" ThisKey="QuanZiID" OtherKey="QuanZiID" Type="News" />
+      <Association Name="User_QuanZi" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="User">
+    <Type Name="User">
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Sex" Type="System.String" DbType="NChar(2)" CanBeNull="true" />
+      <Column Name="UserImagePath" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Birthday" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BriefIntroduction" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="[Identity]" Member="Identity" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="QuanZiID" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Signature" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="SecurityQ" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecurityA" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FavBookCate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Grade" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="User_Blog" Member="Blog" ThisKey="UserID" OtherKey="UserID" Type="Blog" />
+      <Association Name="User_Book" Member="Book" ThisKey="UserID" OtherKey="UserID" Type="Book" />
+      <Association Name="User_BookReview" Member="BookReview" ThisKey="UserID" OtherKey="UserID" Type="BookReview" />
+      <Association Name="User_BookReviewComment" Member="BookReviewComment" ThisKey="UserID" OtherKey="UserID" Type="BookReviewComment" />
+      <Association Name="User_BookWarehouse" Member="BookWarehouse" ThisKey="UserID" OtherKey="UserID" Type="BookWarehouse" />
+      <Association Name="User_Forum" Member="Forum" ThisKey="UserID" OtherKey="UserID" Type="Forum" />
+      <Association Name="User_LeaveMessage" Member="LeaveMessage" ThisKey="UserID" OtherKey="UserID" Type="LeaveMessage" />
+      <Association Name="User_LeaveMessageReply" Member="LeaveMessageReply" ThisKey="UserID" OtherKey="UserID" Type="LeaveMessageReply" />
+      <Association Name="User_Letter" Member="Letter" ThisKey="UserID" OtherKey="UserID" Type="Letter" />
+      <Association Name="User_News" Member="News" ThisKey="UserID" OtherKey="UserID" Type="News" />
+      <Association Name="User_Participant" Member="Participant" ThisKey="UserID" OtherKey="UserID" Type="Participant" />
+      <Association Name="User_QuanZi" Member="QuanZi" ThisKey="UserID" OtherKey="UserID" Type="QuanZi" />
+      <Association Name="User_VisitRecord" Member="VisitRecord" ThisKey="UserID" OtherKey="UserID" Type="VisitRecord" />
+      <Association Name="User_VisitRecord1" Member="VisitRecord1" ThisKey="UserID" OtherKey="HostID" Type="VisitRecord" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VisitRecord" Member="VisitRecord">
+    <Type Name="VisitRecord">
+      <Column Name="VisitID" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="HostID" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="User_VisitRecord" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+      <Association Name="User_VisitRecord1" Member="User1" ThisKey="HostID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
