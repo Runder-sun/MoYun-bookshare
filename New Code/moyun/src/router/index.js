@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 
+const Admin = () => import("../views/Admin.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -19,6 +20,11 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+  {
+    path:"/Admin",
+    name:"Admin",
+    component:Admin,
+  }
 ];
 
 const router = new VueRouter({
