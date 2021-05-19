@@ -3,11 +3,14 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 
 const Admin = () => import("../views/Admin.vue");
+const Login = () => import("../views/Login.vue");
+const Register = () => import("../views/Register.vue");
+const ForgetPassword = () => import("../views/ForgetPassword.vue");
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/Home",
     name: "Home",
     component: Home,
   },
@@ -24,7 +27,22 @@ const routes = [
     path:"/Admin",
     name:"Admin",
     component:Admin,
-  }
+  },
+  {
+    path:"/Login",
+    name:"Login",
+    component:Login,
+  },
+  {
+    path:"/Register",
+    name:"Register",
+    component:Register,
+  },
+  {
+    path:"/ForgetPassword",
+    name:"ForgetPassword",
+    component:ForgetPassword,
+  },
 ];
 
 const router = new VueRouter({
