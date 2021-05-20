@@ -25,7 +25,7 @@
                 class="button"
                 @click="validate"
                 large
-                href="/Home"
+                href="/"
               >
                 <p class="login_">登录</p>
               </v-btn>
