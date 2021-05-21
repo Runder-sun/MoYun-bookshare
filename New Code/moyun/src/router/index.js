@@ -6,6 +6,10 @@ const Admin = () => import("../views/Admin.vue");
 const Login = () => import("../views/Login.vue");
 const Register = () => import("../views/Register.vue");
 const ForgetPassword = () => import("../views/ForgetPassword.vue");
+const GroupList = () => import("../views/GroupList.vue");
+const GroupIndex = () => import("../views/GroupIndex.vue");
+const CreatGroup = () => import("../views/CreateGroup.vue");
+const AllGroup = () => import("../views/AllGroup.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -42,6 +46,26 @@ const routes = [
     path:"/ForgetPassword",
     name:"ForgetPassword",
     component:ForgetPassword,
+  },
+  {
+    path:"/Group/GroupList",
+    name:"GroupList",
+    component:GroupList,
+  },
+  {
+    path:"/Group/GroupIndex",
+    name:"GroupIndex",
+    component:GroupIndex,
+  },
+  {
+    path:"/Group/CreatGroup",
+    name:"CreatGroup",
+    component:CreatGroup,
+  },
+  {
+    path:"/Group/AllGroup",
+    name:"AllGroup",
+    component:AllGroup,
   },
 ];
 
