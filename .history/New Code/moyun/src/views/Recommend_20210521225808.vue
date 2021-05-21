@@ -4,19 +4,18 @@
     
       <v-row>
       <sideBar></sideBar>
-      <v-container class="pa-4 text-center" style="margin-top:80px" color="transparent" justify="space-around" width="1100px" rounded>
+      <v-container class="pa-4 text-center" style="margin-top:30px">
 
         <v-tabs
           v-model="tab"
+          background-color="transparent"
           grow
-          color="blue lighten-2"
-          height="50px"
         >
-          <v-tab class="font-weight-black">圈子</v-tab>
-          <v-tab class="font-weight-black">书籍</v-tab>
+          <v-tab>圈子</v-tab>
+          <v-tab>书籍</v-tab>
 
            <v-tab-item>
-            <v-container class="pa-4 text-center" style="margin-left:100px">
+            <v-container class="pa-4 text-center">
             <v-row class="fill-height" align="center" justify="center">
               <template v-for="(group, i) in groups">
                 <v-col :key="i" cols="12" md="3" >
@@ -24,10 +23,9 @@
                     <v-card
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
-                      width="250px"
-                      align="center"
+                      width=300
                     >
-                      <v-img :src="group.img" height="200px" >
+                      <v-img :src="group.img" height="225px">
                         <v-card-title class="title white--text">
                           <v-row
                             class="fill-height flex-column"
@@ -71,7 +69,7 @@
           </v-tab-item>
 
           <v-tab-item>
-            <v-container class="pa-4 text-center" style="margin-left:100px">
+            <v-container class="pa-4 text-center">
             <v-row class="fill-height" align="center" justify="center">
               <template v-for="(book, i) in books">
                 <v-col :key="i" cols="12" md="3" >
@@ -79,8 +77,7 @@
                     <v-card
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
-                      width="250px"
-                      align="center"
+                      width=300
                     >
                       <v-img :src="book.img" height="225px">
                         <v-card-title class="title white--text">
@@ -195,74 +192,38 @@ import sideBar from"../components/MSGSideBar.vue";
         subtext: "Chill beats to mellow you out.",
         img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
       },
-      {
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
     ],
     books:[
       {
         title: "Little Prince",
-        text: "Story",
+        text: "Ambient Bass",
         subtext: "An adventure and a love scene",
-        img: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
-      },
-      {
-        title: "Little Prince",
-        text: "Novel",
-        subtext: "An adventure and a love scene",
-        img: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
+        img: url("../assets/prince.jpg"),
       },
       {
         title: "Little Prince",
         text: "Ambient Bass",
         subtext: "An adventure and a love scene",
-        img: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
+        img: "https://cn.bing.com/images/search?view=detailV2&ccid=GriWYgSz&id=A4B2DE1A4B52B7350B7AE7C642336CA5626B6529&thid=OIP.GriWYgSzSI6tON4U1tngcAHaKg&mediaurl=https%3a%2f%2fimg.zcool.cn%2fcommunity%2f01af1a561d147b6ac7255b14d7162c.jpg%401280w_1l_2o_100sh.jpg&exph=1816&expw=1280&q=%e5%b0%8f%e7%8e%8b%e5%ad%90&simid=608031721254885322&ck=149A5244EDB63BB10E344FE9C2FE95A2&selectedIndex=10&FORM=IRPRST&ajaxhist=0&ajaxserp=0",
       },
       {
         title: "Little Prince",
         text: "Ambient Bass",
         subtext: "An adventure and a love scene",
-        img: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
+        img: "https://cn.bing.com/images/search?view=detailV2&ccid=GriWYgSz&id=A4B2DE1A4B52B7350B7AE7C642336CA5626B6529&thid=OIP.GriWYgSzSI6tON4U1tngcAHaKg&mediaurl=https%3a%2f%2fimg.zcool.cn%2fcommunity%2f01af1a561d147b6ac7255b14d7162c.jpg%401280w_1l_2o_100sh.jpg&exph=1816&expw=1280&q=%e5%b0%8f%e7%8e%8b%e5%ad%90&simid=608031721254885322&ck=149A5244EDB63BB10E344FE9C2FE95A2&selectedIndex=10&FORM=IRPRST&ajaxhist=0&ajaxserp=0",
       },
       {
         title: "Little Prince",
         text: "Ambient Bass",
         subtext: "An adventure and a love scene",
-        img: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
-      },
-      {
-        title: "Little Prince",
-        text: "Story",
-        subtext: "An adventure and a love scene",
-        img: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
-      },
-      {
-        title: "Little Prince",
-        text: "Novel",
-        subtext: "An adventure and a love scene",
-        img: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
+        img: "https://cn.bing.com/images/search?view=detailV2&ccid=GriWYgSz&id=A4B2DE1A4B52B7350B7AE7C642336CA5626B6529&thid=OIP.GriWYgSzSI6tON4U1tngcAHaKg&mediaurl=https%3a%2f%2fimg.zcool.cn%2fcommunity%2f01af1a561d147b6ac7255b14d7162c.jpg%401280w_1l_2o_100sh.jpg&exph=1816&expw=1280&q=%e5%b0%8f%e7%8e%8b%e5%ad%90&simid=608031721254885322&ck=149A5244EDB63BB10E344FE9C2FE95A2&selectedIndex=10&FORM=IRPRST&ajaxhist=0&ajaxserp=0",
       },
       {
         title: "Little Prince",
         text: "Ambient Bass",
         subtext: "An adventure and a love scene",
-        img: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
-      },
+        img: "https://cn.bing.com/images/search?view=detailV2&ccid=GriWYgSz&id=A4B2DE1A4B52B7350B7AE7C642336CA5626B6529&thid=OIP.GriWYgSzSI6tON4U1tngcAHaKg&mediaurl=https%3a%2f%2fimg.zcool.cn%2fcommunity%2f01af1a561d147b6ac7255b14d7162c.jpg%401280w_1l_2o_100sh.jpg&exph=1816&expw=1280&q=%e5%b0%8f%e7%8e%8b%e5%ad%90&simid=608031721254885322&ck=149A5244EDB63BB10E344FE9C2FE95A2&selectedIndex=10&FORM=IRPRST&ajaxhist=0&ajaxserp=0",
+      }
     ]
     }),
     components:{

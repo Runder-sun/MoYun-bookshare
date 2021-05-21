@@ -8,13 +8,13 @@
             <div class="word" v-if="!itemc.mineMsg">
                 <img :src="itemc.headUrl">
                 <div class="info">
-                        <p class="time">{{itemc.nickName}} </p>
+                        <p class="time">{{itemc.nickName}}  {{chatTime(itemc.timestamp)}}</p>
                         <div class="info-content">{{itemc.contactText}}</div>
                 </div>
             </div>
             <div class="word-my" v-else>
                 <div class="info">
-                        <p class="time">{{itemc.nickName}} </p>
+                        <p class="time">{{itemc.nickName}}  {{chatTime(itemc.timestamp)}}</p>
                         <div class="info-content">{{itemc.contactText}}</div>
                 </div>
                 <img :src="itemc.headUrl">
@@ -25,6 +25,7 @@
         </v-container>          
   </div>
 
+  
 </template>
 
 

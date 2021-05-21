@@ -7,6 +7,7 @@
   
         floating
         permanent
+        max-width=10%
       elevate-on-scroll
         expand-on-hover
       >
@@ -14,50 +15,57 @@
           :default-active="activeIndex"
           dense
           rounded
-          align="center"
-          justify="center"
-          height=50%
         >
           <v-list-item
-           style="margin-top:200px;"
+           style="margin-top:70px;"
            @click="toFriend"
-           class="px-2"
           >
 
-            <v-list-item-icon >
+            <v-col >
+            <v-row style="margin-bottom:15px;margin-top:20px; " align="center">
+            <v-list-item-icon style="margin-left:15px">
               <v-icon>mdi-message-text</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="font-italic">Friends</v-list-item-title>
             </v-list-item-content>
+            </v-row>
+            <v-divider></v-divider>
+            </v-col>
           </v-list-item>
 
           <v-list-item
             link
             @click="toSystem"
-            class="px-2"
-            style="margin-top:15px"
           >
-            <v-list-item-icon >
+            <v-col>
+            <v-row style="margin-bottom:15px; margin-top:10px;" align="center">
+            <v-list-item-icon style="margin-left:15px">
               <v-icon>mdi-view-dashboard</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="font-italic">System</v-list-item-title>
             </v-list-item-content>
+            </v-row>
+            <v-divider></v-divider>
+            </v-col>
           </v-list-item>
 
           <v-list-item
             link
             @click="toRec"
-            class="px-2"
-            style="margin-top:15px"
           >
-            <v-list-item-icon >
+            <v-col>
+            <v-row style="margin-bottom:15px; margin-top:10px;" align="center">
+            <v-list-item-icon style="margin-left:15px">
               <v-icon>mdi-heart</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title class="font-italic">Recommendations</v-list-item-title>
             </v-list-item-content>
+            </v-row>
+            <v-divider></v-divider>
+            </v-col>
           </v-list-item>
          <router-view />
         </v-list>
@@ -112,10 +120,11 @@ import bar from"../components/Bar";
 
 <style lang="scss" scoped>
 .left{
+    width: 250px;
     height: 100%;
     z-index: 100;
     display: flex;
-    background-color:rgb(220, 228, 220);
+    background-color:honeydew;
     box-shadow: 5px 0 8px -4px #000;
     }
  

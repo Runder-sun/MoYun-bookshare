@@ -4,7 +4,7 @@
     
       <v-row>
       <sideBar></sideBar>
-      <v-container class="pa-4 text-center" style="margin-top:80px" color="transparent" justify="space-around" width="1100px" rounded>
+      <v-container class="pa-4 text-center" style="margin-top:100px" color="transparent" justify="space-around" width="1100px" rounded>
 
         <v-tabs
           v-model="tab"

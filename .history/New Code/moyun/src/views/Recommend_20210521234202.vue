@@ -4,7 +4,7 @@
     
       <v-row>
       <sideBar></sideBar>
-      <v-container class="pa-4 text-center" style="margin-top:80px" color="transparent" justify="space-around" width="1100px" rounded>
+      <v-container class="pa-4 text-center" style="margin-top:50px" color="transparent" justify="space-around" width="1100px" rounded>
 
         <v-tabs
           v-model="tab"
@@ -27,7 +27,7 @@
                       width="250px"
                       align="center"
                     >
-                      <v-img :src="group.img" height="200px" >
+                      <v-img :src="group.img" height="225px" >
                         <v-card-title class="title white--text">
                           <v-row
                             class="fill-height flex-column"

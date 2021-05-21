@@ -24,7 +24,7 @@
            class="px-2"
           >
 
-            <v-list-item-icon >
+            <v-list-item-icon style="margin-top:15px">
               <v-icon>mdi-message-text</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
@@ -36,9 +36,8 @@
             link
             @click="toSystem"
             class="px-2"
-            style="margin-top:15px"
           >
-            <v-list-item-icon >
+            <v-list-item-icon style="margin-top:15px">
               <v-icon>mdi-view-dashboard</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
@@ -50,9 +49,8 @@
             link
             @click="toRec"
             class="px-2"
-            style="margin-top:15px"
           >
-            <v-list-item-icon >
+            <v-list-item-icon style="margin-left:15px">
               <v-icon>mdi-heart</v-icon>
             </v-list-item-icon>
             <v-list-item-content>

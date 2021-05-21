@@ -14,17 +14,13 @@
           :default-active="activeIndex"
           dense
           rounded
-          align="center"
-          justify="center"
-          height=50%
         >
           <v-list-item
-           style="margin-top:200px;"
+           style="margin-top:70px;"
            @click="toFriend"
-           class="px-2"
           >
 
-            <v-list-item-icon >
+            <v-list-item-icon style="margin-left:15px">
               <v-icon>mdi-message-text</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
@@ -35,10 +31,8 @@
           <v-list-item
             link
             @click="toSystem"
-            class="px-2"
-            style="margin-top:15px"
           >
-            <v-list-item-icon >
+            <v-list-item-icon style="margin-left:15px">
               <v-icon>mdi-view-dashboard</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
@@ -49,10 +43,8 @@
           <v-list-item
             link
             @click="toRec"
-            class="px-2"
-            style="margin-top:15px"
           >
-            <v-list-item-icon >
+            <v-list-item-icon style="margin-left:15px">
               <v-icon>mdi-heart</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
