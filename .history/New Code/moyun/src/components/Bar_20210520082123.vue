@@ -10,17 +10,17 @@
         :default-active="activeIndex"
         class="menu"
         mode="horizontal"
-        router
+        
         @select="handleSelect"
       >
-        <el-menu-item index="/">首页</el-menu-item>
+        <el-menu-item index="1" v-on:click="toHome">首页</el-menu-item>
         <el-submenu index="2">
           <template slot="title">书库</template>
           <el-menu-item index="2-1">书评</el-menu-item>
           <el-menu-item index="2-2">书籍</el-menu-item>
         </el-submenu>
         <el-menu-item index="3">圈子</el-menu-item>
-        <el-menu-item index="/updates">动态</el-menu-item>
+        <el-menu-item index="4" v-on:click="toUpdates">动态</el-menu-item>
         <router-view />
       </el-menu>
       <v-row justify="end">
@@ -45,7 +45,7 @@
                 <v-divider class="my-3"></v-divider>
                 <v-btn depressed rounded text> 个人主页 </v-btn>
                 <v-divider class="my-3"></v-divider>
-                <v-btn depressed rounded text v-on:click="toMsg"> 消息 </v-btn>
+                <v-btn depressed rounded text> 消息 </v-btn>
                 <v-divider class="my-3"></v-divider>
                 <v-btn depressed rounded text> 日志 </v-btn>
                 <v-divider class="my-3"></v-divider>
@@ -63,8 +63,11 @@
 export default {
   name:"Bar",
   methods:{
-    toMsg(){
-      this.$router.push({path:"/messageListFromFriend"});
+    toUpdates(){
+      this.$router.push({path:"/updates"});
+    },
+    toHome(){
+      this.$router.push({path:"/"});
     }
   }
 }

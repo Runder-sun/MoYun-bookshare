@@ -32,10 +32,10 @@ const routes = [
     import("../views/Updates.vue"),
   },
   {
-    path:"/message",
-    name:"Message",
+    path:"/updates/blockPerson",
+    name:"BlockPerson",
     component: () =>
-    import("../views/Message.vue"),
+    import("../views/BlockPerson.vue"),
   },
   {
     path:"/messageListFromFriend",
@@ -51,9 +51,9 @@ const routes = [
   },
   {
     path:"/recommend",
-    name:"Recommend",
+    name:"MessageListFromFriend",
     component: () =>
-    import("../views/Recommend.vue"),
+    import("../views/MessageListFromFriend.vue"),
   },
   {
     path:"/updates/block",

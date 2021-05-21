@@ -63,6 +63,12 @@
 export default {
   name:"Bar",
   methods:{
+    toUpdates(){
+      this.$router.push({path:"/updates"});
+    },
+    toHome(){
+      this.$router.push({path:"/"});
+    },
     toMsg(){
       this.$router.push({path:"/messageListFromFriend"});
     }
