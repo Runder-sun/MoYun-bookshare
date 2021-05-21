@@ -4,7 +4,6 @@
       elevate-on-scroll
       color="write"
       light
-      
     >
       <el-menu
         :default-active="activeIndex"
@@ -12,6 +11,7 @@
         mode="horizontal"
         router
         @select="handleSelect"
+        background-color="#efeeee"
       >
         <el-menu-item index="/">首页</el-menu-item>
         <el-submenu index="2">
@@ -19,9 +19,8 @@
           <el-menu-item index="2-1">书评</el-menu-item>
           <el-menu-item index="2-2">书籍</el-menu-item>
         </el-submenu>
-        <el-menu-item index="3">圈子</el-menu-item>
+        <el-menu-item index="/Group/GroupList" >圈子</el-menu-item>
         <el-menu-item index="/updates">动态</el-menu-item>
-        <router-view />
       </el-menu>
       <v-row justify="end">
         <v-menu bottom min-width="200px" round offset-y>
