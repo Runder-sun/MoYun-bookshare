@@ -11,8 +11,6 @@ const GroupIndex = () => import("../views/GroupIndex.vue");
 const CreatGroup = () => import("../views/CreateGroup.vue");
 const AllGroup = () => import("../views/AllGroup.vue");
 const BlogList = () => import("../views/BlogList.vue");
-const WriteBlog = () => import("../views/WriteBlog.vue");
-const PersonalCollection = () => import("../views/PersonalCollection.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -109,16 +107,6 @@ const routes = [
     path:"/BlogList",
     name:"BlogList",
     component:BlogList,
-  },
-  {
-    path:"/BlogList/PersonalCollection",
-    name:"PersonalCollection",
-    component:PersonalCollection,
-  },
-  {
-    path:"/BlogList/WriteBlog",
-    name:"WriteBlog",
-    component:WriteBlog,
   },
 ];
 

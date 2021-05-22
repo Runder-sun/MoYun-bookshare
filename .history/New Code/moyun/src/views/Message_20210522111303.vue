@@ -5,8 +5,8 @@
         <sideBar></sideBar>
         <v-card
             color="grey lighten-4"
-            height="780px"
-            width="1300px"
+            height="900px"
+            width="1100px"
             rounded
             align="center"
             justify="center"
@@ -52,9 +52,9 @@
                 </v-col>
                 </v-row>
             </div>
-            <v-card-action>
-            <v-form align="bottom">
-                <v-container >
+
+            <v-form >
+                <v-container bottom>
                 <v-row>
 
                     <v-col cols="12">
@@ -78,7 +78,7 @@
                 </v-row>
                 </v-container>
             </v-form>
-        </v-card-action>
+
         </v-card>
         </v-row>
         </v-container>          

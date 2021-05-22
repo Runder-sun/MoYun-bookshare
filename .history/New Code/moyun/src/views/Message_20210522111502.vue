@@ -52,7 +52,7 @@
                 </v-col>
                 </v-row>
             </div>
-            <v-card-action>
+
             <v-form align="bottom">
                 <v-container >
                 <v-row>
@@ -78,7 +78,7 @@
                 </v-row>
                 </v-container>
             </v-form>
-        </v-card-action>
+
         </v-card>
         </v-row>
         </v-container>          
