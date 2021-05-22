@@ -1,57 +1,22 @@
 package com.example.moyun.Entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "book_review_collection")
 public class BookReviewCollection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int BookReviewCollectionID;
-    private int BookReviewID;
+    private Integer BookReviewCollectionID;
+    private Integer BookReviewID;
     private String UserID;
     private Timestamp CollectTime;
-
-    public BookReviewCollection() {
-    }
-
-    public BookReviewCollection(int bookReviewCollectionID, int bookReviewID, String userID, Timestamp collectTime) {
-        BookReviewCollectionID = bookReviewCollectionID;
-        BookReviewID = bookReviewID;
-        UserID = userID;
-        CollectTime = collectTime;
-    }
-
-    public int getBookReviewCollectionID() {
-        return BookReviewCollectionID;
-    }
-
-    public void setBookReviewCollectionID(int bookReviewCollectionID) {
-        BookReviewCollectionID = bookReviewCollectionID;
-    }
-
-    public int getBookReviewID() {
-        return BookReviewID;
-    }
-
-    public void setBookReviewID(int bookReviewID) {
-        BookReviewID = bookReviewID;
-    }
-
-    public String getUserID() {
-        return UserID;
-    }
-
-    public void setUserID(String userID) {
-        UserID = userID;
-    }
-
-    public Timestamp getCollectTime() {
-        return CollectTime;
-    }
-
-    public void setCollectTime(Timestamp collectTime) {
-        CollectTime = collectTime;
-    }
 }

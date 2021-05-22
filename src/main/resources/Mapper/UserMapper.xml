@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.moyun.Dao.UserDao">
+    <insert id="registerUser" parameterType="User">
+        insert into user_info(userid,password,is_teacher,email)
+        values(#{UserID},#{Password},#{isTeacher},#{Email})
+    </insert>
+    <select id="getUserByUserID" resultType="User">
+        select * from user_info where userid=#{UserID}
+    </select>
+    <select id="getUserByUserIDAndPassword" resultType="User">
+        select * from user_info where userid=#{UserID} and password=#{Password}
+    </select>
+    <select id="getUserByUserIDAndEmail" resultType="User">
+        select * from user_info where userid=#{UserID} and email=#{Email}
+    </select>
+    <select id="getPasswordByUserID" resultType="String">
+        select password from user_info where userid=#{UserID}
+    </select>
+    <update id="updatePasswordByUserID" parameterType="User">
+        update user_info set password=#{Password} where userid=#{UserID}
+    </update>
+</mapper>

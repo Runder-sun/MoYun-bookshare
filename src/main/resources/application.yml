@@ -1,13 +1,24 @@
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/MoYun
+    url: jdbc:mysql://127.0.0.1:3306/moyun
     username: root
     password: BUAAYZH2001
   jpa:
     hibernate:
       ddl-auto: update
+  mail:
+    host: smtp.qq.com
+    username: 1160411003@qq.com
+    password: gdpmrvaiciaighgj
+    port: 587
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          socketFactoryClass: javax.net.ssl.SSLSocketFactory
+        debug: true
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.example.demo.Entity
+  mapper-locations: classpath:Mapper/*.xml
+  type-aliases-package: com.example.moyun.Entity
 server:
   port: 8090
