@@ -59,8 +59,6 @@
     </v-app-bar>
     <v-img src="../assets/widthPic.jpg" dark></v-img>
     <h1 class="textCenter">墨韵</h1>
-    
-
     <v-main>
       <v-container fluid>
         <h2 class="text-center">

@@ -36,6 +36,41 @@ const routes = [
     component:Admin,
   },
   {
+    path:"/updates",
+    name:"Updates",
+    component: () =>
+    import("../views/Updates.vue"),
+  },
+  {
+    path:"/message",
+    name:"Message",
+    component: () =>
+    import("../views/Message.vue"),
+  },
+  {
+    path:"/messageListFromFriend",
+    name:"MessageListFromFriend",
+    component: () =>
+    import("../views/MessageListFromFriend.vue"),
+  },
+  {
+    path:"/messageListFromSystem",
+    name:"MessageListFromSystem",
+    component: () =>
+    import("../views/MessageListFromSystem.vue"),
+  },
+  {
+    path:"/recommend",
+    name:"Recommend",
+    component: () =>
+    import("../views/Recommend.vue"),
+  },
+  {
+    path:"/updates/block",
+    name:"BlockPerson",
+    component: () =>
+    import("../views/BlockPerson.vue"),},
+    {
     path:"/Login",
     name:"Login",
     component:Login,
