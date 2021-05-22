@@ -141,7 +141,7 @@ export default {
   },
   methods:{
     toBlock(){
-        this.$router.push({path:"/updates/blockPerson"});
+        this.$router.push({path:"/updates/block"});
     }
   }
 };

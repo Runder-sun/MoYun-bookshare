@@ -7,42 +7,12 @@
       <v-toolbar-title>讨论</v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-bottom-sheet v-model="sheet" inset>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-        text
-          color="cyan"
-          dark
-          v-bind="attrs"
-          v-on="on"
-        >
-          发起讨论
-        </v-btn>
-      </template>
-      <v-sheet
-        class="text-center"
-        height="700px"
-      >
-        <v-btn
-          class="mt-6"
-          text
-          color="red"
-          @click="sheet = !sheet"
-        >
-          close
-        </v-btn>
-        <div class="py-3">
-          This is a bottom sheet using the controlled by v-model instead of activator
-        </div>
-      </v-sheet>
-            
-    </v-bottom-sheet>
-      
+        <el-button type="text" @click="open">发起讨论</el-button>
         <template v-slot:extension>
-        <v-tabs v-model="tab" grow>
+        <v-tabs v-model="tab" >
           <v-tab>按时间排序</v-tab>
           <v-tab>按热度排序</v-tab>
-          <v-container>
+
           <v-tab-item>
               <v-card flat>
             <v-container class="pa-4 text-center">
@@ -99,7 +69,6 @@
           </v-container>
               </v-card>
           </v-tab-item>
-          </v-container>
           
           <v-tab-item>
             <v-container class="pa-4 text-center">
@@ -170,7 +139,26 @@
 <script >
 import Bar from "../components/Bar.vue"
 export default ({
-
+    methods: {
+      open() {
+        this.$prompt('请输入讨论名称', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          showInput:true,
+          inputValue:"讨论内容",
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '提交成功'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          });       
+        });
+      }
+    },
   data: () => ({
     groups: [
       {
