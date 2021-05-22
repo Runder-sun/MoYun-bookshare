@@ -10,6 +10,9 @@ const GroupList = () => import("../views/GroupList.vue");
 const GroupIndex = () => import("../views/GroupIndex.vue");
 const CreatGroup = () => import("../views/CreateGroup.vue");
 const AllGroup = () => import("../views/AllGroup.vue");
+const AddForum = () => import("../views/AddForum.vue");
+const Forum = () => import("../views/Forum.vue");
+const ForumHome = () => import("../views/ForumHome.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -66,6 +69,21 @@ const routes = [
     path:"/Group/AllGroup",
     name:"AllGroup",
     component:AllGroup,
+  },
+  {
+    path:"/Group/Forum/ForumHome",
+    name:"ForumHome",
+    component:ForumHome,
+  },
+  {
+    path:"/Group/Forum/Forum",
+    name:"Forum",
+    component:Forum,
+  },
+  {
+    path:"/Group/Forum/AddForum",
+    name:"AddForum",
+    component:AddForum,
   },
 ];
 
