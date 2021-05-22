@@ -5,7 +5,7 @@
         <v-container>
           <v-form ref="form" v-model="valid" lazy-validation>
             <img src="../assets/logo.png" id="logo" /><br />
-            <v-cintainer>
+            <v-container>
               <v-text-field
                 v-model="id"
                 :rules="idRules"
@@ -29,7 +29,7 @@
               >
                 <p class="login_">登录</p>
               </v-btn>
-            </v-cintainer>
+            </v-container>
           </v-form>
         </v-container>
         <v-container>
@@ -99,10 +99,6 @@ export default {
   outline: none;
   border: none;
 }
-.login_ {
-  font-size: 20px;
-  margin-top: 15px;
-}
 .button:hover {
   font-size: 19px;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2),
@@ -111,7 +107,10 @@ export default {
   transition: box-shadow 0.2s ease-out;
   transition: font-size 0.2s ease-out;
 }
-
+.login_ {
+  font-size: 20px;
+  margin-top: 15px;
+}
 .card {
   position: absolute;
   left: 50%;

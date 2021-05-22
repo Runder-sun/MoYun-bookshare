@@ -93,7 +93,7 @@ const routes = [
     component:GroupIndex,
   },
   {
-    path:"/Group/CreatGroup",
+    path:"/Group/CreateGroup",
     name:"CreatGroup",
     component:CreatGroup,
   },

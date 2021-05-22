@@ -1,0 +1,169 @@
+<template>
+  <div class="createGroup">
+    <bar></bar>
+    <v-container>
+      <div class="card">
+          <div class="front">
+        <el-upload
+          class="avatar-uploader"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload"
+        >
+          <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i> </el-upload
+        ><v-form>
+          <v-container fluid>
+                <v-col cols="12" >
+                    <v-text-field
+                      color="blue darken-2"
+                      label="圈子名称"
+                      required
+                    ></v-text-field>
+                  <v-textarea color="teal">
+                    <template v-slot:label>
+                      <div>圈子简介</div>
+                    </template>
+                  </v-textarea>
+                  <v-checkbox v-model="Private" label="私密"></v-checkbox>
+                    <p>圈子标签</p>
+                    <v-row justify="center">
+                    <v-chip-group  active-class="primary--text">
+                      <v-chip v-for="tag in 10" :key="tag"> tag </v-chip>
+                    </v-chip-group>
+                    </v-row>
+                </v-col>
+                <v-btn
+                class="button"
+                large
+              >
+                <p class="create">创建</p>
+              </v-btn>
+          </v-container>
+        </v-form>
+        
+      </div>
+      </div>
+    </v-container>
+  </div>
+</template>
+
+<script>
+import bar from "../components/Bar.vue";
+
+export default {
+  data: () => ({
+    Private: false,
+    imageUrl: "",
+  }),
+  methods: {
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error("上传头像图片只能是 JPG 格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isJPG && isLt2M;
+    },
+  },
+  components: {
+    bar,
+  },
+};
+</script>
+
+<style>
+.createGroup {
+  background-color: #efeeee;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 700px;
+  width: 600px;
+  z-index: 1;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.card .front {
+  position: absolute;
+  text-align: center;
+  box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.1),
+    -12px -12px 24px rgba(255, 255, 255, 1);
+  border-radius: 3rem;
+  background-color: #efeeee;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.card .front {
+  z-index: 1;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #5d5d6d;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  top:10px;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #2a436e;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+.button {
+  color: #596275;
+  box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
+    -9px -9px 18px rgba(255, 255, 255, 1);
+  border-radius: 3rem;
+  transition: box-shadow 0.2s ease-out;
+  background-color: #efeeee;
+  position: relative;
+  top: 0px;
+  margin-top: 20px;
+  width: 130px;
+  height: 55px;
+  outline: none;
+  border: none;
+}
+.button:hover {
+  font-size: 19px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2),
+    -1px -1px 2px rgba(255, 255, 255, 0.8);
+  border-radius: 3rem;
+  transition: box-shadow 0.2s ease-out;
+  transition: font-size 0.2s ease-out;
+}
+.create {
+  font-size: 20px;
+  margin-top: 15px;
+}
+</style>

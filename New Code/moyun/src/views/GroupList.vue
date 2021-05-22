@@ -1,16 +1,17 @@
 <template>
+<div class="grouplist">
   <v-app>
   <bar></bar>
-  <v-container>
+    <v-container>
     <v-toolbar flat>
       <v-toolbar-title>圈子</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn text color="cyan"> 创建圈子 </v-btn>
+      <v-btn text color="cyan" href="/Group/CreateGroup"> 创建圈子 </v-btn>
 
-      <v-btn text color="deep-orange"> 所有圈子 </v-btn>
-
+      <v-btn text color="deep-orange" href="/Group/AllGroup"> 所有圈子 </v-btn>
+      
       <template v-slot:extension>
         <v-tabs v-model="tab">
           <v-tab>热门圈子</v-tab>
@@ -26,6 +27,7 @@
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
                       width=300
+                      
                     >
                       <v-img :src="group.img" height="225px">
                         <v-card-title class="title white--text">
@@ -80,6 +82,7 @@
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
                       width=300
+                      
                     >
                       <v-img :src="group.img" height="225px">
                         <v-card-title class="title white--text">
@@ -127,8 +130,9 @@
         </v-tabs>
       </template>
     </v-toolbar>
-  </v-container>
+    </v-container>
   </v-app>
+</div>
 </template>
 
 <script >
@@ -138,34 +142,10 @@ export default ({
   data: () => ({
     groups: [
       {
-        title: "New Releases",
-        text: `It's New Release Friday`,
-        subtext: "Newly released songs. Updated daily.",
-        img: "https://images.unsplash.com/photo-1429514513361-8fa32282fd5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3264&q=80",
-      },
-      {
         title: "Rock",
         text: "Greatest Rock Hits",
         subtext: "Lose yourself in rock tunes.",
         img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
-      },
-      {
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
       },
       {
         title: "Mellow Moods",
