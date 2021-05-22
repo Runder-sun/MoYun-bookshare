@@ -5,8 +5,8 @@
         <sideBar></sideBar>
         <v-card
             color="grey lighten-4"
-            height="780px"
-            width="1300px"
+            height="700px"
+            width="800px"
             rounded
             align="center"
             justify="center"
@@ -52,9 +52,9 @@
                 </v-col>
                 </v-row>
             </div>
-            <v-card-action>
-            <v-form align="bottom">
-                <v-container >
+
+            <v-form>
+                <v-container>
                 <v-row>
 
                     <v-col cols="12">
@@ -78,7 +78,7 @@
                 </v-row>
                 </v-container>
             </v-form>
-        </v-card-action>
+
         </v-card>
         </v-row>
         </v-container>          
@@ -95,7 +95,7 @@ import sideBar from"../components/MSGSideBar.vue";
         object:"Jackson",
         recordContent:[
             {headUrl:"https://images.unsplash.com/photo-1429514513361-8fa32282fd5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3264&q=80",
-            mineMsg:'true',
+            mineMsg:'ture',
             nickName:'me',
             timestamp:'2021-2-5',
             contactText:'Wanna hang out?'},
@@ -105,7 +105,7 @@ import sideBar from"../components/MSGSideBar.vue";
             timestamp:'2021-2-6',
             contactText:'Coool'},
             {headUrl:"https://images.unsplash.com/photo-1429514513361-8fa32282fd5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3264&q=80",
-            mineMsg:'true',
+            mineMsg:'ture',
             nickName:'me',
             timestamp:'2021-2-7',
             contactText:'Kay'},
