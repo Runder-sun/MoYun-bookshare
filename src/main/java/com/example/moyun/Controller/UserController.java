@@ -1,6 +1,8 @@
 package com.example.moyun.Controller;
 
+import com.example.moyun.Entity.Admin;
 import com.example.moyun.Entity.User;
+import com.example.moyun.Service.AdminService;
 import com.example.moyun.Service.EmailService;
 import com.example.moyun.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class UserController{
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private AdminService adminService;
 
     @PostMapping("/Register")
     public Map<String,Object> registerUser(@RequestBody Map<String,String> remap){
@@ -58,18 +63,19 @@ public class UserController{
         return map;
     }
 
-    @PostMapping("/Login")//加入对管理员表的查询
+    @PostMapping("/Login")
     public Map<String,Object> login(HttpServletRequest request, @RequestBody Map<String, String> loginMap){
         String UserID = loginMap.get("UserID");
         String Password = loginMap.get("Password");
         Map<String, Object> map = new HashMap<>();
         try {
             User user=userService.getUserByUserIDAndPassword(UserID, DigestUtils.md5DigestAsHex(Password.getBytes(StandardCharsets.UTF_8)));
-            if (userService.getUserByUserID(UserID) == null) {
+            Admin admin=adminService.getAdminByAdminIDAndPassword(UserID,Password);
+            if (userService.getUserByUserID(UserID) == null&&adminService.getAdminByAdminID(UserID)==null) {
                 map.put("success", false);
                 map.put("message", "用户ID不存在！");
             }
-            else if(user==null){
+            else if(user==null&&admin==null){
                 map.put("success",false);
                 map.put("message","密码错误！");
             }
@@ -78,7 +84,12 @@ public class UserController{
                 session.setAttribute("UserID",UserID);
                 map.put("success", true);
                 map.put("message", "用户登录成功！");
-                map.put("isAdmin",true);
+                if(user==null){
+                    map.put("isAdmin",true);
+                }
+                else{
+                    map.put("isAdmin",false);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Entity
 @Data
@@ -24,4 +23,5 @@ public class Group {
     private Integer MemberNum;
     private Boolean isPrivate;
     private String Introduce;
+    private String GroupImage;
 }
