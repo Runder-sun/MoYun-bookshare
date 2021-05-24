@@ -15,6 +15,8 @@ const ForumHome = () => import("../views/ForumHome.vue");
 const BlogList = () => import("../views/BlogList.vue");
 const WriteBlog = () => import("../views/WriteBlog.vue");
 const PersonalCollection = () => import("../views/PersonalCollection.vue");
+const EditBlog = () => import("../views/EditBlog.vue");
+const ScanBlog = () => import("../views/ScanBlog.vue");
 Vue.use(VueRouter);
 
 const routes = [
@@ -133,6 +135,16 @@ const routes = [
     path:"/BlogList/WriteBlog",
     name:"WriteBlog",
     component:WriteBlog,
+  },
+  {
+    path:"/BlogList/EditBlog",
+    name:"EditBlog",
+    component:EditBlog,
+  },
+  {
+    path:"/BlogList/ScanBlog",
+    name:"ScanBlog",
+    component:ScanBlog,
   },
 ];
 
