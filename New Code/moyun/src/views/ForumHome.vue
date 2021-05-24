@@ -23,7 +23,7 @@
                     <v-card
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
-                      
+                      href="/Group/Forum/Forum"
                       height=60px
                     >
                       <v-img :src="group.img" height="60px">

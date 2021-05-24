@@ -27,7 +27,7 @@
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
                       width=300
-                      
+                      href="/Group/GroupIndex"
                     >
                       <v-img :src="group.img" height="225px">
                         <v-card-title class="title white--text">
