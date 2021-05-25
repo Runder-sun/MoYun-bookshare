@@ -13,4 +13,7 @@
     <select id="getAdminByAdminIDAnd[assword" resultType="Admin">
         select * from admin where adminid=#{AdminID} and password=#{Password}
     </select>
+    <update id="updateUserIsForbidden" parameterType="User">
+        update user_info set is_forbidden=#{isForbidden} where userid=#{UserID}
+    </update>
 </mapper>

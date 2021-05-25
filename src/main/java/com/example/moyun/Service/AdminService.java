@@ -20,4 +20,7 @@ public interface AdminService {
 
     //判断密码是否正确
     Admin getAdminByAdminIDAndPassword(String AdminID,String Password);
+
+    //更新用户是否封禁信息
+    void updateUserIsForbidden(String UserID,Boolean isForbidden);
 }

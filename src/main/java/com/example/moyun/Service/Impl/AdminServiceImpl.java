@@ -48,4 +48,8 @@ public class AdminServiceImpl implements AdminService {
         return adminDao.getAdminByAdminIDAndPassword(AdminID,Password);
     }
 
+    @Override
+    public void updateUserIsForbidden(String UserID,Boolean isForbidden){
+        adminDao.updateUserIsForbidden(UserID,isForbidden);
+    }
 }

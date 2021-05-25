@@ -90,6 +90,32 @@ public class AdminController {
         return map;
     }
 
+    @PostMapping("/forbidUser")
+    public Map<String,Object> forbidUser(@RequestBody Map<String,String> forbidmap){
+        Map<String,Object> map=new HashMap<>();
+        try{
+            adminService.updateUserIsForbidden(forbidmap.get("UserID"),true);
+            map.put("success",true);
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("success",false);
+        }
+        return map;
+    }
+
+    @PostMapping("/unblockUser")
+    public Map<String,Object> unblockUser(@RequestBody Map<String,String> unblockmap){
+        Map<String,Object> map=new HashMap<>();
+        try{
+            adminService.updateUserIsForbidden(unblockmap.get("UserID"),false);
+            map.put("success",true);
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("success",false);
+        }
+        return map;
+    }
+
     @PostMapping("/deleteBlog")
     public Map<String,Object> deleteBlog(@RequestBody Map<String,String> delmap){
         String BlogID=delmap.get("BlogID");
@@ -206,23 +232,6 @@ public class AdminController {
             Book book=bookService.getBookByBookID(Integer.valueOf(BookID));
             map.put("success",true);
             map.put("bookInfo",book);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            map.put("success",false);
-        }
-        return map;
-    }
-
-    @GetMapping("/inspectUserMessage")
-    public Map<String ,Object> inspectUserMessage(@RequestBody Map<String,String>insmap){
-        String MessageID=insmap.get("UserMessageID");
-        Map<String ,Object> map=new HashMap<>();
-
-        try {
-            UserMessage userMessage=userMessageService.getUserMessageByUserMessageID(Integer.valueOf(MessageID));
-            map.put("success",true);
-            map.put("userMessageInfo",userMessage);
         }
         catch (Exception e){
             e.printStackTrace();

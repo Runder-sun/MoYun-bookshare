@@ -26,4 +26,5 @@ public class User {
     private String Signature;
     private String HeadImage;
     private String BackgroundImage;
+    private Boolean isForbidden;
 }

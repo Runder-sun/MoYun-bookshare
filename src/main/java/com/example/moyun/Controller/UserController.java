@@ -51,6 +51,7 @@ public class UserController{
                 user.setUserID(UserID);
                 user.setEmail(Email);
                 user.setPassword(DigestUtils.md5DigestAsHex(Password.getBytes(StandardCharsets.UTF_8)));
+                user.setIsForbidden(false);
                 userService.registerUser(user);
                 map.put("success",true);
                 map.put("message","用户注册成功！");
@@ -80,15 +81,25 @@ public class UserController{
                 map.put("message","密码错误！");
             }
             else{
-                HttpSession session=request.getSession();
-                session.setAttribute("UserID",UserID);
-                map.put("success", true);
-                map.put("message", "用户登录成功！");
                 if(user==null){
+                    HttpSession session=request.getSession();
+                    session.setAttribute("UserID",UserID);
+                    map.put("success", true);
+                    map.put("message", "用户登录成功！");
                     map.put("isAdmin",true);
                 }
                 else{
-                    map.put("isAdmin",false);
+                    if(!user.getIsForbidden()){
+                        HttpSession session=request.getSession();
+                        session.setAttribute("UserID",UserID);
+                        map.put("success", true);
+                        map.put("message", "用户登录成功！");
+                        map.put("isAdmin",false);
+                    }
+                    else{
+                        map.put("success",false);
+                        map.put("message","当前用户被封禁！");
+                    }
                 }
             }
         } catch (Exception e) {

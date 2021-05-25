@@ -11,4 +11,5 @@ public interface AdminDao {
     List<User> getAllUser();
     Admin getAdminByAdminID(String AdminID);
     Admin getAdminByAdminIDAndPassword(String AdminID,String Password);
+    void updateUserIsForbidden(String UserID,Boolean isForbidden);
 }
