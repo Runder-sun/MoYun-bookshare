@@ -17,4 +17,7 @@ public interface GroupService {
 
     //GroupList转GroupVoList
     List<GroupVo> GroupToGroupVo(List<Group> list);
+
+    //查看人数最多的Group(前8)
+    List<Group> getHotGroup();
 }

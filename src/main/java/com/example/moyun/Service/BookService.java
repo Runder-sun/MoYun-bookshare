@@ -21,4 +21,6 @@ public interface BookService {
     //BookList转成BookVoList
     List<BookVo> BookToBookVo(List<Book> list);
 
+    //根据阅读次数获取热门书籍（前8）
+    List<Book> getHotBook();
 }

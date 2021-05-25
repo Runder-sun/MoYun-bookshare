@@ -10,4 +10,7 @@
     <delete id="deleteGroup" parameterType="Group">
         delete from group_info where groupid=#{GroupID}
     </delete>
+    <select id="getHotGroup" resultType="Group">
+        select * from group_info order by member_num desc limit 0,8
+    </select>
 </mapper>

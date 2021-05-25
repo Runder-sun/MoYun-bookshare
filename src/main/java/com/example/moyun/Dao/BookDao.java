@@ -10,4 +10,5 @@ public interface BookDao {
     void deleteBook(Integer BookID);
     List<Book> getAllBook();
     Book getBookByBookID(Integer BookID);
+    List<Book> getHotBook();
 }

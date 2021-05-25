@@ -10,4 +10,7 @@
     <delete id="deleteBook" parameterType="Book">
         delete from book_info where bookid=#{BookID}
     </delete>
+    <select id="getHotBook" resultType="Book">
+        select * from book_info order by read_times desc limit 0,8
+    </select>
 </mapper>

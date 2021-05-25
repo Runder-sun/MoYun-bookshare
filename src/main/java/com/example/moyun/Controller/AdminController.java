@@ -42,13 +42,13 @@ public class AdminController {
     @GetMapping("/admin")
     public Map<String,Object> admin(){
         Map<String,Object> admap=new HashMap<>();
-        List<UserVo> users=adminService.UserToUserVo(adminService.getAllUser());
-        List<BlogVo> blogs=blogService.BlogToBlogVo(blogService.getAllBlog());
-        List<BookVo> books=bookService.BookToBookVo(bookService.getAllBook());
-        List<ForumVo> forums=forumService.ForumToForumVo(forumService.getAllForum());
-        List<GroupVo> groups=groupService.GroupToGroupVo(groupService.getAllGroup());
-        List<UserMessageVo> userMessages=userMessageService.UserMessageToUserMessageVo(userMessageService.getAllUserMessage());
-        List<BookReviewVo> bookReviews=bookReviewService.BookReviewToBookReviewVo(bookReviewService.getAllBookReview());
+        List<User> users=adminService.getAllUser();
+        List<Blog> blogs=blogService.getAllBlog();
+        List<Book> books=bookService.getAllBook();
+        List<Forum> forums=forumService.getAllForum();
+        List<Group> groups=groupService.getAllGroup();
+        List<UserMessage> userMessages=userMessageService.getAllUserMessage();
+        List<BookReview> bookReviews=bookReviewService.getAllBookReview();
         admap.put("users",users);
         admap.put("blogs",blogs);
         admap.put("books",books);

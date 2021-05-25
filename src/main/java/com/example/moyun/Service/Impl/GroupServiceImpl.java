@@ -42,4 +42,8 @@ public class GroupServiceImpl implements GroupService {
         return groupVos;
     }
 
+    @Override
+    public List<Group> getHotGroup(){
+        return groupDao.getHotGroup();
+    }
 }

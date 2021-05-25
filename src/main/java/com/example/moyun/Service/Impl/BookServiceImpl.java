@@ -46,4 +46,9 @@ public class BookServiceImpl implements BookService {
         }
         return bookVos;
     }
+
+    @Override
+    public List<Book> getHotBook(){
+        return bookDao.getHotBook();
+    }
 }

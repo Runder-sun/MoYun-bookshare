@@ -12,4 +12,6 @@ public interface GroupDao {
     List<Group> getAllGroup();
 
     Group getGroupByGroupID(Integer GroupID);
+
+    List<Group> getHotGroup();
 }
