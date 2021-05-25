@@ -2,15 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.moyun.Dao.BookDao">
     <select id="getBookByBookID" resultType="Book">
-        select * from book_info where bookid=#{BookID}
+        select *
+        from book_info
+        where bookid=#{BookID}
     </select>
     <select id="getAllBook" resultType="Book">
-        select * from book_info
+        select *
+        from book_info
     </select>
     <delete id="deleteBook" parameterType="Book">
-        delete from book_info where bookid=#{BookID}
+        delete from book_info
+        where bookid=#{BookID}
     </delete>
     <select id="getHotBook" resultType="Book">
-        select * from book_info order by read_times desc limit 0,8
+        select *
+        from book_info
+        order by read_times desc
+        limit 0,8
+    </select>
+    <select id="getBookCollectionByUserID" resultType="Book">
+        select *
+        from book_collection
+        where userid=#{UserID}
     </select>
 </mapper>

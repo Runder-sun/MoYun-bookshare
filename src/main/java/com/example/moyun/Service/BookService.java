@@ -1,5 +1,6 @@
 package com.example.moyun.Service;
 
+import com.example.moyun.Entity.Blog;
 import com.example.moyun.Entity.Book;
 import com.example.moyun.Vo.BookVo;
 
@@ -23,4 +24,7 @@ public interface BookService {
 
     //根据阅读次数获取热门书籍（前8）
     List<Book> getHotBook();
+
+    //根据UserID查找BookCollection
+    List<Book> getBookCollectionByUserID(String UserID);
 }

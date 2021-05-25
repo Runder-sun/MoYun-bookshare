@@ -1,5 +1,6 @@
 package com.example.moyun.Service;
 
+import com.example.moyun.Entity.Book;
 import com.example.moyun.Entity.Group;
 import com.example.moyun.Vo.GroupVo;
 
@@ -20,4 +21,7 @@ public interface GroupService {
 
     //查看人数最多的Group(前8)
     List<Group> getHotGroup();
+
+    //根据UserID查找GroupCollection
+    List<Group> getGroupCollectionByUserID(String UserID);
 }

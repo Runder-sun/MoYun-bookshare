@@ -12,4 +12,6 @@ public interface BookReviewDao {
     List<BookReview> getAllBookReview();
 
     BookReview getBookReviewByBookReviewID(Integer BookReviewID);
+
+    List<BookReview> getBookReviewCollectionByUserID(String UserID);
 }

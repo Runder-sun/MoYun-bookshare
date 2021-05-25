@@ -51,4 +51,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> getHotBook(){
         return bookDao.getHotBook();
     }
+
+    @Override
+    public List<Book> getBookCollectionByUserID(String UserID){
+        return bookDao.getBookCollectionByUserID(UserID);
+    }
 }

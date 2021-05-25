@@ -2,6 +2,8 @@ package com.example.moyun.Service;
 
 import com.example.moyun.Entity.User;
 
+import java.sql.Date;
+
 public interface UserService {
     //注册
     void registerUser(User user);
@@ -20,4 +22,10 @@ public interface UserService {
 
     //修改密码
     void updatePasswordByUserID(String UserID,String Password);
+
+    //修改用户信息(不包括头像及背景)
+    void updateUserInfo(String UserID,String Username, Boolean Sex,String Email,Date Birthday,String Signature);
+
+    //修改头像、背景
+    void updatePictures(String UserID,String HeadImage,String BackgroundImage);
 }

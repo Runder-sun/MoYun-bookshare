@@ -6,6 +6,8 @@ import com.example.moyun.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -39,5 +41,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updatePasswordByUserID(String UserID,String Password){
         userDao.updatePasswordByUserID(UserID,Password);
+    }
+
+    @Override
+    public void updateUserInfo(String UserID,String Username, Boolean Sex, String Email,Date Birthday, String Signature){
+        userDao.updateUserInfo(UserID,Username,Sex,Email,Birthday,Signature);
+    }
+
+    @Override
+    public void updatePictures(String UserID,String HeadImage,String BackgroundImage){
+        userDao.updatePictures(UserID,HeadImage,BackgroundImage);
     }
 }

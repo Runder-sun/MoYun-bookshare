@@ -46,4 +46,9 @@ public class GroupServiceImpl implements GroupService {
     public List<Group> getHotGroup(){
         return groupDao.getHotGroup();
     }
+
+    @Override
+    public List<Group> getGroupCollectionByUserID(String UserID){
+        return groupDao.getGroupCollectionByUserID(UserID);
+    }
 }

@@ -6,18 +6,38 @@
         values(#{UserID},#{Password},#{isTeacher},#{Email},#{isForbidden})
     </insert>
     <select id="getUserByUserID" resultType="User">
-        select * from user_info where userid=#{UserID}
+        select *
+        from user_info
+        where userid=#{UserID}
     </select>
     <select id="getUserByUserIDAndPassword" resultType="User">
-        select * from user_info where userid=#{UserID} and password=#{Password}
+        select *
+        from user_info
+        where userid=#{UserID} and password=#{Password}
     </select>
     <select id="getUserByUserIDAndEmail" resultType="User">
-        select * from user_info where userid=#{UserID} and email=#{Email}
+        select *
+        from user_info
+        where userid=#{UserID} and email=#{Email}
     </select>
     <select id="getPasswordByUserID" resultType="String">
-        select password from user_info where userid=#{UserID}
+        select password
+        from user_info
+        where userid=#{UserID}
     </select>
     <update id="updatePasswordByUserID" parameterType="User">
-        update user_info set password=#{Password} where userid=#{UserID}
+        update user_info
+        set password=#{Password}
+        where userid=#{UserID}
+    </update>
+    <update id="updateUserInfo" parameterType="User">
+        update user_info
+        set username=#{UserName},sex=#{Sex},email=#{Email},birthday=#{Birthday},signature=#{Signature}
+        where userid=#{UserID}
+    </update>
+    <update id="updatePictures" parameterType="User">
+        update user_info
+        set head_image=#{HeadImage},background_image=#{BackgroundImage}
+        where userid=#{UserID}
     </update>
 </mapper>

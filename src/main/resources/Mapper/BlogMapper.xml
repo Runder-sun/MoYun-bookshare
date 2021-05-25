@@ -2,12 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.moyun.Dao.BlogDao">
     <select id="getBlogByBlogID" resultType="Blog">
-        select * from blog_info where blogid=#{BlogID}
+        select *
+        from blog_info
+        where blogid=#{BlogID}
     </select>
     <select id="getAllBlog" resultType="Blog">
-        select * from blog_info
+        select *
+        from blog_info
     </select>
     <delete id="deleteBlog" parameterType="Blog">
-        delete from blog_info where blogid=#{BlogID}
+        delete from blog_info
+        where blogid=#{BlogID}
     </delete>
+    <select id="getBlogCollectionByUserID" resultType="Blog">
+        select *
+        from blog_collection
+        where userid=#{UserID}
+    </select>
 </mapper>

@@ -17,4 +17,7 @@ public interface BlogService {
 
     //BlogList转成BlogVoList
     List<BlogVo> BlogToBlogVo(List<Blog> list);
+
+    //根据UserID查找BlogCollection
+    List<Blog> getBlogCollectionByUserID(String UserID);
 }

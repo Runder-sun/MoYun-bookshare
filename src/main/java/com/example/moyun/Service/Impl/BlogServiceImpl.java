@@ -41,4 +41,9 @@ public class BlogServiceImpl implements BlogService {
         }
         return blogVos;
     }
+
+    @Override
+    public List<Blog> getBlogCollectionByUserID(String UserID){
+        return blogDao.getBlogCollectionByUserID(UserID);
+    }
 }

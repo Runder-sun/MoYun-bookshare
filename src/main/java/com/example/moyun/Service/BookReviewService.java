@@ -17,4 +17,7 @@ public interface BookReviewService {
 
     //BookReviewList转BookReviewVoList
     List<BookReviewVo> BookReviewToBookReviewVo(List<BookReview> list);
+
+    //根据UserID查找BookReviewCollection
+    List<BookReview> getBookReviewCollectionByUserID(String UserID);
 }

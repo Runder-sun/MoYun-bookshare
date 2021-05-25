@@ -11,4 +11,5 @@ public interface BookDao {
     List<Book> getAllBook();
     Book getBookByBookID(Integer BookID);
     List<Book> getHotBook();
+    List<Book> getBookCollectionByUserID(String UserID);
 }

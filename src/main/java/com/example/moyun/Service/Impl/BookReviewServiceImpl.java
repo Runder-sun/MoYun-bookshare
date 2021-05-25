@@ -41,4 +41,9 @@ public class BookReviewServiceImpl implements BookReviewService {
         }
         return bookReviewVos;
     }
+
+    @Override
+    public List<BookReview> getBookReviewCollectionByUserID(String UserID){
+        return bookReviewDao.getBookReviewCollectionByUserID(UserID);
+    }
 }

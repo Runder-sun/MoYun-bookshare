@@ -2,18 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.moyun.Dao.AdminDao">
     <select id="getAllUser" resultType="User">
-        select * from user_info
+        select *
+        from user_info
     </select>
     <delete id="deleteUser" parameterType="User">
-        delete from user_info where userid=#{UserID}
+        delete from user_info
+        where userid=#{UserID}
     </delete>
     <select id="getAdminByAdminID" resultType="Admin">
-        select * from admin where adminid=#{AdminID}
+        select *
+        from admin
+        where adminid=#{AdminID}
     </select>
     <select id="getAdminByAdminIDAnd[assword" resultType="Admin">
-        select * from admin where adminid=#{AdminID} and password=#{Password}
+        select *
+        from admin
+        where adminid=#{AdminID} and password=#{Password}
     </select>
     <update id="updateUserIsForbidden" parameterType="User">
-        update user_info set is_forbidden=#{isForbidden} where userid=#{UserID}
+        update user_info
+        set is_forbidden=#{isForbidden}
+        where userid=#{UserID}
     </update>
 </mapper>

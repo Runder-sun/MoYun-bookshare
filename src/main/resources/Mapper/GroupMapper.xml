@@ -2,15 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.moyun.Dao.GroupDao">
     <select id="getGroupByGroupID" resultType="Group">
-        select * from group_info where groupid=#{GroupID}
+        select *
+        from group_info
+        where groupid=#{GroupID}
     </select>
     <select id="getAllGroup" resultType="Group">
-        select * from group_info
+        select *
+        from group_info
     </select>
     <delete id="deleteGroup" parameterType="Group">
-        delete from group_info where groupid=#{GroupID}
+        delete from group_info
+        where groupid=#{GroupID}
     </delete>
     <select id="getHotGroup" resultType="Group">
-        select * from group_info order by member_num desc limit 0,8
+        select *
+        from group_info
+        order by member_num desc
+        limit 0,8
+    </select>
+    <select id="getGroupCollectionByUserID" resultType="Group">
+        select *
+        from group_collection
+        where userid=#{UserID}
     </select>
 </mapper>
