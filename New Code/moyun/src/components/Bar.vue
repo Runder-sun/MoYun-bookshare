@@ -16,8 +16,8 @@
         <el-menu-item index="/">首页</el-menu-item>
         <el-submenu index="2">
           <template slot="title">书库</template>
-          <el-menu-item index="2-1">书评</el-menu-item>
-          <el-menu-item index="2-2">书籍</el-menu-item>
+          <el-menu-item index="/Book/BookReview">书评</el-menu-item>
+          <el-menu-item index="/Book/BookWareHouse">书籍</el-menu-item>
         </el-submenu>
         <el-menu-item index="/Group/GroupList" >圈子</el-menu-item>
         <el-menu-item index="/updates">动态</el-menu-item>
