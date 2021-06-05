@@ -46,7 +46,7 @@
                 <v-divider class="my-3"></v-divider>
                 <v-btn depressed rounded text v-on:click="toMsg"> 消息 </v-btn>
                 <v-divider class="my-3"></v-divider>
-                <v-btn depressed rounded text> 日志 </v-btn>
+                <v-btn depressed rounded text v-on:click="toBlog"> 日志 </v-btn>
                 <v-divider class="my-3"></v-divider>
                 <v-btn depressed rounded text> 退出登录 </v-btn>
               </div>
@@ -64,7 +64,10 @@ export default {
   methods:{
     toMsg(){
       this.$router.push({path:"/messageListFromFriend"});
-    }
+    },
+    toBlog(){
+      this.$router.push({path:"/BlogList"});
+    },
   }
 }
 </script>
