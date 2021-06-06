@@ -10,4 +10,42 @@
         select *
         from user_message
     </select>
+    <select id="getUserMessageListBySendIDAndGetID" parameterType="UserMessage">
+        select *
+        from user_message
+        where (sendid=#{SendID} and getid=#{GetID}) or (getid=#{SendID} and sendid=#{GetID})
+        order by send_time
+    </select>
+    <insert id="addUserMessage" parameterType="UserMessage">
+        insert into user_message(getid, sendid, message, send_time)
+        values(#{GetID},#{SendID},#{Message},#{SendTime})
+    </insert>
+    <insert id="addSystemMessage" parameterType="SystemMessage">
+        insert into system_message(system_message_content, message_time, userid)
+        values (#{SystemMessageContent},#{MessageTime},#{UserID})
+    </insert>
+    <select id="getSystemMessageByUserID" resultType="SystemMessage">
+        select *
+        from system_message
+        where userid=#{UserID}
+        order by message_time
+    </select>
+    <select id="getPersonalRecommend" resultType="Book">
+        select *
+        from book_info
+        where exists
+            (select *
+            from book_info
+            where kind in(
+                select kind
+                from book_info join book_collection bc on book_info.bookid = bc.bookid)
+            )
+        order by read_times desc
+        limit 0,4
+    </select>
+    <select id="getMessageTarget" resultType="User">
+        select *
+        from follow_list
+        where followerid=#{UserID} or followedid=#{UserID}
+    </select>
 </mapper>

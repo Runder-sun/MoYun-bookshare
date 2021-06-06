@@ -19,4 +19,82 @@
         from book_review_collection
         where userid=#{UserID}
     </select>
+    <update id="likeBookReview" parameterType="BookReview">
+        update book_review
+        set likes=likes+1
+        where book_reviewid=#{BookReviewID}
+    </update>
+    <insert id="createBookReviewByBookID" parameterType="BookReview">
+        insert into book_review(bookid,userid,content,title,score,review_time)
+        values(#{BookID},#{UserID},#{Content},#{Title},#{Score},#{ReviewTime})
+    </insert>
+    <insert id="createBookReviewCommentByReviewID" parameterType="BookReviewComment">
+        insert into book_review_comment(book_reviewid,userid,content,comment_time)
+        values(#{ReviewID},#{UserID},#{Content},#{CommentTime})
+    </insert>
+    <update id="updateBookReview" parameterType="BookReview">
+        update book_review
+        set content=#{Content},title=#{Title},score=#{Score}
+        where book_reviewid=#{BookReviewID}
+    </update>
+    <insert id="collectBookReview" parameterType="BookReview">
+        insert into book_review_collection(book_reviewid,userid,collect_time)
+        values(#{BookReviewID},#{UserID},#{CollectTime})
+    </insert>
+    <delete id="cancelCollectBookReview" parameterType="BookReviewCollectionID">
+        delete from book_review_collection
+        where book_review_collectionid=#{BookReviewCollectionID}
+    </delete>
+    <delete id="deleteRelatedComment" parameterType="BookReviewComment">
+        delete from book_review_comment
+        where book_reviewid=#{BookReviewID}
+    </delete>
+    <delete id="deleteCollectBookReview" parameterType="BookReview">
+        delete from book_review_collection
+        where book_reviewid=#{BookReviewID}
+    </delete>
+    <select id="getBookReviewCommentList" resultType="BookReviewComment">
+        select *
+        from book_review_comment
+        where book_reviewid=#{BookReviewID}
+    </select>
+    <delete id="deleteRelatedBookReview" parameterType="BookReview">
+        delete from book_review
+        where bookid=#{BookID}
+    </delete>
+    <delete id="deleteRelatedBookReviewComment" parameterType="Book">
+        delete from book_review_comment
+        where book_review_commentid in(
+            select book_review_commentid from(
+                select book_review_commentid
+                from book_review join book_review_comment brc on book_review.book_reviewid = brc.book_reviewid
+                where bookid=#{BookID}
+                )as del
+        )
+    </delete>
+    <delete id="deleteRelatedBookReviewCollection" parameterType="Book">
+        delete from book_review_collection
+        where book_review_collectionid in(
+            select book_review_collectionid from(
+                select  book_review_collectionid
+                from book_review join book_review_comment brc on book_review.book_reviewid = brc.book_reviewid
+                where bookid=#{BookID}
+                )as del
+        )
+    </delete>
+    <select id="getBookReviewDT" resultType="BookReview">
+        select *
+        from book_review
+        where userid=#{UserID}
+           or userid in (
+            select followedid from (
+                select followedid from follow_list where followerid=#{UserID}
+                ) as get
+        )
+    </select>
+    <select id="getBookReviewListByBookID" parameterType="BookReview">
+        select *
+        from book_review
+        where bookid=#{BookID}
+    </select>
 </mapper>

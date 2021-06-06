@@ -1,8 +1,11 @@
 package com.example.moyun.Service;
 
+import com.example.moyun.Entity.Blacklist;
+import com.example.moyun.Entity.FollowList;
 import com.example.moyun.Entity.User;
 
 import java.sql.Date;
+import java.util.List;
 
 public interface UserService {
     //注册
@@ -11,7 +14,7 @@ public interface UserService {
     //判断身份
     Boolean checkIsTeacher(String UserID);
 
-    //根据UserID查找User
+    //查看个人信息
     User getUserByUserID(String UserID);
 
     //判断密码是否正确
@@ -28,4 +31,22 @@ public interface UserService {
 
     //修改头像、背景
     void updatePictures(String UserID,String HeadImage,String BackgroundImage);
+
+    //关注用户
+    void addFollow(FollowList followList);
+
+    //取消关注
+    void deleteFollow(Integer FollowListID);
+
+    //获取用户关注列表
+    List<FollowList> getFollowListByUserID(String UserID);
+
+    //屏蔽用户
+    void addBlacklist(Blacklist blacklist);
+
+    //取消屏蔽
+    void deleteBlacklist(Integer BlacklistID);
+
+    //获取屏蔽列表
+    List<Blacklist> getBlacklistByUserID(String UserID);
 }

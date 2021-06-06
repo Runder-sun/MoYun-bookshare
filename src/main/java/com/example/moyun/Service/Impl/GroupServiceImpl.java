@@ -1,7 +1,7 @@
 package com.example.moyun.Service.Impl;
 
 import com.example.moyun.Dao.GroupDao;
-import com.example.moyun.Entity.Group;
+import com.example.moyun.Entity.*;
 import com.example.moyun.Service.GroupService;
 import com.example.moyun.Vo.GroupVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,107 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<Group> getGroupCollectionByUserID(String UserID){
+    public List<GroupCollection> getGroupCollectionByUserID(String UserID){
         return groupDao.getGroupCollectionByUserID(UserID);
+    }
+
+    @Override
+    public void addGroup(Group group){
+        groupDao.addGroup(group);
+    }
+
+    @Override
+    public void addGroupMember(GroupMember groupMember){
+        groupDao.addGroupMember(groupMember);
+    }
+
+    @Override
+    public void deleteGroupMember(Integer MemberID){
+        groupDao.deleteGroupMember(MemberID);
+    }
+
+    @Override
+    public void updateGroupInfo(Integer GroupID,String GroupName,String Tag,Boolean isPrivate,String Introduce,String GroupImage){
+        groupDao.updateGroupInfo(GroupID,GroupName,Tag,isPrivate,Introduce,GroupImage);
+    }
+
+    @Override
+    public List<GroupMember> getGroupMemberListByGroupID(Integer GroupID){
+        return groupDao.getGroupMemberListByGroupID(GroupID);
+    }
+
+    @Override
+    public void addGroupApply(GroupApply groupApply){
+        groupDao.addGroupApply(groupApply);
+    }
+
+    @Override
+    public void updateGroupApply(Integer GroupApplyID){
+        groupDao.updateGroupApply(GroupApplyID);
+    }
+
+    @Override
+    public List<GroupApply> getGroupApplyListByGroupID(Integer GroupID){
+        return groupDao.getGroupApplyListByGroupID(GroupID);
+    }
+
+    @Override
+    public void deleteGroupApply(Integer GroupApplyID){
+        groupDao.deleteGroupApply(GroupApplyID);
+    }
+
+    @Override
+    public List<Group> getGroupListByUserID(String UserID){
+        return groupDao.getGroupListByUserID(UserID);
+    }
+
+    @Override
+    public void addTask(Task task){
+        groupDao.addTask(task);
+    }
+
+    @Override
+    public List<Task> getTaskList(Integer GroupID){
+        return groupDao.getTaskList(GroupID);
+    }
+
+    @Override
+    public void collectGroup(GroupCollection groupCollection){
+        groupDao.collectGroup(groupCollection);
+    }
+
+    @Override
+    public void cancelCollectGroup(Integer GroupCollectionID){
+        groupDao.cancelCollectGroup(GroupCollectionID);
+    }
+
+    @Override
+    public void deleteGroupCollection(Integer GroupID){
+        groupDao.deleteGroupCollection(GroupID);
+    }
+
+    @Override
+    public void deleteTask(Integer GroupID){
+        groupDao.deleteTask(GroupID);
+    }
+
+    @Override
+    public void deleteMemberList(Integer GroupID){
+        groupDao.deleteMemberList(GroupID);
+    }
+
+    @Override
+    public void deleteGroupApplyByGroupID(Integer GroupID){
+        groupDao.deleteGroupApplyByGroupID(GroupID);
+    }
+
+    @Override
+    public GroupApply getGroupApplyByGroupApplyID(Integer GroupApplyID){
+        return groupDao.getGroupApplyByGroupApplyID(GroupApplyID);
+    }
+
+    @Override
+    public List<Group> searchGroup(String GroupName,String Tag){
+        return groupDao.searchGroup(GroupName,Tag);
     }
 }

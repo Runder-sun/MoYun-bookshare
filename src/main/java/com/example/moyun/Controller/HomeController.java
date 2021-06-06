@@ -36,7 +36,7 @@ public class HomeController {
     @Autowired
     private GroupService groupService;
 
-    @PostMapping("/Register")
+    @PostMapping("/Register")//（已完成，已测试）
     public Map<String,Object> registerUser(@RequestBody Map<String,String> remap){
         String UserID=remap.get("UserID");
         String Password=remap.get("Password");
@@ -71,7 +71,7 @@ public class HomeController {
         return map;
     }
 
-    @PostMapping("/Login")
+    @PostMapping("/Login")//（已完成，已测试）
     public Map<String,Object> login(HttpServletRequest request, @RequestBody Map<String, String> loginMap){
         String UserID = loginMap.get("UserID");
         String Password = loginMap.get("Password");
@@ -99,6 +99,7 @@ public class HomeController {
                     if(!user.getIsForbidden()){
                         HttpSession session=request.getSession();
                         session.setAttribute("UserID",UserID);
+                        session.setAttribute("isTeacher",user.getIsTeacher());
                         map.put("success", true);
                         map.put("message", "用户登录成功！");
                         map.put("isAdmin",false);
@@ -117,7 +118,7 @@ public class HomeController {
         return map;
     }
 
-    @PostMapping("/ForgetPassword")
+    @PostMapping("/ForgetPassword")//（已完成，已测试）
     public Map<String,Object> forgetPassword(HttpServletRequest request,@RequestBody Map<String,String> forgetMap){
         String UserID=forgetMap.get("UserID");
         String Email=forgetMap.get("Email");
@@ -145,7 +146,7 @@ public class HomeController {
         return map;
     }
 
-    @PostMapping("/code")
+    @PostMapping("/code")//（已完成，已测试）
     public Map<String,Object> resetPassword(HttpServletRequest request,@RequestBody Map<String,String> resetMap){
         String UserID=resetMap.get("UserID");
         String Password=resetMap.get("Password");
@@ -176,7 +177,7 @@ public class HomeController {
         return map;
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/logout")//（已完成，已测试）
     public Map<String,Object> logout (HttpServletRequest request){
         Map<String ,Object> map=new HashMap<>();
         try {
@@ -192,13 +193,19 @@ public class HomeController {
         return map;
     }
 
-    @GetMapping("/Home")
+    @GetMapping("/Home")//（已完成）
     public Map<String,Object> home(){
         Map<String,Object> map=new HashMap<>();
-        List<Book> books= bookService.getHotBook();
-        List<Group> groups=groupService.getHotGroup();
-        map.put("hotBook",books);
-        map.put("hotGroup",groups);
+        try {
+            List<Book> books= bookService.getHotBook();
+            List<Group> groups=groupService.getHotGroup();
+            map.put("hotBook",books);
+            map.put("hotGroup",groups);
+            map.put("success",true);
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("success",false);
+        }
         return map;
     }
 }

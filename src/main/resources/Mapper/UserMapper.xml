@@ -40,4 +40,30 @@
         set head_image=#{HeadImage},background_image=#{BackgroundImage}
         where userid=#{UserID}
     </update>
+    <insert id="addFollow" parameterType="FollowList">
+        insert into follow_list(followerid, followedid, follow_time)
+        values(#{FollowID},#{FollowedID},#{FollowTime})
+    </insert>
+    <delete id="deleteFollow">
+        delete from follow_list
+        where follow_listid=#{FollowListID}
+    </delete>
+    <select id="getFollowListByUserID" resultType="FollowList">
+        select *
+        from follow_list
+        where followerid=#{FollowerID}
+    </select>
+    <insert id="addBlacklist" parameterType="Blacklist">
+        insert into blacklist(userid, ban_userid, ban_time)
+        values(#{UserID},#{BanUserID},#{BanTime})
+    </insert>
+    <delete id="deleteBlacklist" parameterType="Blacklist">
+        delete from blacklist
+        where blacklistid=#{BlacklistID}
+    </delete>
+    <select id="getBlacklistByUserID" resultType="Blacklist">
+        select *
+        from blacklist
+        where userid=#{UserID}
+    </select>
 </mapper>

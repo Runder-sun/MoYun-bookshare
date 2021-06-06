@@ -25,4 +25,5 @@ public class Book {
     private String Link;
     private String BookImage;
     private Integer ReadTimes;
+    private String UserID;
 }

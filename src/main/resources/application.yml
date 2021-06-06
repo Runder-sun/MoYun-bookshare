@@ -17,8 +17,14 @@ spring:
         smtp:
           socketFactoryClass: javax.net.ssl.SSLSocketFactory
         debug: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 200MB
+      location: C:\Users\11604\Desktop\MoYunFile
+      enabled: true
 mybatis:
   mapper-locations: classpath:Mapper/*.xml
   type-aliases-package: com.example.moyun.Entity
 server:
-  port: 8090
+  port: 8080

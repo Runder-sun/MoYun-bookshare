@@ -14,4 +14,51 @@
         delete from forum_info
         where forumid=#{ForumID}
     </delete>
+    <insert id="addForum" parameterType="Forum">
+        insert into forum_info(topic, groupid, create_time, kind,createid)
+        values (#{Topic},#{GroupID},#{CreateTime},#{Kind},#{CreateID})
+    </insert>
+    <select id="getForumMessageListByForumID" resultType="ForumMessage">
+        select *
+        from forum_message
+        where forumid=#{ForumID}
+        order by comment_time
+    </select>
+    <insert id="addForumMessage" parameterType="ForumMessage">
+        insert into forum_message(forumid, comment, userid, comment_time)
+        values(#{ForumID},#{Comment},#{UserID},#{CommentTime})
+    </insert>
+    <select id="getHotForumByGroupID" resultType="Forum">
+        select *
+        from forum_info
+        where groupid=#{GroupID}
+        order by forum_messages desc
+        limit 0,8
+    </select>
+    <select id="getForumByGroupID" resultType="Forum">
+        select *
+        from forum_info
+        where groupid=#{GroupID}
+    </select>
+    <update id="addMessageNum" parameterType="Forum">
+        update forum_info
+        set forum_messages=forum_messages+1
+        where forumid=#{ForumID}
+    </update>
+    <delete id="deleteForumMessage" parameterType="ForumMessage">
+        delete from forum_message
+        where forumid=#{ForumID}
+    </delete>
+    <delete id="deleteForumByGroupID" parameterType="Forum">
+        delete from forum_info
+        where groupid=#{GroupID}
+    </delete>
+    <delete id="deleteForumMessageByGroupID" parameterType="Group">
+        delete from forum_message where forum_messageid in(
+            select forum_messageid from(
+                select forum_messageid from forum_info join forum_message fm on forum_info.forumid = fm.forumid
+                where groupid=#{GroupID}
+                )as del
+        )
+    </delete>
 </mapper>

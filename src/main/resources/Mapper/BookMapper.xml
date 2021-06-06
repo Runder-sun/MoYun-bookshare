@@ -20,9 +20,52 @@
         order by read_times desc
         limit 0,8
     </select>
-    <select id="getBookCollectionByUserID" resultType="Book">
+    <select id="getBookCollectionByUserID" resultType="BookCollection">
         select *
         from book_collection
         where userid=#{UserID}
     </select>
+    <select id="searchBook" resultType="Book">
+        select *
+        from book_info
+        where book_name like '%#{BookName}%' and kind=#{Tag}
+    </select>
+    <insert id="addBook" parameterType="Book">
+        insert into book_info(book_name,author,publisher,ISBN,kind,link,book_image,userid)
+        values(#{BookName},#{Author},#{Publisher},#{ISBN},#{Kind},#{Link},#{BookImage},#{UserID})
+    </insert>
+    <update id="updateBook" parameterType="Book">
+        update book_info
+        set book_name=#{BookName},author=#{Author},publisher=#{Publisher},ISBN=#{ISBN},kind=#{Kind}
+        where bookid=#{BookID}
+    </update>
+    <insert id="collectBook" parameterType="Book">
+        insert into book_collection(bookid,userid,collect_time)
+        values(#{BookID},#{UserID},#{CollectTime})
+    </insert>
+    <delete id="cancelCollectBook" parameterType="BookCollection">
+        delete from book_collection
+        where book_collectionid=#{BookCollectionID}
+    </delete>
+    <update id="plusReadTime" parameterType="Book">
+        update book_info
+        set read_times=read_times+1
+        where bookid=#{BookID}
+    </update>
+    <insert id="addReadHistory" parameterType="ReadHistory">
+        insert into read_history(userid,bookid,read_time)
+        values(#{UserID},#{BookID},#{ReadTime})
+    </insert>
+    <delete id="deleteBookCollection" parameterType="Book">
+        delete from book_collection
+        where bookid=#{BookID}
+    </delete>
+    <delete id="deleteReadHistory" parameterType="Book">
+        delete from read_history
+        where bookid=#{BookID}
+    </delete>
+    <update id="updateBookScore" parameterType="Book">
+        update book_info
+        set score=(select sum(score) from book_review where book_review.bookid=#{BookID})/(select count(*) from book_review where book_review.bookid=#{BookID})
+    </update>
 </mapper>

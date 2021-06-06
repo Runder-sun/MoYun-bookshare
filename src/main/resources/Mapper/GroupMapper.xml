@@ -17,12 +17,105 @@
     <select id="getHotGroup" resultType="Group">
         select *
         from group_info
+        where is_private=0
         order by member_num desc
         limit 0,8
     </select>
-    <select id="getGroupCollectionByUserID" resultType="Group">
+    <select id="getGroupCollectionByUserID" resultType="GroupCollection">
         select *
         from group_collection
         where userid=#{UserID}
+    </select>
+    <insert id="addGroup" parameterType="Group">
+        insert into group_info(group_name, tag, createid, create_time, introduce, group_image,is_private)
+        values (#{GroupName},#{Tag},#{CreateID},#{CreateTime},#{Introduce},#{GroupImage},#{isPrivate})
+    </insert>
+    <insert id="addGroupMember" parameterType="GroupMember">
+        insert into group_member(groupid, userid)
+        values (#{GroupID},#{UserID})
+    </insert>
+    <delete id="deleteGroupMember" parameterType="GroupMember">
+        delete from group_member
+        where memberid=#{MemberID}
+    </delete>
+    <update id="updateGroupInfo" parameterType="Group">
+        update group_info
+        set group_name=#{GroupName},tag=#{Tag},introduce=#{Introduce},group_image=#{GroupImage},is_private=#{isPrivate}
+        where groupid=#{GroupID}
+    </update>
+    <select id="getGroupMemberListByGroupID" resultType="GroupMember">
+        select *
+        from group_member
+        where groupid=#{GroupID}
+    </select>
+    <insert id="addGroupApply" parameterType="GroupApply">
+        insert into group_apply(groupid, apply_userid, apply_time)
+        values(#{GroupID},#{ApplyUserID},#{ApplyTime})
+    </insert>
+    <update id="updateGroupApply" parameterType="GroupApply">
+        update group_apply
+        set is_allow=1
+        where group_applyid=#{GroupID}
+    </update>
+    <select id="getGroupApplyListByGroupID" resultType="GroupApply">
+        select *
+        from group_apply
+        where groupid=#{GroupID}
+    </select>
+    <delete id="deleteGroupApply" parameterType="GroupApply">
+        delete from group_apply
+        where group_applyid=#{GroupApplyID}
+    </delete>
+    <select id="getGroupListByUserID" resultType="Group">
+        select *
+        from group_info
+        where groupid in
+              (select groupid
+              from group_member
+              where userid=#{UserID})
+    </select>
+    <insert id="addTask" parameterType="Task">
+        insert into task(groupid, createid, create_time, task_content)
+        values(#{GroupID},#{CreateID},#{CreateTime},#{TaskContent})
+    </insert>
+    <select id="getTaskList" resultType="Task">
+        select *
+        from task
+        where groupid=#{GroupID}
+        order by create_time desc
+    </select>
+    <insert id="collectGroup" parameterType="GroupCollection">
+        insert into group_collection(userid, groupid, collect_time)
+        values(#{UserID},#{GroupID},#{CollectTime})
+    </insert>
+    <delete id="cancelCollectGroup" parameterType="GroupCollection">
+        delete from group_collection
+        where group_collectionid=#{GroupCollectionID}
+    </delete>
+    <delete id="deleteGroupCollection" parameterType="GroupCollection">
+        delete from group_collection
+        where groupid=#{GroupID}
+    </delete>
+    <delete id="deleteTask" parameterType="Task">
+        delete from task
+        where groupid=#{GroupID}
+    </delete>
+    <delete id="deleteMemberList" parameterType="GroupMember">
+        delete from group_member
+        where groupid=#{GroupID}
+    </delete>
+    <delete id="deleteGroupApplyByGroupID" parameterType="GroupApply">
+        delete from group_apply
+        where groupid=#{GroupID}
+    </delete>
+    <select id="getGroupApplyByGroupApplyID" resultType="GroupApply">
+        select *
+        from group_apply
+        where group_applyid=#{GroupApplyID}
+    </select>
+    <select id="searchGroup" resultType="Group">
+        select *
+        from group_info
+        where is_private=0 and group_name like '%{#GroupName}%' and tag=#{Tag}
     </select>
 </mapper>

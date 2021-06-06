@@ -1,12 +1,15 @@
 package com.example.moyun.Service.Impl;
 
 import com.example.moyun.Dao.UserDao;
+import com.example.moyun.Entity.Blacklist;
+import com.example.moyun.Entity.FollowList;
 import com.example.moyun.Entity.User;
 import com.example.moyun.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -51,5 +54,35 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updatePictures(String UserID,String HeadImage,String BackgroundImage){
         userDao.updatePictures(UserID,HeadImage,BackgroundImage);
+    }
+
+    @Override
+    public void addFollow(FollowList followList){
+        userDao.addFollow(followList);
+    }
+
+    @Override
+    public void deleteFollow(Integer FollowListID){
+        userDao.deleteFollow(FollowListID);
+    }
+
+    @Override
+    public List<FollowList> getFollowListByUserID(String UserID){
+        return userDao.getFollowListByUserID(UserID);
+    }
+
+    @Override
+    public void addBlacklist(Blacklist blacklist){
+        userDao.addBlacklist(blacklist);
+    }
+
+    @Override
+    public void deleteBlacklist(Integer BlacklistID){
+        userDao.deleteBlacklist(BlacklistID);
+    }
+
+    @Override
+    public List<Blacklist> getBlacklistByUserID(String UserID){
+        return userDao.getBlacklistByUserID(UserID);
     }
 }

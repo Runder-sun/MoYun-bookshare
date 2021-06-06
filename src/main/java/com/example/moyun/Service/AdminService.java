@@ -6,8 +6,6 @@ import com.example.moyun.Vo.UserVo;
 import java.util.List;
 
 public interface AdminService {
-    //删除User
-    void deleteUser(String UserID);
 
     //查看全部User
     List<User> getAllUser();

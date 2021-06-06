@@ -2,6 +2,7 @@ package com.example.moyun.Service.Impl;
 
 import com.example.moyun.Dao.AdminDao;
 import com.example.moyun.Entity.Admin;
+import com.example.moyun.Entity.Blog;
 import com.example.moyun.Entity.User;
 import com.example.moyun.Service.AdminService;
 import com.example.moyun.Vo.UserVo;
@@ -15,11 +16,6 @@ import java.util.List;
 public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminDao adminDao;
-
-    @Override
-    public void deleteUser(String UserID){
-        adminDao.deleteUser(UserID);
-    }
 
     @Override
     public List<User> getAllUser(){

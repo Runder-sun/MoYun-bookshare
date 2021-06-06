@@ -14,9 +14,72 @@
         delete from blog_info
         where blogid=#{BlogID}
     </delete>
-    <select id="getBlogCollectionByUserID" resultType="Blog">
+    <select id="getBlogCollectionByUserID" resultType="BlogCollection">
         select *
-        from blog_collection
+        from blog_collection ,blog_info
         where userid=#{UserID}
+    </select>
+    <select id="getBlogListByUserID" resultType="Blog">
+        select *
+        from blog_info
+        where authorid=#{UserID}
+    </select>
+    <insert id="addBlog" parameterType="Blog">
+        insert into blog_info(blog_title, authorid, recent_finish_time, content)
+        values(#{BlogTitle},#{AuthorID},#{RecentFinishTime},#{Content})
+    </insert>
+    <update id="editBlog" parameterType="Blog">
+        update blog_info set blog_title=#{BlogTitle},recent_finish_time=#{RecentFinishTime},content=#{Content}
+        where blogid=#{BlogID}
+    </update>
+    <insert id="reprintBlog" parameterType="Blog">
+        insert into blog_info(blog_title, authorid, recent_finish_time, content,is_reprint)
+        values(#{BlogTitle},#{AuthorID},#{RecentFinishTime},#{Content},#{isReprint})
+    </insert>
+    <insert id="collectBlog" parameterType="BlogCollection">
+        insert into blog_collection(blogid, userid, collect_time)
+        values (#{BlogID},#{UserID},#{CollecTime})
+    </insert>
+    <update id="likeBlog" parameterType="Blog">
+        update blog_info
+        set likes=likes+1
+        where blogid=#{BlogID}
+    </update>
+    <update id="cancelLikeBlog" parameterType="Blog">
+        update blog_info
+        set likes=likes-1
+        where blogid=#{BlogID}
+    </update>
+    <delete id="cancelCollectBlog" parameterType="BlogCollection">
+        delete from blog_collection
+        where blog_collectionid=#{BlogCollectionID}
+    </delete>
+    <insert id="addBlogComment" parameterType="BlogComment">
+        insert into blog_comment(blogid, userid, comment, comment_time)
+        values(#{BlogID},#{UserID},#{Comment},#{CommentTime})
+    </insert>
+    <select id="getBlogCommentListByBlogID" resultType="BlogComment">
+        select *
+        from blog_comment
+        where blogid=#{BlogID}
+        order by comment_time
+    </select>
+    <delete id="deleteBlogComment" parameterType="BlogComment">
+        delete from blog_comment
+        where blogid=#{BlogID}
+    </delete>
+    <delete id="deleteBlogCollection" parameterType="BlogCollection">
+        delete from blog_collection
+        where blogid=#{BlogID}
+    </delete>
+    <select id="getBlogDT" resultType="Blog">
+        select *
+        from blog_info
+        where authorid=#{UserID}
+           or authorid in (
+               select followedid from (
+                   select followedid from follow_list where followerid=#{UserID}
+                   ) as get
+               )
     </select>
 </mapper>

@@ -8,18 +8,15 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "group_apply")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "forum_info")
-public class Forum {
+public class GroupApply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ForumID;
-    private String Topic;
+    private Integer GroupApplyID;
     private Integer GroupID;
-    private String CreateID;
-    private Timestamp CreateTime;
-    private String Kind;
-    private Integer ForumMessages;
+    private String ApplyUserID;
+    private Timestamp ApplyTime;
 }

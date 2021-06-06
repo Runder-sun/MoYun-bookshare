@@ -7,7 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface AdminDao {
-    void deleteUser(String UserID);
     List<User> getAllUser();
     Admin getAdminByAdminID(String AdminID);
     Admin getAdminByAdminIDAndPassword(String AdminID,String Password);

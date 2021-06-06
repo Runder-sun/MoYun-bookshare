@@ -14,7 +14,7 @@
         from admin
         where adminid=#{AdminID}
     </select>
-    <select id="getAdminByAdminIDAnd[assword" resultType="Admin">
+    <select id="getAdminByAdminIDAndPassword" resultType="Admin">
         select *
         from admin
         where adminid=#{AdminID} and password=#{Password}
