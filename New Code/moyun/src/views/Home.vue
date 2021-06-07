@@ -18,8 +18,8 @@
         <el-menu-item index="/">首页</el-menu-item>
         <el-submenu index="2">
           <template slot="title">书库</template>
-          <el-menu-item index="2-1">书评</el-menu-item>
-          <el-menu-item index="2-2">书籍</el-menu-item>
+          <el-menu-item index="/Book/BookReview">书评</el-menu-item>
+          <el-menu-item index="/Book/BookWareHouse">书籍</el-menu-item>
         </el-submenu>
         <el-menu-item index="/Group/GroupList" >圈子</el-menu-item>
         <el-menu-item index="/updates">动态</el-menu-item>
@@ -129,7 +129,7 @@
                       :class="{ 'on-hover': hover }"
                       width=300
                     >
-                      <v-img :src="group.img" height="225px">
+                      <v-img :src="group.img" height="225px" @click="toCheckBook">
                         <v-card-title class="title white--text">
                           <v-row
                             class="fill-height flex-column"
@@ -334,8 +334,11 @@ export default {
   //components: {
    // bar,
   //},
-  
-
+  methods: {
+    toCheckBook(){
+       this.$router.push({ path: "/Book/CheckBook" });
+    }
+  },
 };
 </script>
 

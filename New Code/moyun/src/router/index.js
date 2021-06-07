@@ -10,6 +10,15 @@ const GroupList = () => import("../views/GroupList.vue");
 const GroupIndex = () => import("../views/GroupIndex.vue");
 const CreatGroup = () => import("../views/CreateGroup.vue");
 const AllGroup = () => import("../views/AllGroup.vue");
+const BookWareHouse = () => import("../views/BookWareHouse.vue");
+const SearchBook = () => import("../views/SearchBook.vue");
+const WriteBookReview = () => import("../views/WriteBookReview");
+const CheckBook = () => import("../views/CheckBook");
+const BookRecommmand = () => import("../views/BookRecommand");
+const BookReview = () =>import("../views/BookReview");
+const AddBook = () =>import("../views/AddBook");
+const EditBook = () =>import("../views/EditBook")
+const Reading = () =>import("../views/Reading")
 const Forum = () => import("../views/Forum.vue");
 const ForumHome = () => import("../views/ForumHome.vue");
 const BlogList = () => import("../views/BlogList.vue");
@@ -110,6 +119,50 @@ const routes = [
     name:"AllGroup",
     component:AllGroup,
   },
+  {
+    path:"/Book/BookWareHouse",
+    name:"BookWareHouse",
+    component:BookWareHouse,
+  },
+  {
+    path:"/Book/SearchBook",
+    name:"SearchBook",
+    component:SearchBook
+  },
+  {
+    path:"/Book/WriteBookReview",
+    name:"WriteBookReview",
+    component:WriteBookReview
+  },
+  {
+    path:"/Book/CheckBook",
+    name:"CheckBook",
+    component:CheckBook
+  },
+  {
+    path:"/Book/BookRecommand",
+    name:"BookRecommand",
+    component: BookRecommmand
+  },
+  {
+    path:"/Book/BookReview",
+    name:"BookReview",
+    component: BookReview
+  },
+  {
+    path:"/Book/AddBook",
+    name:"AddBook",
+    component: AddBook
+  },
+  {
+    path:"/Book/EditBook",
+    name:"EditBook",
+    component:EditBook
+  },
+  {
+    path:"/Book/Reading",
+    name:"Reading",
+    component:Reading},
   {
     path:"/Group/Forum/ForumHome",
     name:"ForumHome",
