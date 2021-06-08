@@ -21,25 +21,30 @@
                 label="E-mail"
                 required
               ></v-text-field>
-              <v-row>
+              
+              <template >
+                <v-row>
                 <v-col cols="12" sm="8">
-              <v-text-field
+                <v-text-field
                 v-model="code"
                 :rules="codeRules"
                 label="验证码"
                 required
               ></v-text-field>
-              <template v-slot:append-outer>
-                  <v-btn
+              </v-col>
+              <v-col><v-btn
                     text
-                    style="top: -12px"
+                    class="Code"
                     offset-y
+                    color="cyan"
+                    @click="getCode"
                   > 
                     获取验证码
                   </v-btn>
-              </template>
-                </v-col>
+                  </v-col>
               </v-row>
+              </template>
+                
               <v-text-field
                 v-model="password"
                 :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -63,12 +68,21 @@
               <v-btn
                 :disabled="!valid"
                 class="button"
-                @click="validate"
+                @click="resetPassword"
                 large
                 href="/Login"
               >
                 <p class="pass_">重置密码</p>
               </v-btn>
+              <v-snackbar
+                    v-model="snackbar"
+                    :timeout="3000"
+                    color="blue-grey"
+                    absolute
+                    rounded="pill"
+                  >
+                    {{ message }}
+                  </v-snackbar>
                 </v-col>
                   </v-row>
             </v-cintainer>
@@ -85,6 +99,7 @@ export default {
     show2:false,
     show3:false,
     valid: true,
+    snackbar: false,
     id: "",
     idRules: [(v) => !!v || "请填写账号"],
     password: "",
@@ -98,9 +113,46 @@ export default {
     code:"",
     codeRules:[(v) => !!v || "请填写验证码"],
     checkbox: false,
+    message: "",
   }),
 
   methods: {
+    resetPassword(){
+      this.validate();
+      this.$http({
+        method:'POST',
+        url:"/code",
+        data: {
+          UserID:this.id,
+          Password:this.password,
+          rePassword:this.rePassword,
+          code:this.code,
+        }
+      }).then(res=>{
+        this.message = res.data.message;
+        this.snackbar = true;
+        if (res.data.success) {
+          this.$router.push({path:"/Login"})
+        }
+      }).catch(err=>{
+        console.log(err)
+      })
+    },
+    getCode(){
+      this.$http({
+        method:'POST',
+        url:"/ForgetPassword",
+        data: {
+          UserID:this.id,
+          Email:this.Email,
+        }
+      }).then(res=>{
+        this.message = res.data.message;
+        this.snackbar = true;
+      }).catch(err=>{
+        console.log(err)
+      })
+    },
     validate() {
       this.$refs.form.validate();
     },
@@ -179,5 +231,9 @@ export default {
   flex-direction: column;
   transition: 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-
+.Code{
+  
+  top:25%;
+  left:10%;
+}
 </style>
