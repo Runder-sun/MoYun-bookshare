@@ -49,13 +49,13 @@
                             justify="end"
                             v-if="item.typeStamp===1"
                           >
-                            <v-btn v-if="item.myLike" icon color="grey lighten-1" style="margin-right:50px;" >
+                            <v-btn icon color="grey lighten-1" style="margin-right:50px;" v-if="item.myLike">
                               <v-icon v-on:click="like(item)">mdi-heart</v-icon>
                               <span class="subheading mr-3">{{
                                 item.likes
                               }}</span>
                             </v-btn>
-                            <v-btn v-else icon color="pink lighten-2" style="margin-right:50px;" >
+                            <v-btn icon color="pink lighten-2" style="margin-right:50px;" v-else>
                               <v-icon v-on:click="unlike(item)">mdi-heart</v-icon>
                               <span class="subheading mr-3">{{
                                 item.likes

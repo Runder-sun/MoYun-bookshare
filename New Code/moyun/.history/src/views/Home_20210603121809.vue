@@ -1,6 +1,12 @@
 <template>
   <div class="home">
-    <v-app-bar app elevate-on-scroll color="#efeeee" light inverted-scroll>
+    <v-app-bar
+      app
+      elevate-on-scroll
+      color="write"
+      light
+      inverted-scroll
+    >
       <el-menu
         :default-active="activeIndex"
         class="menu"
@@ -12,21 +18,43 @@
         <el-menu-item index="/">首页</el-menu-item>
         <el-submenu index="2">
           <template slot="title">书库</template>
-          <el-menu-item index="/Book/BookReview">书评</el-menu-item>
-          <el-menu-item index="/Book/BookWareHouse">书籍</el-menu-item>
+          <el-menu-item index="2-1">书评</el-menu-item>
+          <el-menu-item index="2-2">书籍</el-menu-item>
         </el-submenu>
-        <el-menu-item index="/Group/GroupList">圈子</el-menu-item>
-        <el-menu-item index="/updates">动态</el-menu-item>
+        <el-menu-item index="/Group/GroupList" >圈子</el-menu-item>
+        <el-menu-item index="4">动态</el-menu-item>
       </el-menu>
       <v-row justify="end">
-        <template v-if="this.$store.state.login">
-          <avatar></avatar>
-        </template>
-        <template v-else>
-          <v-btn class="button" href="/Login">
-            <p class="login_">登录</p>
-          </v-btn>
-        </template>
+        <v-menu bottom min-width="200px" round offset-y>
+          <template v-slot:activator="{ on }">
+            <v-btn icon v-on="on">
+              <v-avatar color="brown" size="40">
+                <span class="white--text headline">{{ Z }}</span>
+              </v-avatar>
+            </v-btn>
+          </template>
+          <v-card>
+            <v-list-item-content class="justify-center">
+              <div class="mx-auto text-center">
+                <v-avatar color="brown">
+                  <span class="white--text headline">{{ 1 }}</span>
+                </v-avatar>
+                <h3>{{ Z }}</h3>
+                <p class="caption mt-1">
+                  {{ Z }}
+                </p>
+                <v-divider class="my-3"></v-divider>
+                <v-btn depressed rounded text> 个人主页 </v-btn>
+                <v-divider class="my-3"></v-divider>
+                <v-btn depressed rounded text> 消息 </v-btn>
+                <v-divider class="my-3"></v-divider>
+                <v-btn depressed rounded text> 日志 </v-btn>
+                <v-divider class="my-3"></v-divider>
+                <v-btn depressed rounded text> 退出登录 </v-btn>
+              </div>
+            </v-list-item-content>
+          </v-card>
+        </v-menu>
       </v-row>
     </v-app-bar>
     <v-img src="../assets/widthPic.jpg" dark></v-img>
@@ -38,12 +66,12 @@
           <v-container class="pa-4 text-center">
             <v-row class="fill-height" align="center" justify="center">
               <template v-for="(group, i) in groups">
-                <v-col :key="i" cols="12" md="2">
+                <v-col :key="i" cols="12" md="2" >
                   <v-hover v-slot="{ hover }">
                     <v-card
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
-                      width="300"
+                      width=300
                     >
                       <v-img :src="group.img" height="225px">
                         <v-card-title class="title white--text">
@@ -76,6 +104,7 @@
                                 {{ group.subtext }}
                               </p>
                             </div>
+
                           </v-row>
                         </v-card-title>
                       </v-img>
@@ -93,18 +122,14 @@
           <v-container class="pa-4 text-center">
             <v-row class="fill-height" align="center" justify="center">
               <template v-for="(group, i) in groups">
-                <v-col :key="i" cols="12" md="2">
+                <v-col :key="i" cols="12" md="2" >
                   <v-hover v-slot="{ hover }">
                     <v-card
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
-                      width="300"
+                      width=300
                     >
-                      <v-img
-                        :src="group.img"
-                        height="225px"
-                        @click="toCheckBook"
-                      >
+                      <v-img :src="group.img" height="225px">
                         <v-card-title class="title white--text">
                           <v-row
                             class="fill-height flex-column"
@@ -135,6 +160,7 @@
                                 {{ group.subtext }}
                               </p>
                             </div>
+
                           </v-row>
                         </v-card-title>
                       </v-img>
@@ -151,8 +177,9 @@
 </template>
 
 <script>
-import avatar from "../components/Avatar.vue";
+//import bar from "../components/Bar.vue";
 export default {
+  
   data: () => ({
     groups: [
       {
@@ -304,30 +331,11 @@ export default {
     ],
     transparent: "rgba(255, 255, 255, 0)",
   }),
-  components: {
-    avatar,
-  },
-  created() {
-    this.show();
-  },
-  methods: {
-    toCheckBook() {
-      this.$router.push({ path: "/Book/CheckBook" });
-    },
-    show() {
-      this.$http({
-        method: "get",
-        url: "/Home",
-      })
-        .then((res) => {
-          this.books = res.data.hotBook;
-          this.groups = res.data.hotGroup;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-  },
+  //components: {
+   // bar,
+  //},
+  
+
 };
 </script>
 
@@ -344,31 +352,16 @@ export default {
   opacity: 0.8;
   filter: alpha(opacity=60);
 }
-.textCenter {
-  position: absolute;
-  text-align: center;
-  left: 50%;
-  top: 30%;
+.textCenter{
+	position:absolute;
+  text-align:center;
+  left:50%;
+	top:30%;
   margin-left: -200px;
-  text-shadow: 5px -5px black, 4px -4px white;
+	text-shadow: 5px -5px black, 4px -4px white;
   font-weight: bold;
   -webkit-text-fill-color: transparent;
-  font-size: 200px;
+  font-size:200px
 }
-.button {
-  color: #596275;
-  box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
-    -9px -9px 18px rgba(255, 255, 255, 1);
-  border-radius: 3rem;
-  transition: box-shadow 0.2s ease-out;
-  background-color: #efeeee;
-  position: relative;
-  top: 15%;
-  outline: none;
-  border: none;
-}
-.login_ {
-  margin-top: 40%;
-  font-size: 15px;
-}
+
 </style>

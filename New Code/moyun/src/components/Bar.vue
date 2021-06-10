@@ -2,7 +2,7 @@
     <v-app-bar
       app
       elevate-on-scroll
-      color="write"
+      color="#efeeee"
       light
     >
       <el-menu

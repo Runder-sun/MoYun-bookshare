@@ -43,20 +43,16 @@
                               src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
                             ></v-img>
                           </v-list-item-avatar>
-                            <v-list-item-title class="title font-weight-bold" style="margin-left:100px">{{item.name}}</v-list-item-title>
+
+                          <v-list-item-content style="margin-left:-150px;">
+                            <v-list-item-title class="title font-weight-bold">{{item.name}}</v-list-item-title>
+                          </v-list-item-content>
                         <v-row
                             align="center"
                             justify="end"
-                            v-if="item.typeStamp===1"
                           >
-                            <v-btn v-if="item.myLike" icon color="grey lighten-1" style="margin-right:50px;" >
-                              <v-icon v-on:click="like(item)">mdi-heart</v-icon>
-                              <span class="subheading mr-3">{{
-                                item.likes
-                              }}</span>
-                            </v-btn>
-                            <v-btn v-else icon color="pink lighten-2" style="margin-right:50px;" >
-                              <v-icon v-on:click="unlike(item)">mdi-heart</v-icon>
+                            <v-btn icon color="pink lighten-2" style="margin-right:50px;">
+                              <v-icon v-on:click="item.likes++">mdi-heart</v-icon>
                               <span class="subheading mr-3">{{
                                 item.likes
                               }}</span>
@@ -86,7 +82,6 @@
 </template>
 
 <script>
-//0是bookreview 1是blog
 import bar from "../components/Bar.vue";
 export default {
   data: () => ({
@@ -95,7 +90,6 @@ export default {
         id: 1,
         title: "Book1",
         type: "BookReview",
-        typeStamp:0,
         content: `This is a book about Jesus and how mankind react to atheism,deeply revealling the truth of religious...`,
         name: "Jeff",
         personPhoto: "../assets/UpdatesA1",
@@ -103,13 +97,11 @@ export default {
         postPic: "../assets/UpdatesB2",
         likes: 5,
         shares: 5,
-        myLike:false,
       },
       {
         id: 2,
         title: "Tweet",
         type: "Blog",
-        typeStamp:1,
         content: `Just had a good day！`,
         name: "Kitty",
         personPhoto: "../assets/UpdatesA2",
@@ -117,13 +109,11 @@ export default {
         postPic: "../assets/UpdatesB1",
         likes: 71,
         shares: 75,
-        myLike:true,
       },
       {
         id: 3,
         title: "Tweet",
         type: "Blog",
-        typeStamp:1,
         content: `Kinda ok`,
         name: "Ken",
         personPhoto: "../assets/UpdatesA3",
@@ -131,13 +121,11 @@ export default {
         postPic: "../assets/UpdatesB3",
         likes: 10,
         shares: 11,
-        myLike:false,
       },
       {
         id: 2,
         title: "Book44",
         type: "BookReview",
-        typeStamp:0,
         content: `Worthy book`,
         name: "Micki",
         personPhoto: "../assets/UpdatesA2",
@@ -145,7 +133,6 @@ export default {
         postPic: "../assets/UpdatesB3",
         likes: 71,
         shares: 75,
-        myLike:false,
       },
     ],
   }),
@@ -155,14 +142,6 @@ export default {
   methods:{
     toBlock(){
         this.$router.push({path:"/updates/block"});
-    },
-    like(news){
-      news.likes++;
-      news.myLike=true;
-    },
-    unlike(news){
-      news.likes--;
-      news.myLike=false;
     }
   }
 };

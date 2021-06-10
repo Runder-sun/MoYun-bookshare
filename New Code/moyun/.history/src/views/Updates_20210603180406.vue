@@ -47,15 +47,15 @@
                         <v-row
                             align="center"
                             justify="end"
-                            v-if="item.typeStamp===1"
+                            v-if="item.type===Blog"
                           >
-                            <v-btn v-if="item.myLike" icon color="grey lighten-1" style="margin-right:50px;" >
+                            <v-btn icon color="grey lighten-1" style="margin-right:50px;" v-if="item.myLike">
                               <v-icon v-on:click="like(item)">mdi-heart</v-icon>
                               <span class="subheading mr-3">{{
                                 item.likes
                               }}</span>
                             </v-btn>
-                            <v-btn v-else icon color="pink lighten-2" style="margin-right:50px;" >
+                            <v-btn icon color="pink lighten-2" style="margin-right:50px;" v-else>
                               <v-icon v-on:click="unlike(item)">mdi-heart</v-icon>
                               <span class="subheading mr-3">{{
                                 item.likes
@@ -86,7 +86,6 @@
 </template>
 
 <script>
-//0是bookreview 1是blog
 import bar from "../components/Bar.vue";
 export default {
   data: () => ({
@@ -95,7 +94,6 @@ export default {
         id: 1,
         title: "Book1",
         type: "BookReview",
-        typeStamp:0,
         content: `This is a book about Jesus and how mankind react to atheism,deeply revealling the truth of religious...`,
         name: "Jeff",
         personPhoto: "../assets/UpdatesA1",
@@ -109,7 +107,6 @@ export default {
         id: 2,
         title: "Tweet",
         type: "Blog",
-        typeStamp:1,
         content: `Just had a good day！`,
         name: "Kitty",
         personPhoto: "../assets/UpdatesA2",
@@ -123,7 +120,6 @@ export default {
         id: 3,
         title: "Tweet",
         type: "Blog",
-        typeStamp:1,
         content: `Kinda ok`,
         name: "Ken",
         personPhoto: "../assets/UpdatesA3",
@@ -137,7 +133,6 @@ export default {
         id: 2,
         title: "Book44",
         type: "BookReview",
-        typeStamp:0,
         content: `Worthy book`,
         name: "Micki",
         personPhoto: "../assets/UpdatesA2",
