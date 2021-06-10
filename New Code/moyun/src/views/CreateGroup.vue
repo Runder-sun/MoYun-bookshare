@@ -17,11 +17,14 @@
           <v-container fluid>
                 <v-col cols="12" >
                     <v-text-field
+                      v-model="groupName"
                       color="blue darken-2"
                       label="圈子名称"
                       required
                     ></v-text-field>
-                  <v-textarea color="teal">
+                  <v-textarea 
+                  v-model="groupIntroduce"
+                  color="teal">
                     <template v-slot:label>
                       <div>圈子简介</div>
                     </template>
@@ -30,7 +33,7 @@
                     <p>圈子标签</p>
                     <v-row justify="center">
                     <v-chip-group  active-class="primary--text">
-                      <v-chip v-for="tag in 10" :key="tag"> tag </v-chip>
+                      <v-chip v-for="tag in tags" :key="tag" @click="choosedTag=tag.Tag" > {{tag.Tag}} </v-chip>
                     </v-chip-group>
                     </v-row>
                 </v-col>
@@ -55,10 +58,50 @@ import bar from "../components/Bar.vue";
 export default {
   data: () => ({
     Private: false,
+    choosedTag:"",
     imageUrl: "",
+    groupIntroduce:"",
+    groupName:"",
+    image:null,
+    tags: [
+      {
+        Tag:"文学",
+      },
+      {
+        Tag:"科幻",
+      },
+      {
+        Tag:"侦探",
+      },
+      {
+        Tag:"纪实",
+      },
+      {
+        Tag:"儿童",
+      },
+      {
+        Tag:"艺术",
+      },
+      {
+        Tag:"历史",
+      },
+      {
+        Tag:"武侠小说",
+      },
+      {
+        Tag: "地理",
+      },
+      {
+        Tag:"IT",
+      },
+    ],
   }),
+  components: {
+    bar,
+  },
   methods: {
     handleAvatarSuccess(res, file) {
+      this.image = file;
       this.imageUrl = URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {
@@ -71,12 +114,26 @@ export default {
       if (!isLt2M) {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       }
+      
       return isJPG && isLt2M;
     },
-  },
-  components: {
-    bar,
-  },
+    createGroup(){
+      this.$http({
+        method: "post",
+        url: "/Login",
+        data: {
+          GroupName: this.groupname,
+          Tag: this.choosedTag,
+          Introduce:this.groupIntroduce,
+          file:this.image,
+        },
+    }).then(res=>{
+      if(res.data.success){
+        this.$router.push({path:"/Group/GroupList"});
+      }
+    });
+  }
+},
 };
 </script>
 

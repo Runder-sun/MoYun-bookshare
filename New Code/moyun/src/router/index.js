@@ -105,7 +105,7 @@ const routes = [
     component:GroupList,
   },
   {
-    path:"/Group/GroupIndex",
+    path:"/Group/GroupIndex/:id",
     name:"GroupIndex",
     component:GroupIndex,
   },

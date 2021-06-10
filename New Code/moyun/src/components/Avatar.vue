@@ -3,7 +3,7 @@
     <template v-slot:activator="{ on }">
       <v-btn icon v-on="on">
         <v-avatar color="brown" size="40">
-          <span class="white--text headline">{{ Z }}</span>
+          <span class="white--text headline">A</span>
         </v-avatar>
       </v-btn>
     </template>
@@ -11,11 +11,11 @@
       <v-list-item-content class="justify-center">
         <div class="mx-auto text-center">
           <v-avatar color="brown">
-            <span class="white--text headline">{{ 1 }}</span>
+            <span class="white--text headline">A</span>
           </v-avatar>
-          <h3>{{ Z }}</h3>
+          <h3>Admin</h3>
           <p class="caption mt-1">
-            {{ Z }}
+            111@qq.com
           </p>
           <v-divider class="my-3"></v-divider>
           <v-btn depressed rounded text> 个人主页 </v-btn>
