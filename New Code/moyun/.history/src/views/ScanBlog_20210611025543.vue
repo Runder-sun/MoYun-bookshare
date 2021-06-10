@@ -150,10 +150,10 @@
                         <v-icon>mdi-star</v-icon>
                     </v-btn>
                 <v-btn
-                        :color="fakelike?grey:pink"
+                        :class="this.Blog.like?grey:pink"
                         fab
                         dark
-                        v-on:click="fake"
+                        v-on:click="likeBlog"
                         class="button"
                     >
                     <v-icon>mdi-heart</v-icon>                    
@@ -202,7 +202,6 @@ export default({
         rules: {
           name1: [val => (val || '').length > 0 || 'This field is required'],
         },
-        fakeLike: true,
         alert1: false,
         conditions: false,
         snackbar1: false,
@@ -398,9 +397,6 @@ export default({
             });
        }
       },
-      fake(){
-        this.fakeLike =! this.fakeLike;
-      }
     },
 })
 </script>

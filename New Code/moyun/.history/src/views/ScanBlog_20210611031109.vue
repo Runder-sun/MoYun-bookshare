@@ -150,10 +150,10 @@
                         <v-icon>mdi-star</v-icon>
                     </v-btn>
                 <v-btn
-                        :color="fakelike?grey:pink"
+                        :color="this.fakelike?grey:pink"
                         fab
                         dark
-                        v-on:click="fake"
+                        v-on:click="this.fakeLike=!this.fakeLike"
                         class="button"
                     >
                     <v-icon>mdi-heart</v-icon>                    
@@ -398,9 +398,6 @@ export default({
             });
        }
       },
-      fake(){
-        this.fakeLike =! this.fakeLike;
-      }
     },
 })
 </script>

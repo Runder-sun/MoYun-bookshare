@@ -215,7 +215,7 @@ export default({
         console.log(index, row);
         this.$http({
           method:"delete",
-          url:"/deleteBlog",
+          url:"/BlogList",
           data:{
             BlogID:this.tableData(index).id,
           }
@@ -253,7 +253,7 @@ export default({
       officialPostBlog(){
         this.$http({
           method:"post",
-          url:"/WriteBlog",
+          url:"/BlogList",
           data: {
             BlogTitle: this.form.postTitle,
             Content: this.form.postContent,

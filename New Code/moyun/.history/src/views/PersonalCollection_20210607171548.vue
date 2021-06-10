@@ -36,28 +36,11 @@
                 label="操作"
                 style="width: 25%">
                 <template slot-scope="scope">
-                    <v-btn text color="blue darken-1" rounded @click="handleEdit(scope.$index, scope.row)"> 查看日志</v-btn>
+                    <v-btn text color="blue darken-1" href="/BlogList/ScanBlog" rounded @click="handleEdit(scope.$index, scope.row)"> 查看日志</v-btn>
                     <v-btn text color="pink lighten-1" rounded @click="handleDelete(scope.$index, scope.row)"> 取消收藏 </v-btn>
                 </template>
                 </el-table-column>
             </el-table>
-            <v-snackbar
-              v-model="snackbar"
-              :timeout="timeout"
-            >
-              {{ snacktext }}
-
-              <template v-slot:action="{ attrs }">
-                <v-btn
-                  color="green"
-                  text
-                  v-bind="attrs"
-                  @click="snackbar = false"
-                >
-                  Close
-                </v-btn>
-              </template>
-            </v-snackbar>
         </template>
         </v-container>
         </v-app>
@@ -78,9 +61,6 @@ export default({
     },
     data() {
       return {
-      snackbar: false,
-      snacktext: '取消收藏成功',
-      timeout: 1000,
         tableData: [{
           name: "在墨韵收藏的第一篇日志",
           writer:"AStudent",
@@ -131,43 +111,7 @@ export default({
     },
     components:{
     bar,
-    },
-    created(){
-      this.show();
-    },
-    methods:{
-    show() {
-      this.$http({
-        method: "get",
-        url: "/PersonalCollection",
-      })
-        .then((res) => {
-          this.tableData=res.data.blogCollectionBlog;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      },
-    handleEdit(){
-      this.$router.push({path:"/BlogList/ScanBlog"});
-    },
-    handleDelete(){
-      //this.snackbar=true;
-        this.$http({
-        method: "post",
-        url: "/cancelCollectBlog",
-        data:{
-          BlogID: this.tableData(index).BlogID,
-        }
-      }).then((res) => {
-          this.snackbar=true;
-          this.$router.push({path:"/BlogList/PersonalCollection"})
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      },
-    }
+},
 })
 </script>
 

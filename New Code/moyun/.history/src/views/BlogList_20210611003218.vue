@@ -148,7 +148,6 @@ export default({
           BlogID:1,
           BlogTitle: "在墨韵的第一天",
           RecentFinishTime: "2021/5/21",
-        },
         {
           BlogID:1,
           BlogTitle: "在墨韵的第一天",
@@ -215,7 +214,7 @@ export default({
         console.log(index, row);
         this.$http({
           method:"delete",
-          url:"/deleteBlog",
+          url:"/BlogList",
           data:{
             BlogID:this.tableData(index).id,
           }
@@ -253,7 +252,7 @@ export default({
       officialPostBlog(){
         this.$http({
           method:"post",
-          url:"/WriteBlog",
+          url:"/BlogList",
           data: {
             BlogTitle: this.form.postTitle,
             Content: this.form.postContent,

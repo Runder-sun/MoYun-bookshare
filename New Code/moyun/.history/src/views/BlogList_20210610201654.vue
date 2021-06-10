@@ -91,13 +91,13 @@
             <el-table-column
             fixed
             sortable
-            prop="BlogTitle"
+            prop="name"
             label="日志名称"
             style="width: 35%">
             </el-table-column>
             <el-table-column 
             sortable           
-            prop="RecentFinishTime"
+            prop="date"
             label="日期"
             style="width: 30%">
             </el-table-column>
@@ -140,49 +140,49 @@ export default({
         defaultForm,
         dialog: false,
         tableData: [{
-          BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          id:1,
+          name: "在墨韵的第一天",
+          date: "2021/5/21",
         },
         {
-          BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          id:2,
+          name: "在墨韵的第二天",
+          date: "2021/5/22",
         },
         {
-          BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          id:3,
+          name: "在墨韵的第三天",
+          date: "2021/5/23",
         },
         {
-          BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          id:4,
+          name: "在墨韵的第三天2",
+          date: "2021/4/22",
         },
         {
-            BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          id:5,
+          name: "在墨韵的第三天3",
+          date: "2021/5/12",
         },
         {
-          BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          id:6,
+          name: "在墨韵的第四天",
+          date: "2021/5/22",
         },
         {
-          BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          id:7,
+          name: "在墨韵的第四天1",
+          date: "2021/5/22",
         },
         {
-           BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          id:7,
+          name: "在墨韵的第四天2",
+          date: "2021/5/22",
         },
         {
-           BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          id:8,
+          name: "在墨韵的第四天3",
+          date: "2021/5/22",
         },        
         ]
       }
@@ -202,9 +202,9 @@ export default({
       },
     },
 
-    created(){
+    showMyBlogs(){
       this.show;
-    },
+      },
 
       methods: {
       handleEdit(index, row) {
@@ -213,22 +213,6 @@ export default({
       },
       handleDelete(index, row) {
         console.log(index, row);
-        this.$http({
-          method:"delete",
-          url:"/deleteBlog",
-          data:{
-            BlogID:this.tableData(index).id,
-          }
-        }).then((res)=>{
-          if(res.data.success){
-            this.$router.push({path:"/BlogList"});
-          }
-          else{
-            alert("删除失败！");
-          }
-        }).catch(err=>{
-          console.log(err)
-        });
       },
       resetForm () {
         this.form = Object.assign({}, this.defaultForm)
@@ -253,7 +237,7 @@ export default({
       officialPostBlog(){
         this.$http({
           method:"post",
-          url:"/WriteBlog",
+          url:"/BlogList",
           data: {
             BlogTitle: this.form.postTitle,
             Content: this.form.postContent,

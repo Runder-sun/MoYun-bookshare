@@ -71,14 +71,12 @@ import bar from "../components/Bar.vue"
   export default {
     setup(){},
     data: () => ({
-      Blog:[{
-        BlogID:'192312',
-        BlogTitle: 'JohnAblog',
-        Content: 'DoeBcontent',
-      }],
+      BlogId:"192371",
       validSave:true,
       validCancel:true,
-
+      blogid:'192312',
+      title: 'JohnAblog',
+      content: 'DoeBcontent',
       snackbar: false,
       titleRules: [
 				v => !!v || '题目不能为空',
@@ -99,7 +97,7 @@ import bar from "../components/Bar.vue"
         if(this.$refs.form.validate()){
           this.$http({
             method:"post",
-            url:"/EditBlog",
+            url:"/BlogList/EditBlog",
             data:{
               BlogID: this.blogid,
               BlogTitle: this.title,
@@ -124,10 +122,12 @@ import bar from "../components/Bar.vue"
       show(){
           this.$http({
           method:"get",
-          url:"/inspectBlog",
+          url:"/BlogList/EditBlog",
         })
           .then((res)=>{
-            this.Blog=res.data.Blog;
+            this.blogid=res.data.BlogID;
+            this.title=res.data.BlogTitle;
+            this.content=res.data.Content;
           })
           .catch((err)=>{
             console.log(err);
@@ -192,12 +192,12 @@ import bar from "../components/Bar.vue"
 		background-color: #efeeee;
 		position: relative;
 		top: 0px;
-		margin-top: 30px;
+		margin-top: 20px;
 		width: 130px;
 		height: 55px;
 		outline: none;
 		border: none;
-    margin-left: 100px;
+    margin-left: 20px;
 	}
 
   	.buttonright {
@@ -209,12 +209,12 @@ import bar from "../components/Bar.vue"
 		background-color: #efeeee;
 		position: relative;
 		top: 0px;
-		margin-top: 30px;
+		margin-top: 20px;
 		width: 130px;
 		height: 55px;
 		outline: none;
 		border: none;
-    margin-right: 90px;
+    margin-right: 20px;
 	}
 
 	.button:hover {

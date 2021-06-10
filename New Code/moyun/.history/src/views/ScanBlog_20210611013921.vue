@@ -21,7 +21,7 @@
             :headStyle="{ 'text-align': 'center' }" 
             >{{title}}</span>
             </v-card-title> 
-            
+            <v-textarea>{{title}}</v-textarea>
             <v-row justify="center" style="margin-top:20px">
             <v-snackbar
               v-model="snackbar1"
@@ -29,7 +29,7 @@
               top
               center
               color="success"
-              timeout="1000"
+              timeout="5"
               >
               <span>ReTweet successful!</span>
               <v-icon dark>mdi-checkbox-marked-circle</v-icon>
@@ -61,7 +61,7 @@
                         <v-btn
                             color="green darken-1"
                             text
-                            @click="cancelpost"
+                            @click="dialog = false"
                         >
                             No
                         </v-btn>
@@ -102,7 +102,6 @@
                         center
                         color="success"
                         vertical
-                        timeout="1000"
                         >
                         <span>Comment Post successful!</span>
                         <v-icon dark>mdi-checkbox-marked-circle</v-icon>
@@ -112,7 +111,7 @@
                                 <v-row>
                                 <v-col cols="12">
                                     <v-textarea
-                                    v-model="form.content"
+                                    v-model="form.bio"
                                     color="teal"
                                     >
                                     <template v-slot:label>
@@ -132,7 +131,6 @@
                             text
                             color="primary"
                             type="submit"
-                            @click="postComment"
                             >Post</v-btn>
                         </v-card-actions>
                         </v-form> 
@@ -142,7 +140,7 @@
                 <v-btn
                         fab
                         dark
-                        :color="this.Blog.ableCollect?grey:indigo"
+                        color="indigo"
                         style="space around"
                         v-on:click="collect"
                         class="button"
@@ -150,10 +148,10 @@
                         <v-icon>mdi-star</v-icon>
                     </v-btn>
                 <v-btn
-                        :color="fakelike?grey:pink"
+                        :class="this.like?'like':'dislike'"
                         fab
                         dark
-                        v-on:click="fake"
+                        v-on:click="likeBlog"
                         class="button"
                     >
                     <v-icon>mdi-heart</v-icon>                    
@@ -194,7 +192,7 @@ export default({
     
     const defaultForm = Object.freeze({
         first: '',
-        content: '',
+        bio: '',
       })
     
     return{
@@ -202,7 +200,8 @@ export default({
         rules: {
           name1: [val => (val || '').length > 0 || 'This field is required'],
         },
-        fakeLike: true,
+        cantCollect: false,
+        ableCollect: false,
         alert1: false,
         conditions: false,
         snackbar1: false,
@@ -220,17 +219,13 @@ export default({
         tabs: null,
         transition: 'slide-y-reverse-transition',
         //backend content
-        Blog:[{
-        BlogId:'asdad',
         title:"Blog4Test",
         date:"2020-12-25",
         author:"Jackson",
         like: false,
-        ableCollect:false,
+        incollection: false,
         content:"This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.vThis is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.This is a test blog 4 testing vue pages.",
-
-        }]
-      }
+        }
     },
     components:{
         bar,
@@ -238,28 +233,17 @@ export default({
     computed: {
       formIsValid () {
         return (
-          this.form.content
+          this.form.bio
         )
       },
     },
 
-    created(){
-      this.show;
-    },
-
     methods: {
-      show(){
-        this.$http({
-        method: "get",
-        url: "/inspectBlog",
-        //没传入dataid,暂时为get
-          }).then((res) => {
-            if (res.data.success) {
-              this.Blog=res.data.Blog;
-            }
-          }).catch(err=>{
-            console.log(err)
-          });
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
       },
       resetForm () {
         this.form = Object.assign({}, this.defaultForm)
@@ -269,138 +253,24 @@ export default({
         this.snackbar2 = true
         this.resetForm()
       },
-      postComment(){
-        this.$http({
-        method: "post",
-        url: "/WriteBlogComment",
-        data: {
-          BlogID: this.Blog.BlogId,
-          Comment: this.form.content,
-
-        },
-          }).then((res) => {
-            if (res.data.success) {
-              this.dialog1=false;
-              this.snackbar2=true;
-              this.submit();
-            }
-            else{
-              alert("评论失败！")
-            }
-          }).catch(err=>{
-            console.log(err)
-          });
-
-      },
       post(){
-        //this.alert1=true
-        this.$http({
-        method: "post",
-        url: "/ReprintBlog",
-        data: {
-          Blog: this.Blog.BlogId,
-
-        },
-          }).then((res) => {
-            if (res.data.success) {
-              this.dialog=false;
-              this.snackbar1=true;
-            }
-            else{
-              alert("转载失败！")
-            }
-          }).catch(err=>{
-            console.log(err)
-          });
-
-      },
-      cancelpost(){
+        this.snackbar1=true
         this.dialog=false
+        //this.alert1=true
       },
       collect(){
-        if(this.Blog.ableCollect){
-          this.$http({
-          method: "post",
-          url: "/CollectBlog",
-          data: {
-            BlogID: this.Blog.BlogId,
-
-          },
-            }).then((res) => {
-              if (res.data.success) {
-                this.Blog.ableCollect=!this.Blog.ableCollect;
-              }
-              else{
-                alert("收藏失败！")
-              }
-            }).catch(err=>{
-              console.log(err)
-            });
+        if(this.incollection){
+          this.cantCollect=true
         }
-        else{
-          this.$http({
-          method: "post",
-          url: "/CancelCollectBlog",
-          data: {
-            BlogID: this.Blog.BlogId,
-
-          },
-            }).then((res) => {
-              if (res.data.success) {
-                this.Blog.ableCollect=!this.Blog.ableCollect;
-              }
-              else{
-                alert("取消收藏失败！")
-              }
-            }).catch(err=>{
-              console.log(err)
-            });
-        }
+        else this.ableCollect=true
       },
-
       likeBlog(){
-       if(this.Blog.like){
-          this.$http({
-          method: "post",
-          url: "/LikeBlog",
-          data: {
-            BlogID: this.Blog.BlogId,
-
-          },
-            }).then((res) => {
-              if (res.data.success) {
-                this.Blog.like=!this.Blog.like;
-              }
-              else{
-                alert("点赞失败！")
-              }
-            }).catch(err=>{
-              console.log(err)
-            });
-       }
-       else {
-          this.$http({
-          method: "post",
-          url: "/CancelLikeBlog",
-          data: {
-            BlogID: this.Blog.BlogId,
-
-          },
-            }).then((res) => {
-              if (res.data.success) {
-                this.Blog.like=!this.Blog.like;
-              }
-              else{
-                alert("取消点赞失败！")
-              }
-            }).catch(err=>{
-              console.log(err)
-            });
-       }
+       /* if(this.like){
+          this.likes--
+        }
+        else this.likes++*/
+        this.like=!this.like
       },
-      fake(){
-        this.fakeLike =! this.fakeLike;
-      }
     },
 })
 </script>
@@ -417,7 +287,13 @@ export default({
   }
   .v-btn--floating {
     position: relative;
-  }  
+  }
+  .like{
+    color: palevioletred;
+  }
+  .dislike{
+    color:rgb(22, 158, 29);
+  }    
   .button{
     margin-right: 25px;
 

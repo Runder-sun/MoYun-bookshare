@@ -399,7 +399,7 @@ export default({
        }
       },
       fake(){
-        this.fakeLike =! this.fakeLike;
+        this.fakeLike=!this.fakeLike;
       }
     },
 })

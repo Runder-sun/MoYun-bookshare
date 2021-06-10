@@ -40,16 +40,16 @@
                         <v-row>
                           <v-col cols="12" sm="6">
                             <v-text-field
-                              v-model="form.postTitle"
+                              v-model="form.first"
                               :rules="rules.name1"
                               color="purple darken-2"
-                              label="Blog Title"
+                              label="First name"
                               required
                             ></v-text-field>
                           </v-col>
                           <v-col cols="12">
                             <v-textarea
-                              v-model="form.postContent"
+                              v-model="form.bio"
                               color="teal"
                             >
                               <template v-slot:label>
@@ -69,7 +69,6 @@
                       text
                       color="primary"
                       type="submit"
-                      @click="officialPostBlog"
                     >Post</v-btn>
                   </v-card-actions>
                 </v-form> 
@@ -91,13 +90,13 @@
             <el-table-column
             fixed
             sortable
-            prop="BlogTitle"
+            prop="name"
             label="日志名称"
             style="width: 35%">
             </el-table-column>
             <el-table-column 
             sortable           
-            prop="RecentFinishTime"
+            prop="date"
             label="日期"
             style="width: 30%">
             </el-table-column>
@@ -125,14 +124,14 @@ export default({
     data() {
 
       const defaultForm = Object.freeze({
-        postContent: '',
-        postTitle: '',
+        first: '',
+        bio: '',
       })
 
       return {
         form: Object.assign({}, defaultForm),
         rules: {
-          name1: [val => (val || '').length > 0 || '文件内容不可为空'],
+          name1: [val => (val || '').length > 0 || 'This field is required'],
         },
         conditions: false,
         snackbar: false,
@@ -140,49 +139,40 @@ export default({
         defaultForm,
         dialog: false,
         tableData: [{
-          BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          name: "在墨韵的第一天",
+          date: "2021/5/21",
         },
         {
-          BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          name: "在墨韵的第二天",
+          date: "2021/5/22",
         },
         {
-          BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          name: "在墨韵的第三天",
+          date: "2021/5/23",
         },
         {
-          BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          name: "在墨韵的第三天2",
+          date: "2021/4/22",
         },
         {
-            BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          name: "在墨韵的第三天3",
+          date: "2021/5/12",
         },
         {
-          BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          name: "在墨韵的第四天",
+          date: "2021/5/22",
         },
         {
-          BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          name: "在墨韵的第四天1",
+          date: "2021/5/22",
         },
         {
-           BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          name: "在墨韵的第四天2",
+          date: "2021/5/22",
         },
         {
-           BlogID:1,
-          BlogTitle: "在墨韵的第一天",
-          RecentFinishTime: "2021/5/21",
+          name: "在墨韵的第四天3",
+          date: "2021/5/22",
         },        
         ]
       }
@@ -190,45 +180,26 @@ export default({
 
     components:{
     bar,
-
+    showMyBlogs(){
+      this.show;
+      }
     },
 
     computed: {
       formIsValid () {
         return (
-          this.form.postContent &&
-          this.form.postTitle
+          this.form.first &&
+          this.form.bio
         )
       },
     },
 
-    created(){
-      this.show;
-    },
-
       methods: {
       handleEdit(index, row) {
-
         console.log(index, row);
       },
       handleDelete(index, row) {
         console.log(index, row);
-        this.$http({
-          method:"delete",
-          url:"/deleteBlog",
-          data:{
-            BlogID:this.tableData(index).id,
-          }
-        }).then((res)=>{
-          if(res.data.success){
-            this.$router.push({path:"/BlogList"});
-          }
-          else{
-            alert("删除失败！");
-          }
-        }).catch(err=>{
-          console.log(err)
-        });
       },
       resetForm () {
         this.form = Object.assign({}, this.defaultForm)
@@ -249,28 +220,7 @@ export default({
           .catch((err)=>{
             console.log(err);
           })
-      },
-      officialPostBlog(){
-        this.$http({
-          method:"post",
-          url:"/WriteBlog",
-          data: {
-            BlogTitle: this.form.postTitle,
-            Content: this.form.postContent,
-          },
-        }).then((res)=>{
-            if(res.data.success){
-              this.submit();
-              this.$router.push({path:"/BlogList"});
-            }
-            else{
-              alert("发表失败！");
-            }
-            this.dialog=false;
-        }).catch(err=>{
-          console.log(err);
-        });
-      },
+      }
     },
 
 

@@ -152,7 +152,6 @@ export default({
       this.$router.push({path:"/BlogList/ScanBlog"});
     },
     handleDelete(){
-      //this.snackbar=true;
         this.$http({
         method: "post",
         url: "/cancelCollectBlog",

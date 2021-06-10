@@ -142,7 +142,7 @@
                 <v-btn
                         fab
                         dark
-                        :color="this.Blog.ableCollect?grey:indigo"
+                        :color="ableCollect?grey:indigo"
                         style="space around"
                         v-on:click="collect"
                         class="button"
@@ -150,10 +150,10 @@
                         <v-icon>mdi-star</v-icon>
                     </v-btn>
                 <v-btn
-                        :color="fakelike?grey:pink"
+                        :class="this.like?'like':'dislike'"
                         fab
                         dark
-                        v-on:click="fake"
+                        v-on:click="likeBlog"
                         class="button"
                     >
                     <v-icon>mdi-heart</v-icon>                    
@@ -202,7 +202,6 @@ export default({
         rules: {
           name1: [val => (val || '').length > 0 || 'This field is required'],
         },
-        fakeLike: true,
         alert1: false,
         conditions: false,
         snackbar1: false,
@@ -398,9 +397,6 @@ export default({
             });
        }
       },
-      fake(){
-        this.fakeLike =! this.fakeLike;
-      }
     },
 })
 </script>
@@ -417,7 +413,13 @@ export default({
   }
   .v-btn--floating {
     position: relative;
-  }  
+  }
+  .like{
+    color: palevioletred;
+  }
+  .dislike{
+    color:rgb(22, 158, 29);
+  }    
   .button{
     margin-right: 25px;
 

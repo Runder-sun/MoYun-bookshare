@@ -28,23 +28,23 @@
                         </v-col>
                         <v-row align="center">
                             <v-btn
-                            large
-                            rounded
-                            :disabled="!validCancel"
-                            class="buttonleft button" 
-                            margin-left="20px"
-                            @click="cancelBlog">
-                            <p class="create">Cancel Edit</p>
+                            text
+                            color="red"
+                            width="800px"
+                            height="50px"
+                            :disabled="!validCancel" >
+                                Cancel Edit
                             </v-btn>
                             <v-spacer></v-spacer>
                             <v-btn
-                            v-model="save"
+                            text
+                            color="green"
+                            width="800px"
+                            height="50px"
+                            :disabled="!validSave" 
                             large
-                            rounded
-                            class="buttonright button"
-                            @click="saveBlog"
-                            margin-right="20px">
-                               <p class="create">Save Edit</p>
+                            @click="snackbar = true">
+                                Save Edit
                             </v-btn>
                             <v-snackbar
                             v-model="snackbar"
@@ -67,18 +67,14 @@
 
 
 <script>
-import bar from "../components/Bar.vue"
+import bar from "../components/Bar"
   export default {
-    setup(){},
     data: () => ({
-      Blog:[{
-        BlogID:'192312',
-        BlogTitle: 'JohnAblog',
-        Content: 'DoeBcontent',
-      }],
       validSave:true,
       validCancel:true,
-
+      blogid:'192312',
+      title: 'JohnAblog',
+      content: 'DoeBcontent',
       snackbar: false,
       titleRules: [
 				v => !!v || '题目不能为空',
@@ -88,66 +84,18 @@ import bar from "../components/Bar.vue"
 				v => !!v || '内容不能为空',
 			],
     }),
-    created(){
-      this.show();
-    },
     components:{
         bar,
-    },
-    methods:{
-      saveBlog(){
-        if(this.$refs.form.validate()){
-          this.$http({
-            method:"post",
-            url:"/EditBlog",
-            data:{
-              BlogID: this.blogid,
-              BlogTitle: this.title,
-              Content: this.content,
-            },
-          }).then((res)=>{
-            if(res.data.success){
-              this.snackbar=true;
-              this.$router.push({path:"/BlogList"});
-            }
-            else{
-              alert("编辑失败！");
-            }
-          }).catch(err=>{
-            console.log(err);
-          })
-        }
-      },
-      cancelBlog(){
-        this.$router.push("/BlogList");
-      },
-      show(){
-          this.$http({
-          method:"get",
-          url:"/inspectBlog",
-        })
-          .then((res)=>{
-            this.Blog=res.data.Blog;
-          })
-          .catch((err)=>{
-            console.log(err);
-          })
-      }
-
     }
   }
 </script>
 
-<style scoped>
+<style scope>
+.EditBlog{
+    display:flex;
+    align-content: center;}
 
-.EditBlog {
-  background-color: #efeeee;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+<style scoped>
 	.card {
 		position: absolute;
 		left: 50%;
@@ -183,7 +131,7 @@ import bar from "../components/Bar.vue"
 		display: block;
 	}
 
-	.buttonleft {
+	.button {
 		color: #596275;
 		box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
 			-9px -9px 18px rgba(255, 255, 255, 1);
@@ -192,29 +140,11 @@ import bar from "../components/Bar.vue"
 		background-color: #efeeee;
 		position: relative;
 		top: 0px;
-		margin-top: 30px;
+		margin-top: 20px;
 		width: 130px;
 		height: 55px;
 		outline: none;
 		border: none;
-    margin-left: 100px;
-	}
-
-  	.buttonright {
-		color: #596275;
-		box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
-			-9px -9px 18px rgba(255, 255, 255, 1);
-		border-radius: 3rem;
-		transition: box-shadow 0.2s ease-out;
-		background-color: #efeeee;
-		position: relative;
-		top: 0px;
-		margin-top: 30px;
-		width: 130px;
-		height: 55px;
-		outline: none;
-		border: none;
-    margin-right: 90px;
 	}
 
 	.button:hover {
