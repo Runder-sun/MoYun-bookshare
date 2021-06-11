@@ -26,6 +26,8 @@ const WriteBlog = () => import("../views/WriteBlog.vue");
 const PersonalCollection = () => import("../views/PersonalCollection.vue");
 const EditBlog = () => import("../views/EditBlog.vue");
 const ScanBlog = () => import("../views/ScanBlog.vue");
+const CheckBookReview = () => import("../views/CheckBookReview");
+const EditBookReview = () => import("../views/EditBookReview")
 Vue.use(VueRouter);
 
 const routes = [
@@ -198,6 +200,16 @@ const routes = [
     path:"/BlogList/ScanBlog",
     name:"ScanBlog",
     component:ScanBlog,
+  },
+  {
+    path:"/Book/CheckBookReview",
+    name:"CheckBookReview",
+    component: CheckBookReview
+  },
+  {
+    path:"/Book/EditBookReview",
+    name:"EditBookReview",
+    component: EditBookReview
   },
 ];
 

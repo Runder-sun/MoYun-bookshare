@@ -4,7 +4,7 @@
       <bar></bar>
       <v-container>
         <br />
-        <v-cintainer>
+        <v-container>
           <el-tag>基本信息</el-tag>
           <div class="line" />
           <div class="bookinfocontainer">
@@ -28,17 +28,25 @@
               简介: <el-link type="info" disabled>简介</el-link>
             </div>
           </div>
-        </v-cintainer>
+        </v-container>
       </v-container>
       <v-container>
-        <el-tag>书评列表</el-tag>
-        <div class="line" />
+        <v-toolbar>
+            <v-toolbar-title>书评列表</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <el-button type="primary" round @click="toWriteBookReview">撰写书评</el-button>
+        </v-toolbar>
         <el-table :data="tableData" style="width: 100%" height="250">
           <el-table-column fixed prop="date" label="发布日期" width="150"></el-table-column>
           <el-table-column prop="title" label="题目" width="120"></el-table-column>
           <el-table-column prop="author" label="作者" width="120"></el-table-column>
           <el-table-column prop="bookReview" label="书评内容" width="120"></el-table-column>
           <el-table-column prop="scores" label="评分" width="300"></el-table-column>
+          <el-table-column align="right">
+            <template slot-scope="scope">
+              <el-button type="warning" round @click="toCheckBookReview(scope.$index, scope.row)">查看</el-button>
+            </template>
+          </el-table-column>
         </el-table>
         <el-pagination background layout="prev, pager, next" :total="1000">
         </el-pagination>
@@ -152,8 +160,14 @@ export default {
     toBookRecommand(){
       this.$router.push({ path: "/Book/BookRecommand" });
     },
+    toWriteBookReview(){
+      this.$router.push({ path: "/Book/WriteBookReview" });
+    },
     toEditBook(){
         this.$router.push({ path: "/Book/EditBook" });
+    },
+    toCheckBookReview(){
+        this.$router.push({ path: "/Book/CheckBookReview" });
     },
     deleteBook(){
         alert("删除成功");
