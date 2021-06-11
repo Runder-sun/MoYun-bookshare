@@ -1,10 +1,5 @@
 <template>
-    <v-app-bar
-      app
-      elevate-on-scroll
-      color="#efeeee"
-      light
-    >
+    <v-app-bar app elevate-on-scroll color="#efeeee" light>
       <el-menu
         :default-active="activeIndex"
         class="menu"
@@ -19,46 +14,24 @@
           <el-menu-item index="/Book/BookReview">书评</el-menu-item>
           <el-menu-item index="/Book/BookWareHouse">书籍</el-menu-item>
         </el-submenu>
-        <el-menu-item index="/Group/GroupList" >圈子</el-menu-item>
+        <el-menu-item index="/Group/GroupList">圈子</el-menu-item>
         <el-menu-item index="/updates">动态</el-menu-item>
       </el-menu>
       <v-row justify="end">
-        <v-menu bottom min-width="200px" round offset-y>
-          <template v-slot:activator="{ on }">
-            <v-btn icon v-on="on">
-              <v-avatar color="brown" size="40">
-                <span class="white--text headline">{{ Z }}</span>
-              </v-avatar>
-            </v-btn>
-          </template>
-          <v-card>
-            <v-list-item-content class="justify-center">
-              <div class="mx-auto text-center">
-                <v-avatar color="brown">
-                  <span class="white--text headline">{{ 1 }}</span>
-                </v-avatar>
-                <h3>{{ Z }}</h3>
-                <p class="caption mt-1">
-                  {{ Z }}
-                </p>
-                <v-divider class="my-3"></v-divider>
-                <v-btn depressed rounded text> 个人主页 </v-btn>
-                <v-divider class="my-3"></v-divider>
-                <v-btn depressed rounded text v-on:click="toMsg"> 消息 </v-btn>
-                <v-divider class="my-3"></v-divider>
-                <v-btn depressed rounded text v-on:click="toBlog"> 日志 </v-btn>
-                <v-divider class="my-3"></v-divider>
-                <v-btn depressed rounded text> 退出登录 </v-btn>
-              </div>
-            </v-list-item-content>
-          </v-card>
-        </v-menu>
+        <template v-if="this.$store.state.login">
+          <avatar></avatar>
+        </template>
+        <template v-else>
+          <v-btn class="button" href="/Login">
+            <p class="login_">登录</p>
+          </v-btn>
+        </template>
       </v-row>
     </v-app-bar>
 </template>
 
 <script>
-
+import avatar from "./Avatar.vue"
 export default {
   name:"Bar",
   methods:{
@@ -68,6 +41,27 @@ export default {
     toBlog(){
       this.$router.push({path:"/BlogList"});
     },
+  },
+  components:{
+    avatar,
   }
 }
 </script>
+<style>
+.button {
+  color: #596275;
+  box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
+    -9px -9px 18px rgba(255, 255, 255, 1);
+  border-radius: 3rem;
+  transition: box-shadow 0.2s ease-out;
+  background-color: #efeeee;
+  position: relative;
+  top: 15%;
+  outline: none;
+  border: none;
+}
+.login_ {
+  margin-top: 40%;
+  font-size: 15px;
+}
+</style>
