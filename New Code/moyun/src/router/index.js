@@ -170,7 +170,7 @@ const routes = [
     name:"Reading",
     component:Reading},
   {
-    path:"/Group/Forum/ForumHome",
+    path:"/Group/Forum/ForumHome/:id",
     name:"ForumHome",
     component:ForumHome,
   },

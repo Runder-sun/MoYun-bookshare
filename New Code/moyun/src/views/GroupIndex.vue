@@ -3,7 +3,7 @@
     <bar></bar>
     <v-navigation-drawer v-model="drawer" absolute bottom temporary right>
       <v-list nav dense two-lines>
-        <v-chip-group column>
+        <v-chip-group column v-if="$store.state.userID==group.createID">
           <v-chip
             v-for="user in groupApplyUser"
             :key="user"
@@ -18,20 +18,20 @@
             </v-avatar>
             {{ user.username }}
             <v-spacer></v-spacer>
-            <v-btn text color="cyan" @click="acceptApply"> 同意</v-btn>
+            <v-btn text color="cyan" @click="acceptApply(user)"> 同意</v-btn>
           </v-chip>
         </v-chip-group>
         <v-divider></v-divider>
         <v-list-item-group
-          v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item v-for="(item, i) in items" :key="i">
+          <v-list-item v-for="(member, i) in members" :key="i">
             <v-list-item-avatar>
-              <v-icon v-text="item.icon"></v-icon>
+              <img :src="member.headImage">
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title v-text="item.text"></v-list-item-title>
+              <v-list-item-title v-text="member.username"></v-list-item-title>
+              <v-btn v-if="$store.state.userID==group.createID" right @click="removeMember(member)">删除</v-btn>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -43,16 +43,26 @@
         <v-toolbar>
           <v-toolbar-title>圈子主页</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn v-if="!isMember" color="#76EEC6" @click="apply"
-            >申请加入</v-btn
-          >
-          <v-btn icon @click='getApply'>
+          <v-btn v-if="!isMember" color="#76EEC6" @click="apply">申请加入</v-btn>
+          <template v-if="isCollect">
+          <v-btn icon @click="cancelCollectGroup">
+            <v-icon>mdi-heart-remove</v-icon>
+          </v-btn>
+          </template>
+          <template v-else>
+          <v-btn icon @click="collectGroup">
+            <v-icon>mdi-heart</v-icon>
+          </v-btn>
+          </template>
+          <v-btn icon @click.stop="drawer = !drawer">
             <v-icon>mdi-account-details</v-icon>
           </v-btn>
         </v-toolbar>
 
         <v-list-item three-line>
-          <v-list-item-avatar left size="200" color="grey"></v-list-item-avatar>
+          <v-list-item-avatar left size="200" color="grey">
+            <!--<img :src="group.groupImage">-->
+          </v-list-item-avatar>
           <v-list-item-content>
             <div class="headline mb-4">这是圈子名称</div>
             <v-list-item-title> 这是圈子导师 </v-list-item-title>
@@ -64,13 +74,17 @@
       </v-card>
 
       <v-card>
-        <v-card-title>任务版</v-card-title>
+        <v-card-title>
+          任务版
+          <v-spacer></v-spacer>
+          <v-btn text color="cyan" v-if="$store.state.userID==group.createID" @click="addTask">发布任务</v-btn>
+        </v-card-title>
         <v-simple-table>
           <template v-slot:default>
             <thead>
               <tr>
-                <th class="text-left">Name</th>
-                <th class="text-left">Calories</th>
+                <th class="text-left">任务</th>
+                <th class="text-left">创建时间</th>
               </tr>
             </thead>
             <tbody>
@@ -87,29 +101,30 @@
         <v-toolbar>
           <v-toolbar-title>热门讨论</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn color="cyan" href="/Group/Forum/ForumHome">讨论区</v-btn>
+          <v-btn color="cyan" :to="'/Group/Forum/ForumHome/'+this.$route.params.id">讨论区</v-btn>
         </v-toolbar>
         <v-card flat>
           <v-container class="pa-4 text-center">
             <v-row class="fill-height" align="center" justify="center">
-              <template v-for="(group, i) in groups">
-                <v-col :key="i" cols="auto">
+              <template v-for="(forum, i) in hotForum">
+                <v-col :key="i" cols="12">
                   <v-hover v-slot="{ hover }">
                     <v-card
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
-                      height="60px"
+                      :to="'/Group/Forum/Forum/'+forum.forumID"
                     >
-                      <v-img :src="group.img" height="60px">
-                        <v-card-title class="title white--text">
+                        <v-card-title >
                           <v-row
                             class="fill-height flex-column"
                             justify="space-between"
                           >
                             <p class="mt-4 subheading text-left">
-                              {{ group.title }}
+                              {{ forum.topic }}
                             </p>
-
+                            </v-row>
+                            </v-card-title>
+                            <v-card-text>
                             <div>
                               <p
                                 class="
@@ -119,21 +134,10 @@
                                   text-left
                                 "
                               >
-                                {{ group.text }}
-                              </p>
-                              <p
-                                class="
-                                  caption
-                                  font-weight-medium font-italic
-                                  text-left
-                                "
-                              >
-                                {{ group.subtext }}
+                                {{ forum.forumMessages }}
                               </p>
                             </div>
-                          </v-row>
-                        </v-card-title>
-                      </v-img>
+                            </v-card-text>
                     </v-card>
                   </v-hover>
                 </v-col>
@@ -159,39 +163,58 @@
 import bar from "../components/Bar.vue";
 export default {
   data: () => ({
-    drawer: false,
-    group: null,
-    groupID: this.$route.params.id,
+    drawer: null,
+    //groupID: this.$route.params.id,
+    isCollect:false,
     isMember: false,
-    groups: {},
-    members: [],
-    tasks: [],
-    hotForum: [],
-    groupApplyUser: [],
+    group: {},
+    members: [
+      {
+        headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
+        username:"zy",
+      }
+    ],
+    tasks: [
+        {
+          taskContent:"读书",
+          createTime:"2021.1.1"
+        }
+    ],
+    hotForum: [
+      {
+        forumID:1,
+        topic:"主题",
+        forumMessages:"内容",
+      }
+    ],
+    groupApplyUser: [
+      {
+        headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
+        username:"zy",
+      }
+    ],
     model: 1,
+    snackbar: false,
+    messages: "",
   }),
 
-  watch: {
-    group() {
-      this.drawer = false;
-    },
-  },
   components: {
     bar,
   },
   created() {
     this.getInit();
+    this.getApply();
   },
   methods: {
     getInit() {
       this.$http({
         method: "get",
         url: "/GroupInfo",
-        params: this.groupID,
+        params: this.$route.params.id,
       })
         .then((res) => {
           if (res.data.success) {
-            if (isMember(this.$store.state.userID, res.data.MemberList)) {
+            if (isGroupMember(this.$store.state.userID, res.data.MemberList)) {
               this.isMember = true;
             } else {
               this.isMember = false;
@@ -199,13 +222,14 @@ export default {
             this.groups = res.data.GroupInfo;
             this.members = res.data.MemberUser;
             this.hotForum = res.data.HotForum;
+            this.isCollect = res.data.isCollect;
           }
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    isMember(userID, memberList) {
+    isGroupMember(userID, memberList) {
       for (var i in memberList) {
         if (userID === i.userID) return true;
       }
@@ -220,11 +244,10 @@ export default {
       return null;
     },
     getApply() {
-      this.drawer=!this.drawer;
       this.$http({
         method: "get",
         url: "/GroupApplyList",
-        params: this.groupID,
+        params: this.$route.params.id,
       })
         .then((res) => {
           if (res.data.success) {
@@ -243,14 +266,69 @@ export default {
         url:"/refuseApply",
         params:{
           GroupApplyID:this.getMemberApplyID(item.userID,this.memberList),
-          GroupID:this.groupID,
+          GroupID:this.$route.params.id,
         }
-      }).then(res=>{
-        
       });
     },
-    acceptApply(){
-
+    acceptApply(item){
+      this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
+      this.groupApplyUser = [...this.groupApplyUser];
+      this.$http({
+        method: "post",
+        url:"/addMember",
+        params:{
+          GroupApplyID:this.getMemberApplyID(item.userID,this.memberList),
+          GroupID:this.$route.params.id,
+          UserID:item.userID,
+        }
+      });
+    },
+    apply(){
+      this.$http({
+        method: "post",
+        url:"/applyGroup",
+        params:{
+          GroupID:this.$route.params.id,
+        }
+      });
+    },
+    removeMember(member){
+      this.members.splice(this.members.indexOf(member), 1);
+      this.members = [...this.members];
+      this.$http({
+        method: "post",
+        url:"/deleteMember",
+        params:{
+          MemberID:member.userID,
+        }
+      });
+    },
+    collectGroup(){
+      this.$http({
+        method: "post",
+        url:"/CollectGroup",
+        params:{
+          GroupID:this.$route.params.id,
+        }
+      }).then(res=>{
+        if(res.data.success)
+        this.isCollect=true;
+      });
+    },
+    cancelCollectGroup(){
+      this.$http({
+        method: "post",
+        url:"/cancelCollectGroup",
+        params:{
+          GroupID:this.$route.params.id,
+        }
+      }).then(res=>{
+        if(res.data.success)
+        this.isCollect=false;
+      });
+    },
+    addTask(){
+      //TODO:生成弹窗输入任务
     },
   },
 };
