@@ -18,7 +18,7 @@
             111@qq.com
           </p>
           <v-divider class="my-3"></v-divider>
-          <v-btn depressed rounded text> 个人主页 </v-btn>
+          <v-btn depressed rounded text @click="toPersonalInfo"> 个人主页 </v-btn>
           <v-divider class="my-3"></v-divider>
           <v-btn depressed rounded text> 消息 </v-btn>
           <v-divider class="my-3"></v-divider>
@@ -30,3 +30,16 @@
     </v-card>
   </v-menu>
 </template>
+
+<script>
+export default {
+  methods: {
+    toPersonalInfo(){
+        this.$router.push({ path: "/PersonalInfo" });
+      },
+  },
+  setup() {
+    
+  },
+}
+</script>

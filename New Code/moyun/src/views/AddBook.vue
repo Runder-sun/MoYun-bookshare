@@ -87,7 +87,7 @@
 				cbs: "",
 				desc: "",
 				delivery: false,
-				type: [],
+				items: [],
 				resource: "",
 				filebookcover: [{
 						name: "",
@@ -230,4 +230,3 @@
 		},
 	};
 </script>
-<!-- 校验参代码，文件校验需要重新写：https://www.cnblogs.com/steamed-twisted-roll/p/10167501.html -->

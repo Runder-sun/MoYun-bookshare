@@ -27,7 +27,11 @@ const PersonalCollection = () => import("../views/PersonalCollection.vue");
 const EditBlog = () => import("../views/EditBlog.vue");
 const ScanBlog = () => import("../views/ScanBlog.vue");
 const CheckBookReview = () => import("../views/CheckBookReview");
-const EditBookReview = () => import("../views/EditBookReview")
+const EditBookReview = () => import("../views/EditBookReview");
+const PersonalInfo = () => import("../views/PersonalInfo");
+const ChangePersonalInfo = () => import("../views/ChangePersonalInfo");
+const ChangePictures = () => import("../views/ChangePictures");
+const MyCollections = () => import("../views/MyCollections")
 Vue.use(VueRouter);
 
 const routes = [
@@ -210,6 +214,26 @@ const routes = [
     path:"/Book/EditBookReview",
     name:"EditBookReview",
     component: EditBookReview
+  },
+  {
+    path:"/PersonalInfo",
+    name:"PersonalInfo",
+    component: PersonalInfo
+  },
+  {
+    path:"/ChangePersonalInfo",
+    name:"ChangePersonalInfo",
+    component: ChangePersonalInfo
+  },
+  {
+    path:"/ChangePictures",
+    name:"ChangePictures",
+    component: ChangePictures
+  },
+  {
+    path:"/MyCollections",
+    name:"MyCollections",
+    component: MyCollections
   },
 ];
 
