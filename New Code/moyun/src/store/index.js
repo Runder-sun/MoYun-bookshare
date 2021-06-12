@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     login:false,
     isAdmin:false,
+    userID:"",
   },
   mutations: {
     setLogin(state){
@@ -15,6 +16,9 @@ export default new Vuex.Store({
     setAdmin(state){
       state.isAdmin=true
     },
+    setUserID(state,UserID){
+      state.userID=UserID
+    }
   },
   actions: {},
   modules: {},

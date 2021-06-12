@@ -8,17 +8,17 @@
             <v-expansion-panel-header> 成员管理 </v-expansion-panel-header>
             <v-expansion-panel-content>
               <el-table :data="users" border style="width: 100%">
-                <el-table-column fixed prop="UserID" label="学号" sortable>
+                <el-table-column fixed prop="userID" label="学号" sortable>
                 </el-table-column>
-                <el-table-column prop="Username" label="姓名" sortable>
+                <el-table-column prop="username" label="姓名" sortable>
                 </el-table-column>
                 <el-table-column prop="isTeacher" label="身份" sortable>
                 </el-table-column>
-                <el-table-column prop="Email" label="邮箱" sortable>
+                <el-table-column prop="email" label="邮箱" sortable>
                 </el-table-column>
-                <el-table-column prop="Birthday" label="生日" sortable>
+                <el-table-column prop="birthday" label="生日" sortable>
                 </el-table-column>
-                <el-table-column prop="Signature" label="个性签名" sortable>
+                <el-table-column prop="signature" label="个性签名" sortable>
                 </el-table-column>
                 <el-table-column label="操作">
                   <template slot-scope="scope">
@@ -42,13 +42,13 @@
             <v-expansion-panel-header> 日志管理 </v-expansion-panel-header>
             <v-expansion-panel-content>
               <el-table :data="blogs" border style="width: 100%">
-                <el-table-column fixed prop="BlogID" label="编号" sortable>
+                <el-table-column fixed prop="blogID" label="编号" sortable>
                 </el-table-column>
-                <el-table-column prop="BlogTitle" label="题目" sortable>
+                <el-table-column prop="blogTitle" label="题目" sortable>
                 </el-table-column>
-                <el-table-column prop="AuthorID" label="作者ID" sortable>
+                <el-table-column prop="authorID" label="作者ID" sortable>
                 </el-table-column>
-                <el-table-column prop="RecentFinishTime" label="完成时间" sortable>
+                <el-table-column prop="recentFinishTime" label="完成时间" sortable>
                 </el-table-column>
                 <el-table-column label="操作">
                   <template slot-scope="scope">
@@ -70,19 +70,19 @@
             <v-expansion-panel-header> 圈子管理 </v-expansion-panel-header>
             <v-expansion-panel-content>
               <el-table :data="groups" border style="width: 100%">
-                <el-table-column fixed sortable prop="GroupID" label="圈子编号">
+                <el-table-column fixed sortable prop="groupID" label="圈子编号">
                 </el-table-column>
-                <el-table-column prop="GroupName" sortable label="名称">
+                <el-table-column prop="groupName" sortable label="名称">
                 </el-table-column>
-                <el-table-column prop="Tag" label="标签" sortable>
+                <el-table-column prop="tag" label="标签" sortable>
                 </el-table-column>
-                <el-table-column prop="CreateID" label="创建者ID" sortable>
+                <el-table-column prop="createID" label="创建者ID" sortable>
                 </el-table-column>
-                <el-table-column prop="CreateTime" label="创建时间" sortable>
+                <el-table-column prop="createTime" label="创建时间" sortable>
                 </el-table-column>
-                <el-table-column prop="MemberNum" label="人数" sortable>
+                <el-table-column prop="memberNum" label="人数" sortable>
                 </el-table-column>
-                <el-table-column prop="Introduce" label="简介" sortable>
+                <el-table-column prop="introduce" label="简介" sortable>
                 </el-table-column>
                 <el-table-column label="操作">
                   <template slot-scope="scope">
@@ -103,14 +103,14 @@
             <v-expansion-panel-header> 讨论管理 </v-expansion-panel-header>
             <v-expansion-panel-content>
               <el-table :data="forums" border style="width: 100%">
-                <el-table-column fixed prop="ForumID" label="讨论编号" sortable>
+                <el-table-column fixed prop="forumID" label="讨论编号" sortable>
                 </el-table-column>
-                <el-table-column prop="Topic" label="主题" sortable> </el-table-column>
-                <el-table-column prop="GroupID" label="所在圈子" sortable>
+                <el-table-column prop="topic" label="主题" sortable> </el-table-column>
+                <el-table-column prop="groupID" label="所在圈子" sortable>
                 </el-table-column>
-                <el-table-column prop="CreateID" label="创建者ID" sortable>
+                <el-table-column prop="createID" label="创建者ID" sortable>
                 </el-table-column>
-                <el-table-column prop="CreateTime" label="创建时间" sortable>
+                <el-table-column prop="createTime" label="创建时间" sortable>
                 </el-table-column>
                 <el-table-column label="操作">
                   <template slot-scope="scope">
@@ -133,15 +133,15 @@
             <v-expansion-panel-header> 图书管理 </v-expansion-panel-header>
             <v-expansion-panel-content>
               <el-table :data="books" border style="width: 100%">
-                <el-table-column fixed prop="BookID" label="图书编号" sortable>
+                <el-table-column fixed prop="bookID" label="图书编号" sortable>
                 </el-table-column>
-                <el-table-column prop="BookName" label="书名" sortable>
+                <el-table-column prop="bookName" label="书名" sortable>
                 </el-table-column>
-                <el-table-column prop="Author" label="作者" sortable> </el-table-column>
-                <el-table-column prop="Publisher" label="出版商" sortable>
+                <el-table-column prop="author" label="作者" sortable> </el-table-column>
+                <el-table-column prop="publisher" label="出版商" sortable>
                 </el-table-column>
-                <el-table-column prop="Kind" label="类型" sortable> </el-table-column>
-                <el-table-column prop="Score" label="评分" sortable> </el-table-column>
+                <el-table-column prop="kind" label="类型" sortable> </el-table-column>
+                <el-table-column prop="score" label="评分" sortable> </el-table-column>
                 <el-table-column label="操作">
                   <template slot-scope="scope">
                     <el-button
@@ -163,17 +163,17 @@
             <v-expansion-panel-header> 书评管理 </v-expansion-panel-header>
             <v-expansion-panel-content>
               <el-table :data="bookReviews" border style="width: 100%">
-                <el-table-column fixed prop="BookReviewID" label="书评编号" sortable>
+                <el-table-column fixed prop="bookReviewID" label="书评编号" sortable>
                 </el-table-column>
-                <el-table-column prop="Title" label="题目" sortable> </el-table-column>
-                <el-table-column prop="BookID" label="所属图书" sortable>
+                <el-table-column prop="title" label="题目" sortable> </el-table-column>
+                <el-table-column prop="bookID" label="所属图书" sortable>
                 </el-table-column>
-                <el-table-column prop="UserID" label="评论者" sortable>
+                <el-table-column prop="userID" label="评论者" sortable>
                 </el-table-column>
-                <el-table-column prop="ReviewTime" label="评论时间" sortable>
+                <el-table-column prop="reviewTime" label="评论时间" sortable>
                 </el-table-column>
-                <el-table-column prop="Content" label="内容" sortable> </el-table-column>
-                <el-table-column prop="Score" label="得分" sortable> </el-table-column>
+                <el-table-column prop="content" label="内容" sortable> </el-table-column>
+                <el-table-column prop="score" label="得分" sortable> </el-table-column>
                 <el-table-column label="操作">
                   <template slot-scope="scope">
                     <el-button

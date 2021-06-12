@@ -29,7 +29,7 @@
                       <div>圈子简介</div>
                     </template>
                   </v-textarea>
-                  <v-checkbox v-model="Private" label="私密"></v-checkbox>
+                  <v-checkbox v-model="checkbox" label="私密"></v-checkbox>
                     <p>圈子标签</p>
                     <v-row justify="center">
                     <v-chip-group  active-class="primary--text">
@@ -63,6 +63,8 @@ export default {
     groupIntroduce:"",
     groupName:"",
     image:null,
+    checkbox:false,
+    isPrivate:0,
     tags: [
       {
         Tag:"文学",
@@ -118,6 +120,8 @@ export default {
       return isJPG && isLt2M;
     },
     createGroup(){
+      if(this.checkbox) this.isPrivate=1;
+      else this.isPrivate=0;
       this.$http({
         method: "post",
         url: "/Login",
@@ -126,6 +130,7 @@ export default {
           Tag: this.choosedTag,
           Introduce:this.groupIntroduce,
           file:this.image,
+          isPrivate:this.isPrivate
         },
     }).then(res=>{
       if(res.data.success){
