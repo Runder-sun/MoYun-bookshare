@@ -123,6 +123,7 @@
 
 <script>
 export default {
+  inject:['reload'],
   data() {
     return {
       valid: true,
@@ -201,7 +202,7 @@ export default {
         this.snackbar = true;
         if (res.data.success) {
           this.$store.commit("setLogin");
-          this.$router.push({path:"/Login"});
+          this.reload();
           }
       }).catch(err=>{
         console.log(err);
