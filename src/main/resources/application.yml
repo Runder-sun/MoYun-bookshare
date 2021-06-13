@@ -21,7 +21,7 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 200MB
-      location: C:\Users\11604\Desktop\MoYunFile
+      location: /home/moyun/file
       enabled: true
 mybatis:
   mapper-locations: classpath:Mapper/*.xml

@@ -53,11 +53,12 @@
         delete from forum_info
         where groupid=#{GroupID}
     </delete>
-    <delete id="deleteForumMessageByGroupID" parameterType="Group">
+    <delete id="deleteForumMessageByGroupID" parameterType="Forum">
         delete from forum_message
         where forum_messageid in(
             select forum_messageid from(
-                select forum_messageid from forum_info join forum_message fm on forum_info.forumid = fm.forumid
+                select forum_messageid
+                from forum_info join forum_message fm on forum_info.forumid = fm.forumid
                 where groupid=#{GroupID}
                 )as test
         )

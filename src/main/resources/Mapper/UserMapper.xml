@@ -20,11 +20,6 @@
         from user_info
         where userid=#{UserID} and email=#{Email}
     </select>
-    <select id="getPasswordByUserID" resultType="String">
-        select password
-        from user_info
-        where userid=#{UserID}
-    </select>
     <update id="updatePasswordByUserID" parameterType="User">
         update user_info
         set password=#{Password}
@@ -44,7 +39,7 @@
         insert into follow_list(followerid, followedid, follow_time)
         values(#{FollowerID},#{FollowedID},#{FollowTime})
     </insert>
-    <delete id="deleteFollow">
+    <delete id="deleteFollow" parameterType="FollowList">
         delete from follow_list
         where follow_listid=#{FollowListID}
     </delete>

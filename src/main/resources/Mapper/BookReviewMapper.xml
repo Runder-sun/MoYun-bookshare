@@ -42,7 +42,7 @@
         set content=#{Content},title=#{Title},score=#{Score}
         where book_reviewid=#{BookReviewID}
     </update>
-    <insert id="collectBookReview" parameterType="BookReview">
+    <insert id="collectBookReview" parameterType="BookReviewCollection">
         insert into book_review_collection(book_reviewid,userid,collect_time)
         values(#{BookReviewID},#{UserID},#{CollectTime})
     </insert>
@@ -54,7 +54,7 @@
         delete from book_review_comment
         where book_reviewid=#{BookReviewID}
     </delete>
-    <delete id="deleteCollectBookReview" parameterType="BookReview">
+    <delete id="deleteCollectBookReview" parameterType="BookReviewCollection">
         delete from book_review_collection
         where book_reviewid=#{BookReviewID}
     </delete>
@@ -67,7 +67,7 @@
         delete from book_review
         where bookid=#{BookID}
     </delete>
-    <delete id="deleteRelatedBookReviewComment" parameterType="Book">
+    <delete id="deleteRelatedBookReviewComment" parameterType="BookReview">
         delete from book_review_comment
         where book_review_commentid in(
             select book_review_commentid from(
@@ -77,7 +77,7 @@
                 )as test
         )
     </delete>
-    <delete id="deleteRelatedBookReviewCollection" parameterType="Book">
+    <delete id="deleteRelatedBookReviewCollection" parameterType="BookReview">
         delete from book_review_collection
         where book_review_collectionid in(
             select book_review_collectionid from(
