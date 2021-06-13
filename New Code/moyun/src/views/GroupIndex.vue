@@ -442,6 +442,7 @@ export default {
           GroupName:this.group.groupName,
           Introduce:this.group.introduce,
           isPrivate:this.group.isPrivate,
+          Tag:this.group.tag,
         }
       })
     }

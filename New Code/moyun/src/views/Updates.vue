@@ -348,7 +348,7 @@ export default {
 
   created(){
     this.showUpdates;
-  }
+  },
   methods:{
     toBlock(){
         this.$router.push({path:"/updates/block"});

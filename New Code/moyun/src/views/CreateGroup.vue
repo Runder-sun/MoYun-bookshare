@@ -6,7 +6,8 @@
           <div class="front">
         <el-upload
           class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action='http://39.105.38.175:8090/api/Login'
+          drag
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
@@ -103,7 +104,6 @@ export default {
   },
   methods: {
     handleAvatarSuccess(res, file) {
-      this.image = file;
       this.imageUrl = URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {
@@ -129,7 +129,6 @@ export default {
           GroupName: this.groupname,
           Tag: this.choosedTag,
           Introduce:this.groupIntroduce,
-          file:this.image,
           isPrivate:this.isPrivate
         },
     }).then(res=>{
