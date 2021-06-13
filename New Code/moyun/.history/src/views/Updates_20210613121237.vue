@@ -160,10 +160,10 @@
                                 <v-list-item-avatar color="grey darken-3">
                                   <v-img
                                     class="elevation-6"
-                                    :src="item.authorImage"
+                                    src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
                                   ></v-img>
                                 </v-list-item-avatar>
-                                  <v-list-item-title class="title font-weight-bold" >{{item.author}}</v-list-item-title>
+                                  <v-list-item-title class="title font-weight-bold" >{{item.name}}</v-list-item-title>
                               </v-list-item>
                             </v-card-actions>
                           </v-card>
@@ -314,8 +314,6 @@ export default {
         bookImage: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
       },
     ],
-    blogDTUsers:[],
-    bookReviewDTUsers:[],
   }),
   components: {
     bar,

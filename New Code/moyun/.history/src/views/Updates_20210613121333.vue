@@ -314,8 +314,6 @@ export default {
         bookImage: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
       },
     ],
-    blogDTUsers:[],
-    bookReviewDTUsers:[],
   }),
   components: {
     bar,

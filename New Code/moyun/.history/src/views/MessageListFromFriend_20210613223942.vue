@@ -317,7 +317,7 @@ import bar from "../components/Bar.vue"
         },
       
         toFriend(id){
-          this.$router.push({path:`/messageListFromFriend/${id}`});
+          thsi.$router.push({path:`/messageListFromFriend/${id}`});
         },
         
         sendMessage () {

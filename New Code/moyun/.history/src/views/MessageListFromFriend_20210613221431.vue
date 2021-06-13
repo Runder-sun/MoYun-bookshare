@@ -55,6 +55,7 @@
             >
                 <v-container fluid class="pa-4 text-center" direction="horizontal">
                   <v-row>
+                                            <h1> {{getUser.headImage}}</h1>
                     <v-card
                           width="1200px"
                           class="mx-auto"
@@ -92,28 +93,28 @@
                               
                               <v-list-item
                               :key="item.title"
-                              v-if="getUser[0].userID===item.getID"
+                              v-if="getUser.userID===item.getID"
                               >
                               <v-list-item-avatar>
-                                  <v-img :src="getUser[0].headImage"></v-img>
+                                  <v-img :src="getUser.headImage"></v-img>
                               </v-list-item-avatar>
 
                               <v-list-item-content>
-                                  <v-list-item-title v-html="getUser[0].username"></v-list-item-title>
+                                  <v-list-item-title v-html="getUser.username"></v-list-item-title>
                                   <v-list-item-subtitle v-html="item.message"></v-list-item-subtitle>
                               </v-list-item-content>
                               </v-list-item>
 
                               <v-list-item
                               :key="item.title"
-                               v-else
+                              v-else
                               >
                               <v-list-item-avatar>
-                                  <v-img :src="sendUser[0].headImage"></v-img>
+                                  <v-img :src="sendUser.headImage"></v-img>
                               </v-list-item-avatar>
 
                               <v-list-item-content>
-                                  <v-list-item-title v-html="sendUser[0].username"></v-list-item-title>
+                                  <v-list-item-title v-html="sendUser.username"></v-list-item-title>
                                   <v-list-item-subtitle v-html="item.message"></v-list-item-subtitle>
                               </v-list-item-content>
                               </v-list-item>
@@ -179,12 +180,12 @@ import bar from "../components/Bar.vue"
             'mdi-emoticon-sad',
             'mdi-emoticon-tongue',
         ],
-        sendUser :[{
+        sendUser:[{
           userID:"12334",
           headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
           username:"Joe"
         }],
-        getUser :[{
+        getUser:[{
           userID:"12345",
           headImage:'https://cdn.vuetifyjs.com/images/lists/3.jpg',
           username:'Sans'
@@ -251,15 +252,14 @@ import bar from "../components/Bar.vue"
         systemMessageList:[],
         userMessageList:[],
     }),
-
     components:{
        avatar,
        bar,
     },
 
-  //  created(){
-  //    this.showFriMsg;
-   // },
+    created(){
+      this.showFriMsg;
+    },
 
     computed: {
         icon () {
@@ -317,7 +317,7 @@ import bar from "../components/Bar.vue"
         },
       
         toFriend(id){
-          this.$router.push({path:`/messageListFromFriend/${id}`});
+          thsi.$router.push({path:`/messageListFromFriend/${id}`});
         },
         
         sendMessage () {

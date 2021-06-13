@@ -92,7 +92,7 @@
                               
                               <v-list-item
                               :key="item.title"
-                              v-if="getUser[0].userID===item.getID"
+                              v-if="getUser.userID===item.getID"
                               >
                               <v-list-item-avatar>
                                   <v-img :src="getUser[0].headImage"></v-img>
@@ -317,7 +317,7 @@ import bar from "../components/Bar.vue"
         },
       
         toFriend(id){
-          this.$router.push({path:`/messageListFromFriend/${id}`});
+          thsi.$router.push({path:`/messageListFromFriend/${id}`});
         },
         
         sendMessage () {

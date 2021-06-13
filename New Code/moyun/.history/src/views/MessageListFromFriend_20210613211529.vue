@@ -81,40 +81,28 @@
                           <v-icon>mdi-dots-vertical</v-icon>
                       </v-btn>
                       </v-toolbar>
-
                         <v-list three-line>
                           <template v-for="(item, index) in friends">
+                              <v-subheader
+                              :key="item.header"
+                              v-text="item.header"
+                              ></v-subheader>
 
                               <v-divider
                               :key="index"
                               :inset="inset"
                               ></v-divider>
-                              
-                              <v-list-item
-                              :key="item.title"
-                              v-if="getUser[0].userID===item.getID"
-                              >
-                              <v-list-item-avatar>
-                                  <v-img :src="getUser[0].headImage"></v-img>
-                              </v-list-item-avatar>
-
-                              <v-list-item-content>
-                                  <v-list-item-title v-html="getUser[0].username"></v-list-item-title>
-                                  <v-list-item-subtitle v-html="item.message"></v-list-item-subtitle>
-                              </v-list-item-content>
-                              </v-list-item>
 
                               <v-list-item
                               :key="item.title"
-                               v-else
                               >
                               <v-list-item-avatar>
-                                  <v-img :src="sendUser[0].headImage"></v-img>
+                                  <v-img :src="item.avatar"></v-img>
                               </v-list-item-avatar>
 
                               <v-list-item-content>
-                                  <v-list-item-title v-html="sendUser[0].username"></v-list-item-title>
-                                  <v-list-item-subtitle v-html="item.message"></v-list-item-subtitle>
+                                  <v-list-item-title v-html="item.title"></v-list-item-title>
+                                  <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
                               </v-list-item-content>
                               </v-list-item>
                           </template>
@@ -161,7 +149,6 @@ import avatar from "../components/Avatar.vue"
 import bar from "../components/Bar.vue"
   export default {
     data: () => ({
-        messageBoxTitle:'System',
         password: 'Password',
         divider:true,
         inset:true,
@@ -179,16 +166,6 @@ import bar from "../components/Bar.vue"
             'mdi-emoticon-sad',
             'mdi-emoticon-tongue',
         ],
-        sendUser :[{
-          userID:"12334",
-          headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-          username:"Joe"
-        }],
-        getUser :[{
-          userID:"12345",
-          headImage:'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-          username:'Sans'
-        }],
         messageTargetList: [
           {
             uid:"1",
@@ -236,30 +213,91 @@ import bar from "../components/Bar.vue"
         ],
       friends: [
         {
-          sendID:"12334",
-          getID:"12345",
-          message:"wanna hang out????"
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+          title: 'Brunch this weekend?',
+          subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
         
         },
         {
-          getID:"12334",
-          sendID:"12345",
-          message:"Sure"
-        
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+          title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+          subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
+        },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+          title: 'Oui oui',
+          subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
+        },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+          title: 'Birthday gift',
+          subtitle: "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
+        },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+          title: 'Recipe to try',
+          subtitle: "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
         },
       ],
+
+          system : [
+        { header: 'Today' },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+          title: 'Brunch this weekend?',
+          subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
+        },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+          title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+          subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
+        },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+          title: 'Oui oui',
+          subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
+        },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+          title: 'Birthday gift',
+          subtitle: "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?",
+        },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+          title: 'Recipe to try',
+          subtitle: "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.",
+        },
+      ],
+              recordContent:[
+            {headUrl:"https://images.unsplash.com/photo-1429514513361-8fa32282fd5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3264&q=80",
+            mineMsg:'true',
+            nickName:'me',
+            timestamp:'2021-2-5',
+            contactText:'Wanna hang out?'},
+            {headUrl:"https://images.unsplash.com/photo-1429514513361-8fa32282fd5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3264&q=80",
+            mineMsg:'false',
+            nickName:'Jackson',
+            timestamp:'2021-2-6',
+            contactText:'Coool'},
+            {headUrl:"https://images.unsplash.com/photo-1429514513361-8fa32282fd5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3264&q=80",
+            mineMsg:'true',
+            nickName:'me',
+            timestamp:'2021-2-7',
+            contactText:'Kay'},
+        ],
         systemMessageList:[],
         userMessageList:[],
+        sendUser:"John",
+        getUser:"Quinn",
     }),
-
     components:{
        avatar,
        bar,
     },
 
-  //  created(){
-  //    this.showFriMsg;
-   // },
+    created(){
+      this.showFriMsg;
+    },
 
     computed: {
         icon () {
@@ -271,6 +309,15 @@ import bar from "../components/Bar.vue"
       
         toggleMarker () {
             this.marker = !this.marker
+        },
+        sendMessage () {
+            this.recordContent.push({headUrl:"https://images.unsplash.com/photo-1429514513361-8fa32282fd5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3264&q=80",
+            mineMsg:'ture',
+            nickName:'me',
+            timestamp:'2021-2-10',
+            contactText:this.message})
+            this.resetIcon()
+            this.clearMessage()
         },
         clearMessage () {
             this.message = ''
@@ -317,29 +364,9 @@ import bar from "../components/Bar.vue"
         },
       
         toFriend(id){
-          this.$router.push({path:`/messageListFromFriend/${id}`});
-        },
-        
-        sendMessage () {
-           this.$http({
-              method: "post",
-              url: "/SendMessage",
-              params: {
-                getID:this.sendUser,
-                message:this.message,
-              },
-            }).then((res)=>{
-              if(res.data.success===1){
-                alert("Send Message Success");
-                this.$router.go(0);
-              }
-            })
-            this.resetIcon()
-            this.clearMessage()
-        },
+          thsi.$router.push({path:`/messageListFromFriend/${id}`});
+        }
        },
-
-        
   }
 </script>
 

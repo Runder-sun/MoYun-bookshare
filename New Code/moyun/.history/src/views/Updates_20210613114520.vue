@@ -86,15 +86,13 @@
                             :class="{ 'on-hover': hover }"
                             :to="'/BlogList/ScanBlog'+item.id"
                           >
-                            <v-card-title
-                            class="title font-weight-bold">
+                            <v-card-title>
                               <v-icon
                                 large
                                 left
                               >
                                 mdi-twitter
                               </v-icon>
-                              {{item.blogTitle}}
                             </v-card-title>
 
                             <v-card-text class="headline font-weight-bold font-italic">
@@ -107,10 +105,10 @@
                                 <v-list-item-avatar color="grey darken-3">
                                   <v-img
                                     class="elevation-6"
-                                    :src="item.authorImage"
+                                    src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
                                   ></v-img>
                                 </v-list-item-avatar>
-                                <v-list-item-title class="title font-weight-bold" >{{item.author}}</v-list-item-title>
+                                <v-list-item-title class="title font-weight-bold" >{{item.name}}</v-list-item-title>
                               </v-list-item>
                             </v-card-actions>
                           </v-card>
@@ -147,7 +145,6 @@
                               >
                                 mdi-twitter
                               </v-icon>
-                              {{item.title}}
                             </v-card-title>
 
                             <v-card-text class="headline font-weight-bold font-italic">
@@ -160,10 +157,10 @@
                                 <v-list-item-avatar color="grey darken-3">
                                   <v-img
                                     class="elevation-6"
-                                    :src="item.authorImage"
+                                    src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
                                   ></v-img>
                                 </v-list-item-avatar>
-                                  <v-list-item-title class="title font-weight-bold" >{{item.author}}</v-list-item-title>
+                                  <v-list-item-title class="title font-weight-bold" >{{item.name}}</v-list-item-title>
                               </v-list-item>
                             </v-card-actions>
                           </v-card>
@@ -206,82 +203,118 @@ export default {
   data: () => ({
     blogDT: [
       {
-        blogID: 1,
-        blogTitle: "Book1",
+        id: 1,
+        title: "Book1",
+        type: "BookReview",
+        typeStamp:0,
         content: `This is a book about Jesus and how mankind react to atheism,deeply revealling the truth of religious...`,
-        authorID: "Jeff",
+        name: "Jeff",
         personPhoto: "../assets/UpdatesA1",
-        recentFinishTime: "2021-04-28",
-        author:"a",
-        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+        time: "2021-04-28",
+        postPic: "../assets/UpdatesB2",
+        likes: 5,
+        shares: 5,
+        myLike:false,
       },
       {
-        blogID: 1,
-        blogTitle: "Book1",
-        content: `This is a book about Jesus and how mankind react to atheism,deeply revealling the truth of religious...`,
-        authorID: "Jeff",
-        personPhoto: "../assets/UpdatesA1",
-        recentFinishTime: "2021-04-28",
-        author:"a",
-        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+        id: 2,
+        title: "Tweet",
+        type: "Blog",
+        typeStamp:1,
+        content: `Just had a good day！`,
+        name: "Kitty",
+        personPhoto: "../assets/UpdatesA2",
+        time: "2021-04-20",
+        postPic: "../assets/UpdatesB1",
+        likes: 71,
+        shares: 75,
+        myLike:true,
       },
       {
-        blogID: 1,
-        blogTitle: "Book1",
-        content: `This is a book about Jesus and how mankind react to atheism,deeply revealling the truth of religious...`,
-        authorID: "Jeff",
-        personPhoto: "../assets/UpdatesA1",
-        recentFinishTime: "2021-04-28",
-        author:"a",
-        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+        id: 3,
+        title: "Tweet",
+        type: "Blog",
+        typeStamp:1,
+        content: `Kinda ok`,
+        name: "Ken",
+        personPhoto: "../assets/UpdatesA3",
+        time: "2021-04-20",
+        postPic: "../assets/UpdatesB3",
+        likes: 10,
+        shares: 11,
+        myLike:false,
       },
       {
-        blogID: 1,
-        blogTitle: "Book1",
-        content: `This is a book about Jesus and how mankind react to atheism,deeply revealling the truth of religious...`,
-        authorID: "Jeff",
-        personPhoto: "../assets/UpdatesA1",
-        recentFinishTime: "2021-04-28",
-        author:"a",
-        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+        id: 2,
+        title: "Book44",
+        type: "BookReview",
+        typeStamp:0,
+        content: `Worthy book`,
+        name: "Micki",
+        personPhoto: "../assets/UpdatesA2",
+        time: "2021-04-20",
+        postPic: "../assets/UpdatesB3",
+        likes: 71,
+        shares: 75,
+        myLike:false,
       },
     ],
       bookReviewDT : [
       {
-        bookReviewID: 1,
+        id: 1,
         title: "Book1",
-        reviewTime:'2020-01-01',
+        type: "BookReview",
+        typeStamp:0,
         content: `This is a book about Jesus and how mankind react to atheism,deeply revealling the truth of religious...`,
-        userID:'1',
-        author:'aaa',
-        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+        name: "Jeff",
+        personPhoto: "../assets/UpdatesA1",
+        time: "2021-04-28",
+        postPic: "../assets/UpdatesB2",
+        likes: 5,
+        shares: 5,
+        myLike:false,
       },
       {
-        bookReviewID: 1,
-        title: "Book1",
-        reviewTime:'2020-01-01',
-        content: `This is a book about Jesus and how mankind react to atheism,deeply revealling the truth of religious...`,
-        userID:'1',
-        author:'aaa',
-        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+        id: 2,
+        title: "Tweet",
+        type: "Blog",
+        typeStamp:1,
+        content: `Just had a good day！`,
+        name: "Kitty",
+        personPhoto: "../assets/UpdatesA2",
+        time: "2021-04-20",
+        postPic: "../assets/UpdatesB1",
+        likes: 71,
+        shares: 75,
+        myLike:true,
       },
       {
-        bookReviewID: 1,
-        title: "Book1",
-        reviewTime:'2020-01-01',
-        content: `This is a book about Jesus and how mankind react to atheism,deeply revealling the truth of religious...`,
-        userID:'1',
-        author:'aaa',
-        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+        id: 3,
+        title: "Tweet",
+        type: "Blog",
+        typeStamp:1,
+        content: `Kinda ok`,
+        name: "Ken",
+        personPhoto: "../assets/UpdatesA3",
+        time: "2021-04-20",
+        postPic: "../assets/UpdatesB3",
+        likes: 10,
+        shares: 11,
+        myLike:false,
       },
       {
-        bookReviewID: 1,
-        title: "Book1",
-        reviewTime:'2020-01-01',
-        content: `This is a book about Jesus and how mankind react to atheism,deeply revealling the truth of religious...`,
-        userID:'1',
-        author:'aaa',
-        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+        id: 2,
+        title: "Book44",
+        type: "BookReview",
+        typeStamp:0,
+        content: `Worthy book`,
+        name: "Micki",
+        personPhoto: "../assets/UpdatesA2",
+        time: "2021-04-20",
+        postPic: "../assets/UpdatesB3",
+        likes: 71,
+        shares: 75,
+        myLike:false,
       },
     ],
         books:[
@@ -314,8 +347,6 @@ export default {
         bookImage: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
       },
     ],
-    blogDTUsers:[],
-    bookReviewDTUsers:[],
   }),
   components: {
     bar,
@@ -344,7 +375,7 @@ export default {
       })
         .then((res) => {
           this.blogDT=res.data.blogDT;
-          this.blogDTUsers=res.data.blogDTUser;
+          this.blogUsers=res.data.blogDTUser;
         })
         .catch((err) => {
           console.log(err);
@@ -370,24 +401,6 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-
-        for(var blog in this.blogDT){
-          for(var user in this.blogDTUsers){
-            if (blog.authorID===user.uid){
-              blog.append(author,user.username);
-              blog.append(authorImage,user.headImage);
-            }
-          }
-        }
-
-        for(var rw in this.bookReviewDT){
-          for(var user in this.bookReviewDT){
-            if (rw.authorID===user.uid){
-              rw.append(author,user.username);
-              rw.append(authorImage,user.headImage);
-            }
-          }
-        }
       },
   }
 };

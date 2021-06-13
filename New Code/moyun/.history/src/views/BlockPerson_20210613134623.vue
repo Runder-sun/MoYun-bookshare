@@ -309,7 +309,7 @@ export default {
 
         if (!search1) return this.blockList
 
-        return this.blockList.filter(item => {
+        return this.blocksList.filter(item => {
           const text = item.name.toLowerCase()
 
           return text.indexOf(search1) > -1
