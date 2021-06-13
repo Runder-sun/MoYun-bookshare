@@ -13,7 +13,7 @@
             text-color="white"
             @click:close="refuse(user)"
           >
-            <v-avatar left size="10">
+            <v-avatar left size="10" :to="'/PersonalInfo/'+user.userID">
               <img :src="user.headImage" :alt="user.username" />
             </v-avatar>
             {{ user.username }}
@@ -24,7 +24,7 @@
         <v-divider></v-divider>
         <v-list-item-group active-class="deep-purple--text text--accent-4">
           <v-list-item v-for="(member, i) in members" :key="i">
-            <v-list-item-avatar>
+            <v-list-item-avatar :to="'/PersonalInfo/'+member.userID">
               <img :src="member.headImage" />
             </v-list-item-avatar>
             <v-list-item-content>

@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    login:false,
+    login:true,
     isAdmin:false,
     userID:"",
   },
@@ -18,6 +18,9 @@ export default new Vuex.Store({
     },
     setUserID(state,UserID){
       state.userID=UserID
+    },
+    setLogout(state){
+      state.login=false
     }
   },
   actions: {},
