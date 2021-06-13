@@ -79,7 +79,7 @@
                 <v-lazy>
                   <v-container class="pa-4 text-center">
                     <v-row class="fill-height" align="center" justify="center">
-                      <template v-for="(group, i) in groups">
+                      <template v-for="(group, i) in myGroups">
                         <v-col :key="i" cols="12" md="3">
                           <v-hover v-slot="{ hover }">
                             <v-card
@@ -142,6 +142,7 @@
 import Bar from "../components/Bar.vue";
 export default {
   data: () => ({
+    tab:null,
     hotGroups: [
       {
         groupID: 1,

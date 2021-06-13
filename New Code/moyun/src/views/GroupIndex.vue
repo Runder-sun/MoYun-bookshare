@@ -5,15 +5,15 @@
       <v-list nav dense two-lines>
         <v-chip-group column v-if="$store.state.userID == group.createID">
           <v-chip
-            v-for="user in groupApplyUser"
-            :key="user"
+            v-for="(user,i) in groupApplyUser"
+            :key="i"
             class="ma-2"
             close
             label
             text-color="white"
             @click:close="refuse(user)"
           >
-            <v-avatar left size="10">
+            <v-avatar left size="10" :to="'/PersonalInfo/'+user.userID">
               <img :src="user.headImage" :alt="user.username" />
             </v-avatar>
             {{ user.username }}
@@ -24,7 +24,7 @@
         <v-divider></v-divider>
         <v-list-item-group active-class="deep-purple--text text--accent-4">
           <v-list-item v-for="(member, i) in members" :key="i">
-            <v-list-item-avatar>
+            <v-list-item-avatar :to="'/PersonalInfo/'+member.userID">
               <img :src="member.headImage" />
             </v-list-item-avatar>
             <v-list-item-content>
@@ -168,7 +168,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="task in tasks" :key="task">
+              <tr v-for="(task,i) in tasks" :key="i">
                 <td>{{ task.taskContent }}</td>
                 <td>{{ task.createTime }}</td>
               </tr>
@@ -288,7 +288,7 @@ export default {
     ],
     model: 1,
     snackbar: false,
-    messages: "",
+    message: "",
   }),
 
   components: {
@@ -442,6 +442,7 @@ export default {
           GroupName:this.group.groupName,
           Introduce:this.group.introduce,
           isPrivate:this.group.isPrivate,
+          Tag:this.group.tag,
         }
       })
     }

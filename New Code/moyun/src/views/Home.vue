@@ -2,7 +2,6 @@
   <div class="home">
     <v-app-bar app elevate-on-scroll color="#efeeee" light inverted-scroll>
       <el-menu
-        :default-active="activeIndex"
         class="menu"
         mode="horizontal"
         router
