@@ -34,7 +34,7 @@
                     <p>圈子标签</p>
                     <v-row justify="center">
                     <v-chip-group  active-class="primary--text">
-                      <v-chip v-for="tag in tags" :key="tag" @click="choosedTag=tag.Tag" > {{tag.Tag}} </v-chip>
+                      <v-chip v-for="(tag,i) in tags" :key="i" @click="choosedTag=tag.Tag" > {{tag.Tag}} </v-chip>
                     </v-chip-group>
                     </v-row>
                 </v-col>

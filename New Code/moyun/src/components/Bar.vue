@@ -1,7 +1,6 @@
 <template>
     <v-app-bar app elevate-on-scroll color="#efeeee" light>
       <el-menu
-        :default-active="activeIndex"
         class="menu"
         mode="horizontal"
         router

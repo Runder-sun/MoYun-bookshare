@@ -35,10 +35,8 @@
           </template>
         </v-textarea>
           </v-container>
-          <v-card-action>
               <v-spacer></v-spacer>
               <v-btn text color="cyan" @click="addMessage">提交</v-btn>
-          </v-card-action>
       </v-card>
     </v-container>
   </div>

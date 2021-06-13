@@ -47,8 +47,7 @@ export default {
     toPersonalInfo(){
         this.$router.push({ path: "/PersonalInfo" });
       },
-  },
-  setup() {
+      setup() {
     this.$http({
       method:"get",
       url:"/PersonnalInfo",
@@ -57,8 +56,10 @@ export default {
         this.user=res.data.personalInfo
       }
     }).catch(err=>{
-      consol.log(err)
+      console.log(err)
     })
   },
+  },
+  
 }
 </script>

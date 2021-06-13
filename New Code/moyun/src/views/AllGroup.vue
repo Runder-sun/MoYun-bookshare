@@ -4,6 +4,8 @@
     <v-container>
       <v-card>
         <v-card-title>
+          <v-tooltip top>
+            <template v-slot:activator="{ on, attrs }">
           <v-text-field
             v-model="search"
             append-icon="mdi-magnify"
@@ -11,13 +13,18 @@
             single-line
             hide-details
             @keyup.enter="searchGroup"
+            v-bind="attrs"
+            v-on="on"
           ></v-text-field>
+          </template>
+          <span>请选择一个标签再进行搜索哦</span>
+          </v-tooltip>
         </v-card-title>
         <v-row justify="center">
           <v-chip-group active-class="primary--text">
             <v-chip
-              v-for="tag in tags"
-              :key="tag"
+              v-for="(tag,i) in tags"
+              :key="i"
               @click="choosedTag = tag.Tag"
             >
               {{ tag.Tag }}

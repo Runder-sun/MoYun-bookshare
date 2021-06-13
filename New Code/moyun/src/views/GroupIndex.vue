@@ -5,8 +5,8 @@
       <v-list nav dense two-lines>
         <v-chip-group column v-if="$store.state.userID == group.createID">
           <v-chip
-            v-for="user in groupApplyUser"
-            :key="user"
+            v-for="(user,i) in groupApplyUser"
+            :key="i"
             class="ma-2"
             close
             label
@@ -168,7 +168,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="task in tasks" :key="task">
+              <tr v-for="(task,i) in tasks" :key="i">
                 <td>{{ task.taskContent }}</td>
                 <td>{{ task.createTime }}</td>
               </tr>
@@ -288,7 +288,7 @@ export default {
     ],
     model: 1,
     snackbar: false,
-    messages: "",
+    message: "",
   }),
 
   components: {
