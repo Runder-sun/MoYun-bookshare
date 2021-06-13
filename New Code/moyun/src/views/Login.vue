@@ -75,7 +75,7 @@
                   <v-text-field
                     v-model="password"
                     :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                    :rules="[passwordRules]"
+                    :rules="passwordRules"
                     :type="show2 ? 'text' : 'password'"
                     label="密码"
                     required
@@ -86,7 +86,7 @@
                     v-model="rePassword"
                     :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
                     :type="show3 ? 'text' : 'password'"
-                    :rules="[passwordRules, affirmPass]"
+                    :rules="[affirmPass]"
                     label="确认密码"
                     required
                     @click:append="show3 = !show3"
@@ -135,7 +135,7 @@ export default {
       idRules: [(v) => !!v || "请填写账号"],
       pass: "",
       password: "",
-      passwordRules: (v) => !!v || "请填写密码",
+      passwordRules: [(v) => !!v || "请填写密码"],
       rePassword: "",
       Email: "",
       emailRules: [
