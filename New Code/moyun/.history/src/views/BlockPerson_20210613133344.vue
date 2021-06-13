@@ -105,7 +105,7 @@
             </template>   
 
             <template>
-              <div>
+                    <div>
                     <v-hover v-slot:default="{ hover }">
                     <template>
                     <v-card
@@ -152,7 +152,7 @@
 
                         <v-col v-if="!allSelected1" cols="12">
                         <v-text-field
-                            ref="search1"
+                            ref="search"
                             v-model="search1"
                             full-width
                             hide-details
@@ -309,7 +309,7 @@ export default {
 
         if (!search1) return this.blockList
 
-        return this.blockList.filter(item => {
+        return this.blocksList.filter(item => {
           const text = item.name.toLowerCase()
 
           return text.indexOf(search1) > -1
@@ -333,10 +333,6 @@ export default {
 
         return selections
       },
-    },
-
-    created(){
-      this.showGuys;
     },
 
     watch: {
@@ -382,12 +378,12 @@ export default {
           console.log(err);
         });
       },
-
-      cancelFollow(){
+      
+      cancelFollow(id){
         var neededID;
         for(var toCancel in this.selected){
             for(var property in this.followListProperty){
-              if(property.followedID===this.toCancel.uid){
+              if(property.followedID===this.selected.uid){
                 neededID=property.followListID;
                 this.$http({
                   method: "post",
@@ -411,7 +407,7 @@ export default {
          var neededID;
         for(var toCancel in this.selected1){
             for(var property in this.blockListProperty){
-              if(property.banUserID===this.toCancel.uid){
+              if(property.banUserID===this.selected1.uid){
                 neededID=property.blackListID;
                 this.$http({
                   method: "post",

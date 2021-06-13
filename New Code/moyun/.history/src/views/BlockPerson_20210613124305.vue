@@ -95,7 +95,7 @@
                         :loading="loading"
                         color="purple"
                         text
-                        @click="cancelFollow"
+                        @click="next"
                     >Unfollow</v-btn>
                     </v-card-actions>
                     </v-card>
@@ -105,7 +105,7 @@
             </template>   
 
             <template>
-              <div>
+                    <div>
                     <v-hover v-slot:default="{ hover }">
                     <template>
                     <v-card
@@ -152,7 +152,7 @@
 
                         <v-col v-if="!allSelected1" cols="12">
                         <v-text-field
-                            ref="search1"
+                            ref="search"
                             v-model="search1"
                             full-width
                             hide-details
@@ -193,7 +193,7 @@
                         :loading1="loading1"
                         color="purple"
                         text
-                        @click="cancelBlack"
+                        @click="next1"
                     >Unblock</v-btn>
                     </v-card-actions>
                     </v-card>
@@ -214,7 +214,7 @@
 import bar from "../components/Bar.vue";
 export default {
   data: () => ({
-    followList: [
+    follows: [
       {
         id: 1,
         name: "Jeff",
@@ -245,7 +245,7 @@ export default {
         name: "Kenny",
         personPhoto: "../assets/UpdatesA3",
       },],
-      blockList:[{
+      blocks:[{
         id: 4,
         name: "Micki",
         personPhoto: "../assets/UpdatesB1",
@@ -282,34 +282,32 @@ export default {
     selected: [],
     selected1: [],
     search1: '',
-    blockListProperty:[],
-    followListProperty:[],
     }),
 
     computed: {
       allSelected () {
-        return this.selected.length === this.followList.length
+        return this.selected.length === this.follows.length
       },
       categories () {
         const search = this.search.toLowerCase()
 
-        if (!search) return this.followList
+        if (!search) return this.follows
 
-        return this.followList.filter(item => {
+        return this.follows.filter(item => {
           const text = item.name.toLowerCase()
 
           return text.indexOf(search) > -1
         })
       },
       allSelected1 () {
-        return this.selected1.length === this.blockList.length
+        return this.selected1.length === this.blocks.length
       },
       categories1 () {
         const search1 = this.search1.toLowerCase()
 
-        if (!search1) return this.blockList
+        if (!search1) return this.blocks
 
-        return this.blockList.filter(item => {
+        return this.blocks.filter(item => {
           const text = item.name.toLowerCase()
 
           return text.indexOf(search1) > -1
@@ -333,10 +331,6 @@ export default {
 
         return selections
       },
-    },
-
-    created(){
-      this.showGuys;
     },
 
     watch: {
@@ -382,54 +376,45 @@ export default {
           console.log(err);
         });
       },
-
       cancelFollow(){
-        var neededID;
-        for(var toCancel in this.selected){
-            for(var property in this.followListProperty){
-              if(property.followedID===this.toCancel.uid){
-                neededID=property.followListID;
-                this.$http({
-                  method: "post",
-                  url: "/cancelFollow",
-                  data: {
-                    followListID:neededID,
-                  },
-                }).then((res) => {
-                  if (res.data.success===1) {
-                    }
-                }).catch(err=>{
-                  console.log(err);
-                })
-              }
-            }
-        }
-      this.next();
+      this.$http({
+        method: "post",
+        url: "/cancelFollow",
+        data: {
+          UserID: this.id,
+          Password: this.password,
+          rePassword:this.rePassword,
+          Email:this.Email,
+        },
+      }).then((res) => {
+        this.message = res.data.message;
+        this.snackbar = true;
+        if (res.data.success) {
+          this.$store.commit("setLogin");
+          this.$router.push({path:"/Login"});
+          }
+      }).catch(err=>{
+        console.log(err);
+      })
       },
-
       cancelBlack(){
-         var neededID;
-        for(var toCancel in this.selected1){
-            for(var property in this.blockListProperty){
-              if(property.banUserID===this.toCancel.uid){
-                neededID=property.blackListID;
-                this.$http({
-                  method: "post",
-                  url: "/cancelBlackList",
-                  data: {
-                    blackListID:neededID,
-                  },
-                }).then((res) => {
-                  if (res.data.success===1) {
-                    }
-                }).catch(err=>{
-                  console.log(err);
-                })
-              }
-            }
-        }
-      this.next1();
-    },
+      this.$http({
+        method: "post",
+        url: "/cancelBalcklist",
+        data: {
+          FollowListID
+        },
+      }).then((res) => {
+        this.message = res.data.message;
+        this.snackbar = true;
+        if (res.data.success) {
+          this.$store.commit("setLogin");
+          this.$router.push({path:"/Login"});
+          }
+      }).catch(err=>{
+        console.log(err);
+      })
+      }
     },
 
   components: {

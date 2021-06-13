@@ -92,14 +92,14 @@
                               
                               <v-list-item
                               :key="item.title"
-                              v-if="getUser[0].userID===item.getID"
+                              v-if="getUser.userID===item.getID"
                               >
                               <v-list-item-avatar>
-                                  <v-img :src="getUser[0].headImage"></v-img>
+                                  <v-img :src="getUser.headImage"></v-img>
                               </v-list-item-avatar>
 
                               <v-list-item-content>
-                                  <v-list-item-title v-html="getUser[0].username"></v-list-item-title>
+                                  <v-list-item-title v-html="getUser.username"></v-list-item-title>
                                   <v-list-item-subtitle v-html="item.message"></v-list-item-subtitle>
                               </v-list-item-content>
                               </v-list-item>
@@ -109,7 +109,7 @@
                                v-else
                               >
                               <v-list-item-avatar>
-                                  <v-img :src="sendUser[0].headImage"></v-img>
+                                  <v-img :src="sendUser.headImage"></v-img>
                               </v-list-item-avatar>
 
                               <v-list-item-content>
@@ -317,7 +317,7 @@ import bar from "../components/Bar.vue"
         },
       
         toFriend(id){
-          this.$router.push({path:`/messageListFromFriend/${id}`});
+          thsi.$router.push({path:`/messageListFromFriend/${id}`});
         },
         
         sendMessage () {

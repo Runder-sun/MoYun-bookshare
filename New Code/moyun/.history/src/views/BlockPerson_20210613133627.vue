@@ -152,7 +152,7 @@
 
                         <v-col v-if="!allSelected1" cols="12">
                         <v-text-field
-                            ref="search1"
+                            ref="search"
                             v-model="search1"
                             full-width
                             hide-details
@@ -309,7 +309,7 @@ export default {
 
         if (!search1) return this.blockList
 
-        return this.blockList.filter(item => {
+        return this.blocksList.filter(item => {
           const text = item.name.toLowerCase()
 
           return text.indexOf(search1) > -1
