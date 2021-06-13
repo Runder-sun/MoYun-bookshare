@@ -26,6 +26,12 @@ const WriteBlog = () => import("../views/WriteBlog.vue");
 const PersonalCollection = () => import("../views/PersonalCollection.vue");
 const EditBlog = () => import("../views/EditBlog.vue");
 const ScanBlog = () => import("../views/ScanBlog.vue");
+const CheckBookReview = () => import("../views/CheckBookReview");
+const EditBookReview = () => import("../views/EditBookReview");
+const PersonalInfo = () => import("../views/PersonalInfo");
+const ChangePersonalInfo = () => import("../views/ChangePersonalInfo");
+const ChangePictures = () => import("../views/ChangePictures");
+const MyCollections = () => import("../views/MyCollections")
 Vue.use(VueRouter);
 
 const routes = [
@@ -164,12 +170,12 @@ const routes = [
     name:"Reading",
     component:Reading},
   {
-    path:"/Group/Forum/ForumHome",
+    path:"/Group/Forum/ForumHome/:id",
     name:"ForumHome",
     component:ForumHome,
   },
   {
-    path:"/Group/Forum/Forum",
+    path:"/Group/Forum/Forum/:id",
     name:"Forum",
     component:Forum,
   },
@@ -198,6 +204,36 @@ const routes = [
     path:"/BlogList/ScanBlog",
     name:"ScanBlog",
     component:ScanBlog,
+  },
+  {
+    path:"/Book/CheckBookReview",
+    name:"CheckBookReview",
+    component: CheckBookReview
+  },
+  {
+    path:"/Book/EditBookReview",
+    name:"EditBookReview",
+    component: EditBookReview
+  },
+  {
+    path:"/PersonalInfo",
+    name:"PersonalInfo",
+    component: PersonalInfo
+  },
+  {
+    path:"/ChangePersonalInfo",
+    name:"ChangePersonalInfo",
+    component: ChangePersonalInfo
+  },
+  {
+    path:"/ChangePictures",
+    name:"ChangePictures",
+    component: ChangePictures
+  },
+  {
+    path:"/MyCollections",
+    name:"MyCollections",
+    component: MyCollections
   },
 ];
 

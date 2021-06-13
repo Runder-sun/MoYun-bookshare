@@ -99,7 +99,7 @@
                     required
                   ></v-text-field>
 
-                  <v-btn :disabled="!valid" class="button" @click="Register" href="/Login">
+                  <v-btn :disabled="!valid" class="button" @click="Register">
                     <p class="register_">注册</p>
                   </v-btn>
                 </v-col>
@@ -173,6 +173,7 @@ export default {
         this.snackbar = true;
         if (res.data.success) {
           this.$store.commit("setLogin");
+          this.$store.commit('setUserID',this.id);
           if (res.data.isAdmin) {
             this.$store.commit("setAdmin");
             this.$router.push({ path: "/Admin" });
