@@ -15,8 +15,8 @@
         where forumid=#{ForumID}
     </delete>
     <insert id="addForum" parameterType="Forum">
-        insert into forum_info(topic, groupid, create_time, kind,createid)
-        values (#{Topic},#{GroupID},#{CreateTime},#{Kind},#{CreateID})
+        insert into forum_info(topic, groupid, create_time, createid)
+        values (#{Topic},#{GroupID},#{CreateTime},#{CreateID})
     </insert>
     <select id="getForumMessageListByForumID" resultType="ForumMessage">
         select *
@@ -54,11 +54,12 @@
         where groupid=#{GroupID}
     </delete>
     <delete id="deleteForumMessageByGroupID" parameterType="Group">
-        delete from forum_message where forum_messageid in(
+        delete from forum_message
+        where forum_messageid in(
             select forum_messageid from(
                 select forum_messageid from forum_info join forum_message fm on forum_info.forumid = fm.forumid
                 where groupid=#{GroupID}
-                )as del
+                )as test
         )
     </delete>
 </mapper>

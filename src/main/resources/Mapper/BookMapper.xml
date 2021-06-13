@@ -28,7 +28,7 @@
     <select id="searchBook" resultType="Book">
         select *
         from book_info
-        where book_name like '%#{BookName}%' and kind=#{Tag}
+        where book_name like '%${BookName}%' and kind=#{Tag}
     </select>
     <insert id="addBook" parameterType="Book">
         insert into book_info(book_name,author,publisher,ISBN,kind,link,book_image,userid)
@@ -39,7 +39,7 @@
         set book_name=#{BookName},author=#{Author},publisher=#{Publisher},ISBN=#{ISBN},kind=#{Kind}
         where bookid=#{BookID}
     </update>
-    <insert id="collectBook" parameterType="Book">
+    <insert id="collectBook" parameterType="BookCollection">
         insert into book_collection(bookid,userid,collect_time)
         values(#{BookID},#{UserID},#{CollectTime})
     </insert>
@@ -56,11 +56,11 @@
         insert into read_history(userid,bookid,read_time)
         values(#{UserID},#{BookID},#{ReadTime})
     </insert>
-    <delete id="deleteBookCollection" parameterType="Book">
+    <delete id="deleteBookCollection" parameterType="BookCollection">
         delete from book_collection
         where bookid=#{BookID}
     </delete>
-    <delete id="deleteReadHistory" parameterType="Book">
+    <delete id="deleteReadHistory" parameterType="ReadHistory">
         delete from read_history
         where bookid=#{BookID}
     </delete>
@@ -68,4 +68,9 @@
         update book_info
         set score=(select sum(score) from book_review where book_review.bookid=#{BookID})/(select count(*) from book_review where book_review.bookid=#{BookID})
     </update>
+    <select id="isCollect" resultType="BookCollection">
+        select *
+        from book_collection
+        where userid=#{UserID} and bookid=#{BookID}
+    </select>
 </mapper>

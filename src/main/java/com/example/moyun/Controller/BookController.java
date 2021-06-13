@@ -24,7 +24,7 @@ public class BookController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/bookWareHouse")//书库主页（已完成）
+    @GetMapping("/bookWareHouse")//书库主页（已完成测试）
     public Map<String,Object> book(HttpServletRequest request){
         HttpSession session=request.getSession();
         String UserID=String.valueOf(session.getAttribute("UserID"));
@@ -49,8 +49,8 @@ public class BookController {
         return map;
     }
 
-    @PostMapping("/uploadBook")//上传书籍(已完成)
-    public Map<String ,Object> uploadBook(HttpServletRequest request, @RequestParam("BookName") String BookName,@RequestParam("Author") String Author,@RequestParam("PubLisher") String Publisher,@RequestParam("ISBN") String ISBN,@RequestParam("Kind") String Kind , @RequestBody MultipartFile[] files ){
+    @PostMapping("/uploadBook")//上传书籍(已完成测试)
+    public Map<String ,Object> uploadBook(HttpServletRequest request, @RequestParam("BookName") String BookName,@RequestParam("Author") String Author,@RequestParam("Publisher") String Publisher,@RequestParam("ISBN") String ISBN,@RequestParam("Kind") String Kind , @RequestBody MultipartFile[] files ){
         HttpSession session=request.getSession();
         String UserID=String.valueOf(session.getAttribute("UserID"));
         Map<String,Object> map=new HashMap<>();
@@ -62,10 +62,8 @@ public class BookController {
         String filename2=files[1].getOriginalFilename();
         String newName1= UUID.randomUUID()+filename1;
         String newName2= UUID.randomUUID()+filename2;
-        String path1="C:/Users/11604/Desktop/MoYunFile/Book";
-        String path2="C:/Users/11604/Desktop/MoYunFile/BookImage";
-        File dest1=new File(path1+newName1);
-        File dest2=new File(path2+newName2);
+        File dest1=new File(newName1);
+        File dest2=new File(newName2);
         try {
             files[0].transferTo(dest1);
             files[1].transferTo(dest2);
@@ -82,7 +80,6 @@ public class BookController {
                 book.setBookImage(BookImage);
                 book.setUserID(UserID);
                 bookService.addBook(book);
-                map.put("book",book);
                 map.put("success",true);
                 return map;
             }
@@ -117,7 +114,7 @@ public class BookController {
         return map;
     }
 
-    @PostMapping("/inspectBook")//查看书籍（已完成）
+    @PostMapping("/inspectBook")//查看书籍（已完成测试）
     public Map<String ,Object>inspectBook(HttpServletRequest request,@RequestBody Map<String,String> rmap){
         Integer BookID=Integer.valueOf(rmap.get("BookID"));
         HttpSession session=request.getSession();
@@ -131,19 +128,21 @@ public class BookController {
             readHistory.setBookID(BookID);
             readHistory.setReadTime(ReadTime);
             User user=userService.getUserByUserID(bookService.getBookByBookID(BookID).getUserID());
-            List<BookReview> bookReviews=bookService.getBookReviewListByBookID(BookID);
+            List<BookReview> bookReviews=bookReviewService.getBookReviewListByBookID(BookID);
             List<User> users=new ArrayList<>();
             if(bookReviews.size()!=0){
                 for (BookReview bookReview:bookReviews){
                     users.add(userService.getUserByUserID(bookReview.getUserID()));
                 }
             }
+            boolean isCollect=bookService.isCollect(UserID,BookID)!=null;
             bookService.addReadHistory(readHistory);
             bookService.plusReadTime(BookID);
             map.put("book",book);
             map.put("bookAdder",user);
             map.put("bookReviewList",bookReviews);
             map.put("bookReviewUser",users);
+            map.put("isCollect",isCollect);
             map.put("success",true);
         }catch (Exception e){
             e.printStackTrace();
@@ -152,7 +151,7 @@ public class BookController {
         return map;
     }
 
-    @PostMapping("/updateBook")//更新书籍信息（已完成）
+    @PostMapping("/updateBook")//更新书籍信息（已完成测试）
     public Map<String,Object> updateBook(@RequestBody Map<String,String> umap){
         Integer BookID=Integer.valueOf(umap.get("BookID"));
         String BookName=umap.get("BookName");
@@ -172,7 +171,7 @@ public class BookController {
         return map;
     }
 
-    @PostMapping("/collectBook")//收藏书籍（已完成）
+    @PostMapping("/collectBook")//收藏书籍（已完成测试）
     public Map<String,Object> collectBook(HttpServletRequest request,@RequestBody Map<String,String> cmap){
         Integer BookID=Integer.valueOf(cmap.get("BookID"));
         Timestamp CollectTime=new Timestamp(System.currentTimeMillis());
@@ -194,7 +193,7 @@ public class BookController {
         return map;
     }
 
-    @PostMapping("/cancelCollectBook")//取消收藏书籍（已完成）
+    @PostMapping("/cancelCollectBook")//取消收藏书籍（已完成测试）
     public Map<String,Object> cancelCollectBook(@RequestBody Map<String,String> cancelCollectMap){
         Map<String,Object> map=new HashMap<>();
         Integer BookCollectionID=Integer.valueOf(cancelCollectMap.get("BookCollectionID"));
@@ -208,7 +207,7 @@ public class BookController {
         return map;
     }
 
-    @PostMapping("/searchBook")//查找书籍(已完成)
+    @PostMapping("/searchBook")//查找书籍(已完成测试)
     public Map<String,Object> searchBook(@RequestBody Map<String,String> smap){
         String KeyWord=smap.get("KeyWord");
         String Tag=smap.get("Tag");

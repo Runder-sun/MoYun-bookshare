@@ -20,6 +20,5 @@ public class Forum {
     private Integer GroupID;
     private String CreateID;
     private Timestamp CreateTime;
-    private String Kind;
     private Integer ForumMessages;
 }

@@ -1,8 +1,8 @@
 package com.example.moyun.Service;
 
 import com.example.moyun.Entity.BookReview;
+import com.example.moyun.Entity.BookReviewCollection;
 import com.example.moyun.Entity.BookReviewComment;
-import com.example.moyun.Vo.BookReviewVo;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -17,14 +17,14 @@ public interface BookReviewService {
     //根据BookReviewID查找BookReview
     BookReview getBookReviewByBookReviewID(Integer BookReviewID);
 
-    //BookReviewList转BookReviewVoList
-    List<BookReviewVo> BookReviewToBookReviewVo(List<BookReview> list);
-
     //根据UserID查找BookReviewCollection
     List<BookReview> getBookReviewCollectionByUserID(String UserID);
 
     //点赞书评
     void likeBookReview(Integer BookReviewID);
+
+    //取消点赞书评
+    void cancelLikeBookReview(Integer BookReviewID);
 
     //创建书评
     void createBookReviewByBookID(BookReview review);
@@ -61,4 +61,10 @@ public interface BookReviewService {
 
     //获取书评动态
     List<BookReview> getBookReviewDT(String UserID);
+
+    //获取一本书的书评
+    List<BookReview> getBookReviewListByBookID(Integer BookID);
+
+    //判断是否收藏
+    BookReviewCollection isCollect(String UserID,Integer BookReviewID);
 }

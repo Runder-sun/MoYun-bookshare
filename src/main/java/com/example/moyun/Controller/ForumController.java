@@ -26,7 +26,7 @@ public class ForumController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/ForumHome")//讨论区主页（已完成）
+    @GetMapping("/ForumHome")//讨论区主页（已完成测试）
     public Map<String,Object> forumHome(@RequestBody Map<String,String> forumHomeMap){
         Map<String,Object> map=new HashMap<>();
         Integer GroupID=Integer.valueOf(forumHomeMap.get("GroupID"));
@@ -41,7 +41,7 @@ public class ForumController {
         return map;
     }
 
-    @GetMapping("/getForumMessage")//获取讨论消息（已完成）
+    @GetMapping("/getForumMessage")//获取讨论消息（已完成测试）
     public Map<String,Object> getForumMessage(@RequestBody Map<String,String> forumMessageMap){
         Map<String,Object> map=new HashMap<>();
         Integer ForumID= Integer.valueOf(forumMessageMap.get("ForumID"));
@@ -65,7 +65,7 @@ public class ForumController {
         return map;
     }
 
-    @PostMapping("/addMessage")//发送消息（已完成）
+    @PostMapping("/addMessage")//发送消息（已完成测试）
     public Map<String,Object> addMessage(HttpServletRequest request,@RequestBody Map<String,String> addMessageMap){
         Map<String,Object> map=new HashMap<>();
         Integer ForumID=Integer.valueOf(addMessageMap.get("ForumID"));
@@ -89,14 +89,13 @@ public class ForumController {
         return map;
     }
 
-    @PostMapping("/addForum")//发起讨论（已完成）
+    @PostMapping("/addForum")//发起讨论（已完成测试）
     public Map<String,Object> addForum(HttpServletRequest request,@RequestBody Map<String,String> addForumMap){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
         String CreateID=String.valueOf(session.getAttribute("UserID"));
         String Topic=addForumMap.get("Topic");
         Integer GroupID=Integer.valueOf(addForumMap.get("GroupID"));
-        String Kind=addForumMap.get("Kind");
         Timestamp CreateTime=new Timestamp(System.currentTimeMillis());
         try {
             Forum forum=new Forum();
@@ -104,7 +103,6 @@ public class ForumController {
             forum.setCreateTime(CreateTime);
             forum.setGroupID(GroupID);
             forum.setTopic(Topic);
-            forum.setKind(Kind);
             forumService.addForum(forum);
             map.put("success",true);
         }catch (Exception e){

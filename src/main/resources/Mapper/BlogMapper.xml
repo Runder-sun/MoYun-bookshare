@@ -38,7 +38,7 @@
     </insert>
     <insert id="collectBlog" parameterType="BlogCollection">
         insert into blog_collection(blogid, userid, collect_time)
-        values (#{BlogID},#{UserID},#{CollecTime})
+        values (#{BlogID},#{UserID},#{CollectTime})
     </insert>
     <update id="likeBlog" parameterType="Blog">
         update blog_info
@@ -79,7 +79,12 @@
            or authorid in (
                select followedid from (
                    select followedid from follow_list where followerid=#{UserID}
-                   ) as get
+                   ) as test
                )
+    </select>
+    <select id="isCollect" resultType="BlogCollection">
+        select *
+        from blog_collection
+        where userid=#{UserID} and blogid=#{BlogID}
     </select>
 </mapper>

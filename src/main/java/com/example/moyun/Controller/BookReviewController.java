@@ -36,7 +36,7 @@ public class BookReviewController {
     @Autowired
     private UserMessageService userMessageService;
 
-    @PostMapping("/likeBookReview")//点赞书评(已完成)
+    @PostMapping("/likeBookReview")//点赞书评(已完成测试)
     public Map<String,Object> likeBookReview(HttpServletRequest request,@RequestBody Map<String,String> lmap){
         HttpSession session=request.getSession();
         String UserID= String.valueOf(session.getAttribute("UserID"));
@@ -59,7 +59,22 @@ public class BookReviewController {
         return map;
     }
 
-    @PostMapping("/createBookReview")//写书评（已完成）
+    @PostMapping("/cancelLikeBookReview")//取消点赞数书评(已完成测试)
+    public Map<String,Object> cancelLikeBookReview(@RequestBody Map<String,String> lmap){
+        Integer BookReviewID=Integer.valueOf(lmap.get("BookReviewID"));
+        Map<String,Object> map=new HashMap<>();
+        try {
+            bookReviewService.cancelLikeBookReview(BookReviewID);
+            map.put("success",true);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            map.put("success",false);
+        }
+        return map;
+    }
+
+    @PostMapping("/createBookReview")//写书评（已完成测试）
     public Map<String,Object> createBookReview(HttpServletRequest request, @RequestBody Map<String, String> rmap){
         HttpSession session=request.getSession();
         String UserID=String.valueOf(session.getAttribute("UserID"));
@@ -88,24 +103,24 @@ public class BookReviewController {
         return map;
     }
 
-    @PostMapping("/commentReview")//评论书评(已完成)
+    @PostMapping("/commentReview")//评论书评(已完成测试)
     public Map<String,Object> commentReview(HttpServletRequest request,@RequestBody Map<String,String> rmap){
         HttpSession session=request.getSession();
         String UserID=String.valueOf(session.getAttribute("UserID"));
-        Integer ReviewID=Integer.valueOf(rmap.get("ReviewID"));
+        Integer BookReviewID=Integer.valueOf(rmap.get("BookReviewID"));
         String Content=rmap.get("Content");
         Timestamp CommentTime=new Timestamp(System.currentTimeMillis());
         Map<String,Object> map=new HashMap<>();
         try {
             BookReviewComment comment=new BookReviewComment();
             comment.setUserID(UserID);
-            comment.setBookReviewCommentID(ReviewID);
+            comment.setBookReviewID(BookReviewID);
             comment.setContent(Content);
             comment.setCommentTime(CommentTime);
             SystemMessage systemMessage=new SystemMessage();
             systemMessage.setMessageTime(CommentTime);
             systemMessage.setSystemMessageContent(userService.getUserByUserID(UserID).getUsername()+"评论了你的书评！");
-            systemMessage.setUserID(bookReviewService.getBookReviewByBookReviewID(ReviewID).getUserID());
+            systemMessage.setUserID(bookReviewService.getBookReviewByBookReviewID(BookReviewID).getUserID());
             bookReviewService.createBookReviewCommentByReviewID(comment);
             userMessageService.addSystemMessage(systemMessage);
             map.put("success",true);
@@ -117,7 +132,7 @@ public class BookReviewController {
         return map;
     }
 
-    @PostMapping("/updateBookReview")//修改书评(已完成)
+    @PostMapping("/updateBookReview")//修改书评(已完成测试)
     public Map<String,Object> updateBookReview(@RequestBody Map<String,String> umap){
         Integer BookReviewID=Integer.valueOf(umap.get("BookReviewID"));
         String Content=umap.get("Content");
@@ -153,7 +168,7 @@ public class BookReviewController {
         return map;
     }
 
-    @PostMapping("/collectBookReview")//收藏书评(已完成)
+    @PostMapping("/collectBookReview")//收藏书评(已完成测试)
     public Map<String,Object> collectBookReview(HttpServletRequest request,@RequestBody Map<String,String> cmap){
         HttpSession session=request.getSession();
         String UserID=String.valueOf(session.getAttribute("UserID"));
@@ -175,7 +190,7 @@ public class BookReviewController {
         return map;
     }
 
-    @PostMapping("/cancelCollectBookReview")//取消收藏书评（已完成）
+    @PostMapping("/cancelCollectBookReview")//取消收藏书评（已完成测试）
     public Map<String,Object> cancelCollectBookReview(@RequestBody Map<String,String> cancelCollectMap){
         Map<String,Object> map=new HashMap<>();
         Integer BookReviewCollectionID=Integer.valueOf(cancelCollectMap.get("BookReviewCollectionID"));
@@ -189,8 +204,10 @@ public class BookReviewController {
         return map;
     }
 
-    @GetMapping("/inspectBookReview")//查看书评（已完成）
-    public Map<String,Object> inspectReview(@RequestBody Map<String,String>insmap) {
+    @GetMapping("/inspectBookReview")//查看书评（已完成测试）
+    public Map<String,Object> inspectReview(HttpServletRequest request,@RequestBody Map<String,String>insmap) {
+        HttpSession session=request.getSession();
+        String UserID=String.valueOf(session.getAttribute("UserID"));
         Integer BookReviewID= Integer.valueOf(insmap.get("BookReviewID"));
         Map<String,Object> map=new HashMap<>();
         try {
@@ -202,9 +219,11 @@ public class BookReviewController {
                     users.add(userService.getUserByUserID(bookReviewComment.getUserID()));
                 }
             }
+            boolean isCollect=bookReviewService.isCollect(UserID,BookReviewID)!=null;
             map.put("bookReviewInfo",bookReview);
             map.put("bookReviewCommentList",bookReviewComments);
             map.put("bookReviewCommentUser",users);
+            map.put("isCollect",isCollect);
             map.put("success",true);
         }
         catch (Exception e){

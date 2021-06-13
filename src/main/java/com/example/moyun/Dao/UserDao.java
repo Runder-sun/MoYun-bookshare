@@ -18,11 +18,9 @@ public interface UserDao {
 
     User getUserByUserIDAndEmail(String UserID,String Email);
 
-    String getPasswordByUserID(String UserID);
-
     void updatePasswordByUserID(String UserID,String Password);
 
-    void updateUserInfo(String UserID,String Username, Boolean Sex,String Email, Date Birthday, String Signature);
+    void updateUserInfo(String UserID,String Username, Integer Sex,String Email, Date Birthday, String Signature);
 
     void updatePictures(String UserID,String HeadImage,String BackgroundImage);
 
@@ -37,4 +35,8 @@ public interface UserDao {
     void deleteBlacklist(Integer BlacklistID);
 
     List<Blacklist> getBlacklistByUserID(String UserID);
+
+    FollowList isFollow(String MyID,String UserID);
+
+    Blacklist isBan(String MyID,String UserID);
 }

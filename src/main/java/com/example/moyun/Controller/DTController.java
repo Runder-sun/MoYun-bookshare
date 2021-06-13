@@ -28,7 +28,7 @@ public class DTController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/blogDT")//动态日志(已完成)
+    @GetMapping("/blogDT")//动态日志(已完成测试)
     public Map<String,Object> blogDT(HttpServletRequest request){
         HttpSession session=request.getSession();
         String UserID=String.valueOf(session.getAttribute("UserID"));
@@ -51,7 +51,7 @@ public class DTController {
         return map;
     }
 
-    @GetMapping("/bookReviewDT")//书评动态（已完成）
+    @GetMapping("/bookReviewDT")//书评动态（已完成测试）
     public Map<String,Object> bookReviewDT(HttpServletRequest request){
         HttpSession session=request.getSession();
         String UserID=String.valueOf(session.getAttribute("UserID"));
@@ -74,7 +74,7 @@ public class DTController {
         return map;
     }
 
-    @GetMapping("/FollowListAndBlacklist")//关注列表与黑名单（已完成）
+    @GetMapping("/FollowListAndBlacklist")//关注列表与黑名单（已完成测试）
     public Map<String,Object> followListAndBlacklist(HttpServletRequest request){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -106,7 +106,7 @@ public class DTController {
         return map;
     }
 
-    @PostMapping("/cancelFollow")//取消关注（已完成）
+    @PostMapping("/cancelFollow")//取消关注（已完成测试）
     public Map<String,Object> cancelFollow(@RequestBody Map<String,String> cancelFollowMap){
         Map<String,Object> map=new HashMap<>();
         Integer FollowListID=Integer.valueOf(cancelFollowMap.get("FollowListID"));
@@ -120,7 +120,7 @@ public class DTController {
         return map;
     }
 
-    @PostMapping("/cancelBlacklist")//移除黑名单（已完成）
+    @PostMapping("/cancelBlacklist")//移除黑名单（已完成测试）
     public Map<String,Object> cancelBlacklist(@RequestBody Map<String,String> cancelBlacklistMap){
         Map<String,Object> map=new HashMap<>();
         Integer BlacklistID=Integer.valueOf(cancelBlacklistMap.get("BlacklistID"));

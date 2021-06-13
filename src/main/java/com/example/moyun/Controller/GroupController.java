@@ -30,7 +30,7 @@ public class GroupController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/GroupHome")//圈子主页（已完成）
+    @GetMapping("/GroupHome")//圈子主页（已完成测试）
     public Map<String,Object> groupHome(HttpServletRequest request){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -48,8 +48,10 @@ public class GroupController {
         return map;
     }
 
-    @GetMapping("/GroupInfo")//圈子信息（已完成）
-    public Map<String,Object> groupInfo(@RequestBody Map<String,String> groupInfoMap){
+    @GetMapping("/GroupInfo")//圈子信息（已完成测试）
+    public Map<String,Object> groupInfo(HttpServletRequest request,@RequestBody Map<String,String> groupInfoMap){
+        HttpSession session=request.getSession();
+        String UserID= String.valueOf(session.getAttribute("UserID"));
         Map<String,Object> map=new HashMap<>();
         Integer GroupID=Integer.valueOf(groupInfoMap.get("GroupID"));
         try {
@@ -61,6 +63,7 @@ public class GroupController {
                     users.add(userService.getUserByUserID(groupMember.getUserID()));
                 }
             }
+            boolean isCollect=groupService.isCollect(UserID,GroupID)!=null;
             List<Forum> HotForum=forumService.getHotForumByGroupID(GroupID);
             List<Task> taskList=groupService.getTaskList(GroupID);
             map.put("GroupInfo",group);
@@ -68,6 +71,7 @@ public class GroupController {
             map.put("MemberUser",users);
             map.put("HotForum",HotForum);
             map.put("TaskList",taskList);
+            map.put("isCollect",isCollect);
             map.put("success",true);
         }catch (Exception e){
             e.printStackTrace();
@@ -76,7 +80,7 @@ public class GroupController {
         return map;
     }
 
-    @PostMapping("/deleteGroup")//删除圈子(已完成)
+    @PostMapping("/deleteGroup")//删除圈子(已完成测试)
     public Map<String,Object> deleteGroup(@RequestBody Map<String,String> delmap){
         Integer GroupID= Integer.valueOf(delmap.get("GroupID"));
         Map<String,Object> map=new HashMap<>();
@@ -97,23 +101,18 @@ public class GroupController {
         return map;
     }
 
-    @PostMapping("/addGroup")//创建圈子（已完成）
-    public Map<String,Object> addGroup(HttpServletRequest request, @RequestParam("GroupName") String GroupName, @RequestParam("Tag") String Tag,@RequestParam("Introduce")String Introduce,@RequestBody MultipartFile file){
+    @PostMapping("/addGroup")//创建圈子（已完成测试）
+    public Map<String,Object> addGroup(HttpServletRequest request, @RequestParam("GroupName") String GroupName, @RequestParam("Tag") String Tag,@RequestParam("Introduce")String Introduce,@RequestParam("isPrivate") Integer isPrivate,@RequestBody MultipartFile file){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
         String CreateID= String.valueOf(session.getAttribute("UserID"));
-        //String GroupName=addGroupMap.get("GroupName");
-        //String Tag=addGroupMap.get("Tag");
         Timestamp CreateTime=new Timestamp(System.currentTimeMillis());
-        //String Introduce=addGroupMap.get("Introduce");
-        //String GroupImage=addGroupMap.get("GroupImage");
         if(file.isEmpty()){
             map.put("success",false);
         }
         String filename=file.getOriginalFilename();
         String newName= UUID.randomUUID()+filename;
-        String path="C:/Users/11604/Desktop/MoYunFile/GroupImage";
-        File dest=new File(path+newName);
+        File dest=new File(newName);
         try {
             file.transferTo(dest);
             String GroupImage=dest.getPath();
@@ -125,11 +124,8 @@ public class GroupController {
                 group.setIntroduce(Introduce);
                 group.setTag(Tag);
                 group.setGroupImage(GroupImage);
+                group.setIsPrivate(isPrivate);
                 groupService.addGroup(group);
-                GroupMember groupMember=new GroupMember();
-                groupMember.setGroupID(group.getGroupID());
-                groupMember.setUserID(CreateID);
-                groupService.addGroupMember(groupMember);
                 map.put("success",true);
             }catch (Exception e){
                 e.printStackTrace();
@@ -142,7 +138,7 @@ public class GroupController {
         return map;
     }
 
-    @PostMapping("/applyGroup")//申请加入圈子（已完成）
+    @PostMapping("/applyGroup")//申请加入圈子（已完成测试）
     public Map<String,Object> applyGroup(HttpServletRequest request,@RequestBody Map<String,String> applyGroupMap){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -168,7 +164,7 @@ public class GroupController {
         return map;
     }
 
-    @PostMapping("/addMember")//批准申请，添加用户（已完成）
+    @PostMapping("/addMember")//批准申请，添加用户（已完成测试）
     public Map<String,Object> addMember(@RequestBody Map<String,String> addMemberMap){
         Map<String,Object> map=new HashMap<>();
         Integer GroupApplyID= Integer.valueOf(addMemberMap.get("GroupApplyID"));
@@ -188,7 +184,7 @@ public class GroupController {
         return map;
     }
 
-    @PostMapping("/refuseApply")//拒绝申请(已完成)
+    @PostMapping("/refuseApply")//拒绝申请(已完成测试)
     public Map<String,Object> refuseApply(@RequestBody Map<String,String> refuseApplyMap){
         Map<String,Object> map=new HashMap<>();
         Integer GroupID=Integer.valueOf(refuseApplyMap.get("GroupID"));
@@ -209,17 +205,16 @@ public class GroupController {
         return map;
     }
 
-    @PostMapping("/changeGroupInfo")//修改圈子信息（已完成）
+    @PostMapping("/changeGroupInfo")//修改圈子信息（已完成测试）
     public Map<String,Object> changeGroupInfo(@RequestBody Map<String,String> changeGroupInfoMap){
         Map<String,Object> map=new HashMap<>();
         Integer GroupID=Integer.valueOf(changeGroupInfoMap.get("GroupID"));
         String GroupName=changeGroupInfoMap.get("GroupName");
         String Tag=changeGroupInfoMap.get("Tag");
         String Introduce=changeGroupInfoMap.get("Introduce");
-        String GroupImage=changeGroupInfoMap.get("GroupImage");
-        Boolean isPrivate=Boolean.valueOf(changeGroupInfoMap.get("isPrivate"));
+        Integer isPrivate=Integer.valueOf(changeGroupInfoMap.get("isPrivate"));
         try {
-            groupService.updateGroupInfo(GroupID,GroupName,Tag,isPrivate,Introduce,GroupImage);
+            groupService.updateGroupInfo(GroupID,GroupName,Tag,isPrivate,Introduce);
             map.put("success",true);
         }catch (Exception e){
             e.printStackTrace();
@@ -228,7 +223,7 @@ public class GroupController {
         return map;
     }
 
-    @PostMapping("/deleteMember")//删除圈子成员(已完成)
+    @PostMapping("/deleteMember")//删除圈子成员(已完成测试)
     public Map<String,Object> deleteMember(@RequestBody Map<String,String> deleteMemberMap){
         Map<String,Object> map=new HashMap<>();
         Integer MemberID=Integer.valueOf(deleteMemberMap.get("MemberID"));
@@ -242,7 +237,7 @@ public class GroupController {
         return map;
     }
 
-    @PostMapping("/CollectGroup")//收藏圈子（已完成）
+    @PostMapping("/CollectGroup")//收藏圈子（已完成测试）
     public Map<String,Object> collectGroup(HttpServletRequest request,@RequestBody Map<String,String> collectGroupMap){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -263,7 +258,7 @@ public class GroupController {
         return map;
     }
 
-    @PostMapping("/cancelCollectGroup")//取消收藏圈子（已完成）
+    @PostMapping("/cancelCollectGroup")//取消收藏圈子（已完成测试）
     public Map<String,Object> cancelCollectGroup(@RequestBody Map<String,String> cancelCollectGroupMap){
         Map<String,Object> map=new HashMap<>();
         Integer GroupCollectionID=Integer.valueOf(cancelCollectGroupMap.get("GroupCollectionID"));
@@ -277,7 +272,7 @@ public class GroupController {
         return map;
     }
 
-    @GetMapping("/GroupApplyList")//获取申请列表（已完成）
+    @GetMapping("/GroupApplyList")//获取申请列表（已完成测试）
     public Map<String,Object> groupApplyList(@RequestBody Map<String,String> groupApplyListMap){
         Map<String,Object> map=new HashMap<>();
         Integer GroupID=Integer.valueOf(groupApplyListMap.get("GroupID"));
@@ -299,7 +294,7 @@ public class GroupController {
         return map;
     }
 
-    @PostMapping("/addTask")//发布任务(已完成)
+    @PostMapping("/addTask")//发布任务(已完成测试)
     public Map<String,Object> addTask(HttpServletRequest request,@RequestBody Map<String,String> addTaskMap){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -322,7 +317,7 @@ public class GroupController {
         return map;
     }
 
-    @PostMapping("/searchGroup")//所有圈子（即搜索圈子）
+    @GetMapping("/searchGroup")//所有圈子（即搜索圈子）(已完成测试)
     public Map<String,Object> searchGroup(@RequestBody Map<String,String> allGroupMap){
         String GroupName=allGroupMap.get("GroupName");
         String Tag= allGroupMap.get("Tag");

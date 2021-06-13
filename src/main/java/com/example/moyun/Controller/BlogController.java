@@ -29,7 +29,7 @@ public class BlogController {
     @Autowired
     private UserMessageService userMessageService;
 
-    @PostMapping("/deleteBlog")//删除日志（已完成）
+    @PostMapping("/deleteBlog")//删除日志（已完成测试）
     public Map<String,Object> deleteBlog(@RequestBody Map<String,String> delmap){
         Integer BlogID= Integer.valueOf(delmap.get("BlogID"));
         Map<String,Object> map=new HashMap<>();
@@ -46,8 +46,10 @@ public class BlogController {
         return map;
     }
 
-    @GetMapping("/inspectBlog")//查看日志信息（已完成）
-    public Map<String,Object> inspectBlog(@RequestBody Map<String,String> insmap){
+    @GetMapping("/inspectBlog")//查看日志信息（已完成测试）
+    public Map<String,Object> inspectBlog(HttpServletRequest request,@RequestBody Map<String,String> insmap){
+        HttpSession session=request.getSession();
+        String UserID= String.valueOf(session.getAttribute("UserID"));
         Integer BlogID= Integer.valueOf(insmap.get("BlogID"));
         Map<String,Object> map=new HashMap<>();
         try{
@@ -59,7 +61,9 @@ public class BlogController {
                     users.add(userService.getUserByUserID(blogComment.getUserID()));
                 }
             }
+            boolean isCollect = blogService.isCollect(UserID,BlogID)!=null;
             map.put("blogInfo",blog);
+            map.put("isCollect",isCollect);
             map.put("blogCommentList",blogCommentList);
             map.put("blogCommentUser",users);
             map.put("success",true);
@@ -71,7 +75,7 @@ public class BlogController {
         return map;
     }
 
-    @GetMapping("/BlogList")//查看个人日志列表（已完成）
+    @GetMapping("/BlogList")//查看个人日志列表（已完成测试）
     public Map<String,Object> blogList(HttpServletRequest request){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -87,7 +91,7 @@ public class BlogController {
         return map;
     }
 
-    @PostMapping("/WriteBlog")//写日志（已完成）
+    @PostMapping("/WriteBlog")//写日志（已完成测试）
     public Map<String,Object> writeBlog(HttpServletRequest request,@RequestBody Map<String,String> writeBlogMap){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -110,7 +114,7 @@ public class BlogController {
         return map;
     }
 
-    @PostMapping("/EditBlog")//修改日志（已完成）
+    @PostMapping("/EditBlog")//修改日志（已完成测试）
     public Map<String,Object> editBlog(@RequestBody Map<String,String> editBlogMap){
         Map<String,Object> map=new HashMap<>();
         Integer BlogID=Integer.valueOf(editBlogMap.get("BlogID"));
@@ -126,7 +130,7 @@ public class BlogController {
         return map;
     }
 
-    @PostMapping("/WriteBlogComment")//评论日志（已完成）
+    @PostMapping("/WriteBlogComment")//评论日志（已完成测试）
     public Map<String,Object> writeBlogComment(HttpServletRequest request,@RequestBody Map<String,String> blogCommentMap){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -154,7 +158,7 @@ public class BlogController {
         return map;
     }
 
-    @PostMapping("/ReprintBlog")//转载日志(已完成)
+    @PostMapping("/ReprintBlog")//转载日志(已完成测试)
     public Map<String,Object> reprintBlog(HttpServletRequest request,@RequestBody Map<String,String> reprintMap){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -169,7 +173,7 @@ public class BlogController {
             blog.setContent(blog0.getContent());
             blog.setAuthorID(UserID);
             blog.setRecentFinishTime(RecentFinishTime);
-            blog.setIsReprint(true);
+            blog.setIsReprint(1);
             SystemMessage systemMessage=new SystemMessage();
             systemMessage.setMessageTime(RecentFinishTime);
             systemMessage.setSystemMessageContent(userService.getUserByUserID(UserID).getUsername()+"转载了你的日志！");
@@ -184,7 +188,7 @@ public class BlogController {
         return map;
     }
 
-    @PostMapping("/CollectBlog")//收藏日志(已完成)
+    @PostMapping("/CollectBlog")//收藏日志(已完成测试)
     public Map<String,Object> collectBlog(HttpServletRequest request,@RequestBody Map<String,String> collectBlogMap){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -210,7 +214,7 @@ public class BlogController {
         return map;
     }
 
-    @PostMapping("/CancelCollectBlog")//取消收藏日志（已完成）
+    @PostMapping("/CancelCollectBlog")//取消收藏日志（已完成测试）
     public Map<String,Object> cancelCollectBlog(@RequestBody Map<String,String> cancelCollectBlogMap){
         Map<String,Object> map=new HashMap<>();
         Integer BlogCollectionID= Integer.valueOf(cancelCollectBlogMap.get("BlogCollectionID"));
@@ -224,7 +228,7 @@ public class BlogController {
         return map;
     }
 
-    @PostMapping("/LikeBlog")//点赞日志(已完成)
+    @PostMapping("/LikeBlog")//点赞日志(已完成测试)
     public Map<String,Object> likeBlog(HttpServletRequest request,@RequestBody Map<String,String> likeBlogMap){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -246,7 +250,7 @@ public class BlogController {
         return map;
     }
 
-    @PostMapping("/CancelLikeBlog")//取消点赞日志（已完成）
+    @PostMapping("/CancelLikeBlog")//取消点赞日志（已完成测试）
     public Map<String,Object> cancelLikeBlog(@RequestBody Map<String,String> cancelLikeBlogMap){
         Map<String,Object> map=new HashMap<>();
         Integer BlogID= Integer.valueOf(cancelLikeBlogMap.get("BlogID"));

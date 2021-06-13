@@ -3,7 +3,6 @@ package com.example.moyun.Service;
 import com.example.moyun.Entity.Blog;
 import com.example.moyun.Entity.BlogCollection;
 import com.example.moyun.Entity.BlogComment;
-import com.example.moyun.Vo.BlogVo;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -17,9 +16,6 @@ public interface BlogService {
 
     //查看日志信息
     Blog getBlogByBlogID(Integer BlogID);
-
-    //BlogList转成BlogVoList
-    List<BlogVo> BlogToBlogVo(List<Blog> list);
 
     //查看日志收藏
     List<BlogCollection> getBlogCollectionByUserID(String UserID);
@@ -62,4 +58,7 @@ public interface BlogService {
 
     //获取动态日志
     List<Blog> getBlogDT(String UserID);
+
+    //判断是否收藏过日志
+    BlogCollection isCollect(String UserID,Integer BlogID);
 }

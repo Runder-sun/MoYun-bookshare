@@ -8,7 +8,10 @@ import java.util.List;
 @Mapper
 public interface AdminDao {
     List<User> getAllUser();
+
     Admin getAdminByAdminID(String AdminID);
+
     Admin getAdminByAdminIDAndPassword(String AdminID,String Password);
-    void updateUserIsForbidden(String UserID,Boolean isForbidden);
+
+    void updateUserIsForbidden(String UserID,Integer isForbidden);
 }

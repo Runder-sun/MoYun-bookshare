@@ -3,11 +3,9 @@ package com.example.moyun.Service.Impl;
 import com.example.moyun.Dao.GroupDao;
 import com.example.moyun.Entity.*;
 import com.example.moyun.Service.GroupService;
-import com.example.moyun.Vo.GroupVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,18 +26,6 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public Group getGroupByGroupID(Integer GroupID){
         return groupDao.getGroupByGroupID(GroupID);
-    }
-
-    @Override
-    public List<GroupVo> GroupToGroupVo(List<Group> list){
-        List<GroupVo> groupVos=new ArrayList<>();
-        for (Group group:list){
-            GroupVo groupVo=new GroupVo();
-            groupVo.setGroupID(group.getGroupID());
-            //待确认的属性
-            groupVos.add(groupVo);
-        }
-        return groupVos;
     }
 
     @Override
@@ -68,8 +54,8 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void updateGroupInfo(Integer GroupID,String GroupName,String Tag,Boolean isPrivate,String Introduce,String GroupImage){
-        groupDao.updateGroupInfo(GroupID,GroupName,Tag,isPrivate,Introduce,GroupImage);
+    public void updateGroupInfo(Integer GroupID,String GroupName,String Tag,Integer isPrivate,String Introduce){
+        groupDao.updateGroupInfo(GroupID,GroupName,Tag,isPrivate,Introduce);
     }
 
     @Override
@@ -150,5 +136,10 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public List<Group> searchGroup(String GroupName,String Tag){
         return groupDao.searchGroup(GroupName,Tag);
+    }
+
+    @Override
+    public GroupCollection isCollect(String UserID,Integer GroupID){
+        return groupDao.isCollect(UserID,GroupID);
     }
 }

@@ -26,5 +26,11 @@ spring:
 mybatis:
   mapper-locations: classpath:Mapper/*.xml
   type-aliases-package: com.example.moyun.Entity
+  configuration:
+    map-underscore-to-camel-case: true
 server:
+  tomcat:
+    uri-encoding: UTF-8
   port: 8080
+  servlet:
+    context-path: /api

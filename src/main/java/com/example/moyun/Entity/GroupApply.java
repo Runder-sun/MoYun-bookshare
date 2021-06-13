@@ -19,4 +19,5 @@ public class GroupApply {
     private Integer GroupID;
     private String ApplyUserID;
     private Timestamp ApplyTime;
+    private Integer isAllow;
 }

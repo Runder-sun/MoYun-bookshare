@@ -36,7 +36,7 @@ public class AdminController {
     @Autowired
     private UserMessageService userMessageService;
 
-    @GetMapping("/admin")//管理员主页面(已完成)
+    @GetMapping("/admin")//管理员主页面(已完成测试)
     public Map<String,Object> admin(){
         Map<String,Object> map=new HashMap<>();
         try {
@@ -60,7 +60,7 @@ public class AdminController {
         return map;
     }
 
-    @PostMapping("/forbidUser")//管理员封禁用户(已完成)
+    @PostMapping("/forbidUser")//管理员封禁用户(已完成测试)
     public Map<String,Object> forbidUser(@RequestBody Map<String,String> forbidmap){
         Map<String,Object> map=new HashMap<>();
         String UserID=forbidmap.get("UserID");
@@ -70,7 +70,7 @@ public class AdminController {
             systemMessage.setUserID(UserID);
             systemMessage.setMessageTime(MessageTime);
             systemMessage.setSystemMessageContent("您被封禁了，请注意您的言行！");
-            adminService.updateUserIsForbidden(UserID,true);
+            adminService.updateUserIsForbidden(UserID,1);
             userMessageService.addSystemMessage(systemMessage);
             map.put("success",true);
         }catch (Exception e){
@@ -80,12 +80,12 @@ public class AdminController {
         return map;
     }
 
-    @PostMapping("/unblockUser")//管理员解封用户(已完成)
+    @PostMapping("/unblockUser")//管理员解封用户(已完成测试)
     public Map<String,Object> unblockUser(@RequestBody Map<String,String> unblockmap){
         Map<String,Object> map=new HashMap<>();
         String UserID=unblockmap.get("UserID");
         try{
-            adminService.updateUserIsForbidden(UserID,false);
+            adminService.updateUserIsForbidden(UserID,0);
             map.put("success",true);
         }catch (Exception e){
             e.printStackTrace();

@@ -2,14 +2,13 @@ package com.example.moyun.Service.Impl;
 
 import com.example.moyun.Dao.BookReviewDao;
 import com.example.moyun.Entity.BookReview;
+import com.example.moyun.Entity.BookReviewCollection;
 import com.example.moyun.Entity.BookReviewComment;
 import com.example.moyun.Service.BookReviewService;
-import com.example.moyun.Vo.BookReviewVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,18 +30,6 @@ public class BookReviewServiceImpl implements BookReviewService {
     public BookReview getBookReviewByBookReviewID(Integer BookReviewID){
         return bookReviewDao.getBookReviewByBookReviewID(BookReviewID);
     }
-    
-    @Override
-    public List<BookReviewVo> BookReviewToBookReviewVo(List<BookReview> list){
-        List<BookReviewVo> bookReviewVos=new ArrayList<>();
-        for (BookReview bookReview:list){
-            BookReviewVo bookReviewVo=new BookReviewVo();
-            bookReviewVo.setBookReviewID(bookReview.getBookReviewID());
-            //待确认的属性
-            bookReviewVos.add(bookReviewVo);
-        }
-        return bookReviewVos;
-    }
 
     @Override
     public List<BookReview> getBookReviewCollectionByUserID(String UserID){
@@ -52,6 +39,11 @@ public class BookReviewServiceImpl implements BookReviewService {
     @Override
     public void likeBookReview(Integer BookReviewID){
         bookReviewDao.likeBookReview(BookReviewID);
+    }
+
+    @Override
+    public void cancelLikeBookReview(Integer BookReviewID){
+        bookReviewDao.cancelLikeBookReview(BookReviewID);
     }
 
     @Override
@@ -108,5 +100,15 @@ public class BookReviewServiceImpl implements BookReviewService {
     @Override
     public List<BookReview> getBookReviewDT(String UserID){
         return bookReviewDao.getBookReviewDT(UserID);
+    }
+
+    @Override
+    public List<BookReview> getBookReviewListByBookID(Integer BookID){
+        return bookReviewDao.getBookReviewListByBookID(BookID);
+    }
+
+    @Override
+    public BookReviewCollection isCollect(String UserID, Integer BookReviewID){
+        return bookReviewDao.isCollect(UserID,BookReviewID);
     }
 }

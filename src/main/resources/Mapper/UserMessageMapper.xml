@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.moyun.Dao.UserMessageDao">
-    <select id="getUserMessageByUserMessageID" resultType="UserMessage">
-        select *
-        from user_message
-        where user_messageid=#{UserMessageID}
-    </select>
-    <select id="getAllUserMessage" resultType="UserMessage">
-        select *
-        from user_message
-    </select>
-    <select id="getUserMessageListBySendIDAndGetID" parameterType="UserMessage">
+    <select id="getUserMessageListBySendIDAndGetID" resultType="UserMessage">
         select *
         from user_message
         where (sendid=#{SendID} and getid=#{GetID}) or (getid=#{SendID} and sendid=#{GetID})
@@ -38,12 +29,13 @@
             from book_info
             where kind in(
                 select kind
-                from book_info join book_collection bc on book_info.bookid = bc.bookid)
+                from book_info join book_collection bc on book_info.bookid = bc.bookid
+                where bc.userid=#{UserID})
             )
         order by read_times desc
         limit 0,4
     </select>
-    <select id="getMessageTarget" resultType="User">
+    <select id="getMessageTarget" resultType="FollowList">
         select *
         from follow_list
         where followerid=#{UserID} or followedid=#{UserID}

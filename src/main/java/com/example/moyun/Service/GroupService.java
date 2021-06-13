@@ -1,8 +1,8 @@
 package com.example.moyun.Service;
 
 import com.example.moyun.Entity.*;
-import com.example.moyun.Vo.GroupVo;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface GroupService {
@@ -14,9 +14,6 @@ public interface GroupService {
 
     //查看圈子信息
     Group getGroupByGroupID(Integer GroupID);
-
-    //GroupList转GroupVoList
-    List<GroupVo> GroupToGroupVo(List<Group> list);
 
     //查看人数最多的圈子(前8、热门圈子)
     List<Group> getHotGroup();
@@ -46,7 +43,7 @@ public interface GroupService {
     void deleteGroupMember(Integer MemberID);
 
     //修改圈子信息
-    void updateGroupInfo(Integer GroupID,String GroupName,String Tag,Boolean isPrivate,String Introduce,String GroupImage);
+    void updateGroupInfo(Integer GroupID,String GroupName,String Tag,Integer isPrivate,String Introduce);
 
     //获取成员列表
     List<GroupMember> getGroupMemberListByGroupID(Integer GroupID);
@@ -83,4 +80,7 @@ public interface GroupService {
 
     //搜索圈子
     List<Group> searchGroup(String GroupName,String Tag);
+
+    //判断是否收藏
+    GroupCollection isCollect(String UserID,Integer GroupID);
 }

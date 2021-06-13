@@ -2,11 +2,8 @@ package com.example.moyun.Service;
 
 import com.example.moyun.Entity.Book;
 import com.example.moyun.Entity.BookCollection;
-import com.example.moyun.Entity.BookReview;
 import com.example.moyun.Entity.ReadHistory;
-import com.example.moyun.Vo.BookVo;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public interface BookService {
@@ -22,17 +19,11 @@ public interface BookService {
     //搜索Book(BookName使用likes匹配)
     List<Book> searchBook(String BookName,String Tag);
 
-    //BookList转成BookVoList
-    List<BookVo> BookToBookVo(List<Book> list);
-
     //根据阅读次数获取热门书籍（前8）
     List<Book> getHotBook();
 
     //根据UserID查找BookCollection
     List<BookCollection> getBookCollectionByUserID(String UserID);
-
-    //获取一本书的书评
-    List<BookReview> getBookReviewListByBookID(Integer BookID);
 
     //上传新书籍
     void addBook(Book book);
@@ -60,4 +51,7 @@ public interface BookService {
 
     //计算书籍评分
     void updateBookScore(Integer BookID);
+
+    //判断是否收藏
+    BookCollection isCollect(String UserID,Integer BookID);
 }

@@ -1,6 +1,7 @@
 package com.example.moyun.Dao;
 
 import com.example.moyun.Entity.BookReview;
+import com.example.moyun.Entity.BookReviewCollection;
 import com.example.moyun.Entity.BookReviewComment;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,6 +19,8 @@ public interface BookReviewDao {
     List<BookReview> getBookReviewCollectionByUserID(String UserID);
 
     void likeBookReview(Integer BookReviewID);
+
+    void cancelLikeBookReview(Integer BookReviewID);
 
     void createBookReviewByBookID(BookReview review);
 
@@ -39,7 +42,11 @@ public interface BookReviewDao {
 
     List<BookReviewComment> getBookReviewCommentList(Integer BookReviewID);
 
+    BookReviewCollection isCollect(String UserID, Integer BookReviewID);
+
     void deleteRelatedBookReviewCollection(Integer BookID);
 
     List<BookReview> getBookReviewDT(String UserID);
+
+    List<BookReview> getBookReviewListByBookID(Integer BookID);
 }

@@ -12,7 +12,7 @@ public interface UserService {
     void registerUser(User user);
 
     //判断身份
-    Boolean checkIsTeacher(String UserID);
+    Integer checkIsTeacher(String UserID);
 
     //查看个人信息
     User getUserByUserID(String UserID);
@@ -27,7 +27,7 @@ public interface UserService {
     void updatePasswordByUserID(String UserID,String Password);
 
     //修改用户信息(不包括头像及背景)
-    void updateUserInfo(String UserID,String Username, Boolean Sex,String Email,Date Birthday,String Signature);
+    void updateUserInfo(String UserID,String Username, Integer Sex,String Email,Date Birthday,String Signature);
 
     //修改头像、背景
     void updatePictures(String UserID,String HeadImage,String BackgroundImage);
@@ -49,4 +49,10 @@ public interface UserService {
 
     //获取屏蔽列表
     List<Blacklist> getBlacklistByUserID(String UserID);
+
+    //判断是否关注
+    FollowList isFollow(String MyID,String UserID);
+
+    //判断是否屏蔽
+    Blacklist isBan(String MyID,String UserID);
 }

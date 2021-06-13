@@ -40,7 +40,7 @@
     </delete>
     <update id="updateGroupInfo" parameterType="Group">
         update group_info
-        set group_name=#{GroupName},tag=#{Tag},introduce=#{Introduce},group_image=#{GroupImage},is_private=#{isPrivate}
+        set group_name=#{GroupName},tag=#{Tag},introduce=#{Introduce},is_private=#{isPrivate}
         where groupid=#{GroupID}
     </update>
     <select id="getGroupMemberListByGroupID" resultType="GroupMember">
@@ -69,10 +69,11 @@
     <select id="getGroupListByUserID" resultType="Group">
         select *
         from group_info
-        where groupid in
-              (select groupid
-              from group_member
-              where userid=#{UserID})
+        where groupid in(
+            select groupid from(
+                select groupid from group_member where userid=#{UserID}
+                  )as test
+        ) or createid=#{UserID}
     </select>
     <insert id="addTask" parameterType="Task">
         insert into task(groupid, createid, create_time, task_content)
@@ -116,6 +117,11 @@
     <select id="searchGroup" resultType="Group">
         select *
         from group_info
-        where is_private=0 and group_name like '%{#GroupName}%' and tag=#{Tag}
+        where is_private=0 and group_name like '%${GroupName}%' and tag=#{Tag}
+    </select>
+    <select id="isCollect" resultType="GroupCollection">
+        select *
+        from group_collection
+        where userid=#{UserID} and groupid=#{GroupID}
     </select>
 </mapper>

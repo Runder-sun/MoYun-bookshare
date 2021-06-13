@@ -1,7 +1,6 @@
 package com.example.moyun.Service;
 
 import com.example.moyun.Entity.*;
-import com.example.moyun.Vo.UserVo;
 
 import java.util.List;
 
@@ -10,9 +9,6 @@ public interface AdminService {
     //查看全部User
     List<User> getAllUser();
 
-    //UserList转UserVoList
-    List<UserVo> UserToUserVo(List<User> list);
-
     //根据AdminID查找Admin
     Admin getAdminByAdminID(String AdminID);
 
@@ -20,5 +16,5 @@ public interface AdminService {
     Admin getAdminByAdminIDAndPassword(String AdminID,String Password);
 
     //更新用户是否封禁信息
-    void updateUserIsForbidden(String UserID,Boolean isForbidden);
+    void updateUserIsForbidden(String UserID,Integer isForbidden);
 }

@@ -2,14 +2,11 @@ package com.example.moyun.Service.Impl;
 
 import com.example.moyun.Dao.AdminDao;
 import com.example.moyun.Entity.Admin;
-import com.example.moyun.Entity.Blog;
 import com.example.moyun.Entity.User;
 import com.example.moyun.Service.AdminService;
-import com.example.moyun.Vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,18 +20,6 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<UserVo> UserToUserVo(List<User> list){
-        List<UserVo> userVos=new ArrayList<>();
-        for (User user:list){
-            UserVo userVo=new UserVo();
-            userVo.setUserID(user.getUserID());
-            //待确认的属性
-            userVos.add(userVo);
-        }
-        return userVos;
-    }
-
-    @Override
     public Admin getAdminByAdminID(String AdminID){
         return adminDao.getAdminByAdminID(AdminID);
     }
@@ -45,7 +30,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void updateUserIsForbidden(String UserID,Boolean isForbidden){
+    public void updateUserIsForbidden(String UserID,Integer isForbidden){
         adminDao.updateUserIsForbidden(UserID,isForbidden);
     }
 }

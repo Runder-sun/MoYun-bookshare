@@ -38,7 +38,7 @@ public class UserController {
     @Autowired
     private UserMessageService userMessageService;
 
-    @GetMapping("/PersonalInfo")//获取个人信息（已完成）
+    @GetMapping("/PersonalInfo")//获取个人信息（已完成测试）
     public Map<String,Object> personalInfo(HttpServletRequest request){
         HttpSession session=request.getSession();
         Map<String,Object> map=new HashMap<>();
@@ -53,14 +53,20 @@ public class UserController {
         return map;
     }
 
-    @GetMapping("/inspectUser")//查看其他用户信息（已完成）
-    public Map<String,Object> inspectUser(@RequestBody Map<String,String> insmap){
+    @GetMapping("/inspectUser")//查看其他用户信息（已完成测试）
+    public Map<String,Object> inspectUser(HttpServletRequest request,@RequestBody Map<String,String> insmap){
+        HttpSession session=request.getSession();
+        String MyID= String.valueOf(session.getAttribute("UserID"));
         String UserID=insmap.get("UserID");
         Map<String,Object> map=new HashMap<>();
         try{
             User user=userService.getUserByUserID(UserID);
+            boolean isFollowed=userService.isFollow(MyID, UserID) != null;
+            boolean isBan=userService.isBan(MyID,UserID)!=null;
             map.put("success",true);
             map.put("userInfo",user);
+            map.put("isFollowed",isFollowed);
+            map.put("isBan",isBan);
         }
         catch (Exception e){
             e.printStackTrace();
@@ -69,13 +75,13 @@ public class UserController {
         return map;
     }
 
-    @PostMapping("/ChangePersonalInfo")//修改个人信息（已完成）
+    @PostMapping("/ChangePersonalInfo")//修改个人信息（已完成测试）
     public Map<String,Object> changePersonalInfo(HttpServletRequest request, @RequestBody Map<String,String> changeInfoMap){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
         String UserID= String.valueOf(session.getAttribute("UserID"));
         String Username=changeInfoMap.get("Username");
-        Boolean Sex=Boolean.valueOf(changeInfoMap.get("Sex"));
+        Integer Sex=Integer.valueOf(changeInfoMap.get("Sex"));
         String Email=changeInfoMap.get("Email");
         Date Birthday= Date.valueOf(changeInfoMap.get("Birthday"));
         String Signature=changeInfoMap.get("Signature");
@@ -89,7 +95,7 @@ public class UserController {
         return map;
     }
 
-    @PostMapping("/ChangePictures")//修改头像和背景（已完成）
+    @PostMapping("/ChangePictures")//修改头像和背景（已完成测试）
     public Map<String,Object> changePictures(HttpServletRequest request,@RequestBody MultipartFile[] files){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -102,10 +108,8 @@ public class UserController {
         String filename2=files[1].getOriginalFilename();
         String newName1= UUID.randomUUID()+filename1;
         String newName2= UUID.randomUUID()+filename2;
-        String path1="C:/Users/11604/Desktop/MoYunFile/HeadImage";
-        String path2="C:/Users/11604/Desktop/MoYunFile/Background";
-        File dest1=new File(path1+newName1);
-        File dest2=new File(path2+newName2);
+        File dest1=new File(newName1);
+        File dest2=new File(newName2);
         try {
             files[0].transferTo(dest1);
             files[1].transferTo(dest2);
@@ -125,7 +129,7 @@ public class UserController {
         return map;
     }
 
-    @GetMapping("/PersonalCollection")//个人收藏（已完成）
+    @GetMapping("/PersonalCollection")//个人收藏（已完成测试）
     public Map<String,Object> personalCollection(HttpServletRequest request){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -168,7 +172,7 @@ public class UserController {
         return map;
     }
 
-    @PostMapping("/addFollow")//关注用户(已完成)
+    @PostMapping("/addFollow")//关注用户(已完成测试)
     public Map<String,Object> addFollow(HttpServletRequest request,@RequestBody Map<String,String> addFollowMap){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
@@ -194,7 +198,7 @@ public class UserController {
         return map;
     }
 
-    @PostMapping("/addBlacklist")//添加黑名单（已完成）
+    @PostMapping("/addBlacklist")//添加黑名单（已完成测试）
     public Map<String,Object> addBlacklist(HttpServletRequest request,@RequestBody Map<String,String> addBlacklistMap){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();

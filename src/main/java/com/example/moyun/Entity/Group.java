@@ -21,7 +21,7 @@ public class Group {
     private String CreateID;
     private Timestamp CreateTime;
     private Integer MemberNum;
-    private Boolean isPrivate;
+    private Integer isPrivate;
     private String Introduce;
     private String GroupImage;
 }

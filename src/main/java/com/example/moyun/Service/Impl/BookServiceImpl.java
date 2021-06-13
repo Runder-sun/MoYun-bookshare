@@ -3,15 +3,11 @@ package com.example.moyun.Service.Impl;
 import com.example.moyun.Dao.BookDao;
 import com.example.moyun.Entity.Book;
 import com.example.moyun.Entity.BookCollection;
-import com.example.moyun.Entity.BookReview;
 import com.example.moyun.Entity.ReadHistory;
 import com.example.moyun.Service.BookService;
-import com.example.moyun.Vo.BookVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,18 +36,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookVo> BookToBookVo(List<Book> list) {
-        List<BookVo> bookVos=new ArrayList<>();
-        for (Book book:list){
-            BookVo bookVo=new BookVo();
-            bookVo.setBookID(book.getBookID());
-            //待确认的属性
-            bookVos.add(bookVo);
-        }
-        return bookVos;
-    }
-
-    @Override
     public List<Book> getHotBook(){
         return bookDao.getHotBook();
     }
@@ -59,11 +43,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookCollection> getBookCollectionByUserID(String UserID){
         return bookDao.getBookCollectionByUserID(UserID);
-    }
-
-    @Override
-    public List<BookReview> getBookReviewListByBookID(Integer BookID){
-        return bookDao.getBookReviewListByBookID(BookID);
     }
 
     @Override
@@ -105,5 +84,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public void updateBookScore(Integer BookID){
         bookDao.updateBookScore(BookID);
+    }
+
+    @Override
+    public BookCollection isCollect(String UserID,Integer BookID){
+        return bookDao.isCollect(UserID,BookID);
     }
 }

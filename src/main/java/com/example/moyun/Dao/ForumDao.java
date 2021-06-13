@@ -19,10 +19,16 @@ public interface ForumDao {
     List<ForumMessage> getForumMessageListByForumID(Integer ForumID);
 
     void addForumMessage(ForumMessage forumMessage);
+
     List<Forum> getHotForumByGroupID(Integer GroupID);
+
     List<Forum> getForumByGroupID(Integer GroupID);
+
     void addMessageNum(Integer ForumID);
+
     void deleteForumMessage(Integer ForumID);
+
     void deleteForumByGroupID(Integer GroupID);
+
     void deleteForumMessageByGroupID(Integer GroupID);
 }

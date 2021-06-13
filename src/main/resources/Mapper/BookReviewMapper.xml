@@ -24,13 +24,18 @@
         set likes=likes+1
         where book_reviewid=#{BookReviewID}
     </update>
+    <update id="cancelLikeBookReview" parameterType="BookReview">
+        update book_review
+        set likes=likes-1
+        where book_reviewid=#{BookReviewID}
+    </update>
     <insert id="createBookReviewByBookID" parameterType="BookReview">
         insert into book_review(bookid,userid,content,title,score,review_time)
         values(#{BookID},#{UserID},#{Content},#{Title},#{Score},#{ReviewTime})
     </insert>
     <insert id="createBookReviewCommentByReviewID" parameterType="BookReviewComment">
         insert into book_review_comment(book_reviewid,userid,content,comment_time)
-        values(#{ReviewID},#{UserID},#{Content},#{CommentTime})
+        values(#{BookReviewID},#{UserID},#{Content},#{CommentTime})
     </insert>
     <update id="updateBookReview" parameterType="BookReview">
         update book_review
@@ -41,7 +46,7 @@
         insert into book_review_collection(book_reviewid,userid,collect_time)
         values(#{BookReviewID},#{UserID},#{CollectTime})
     </insert>
-    <delete id="cancelCollectBookReview" parameterType="BookReviewCollectionID">
+    <delete id="cancelCollectBookReview" parameterType="BookReviewCollection">
         delete from book_review_collection
         where book_review_collectionid=#{BookReviewCollectionID}
     </delete>
@@ -69,7 +74,7 @@
                 select book_review_commentid
                 from book_review join book_review_comment brc on book_review.book_reviewid = brc.book_reviewid
                 where bookid=#{BookID}
-                )as del
+                )as test
         )
     </delete>
     <delete id="deleteRelatedBookReviewCollection" parameterType="Book">
@@ -77,9 +82,9 @@
         where book_review_collectionid in(
             select book_review_collectionid from(
                 select  book_review_collectionid
-                from book_review join book_review_comment brc on book_review.book_reviewid = brc.book_reviewid
+                from book_review join book_review_collection brc on book_review.book_reviewid = brc.book_reviewid
                 where bookid=#{BookID}
-                )as del
+                )as test
         )
     </delete>
     <select id="getBookReviewDT" resultType="BookReview">
@@ -89,12 +94,17 @@
            or userid in (
             select followedid from (
                 select followedid from follow_list where followerid=#{UserID}
-                ) as get
+                ) as test
         )
     </select>
-    <select id="getBookReviewListByBookID" parameterType="BookReview">
+    <select id="getBookReviewListByBookID" resultType="BookReview">
         select *
         from book_review
         where bookid=#{BookID}
+    </select>
+    <select id="isCollect" resultType="BookReviewCollection">
+        select *
+        from book_review_collection
+        where userid=#{UserID} and book_reviewid=#{BookReviewID}
     </select>
 </mapper>

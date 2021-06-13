@@ -5,10 +5,6 @@
         select *
         from user_info
     </select>
-    <delete id="deleteUser" parameterType="User">
-        delete from user_info
-        where userid=#{UserID}
-    </delete>
     <select id="getAdminByAdminID" resultType="Admin">
         select *
         from admin

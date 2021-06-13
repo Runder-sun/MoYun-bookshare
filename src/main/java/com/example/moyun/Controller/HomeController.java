@@ -36,7 +36,7 @@ public class HomeController {
     @Autowired
     private GroupService groupService;
 
-    @PostMapping("/Register")//（已完成，已测试）
+    @PostMapping("/Register")//（已完成测试）
     public Map<String,Object> registerUser(@RequestBody Map<String,String> remap){
         String UserID=remap.get("UserID");
         String Password=remap.get("Password");
@@ -58,7 +58,6 @@ public class HomeController {
                 user.setUserID(UserID);
                 user.setEmail(Email);
                 user.setPassword(DigestUtils.md5DigestAsHex(Password.getBytes(StandardCharsets.UTF_8)));
-                user.setIsForbidden(false);
                 userService.registerUser(user);
                 map.put("success",true);
                 map.put("message","用户注册成功！");
@@ -71,7 +70,7 @@ public class HomeController {
         return map;
     }
 
-    @PostMapping("/Login")//（已完成，已测试）
+    @PostMapping("/Login")//（已完成测试）
     public Map<String,Object> login(HttpServletRequest request, @RequestBody Map<String, String> loginMap){
         String UserID = loginMap.get("UserID");
         String Password = loginMap.get("Password");
@@ -94,15 +93,17 @@ public class HomeController {
                     map.put("success", true);
                     map.put("message", "用户登录成功！");
                     map.put("isAdmin",true);
+                    map.put("Admin",admin);
                 }
                 else{
-                    if(!user.getIsForbidden()){
+                    if(user.getIsForbidden()==0){
                         HttpSession session=request.getSession();
                         session.setAttribute("UserID",UserID);
                         session.setAttribute("isTeacher",user.getIsTeacher());
                         map.put("success", true);
                         map.put("message", "用户登录成功！");
                         map.put("isAdmin",false);
+                        map.put("User",user);
                     }
                     else{
                         map.put("success",false);
@@ -118,7 +119,7 @@ public class HomeController {
         return map;
     }
 
-    @PostMapping("/ForgetPassword")//（已完成，已测试）
+    @PostMapping("/ForgetPassword")//（已完成测试）
     public Map<String,Object> forgetPassword(HttpServletRequest request,@RequestBody Map<String,String> forgetMap){
         String UserID=forgetMap.get("UserID");
         String Email=forgetMap.get("Email");
@@ -146,7 +147,7 @@ public class HomeController {
         return map;
     }
 
-    @PostMapping("/code")//（已完成，已测试）
+    @PostMapping("/code")//（已完成测试）
     public Map<String,Object> resetPassword(HttpServletRequest request,@RequestBody Map<String,String> resetMap){
         String UserID=resetMap.get("UserID");
         String Password=resetMap.get("Password");
@@ -177,7 +178,7 @@ public class HomeController {
         return map;
     }
 
-    @GetMapping("/logout")//（已完成，已测试）
+    @GetMapping("/logout")//（已完成测试）
     public Map<String,Object> logout (HttpServletRequest request){
         Map<String ,Object> map=new HashMap<>();
         try {
@@ -193,7 +194,7 @@ public class HomeController {
         return map;
     }
 
-    @GetMapping("/Home")//（已完成）
+    @GetMapping("/Home")//（已完成测试）
     public Map<String,Object> home(){
         Map<String,Object> map=new HashMap<>();
         try {

@@ -19,12 +19,12 @@ public class User {
     private String UserID;
     private String Password;
     private String Username;
-    private Boolean isTeacher;
-    private Boolean Sex;
+    private Integer isTeacher;
+    private Integer Sex;
     private String Email;
     private Date Birthday;
     private String Signature;
     private String HeadImage;
     private String BackgroundImage;
-    private Boolean isForbidden;
+    private Integer isForbidden;
 }

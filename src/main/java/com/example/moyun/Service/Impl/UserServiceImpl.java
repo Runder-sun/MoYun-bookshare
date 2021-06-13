@@ -22,8 +22,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean checkIsTeacher(String UserID){
-        return UserID.startsWith("JS");
+    public Integer checkIsTeacher(String UserID){
+        if(UserID.startsWith("JS")){
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
 
     @Override
@@ -47,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserInfo(String UserID,String Username, Boolean Sex, String Email,Date Birthday, String Signature){
+    public void updateUserInfo(String UserID,String Username, Integer Sex, String Email,Date Birthday, String Signature){
         userDao.updateUserInfo(UserID,Username,Sex,Email,Birthday,Signature);
     }
 
@@ -84,5 +89,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Blacklist> getBlacklistByUserID(String UserID){
         return userDao.getBlacklistByUserID(UserID);
+    }
+
+    @Override
+    public FollowList isFollow(String MyID,String UserID){
+        return userDao.isFollow(MyID,UserID);
+    }
+
+    @Override
+    public Blacklist isBan(String MyID,String UserID){
+        return userDao.isBan(MyID,UserID);
     }
 }

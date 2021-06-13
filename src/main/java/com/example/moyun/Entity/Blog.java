@@ -20,6 +20,6 @@ public class Blog {
     private String AuthorID;
     private Timestamp RecentFinishTime;
     private String Content;
-    private Boolean isReprint;
+    private Integer isReprint;
     private Integer Likes;
 }
