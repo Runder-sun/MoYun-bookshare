@@ -5,7 +5,6 @@
         class="menu"
         mode="horizontal"
         router
-        @select="handleSelect"
         background-color="#efeeee"
       >
         <el-menu-item index="/">首页</el-menu-item>

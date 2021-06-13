@@ -6,7 +6,6 @@
         class="menu"
         mode="horizontal"
         router
-        @select="handleSelect"
         background-color="#efeeee"
       >
         <el-menu-item index="/">首页</el-menu-item>
@@ -43,6 +42,7 @@
                     <v-card
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
+                      :to="'/Group/GroupIndex/' + group.groupID"
                       width="300"
                     >
                       <v-img :src="group.img" height="225px">

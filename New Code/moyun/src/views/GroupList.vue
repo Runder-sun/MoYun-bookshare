@@ -30,7 +30,7 @@
                               :elevation="hover ? 24 : 2"
                               :class="{ 'on-hover': hover }"
                               width="300"
-                              :to="'/Group/GroupIndex/'+group.id"
+                              :to="'/Group/GroupIndex/' + group.groupID"
                             >
                               <v-img :src="group.img" height="225px">
                                 <v-card-title class="title white--text">
@@ -86,6 +86,7 @@
                               :elevation="hover ? 24 : 2"
                               :class="{ 'on-hover': hover }"
                               width="300"
+                              :to="'/Group/GroupIndex/' + group.groupID"
                             >
                               <v-img :src="group.img" height="225px">
                                 <v-card-title class="title white--text">
@@ -143,48 +144,56 @@ export default {
   data: () => ({
     hotGroups: [
       {
+        groupID: 1,
         title: "Rock",
         text: "Greatest Rock Hits",
         subtext: "Lose yourself in rock tunes.",
         img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
       },
       {
+        groupID: 2,
         title: "Mellow Moods",
         text: "Ambient Bass",
         subtext: "Chill beats to mellow you out.",
         img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
       },
       {
+        groupID: 3,
         title: "Mellow Moods",
         text: "Ambient Bass",
         subtext: "Chill beats to mellow you out.",
         img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
       },
       {
+        groupID: 4,
         title: "Mellow Moods",
         text: "Ambient Bass",
         subtext: "Chill beats to mellow you out.",
         img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
       },
       {
+        groupID: 5,
         title: "Mellow Moods",
         text: "Ambient Bass",
         subtext: "Chill beats to mellow you out.",
         img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
       },
       {
+        groupID: 6,
         title: "Mellow Moods",
         text: "Ambient Bass",
         subtext: "Chill beats to mellow you out.",
         img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
       },
       {
+        groupID: 7,
         title: "Mellow Moods",
         text: "Ambient Bass",
         subtext: "Chill beats to mellow you out.",
         img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
       },
       {
+        groupID: 8,
         title: "Mellow Moods",
         text: "Ambient Bass",
         subtext: "Chill beats to mellow you out.",
@@ -204,14 +213,12 @@ export default {
       this.$http({
         method: "get",
         url: "/GroupHome",
-      })
-        .then((res) => {
+      }).then((res) => {
           this.hotGroups = res.data.hotGroup;
           this.myGroups = res.data.UserGroup;
-        })
-        .catch((err) => {
+        }).catch((err) => {
           console.log(err);
-        });
+      });
     },
   },
 };
