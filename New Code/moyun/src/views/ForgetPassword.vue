@@ -71,7 +71,7 @@
                   class="button"
                   @click="resetPassword"
                   large
-                  href="/Login"
+                  :to="'/Login'"
                 >
                   <p class="pass_">重置密码</p>
                 </v-btn>

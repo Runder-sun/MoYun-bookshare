@@ -52,7 +52,7 @@
             <v-btn text color="primary" class="register" @click="toRegister"
               >注册</v-btn
             >
-            <v-btn text color="primary" class="forget" href="/ForgetPassword"
+            <v-btn text color="primary" class="forget" :to="'/ForgetPassword'"
               >忘记密码</v-btn
             >
           </v-col>

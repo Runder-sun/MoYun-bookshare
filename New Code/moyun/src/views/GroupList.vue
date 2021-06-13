@@ -8,9 +8,9 @@
 
           <v-spacer></v-spacer>
 
-          <v-btn text color="cyan" href="/Group/CreateGroup"> 创建圈子 </v-btn>
+          <v-btn text color="cyan" :to="'/Group/CreateGroup'"> 创建圈子 </v-btn>
 
-          <v-btn text color="deep-orange" href="/Group/AllGroup">
+          <v-btn text color="deep-orange" :to="'/Group/AllGroup'">
             所有圈子
           </v-btn>
 
