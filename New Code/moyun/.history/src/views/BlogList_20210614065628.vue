@@ -80,7 +80,7 @@
         </template>
 
 
-        <v-btn text color="teal" @click="toCollection" rounded> 查看日志收藏 </v-btn>
+        <v-btn text color="teal" href="/BlogList/PersonalCollection" rounded> 查看日志收藏 </v-btn>
         </v-toolbar>
         <template>
         <el-table
@@ -91,13 +91,13 @@
             <el-table-column
             fixed
             sortable
-            prop="blogTitle"
+            prop="BlogTitle"
             label="日志名称"
             style="width: 35%">
             </el-table-column>
             <el-table-column 
             sortable           
-            prop="recentFinishTime"
+            prop="RecentFinishTime"
             label="日期"
             style="width: 30%">
             </el-table-column>
@@ -106,10 +106,9 @@
             label="操作"
             style="width: 35%">
             <template slot-scope="scope">
-                <v-btn text color="cyan lighten-1" rounded :to="'/BlogList/ScanBlog/' + scope.row.blogID"> 查看 </v-btn>
-                <v-btn text color="blue darken-1" rounded :to="'/BlogList/EditBlog/' + scope.row.blogID"> 编辑 </v-btn>
-                <v-btn text color="pink lighten-1" rounded @click="handleDelete(scope.row.blogID, scope.row)"> 删除 </v-btn>
-                <router-view/>
+                <v-btn text color="cyan lighten-1" rounded :to="'/BlogList/ScanBlog' + scope.$index.blogID"> 查看 </v-btn>
+                <v-btn text color="blue darken-1" rounded :to="'/BlogList/EditBlog' + scop.$index.blogID"> 编辑 </v-btn>
+                <v-btn text color="pink lighten-1" rounded @click="handleDelete(scope.$index, scope.row)"> 删除 </v-btn>
             </template>
             </el-table-column>
         </el-table>
@@ -141,38 +140,50 @@ export default({
         defaultForm,
         dialog: false,
         tableData: [{
-          blogID:1,
-          blogTitle: "在墨韵的第一天",
-          recentFinishTime: "2021/5/21",
-        },{
-          blogID:22,
-          blogTitle: "在墨韵的第一天",
-          recentFinishTime: "2021/5/21",
-        },{
-          blogID:3,
-          blogTitle: "在墨韵的第一天",
-          recentFinishTime: "2021/5/21",
-        },{
-          blogID:1,
-          blogTitle: "在墨韵的第一天",
-          recentFinishTime: "2021/5/21",
-        },{
-          blogID:1,
-          blogTitle: "在墨韵的第一天",
-          recentFinishTime: "2021/5/21",
-        },{
-          blogID:1,
-          blogTitle: "在墨韵的第一天",
-          recentFinishTime: "2021/5/21",
-        },{
-          blogID:1,
-          blogTitle: "在墨韵的第一天",
-          recentFinishTime: "2021/5/21",
-        },{
-          blogID:1,
-          blogTitle: "在墨韵的第一天",
-          recentFinishTime: "2021/5/21",
-        },       
+          BlogID:1,
+          BlogTitle: "在墨韵的第一天",
+          RecentFinishTime: "2021/5/21",
+        },
+        {
+          BlogID:1,
+          BlogTitle: "在墨韵的第一天",
+          RecentFinishTime: "2021/5/21",
+        },
+        {
+          BlogID:1,
+          BlogTitle: "在墨韵的第一天",
+          RecentFinishTime: "2021/5/21",
+        },
+        {
+          BlogID:1,
+          BlogTitle: "在墨韵的第一天",
+          RecentFinishTime: "2021/5/21",
+        },
+        {
+            BlogID:1,
+          BlogTitle: "在墨韵的第一天",
+          RecentFinishTime: "2021/5/21",
+        },
+        {
+          BlogID:1,
+          BlogTitle: "在墨韵的第一天",
+          RecentFinishTime: "2021/5/21",
+        },
+        {
+          BlogID:1,
+          BlogTitle: "在墨韵的第一天",
+          RecentFinishTime: "2021/5/21",
+        },
+        {
+           BlogID:1,
+          BlogTitle: "在墨韵的第一天",
+          RecentFinishTime: "2021/5/21",
+        },
+        {
+           BlogID:1,
+          BlogTitle: "在墨韵的第一天",
+          RecentFinishTime: "2021/5/21",
+        },        
         ]
       }
     },
@@ -196,19 +207,17 @@ export default({
     },
 
       methods: {
-      toCollection(){
-        this.$router.push({path:"BlogList/PersonalCollection"});
-      },
-      handleDelete(idNum, row) {
+
+      handleDelete(index, row) {
         this.$http({
           method:"post",
           url:"/deleteBlog",
           data:{
-            BlogID:idNum,
+            BlogID:this.tableData[index].id,
           }
         }).then((res)=>{
           if(res.data.success===1){
-            this.$router.push({path:"/BlogList",query:{id:" idNum "}});
+            this.$router.push({path:"/BlogList",query:{id:" this.tableData[index].blogID "}});
           }
           else{
             alert("删除失败！");

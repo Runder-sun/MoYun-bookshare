@@ -5,7 +5,62 @@
       <v-container fluid>
         <v-container class="pa-4 text-center">      
         <v-row class="fill-height" align="center" justify="center">
+            <template 
+            v-for="(book, i) in books"
+            margin-left="100px">
+            <v-col :key="i" 
+            cols="12" 
+            md="3" 
+            >
+                <v-hover v-slot="{ hover }">
+                        <v-card
+                          :elevation="hover ? 24 : 2"
+                          :class="{ 'on-hover': hover }"
+                          width="200px"
+                          height="180px"
+                          align="center"
+                          :to="'/Book/CheckBook/'+book.bookID"
+                        >
+                          <v-img :src="book.bookImage" height="225px">
+                            <v-card-title class="title white--text">
+                              <v-row
+                                class="fill-height flex-column"
+                                justify="space-between"
+                              >
+                                <p class="mt-4 subheading text-left">
+                                  {{ book.bookName }}
+                                </p>
 
+                            <div>
+                              <p
+                                class="
+                                  ma-0
+                                  body-1
+                                  font-weight-bold font-italic
+                                  text-left
+                                "
+                              >
+                                {{ book.author }}
+                              </p>
+                              <p
+                                class="
+                                  caption
+                                  font-weight-medium font-italic
+                                  text-left
+                                "
+                              >
+                                {{ book.kind }}
+                              </p>
+                            </div>
+
+                          </v-row>
+                        </v-card-title>
+                      </v-img>
+                    </v-card>
+                  </v-hover>
+                </v-col>
+            </template>
+  
 
             <br>
             <br>
@@ -229,7 +284,36 @@ export default {
         authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
       },
     ],
-
+        books:[
+      {
+        bookID:1,
+        bookName: "Little Prince",
+        kind: "Story",
+        author: "An adventure and a love scene",
+        bookImage: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
+      },
+      {
+        bookID:1,
+        bookName: "Little Prince",
+        kind: "Story",
+        author: "An adventure and a love scene",
+        bookImage: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
+      },
+      {
+        bookID:1,
+        bookName: "Little Prince",
+        kind: "Story",
+        author: "An adventure and a love scene",
+        bookImage: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
+      },
+      {
+        bookID:1,
+        bookName: "Little Prince",
+        kind: "Story",
+        author: "An adventure and a love scene",
+        bookImage: "https://cdn.vuetifyjs.com/images/cards/server-room.jpg",
+      },
+    ],
     blogDTUsers:[],
     bookReviewDTUsers:[],
   }),
@@ -271,6 +355,16 @@ export default {
         .then((res) => {
           this.bookReviewDT=res.data.bookReviewDT;
           this.bookReviewDTUsers=res.data.bookReviewDTUser;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+        this.$http({
+        method: "get",
+        url: "/getRecommend",
+      })
+        .then((res) => {
+          this.books=this.res.recommend;
         })
         .catch((err) => {
           console.log(err);

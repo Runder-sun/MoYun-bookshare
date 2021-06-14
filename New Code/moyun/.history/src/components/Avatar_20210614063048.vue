@@ -11,7 +11,7 @@
       <v-list-item-content class="justify-center">
         <div class="mx-auto text-center">
           <v-avatar >
-            <img :src="user.userImage" :alt="user.username">
+            <img :src="user.userImage">
           </v-avatar>
           <h3>{{user.username}}</h3>
           <p class="caption mt-1">
@@ -36,8 +36,8 @@ export default {
   data:()=>({
     user:{
       username:"zy",
-      userImage:"",
-      signature:"",
+      userImage:"https://cdn.vuetifyjs.com/images/john.jpg",
+      signature:"hhh",
     }
   }),
   created(){
@@ -48,11 +48,11 @@ export default {
         this.$router.push({ path: "/PersonalInfo" });
       },
       toMSG(){
-        this.$router.push({path:"/MessageListFromFriend"})
+        this.$router.push({path:"/MessageListFromFriends"})
       },
       toBlogs()
       {
-        this.$router.push({path:"/BlogList"});
+        this.$router.push({path:"/BlogList"})
       },
       setup() {
     this.$http({

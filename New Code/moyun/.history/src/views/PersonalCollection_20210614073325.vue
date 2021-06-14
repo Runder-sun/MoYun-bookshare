@@ -15,7 +15,7 @@
                 <el-table-column
                 fixed
                 sortable
-                prop="blogTitle"
+                prop="name"
                 label="日志名称"
                 style="width: 35%">
                 </el-table-column>
@@ -27,7 +27,7 @@
                 </el-table-column>
                 <el-table-column 
                 sortable           
-                prop="recentFinishTime"
+                prop="date"
                 label="创作日期"
                 style="width: 15%">
                 </el-table-column>
@@ -82,38 +82,51 @@ export default({
       snacktext: '取消收藏成功',
       timeout: 1000,
         tableData: [{
-          blogID:123,
-          blogTitle: "在墨韵收藏的第一篇日志",
+          name: "在墨韵收藏的第一篇日志",
           writer:"AStudent",
-          recentFinishTime: "2021/5/21",
-        },{
-          blogID:123,
-          blogTitle: "在墨韵收藏的第一篇日志",
+          date: "2021/5/21",
+        },
+        {
+          name: "在墨韵收藏的第二篇日志",
+          writer:"ATeacher",
+          date: "2021/5/22",
+        },
+        {
+          name: "在墨韵收藏的第三篇日志",
+          writer:"BStudent",
+          date: "2021/5/23",
+        },
+        {
+          name: "在墨韵收藏的第5篇日志",
           writer:"AStudent",
-          recentFinishTime: "2021/5/21",
-        },{
-          blogID:123,
-          blogTitle: "在墨韵收藏的第一篇日志",
-          writer:"AStudent",
-          recentFinishTime: "2021/5/21",
-        },{
-          blogID:123,
-          blogTitle: "在墨韵收藏的第一篇日志",
-          writer:"AStudent",
-          recentFinishTime: "2021/5/21",
-        },{
-          blogID:123,
-          blogTitle: "在墨韵收藏的第一篇日志",
-          writer:"AStudent",
-          recentFinishTime: "2021/5/21",
-        },{
-          blogID:123,
-          blogTitle: "在墨韵收藏的第一篇日志",
-          writer:"AStudent",
-          recentFinishTime: "2021/5/21",
-        },       
-        ],
-        blogAuthor:[],
+          date: "2021/4/22",
+        },
+        {
+          name: "在墨韵收藏的第4篇日志",
+          writer:"BStudent",
+          date: "2021/5/12",
+        },
+        {
+          name: "在墨韵收藏的第三篇日志12",
+          writer:"BSomeone",
+          date: "2021/5/22",
+        },
+        {
+          name: "在墨韵收藏的第123篇日志",
+          writer:"Anonymous",
+          date: "2021/5/22",
+        },
+        {
+          name: "收藏了很多",
+          writer:"Anoynomous",
+          date: "2021/5/27",
+        },
+        {
+          name: "有用的日志",
+          writer:"Anonymous",
+          date: "2021/5/22",
+        },        
+        ]
       }
     },
     components:{
@@ -130,14 +143,6 @@ export default({
       })
         .then((res) => {
           this.tableData=res.data.blogCollectionBlog;
-          this.blogAuthor=res.data.blogAuthor
-          for(var a in tableData){
-            for (var b in blogAuthor){
-              if(a.authorID===b.userID){
-                a.append(writer,b.username);
-              }
-            }
-          }
         })
         .catch((err) => {
           console.log(err);

@@ -11,7 +11,7 @@
       <v-list-item-content class="justify-center">
         <div class="mx-auto text-center">
           <v-avatar >
-            <img :src="user.userImage" :alt="user.username">
+            <img :src="user.userImage">
           </v-avatar>
           <h3>{{user.username}}</h3>
           <p class="caption mt-1">
@@ -20,9 +20,9 @@
           <v-divider class="my-3"></v-divider>
           <v-btn depressed rounded text @click="toPersonalInfo"> 个人主页 </v-btn>
           <v-divider class="my-3"></v-divider>
-          <v-btn depressed rounded text @click="toMSG"> 消息 </v-btn>
+          <v-btn depressed rounded text> 消息 </v-btn>
           <v-divider class="my-3"></v-divider>
-          <v-btn depressed rounded text @click="toBlogs"> 日志 </v-btn>
+          <v-btn depressed rounded text> 日志 </v-btn>
           <v-divider class="my-3"></v-divider>
           <v-btn depressed rounded text @click="$store.commit('setLogout')"> 退出登录 </v-btn>
         </div>
@@ -36,8 +36,8 @@ export default {
   data:()=>({
     user:{
       username:"zy",
-      userImage:"",
-      signature:"",
+      userImage:"https://cdn.vuetifyjs.com/images/john.jpg",
+      signature:"hhh",
     }
   }),
   created(){
@@ -46,13 +46,6 @@ export default {
   methods: {
     toPersonalInfo(){
         this.$router.push({ path: "/PersonalInfo" });
-      },
-      toMSG(){
-        this.$router.push({path:"/MessageListFromFriend"})
-      },
-      toBlogs()
-      {
-        this.$router.push({path:"/BlogList"});
       },
       setup() {
     this.$http({

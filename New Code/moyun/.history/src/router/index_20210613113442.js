@@ -191,17 +191,17 @@ const routes = [
     component:PersonalCollection,
   },
   {
-    path:"/BlogList/WriteBlog/:id",
+    path:"/BlogList/WriteBlog",
     name:"WriteBlog",
     component:WriteBlog,
   },
   {
-    path:"/BlogList/EditBlog/:id",
+    path:"/BlogList/EditBlog",
     name:"EditBlog",
     component:EditBlog,
   },
   {
-    path:"/BlogList/ScanBlog/:id",
+    path:"/BlogList/ScanBlog",
     name:"ScanBlog",
     component:ScanBlog,
   },
