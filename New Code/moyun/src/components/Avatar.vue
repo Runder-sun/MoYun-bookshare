@@ -54,7 +54,7 @@ export default {
 
   methods: {
     toPersonalInfo(){
-        this.$router.push({ path: "/PersonalInfo" });
+        this.$router.push({ path: "/PersonalInfo/"+this.$store.state.userID});
       },
       toMSG(){
         this.$router.push({path:"/MessageListFromFriend/0"})

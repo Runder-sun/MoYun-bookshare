@@ -173,7 +173,7 @@ const routes = [
     component: EditBookReview,
   },
   {
-    path:"/PersonalInfo",
+    path:"/PersonalInfo/:id",
     name:"PersonalInfo",
     component: PersonalInfo,
   },

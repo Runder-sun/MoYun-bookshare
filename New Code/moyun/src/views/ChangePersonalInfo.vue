@@ -12,16 +12,9 @@
         
             <v-container>
               <v-text-field
-                v-model="password"
-                :rules="passwordRules"
-                label="密码"
-                required
-              ></v-text-field>
-
-              <v-text-field
-                v-model="rePassword"
-                :rules="rePasswordRules"
-                label="确认密码"
+                v-model="username"
+                :rules="usernameRules"
+                label="用户名"
                 required
               ></v-text-field>
 
@@ -54,9 +47,8 @@
               <v-btn
                 :disabled="!valid"
                 class="button"
-                @click="validate"
+                @click="saveChange"
                 large
-                href="/PersonalInfo"
               >
                 <p class="login_">保存更改</p>
               </v-btn>
@@ -75,13 +67,9 @@ import Bar from "../components/Bar.vue";
 export default {
   data: () => ({
     valid: true,
-    password: "",
-    passwordRules: [(v) => !!v || "Password is required"],
-    rePassword: "",
-    rePasswordRules: [
-      (v) => !!v || "Password is required",
-      (v) => v === this.password || "Not equle",
-    ],
+    sex:"",
+    username:"",
+    usernameRules:[(v) => !!v || "username is required"],
     Email: "",
     emailRules: [
       (v) => !!v || "E-mail is required",
@@ -91,16 +79,60 @@ export default {
     birthRules: [(v) => !!v || "birth is required"],
     checkbox: false,
     signature: "",
-	sigRules: [
+	  sigRules: [
 		v => !!v || '签名内容不能为空',
 		v => (v && v.length <= 50) || '书评标题为50个字符以内',
-	],
+	  ],
+    message: "test",
   }),
 
+  created() {
+    this.getInit();
+  },
+
   methods: {
-    validate() {
+    saveChange() {
       this.$refs.form.validate();
+      this.$http({
+        method: "post",
+        url: "/ChangePersonalInfo",
+        data: {
+          username: this.username,
+          sex: this.sex,
+          email: this.email,
+          birthday: this.birth,
+          signature:this.signature,
+        },
+      }).then((res) => {
+        this.message = res.data.message;
+        if (res.data.success) {
+          alert("更改成功");
+          this.$router.push({ path: "/PersonalInfo/"+this.$store.state.userID});
+        }
+      }).catch(err=>{
+        console.log(err)
+      });
     },
+
+     getInit() {
+      this.$http({
+        method: "get",
+        url: "/inspectUser",
+        params: this.this.$store.state.userID,
+      })
+        .then((res) => {
+          if (res.data.success) {
+            this.username = res.data.username;
+            this.email = res.data.email;
+            this.birth = res.data.birthDay;
+            this.signature = res.data.signature;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
     reset() {
       this.$refs.form.reset();
     },

@@ -1,6 +1,7 @@
 <template>
   <div class="BookReview">
     <v-app>
+      <v-img src="../assets/widthPic.jpg" width="100%" height="100%">
       <bar></bar>
       <v-container>
         <v-toolbar flat>
@@ -102,7 +103,7 @@
           </template>
         </v-toolbar>
       </v-container>
-
+      </v-img>
     </v-app>
   </div>
 </template>
