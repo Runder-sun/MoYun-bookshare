@@ -10,8 +10,13 @@
     <v-card>
       <v-list-item-content class="justify-center">
         <div class="mx-auto text-center">
-          <v-avatar >
+          <v-avatar color="brown">
+            <template v-if="user.userImage!=undefined">
             <img :src="user.userImage" :alt="user.username">
+            </template>
+            <template v-else>
+              <span>{{user.userID.substr(0,1)}}</span>
+            </template>
           </v-avatar>
           <h3>{{user.username}}</h3>
           <p class="caption mt-1">

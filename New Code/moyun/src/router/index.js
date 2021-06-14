@@ -32,6 +32,9 @@ import PersonalInfo from "../views/PersonalInfo";
 import ChangePersonalInfo from "../views/ChangePersonalInfo";
 import ChangePictures from "../views/ChangePictures";
 import MyCollections from "../views/MyCollections";
+import Updates from "../views/Updates";
+import MessageListFromFriend from "../views/MessageListFromFriend";
+import BlockPerson from "../views/BlockPerson";
 Vue.use(VueRouter);
 
 const routes = [
@@ -41,54 +44,14 @@ const routes = [
     component: Home,
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
-  {
     path:"/Admin",
     name:"Admin",
     component:Admin,
   },
   {
-    path:"/updates",
-    name:"Updates",
-    component: () =>
-    import("../views/Updates.vue"),
-  },
-  {
-    path:"/message",
-    name:"Message",
-    component: () =>
-    import("../views/Message.vue"),
-  },
-  {
-    path:"/messageListFromFriend",
-    name:"MessageListFromFriend",
-    component: () =>
-    import("../views/MessageListFromFriend.vue"),
-  },
-  {
-    path:"/messageListFromSystem",
-    name:"MessageListFromSystem",
-    component: () =>
-    import("../views/MessageListFromSystem.vue"),
-  },
-  {
-    path:"/recommend",
-    name:"Recommend",
-    component: () =>
-    import("../views/Recommend.vue"),
-  },
-  {
     path:"/updates/block",
     name:"BlockPerson",
-    component: () =>
-    import("../views/BlockPerson.vue"),
+    component: BlockPerson,
   },
     {
     path:"/Login",
@@ -208,32 +171,42 @@ const routes = [
   {
     path:"/Book/CheckBookReview",
     name:"CheckBookReview",
-    component: CheckBookReview
+    component: CheckBookReview,
   },
   {
     path:"/Book/EditBookReview",
     name:"EditBookReview",
-    component: EditBookReview
+    component: EditBookReview,
   },
   {
     path:"/PersonalInfo",
     name:"PersonalInfo",
-    component: PersonalInfo
+    component: PersonalInfo,
   },
   {
     path:"/ChangePersonalInfo",
     name:"ChangePersonalInfo",
-    component: ChangePersonalInfo
+    component: ChangePersonalInfo,
   },
   {
     path:"/ChangePictures",
     name:"ChangePictures",
-    component: ChangePictures
+    component: ChangePictures,
   },
   {
     path:"/MyCollections",
     name:"MyCollections",
-    component: MyCollections
+    component: MyCollections,
+  },
+  {
+    path:"/Updates",
+    name:"Updates",
+    component: Updates,
+  },
+  {
+    path:"/MessageListFromFriend/:id",
+    name:"MessageListFromFriend",
+    component: MessageListFromFriend,
   },
 ];
 
