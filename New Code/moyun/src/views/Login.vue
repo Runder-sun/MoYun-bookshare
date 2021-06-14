@@ -52,7 +52,7 @@
             <v-btn text color="primary" class="register" @click="toRegister"
               >注册</v-btn
             >
-            <v-btn text color="primary" class="forget" href="/ForgetPassword"
+            <v-btn text color="primary" class="forget" :to="'/ForgetPassword'"
               >忘记密码</v-btn
             >
           </v-col>
@@ -75,7 +75,7 @@
                   <v-text-field
                     v-model="password"
                     :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                    :rules="[passwordRules]"
+                    :rules="passwordRules"
                     :type="show2 ? 'text' : 'password'"
                     label="密码"
                     required
@@ -86,7 +86,7 @@
                     v-model="rePassword"
                     :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
                     :type="show3 ? 'text' : 'password'"
-                    :rules="[passwordRules, affirmPass]"
+                    :rules="[affirmPass]"
                     label="确认密码"
                     required
                     @click:append="show3 = !show3"
@@ -123,6 +123,7 @@
 
 <script>
 export default {
+  inject:['reload'],
   data() {
     return {
       valid: true,
@@ -135,7 +136,7 @@ export default {
       idRules: [(v) => !!v || "请填写账号"],
       pass: "",
       password: "",
-      passwordRules: (v) => !!v || "请填写密码",
+      passwordRules: [(v) => !!v || "请填写密码"],
       rePassword: "",
       Email: "",
       emailRules: [
@@ -201,7 +202,7 @@ export default {
         this.snackbar = true;
         if (res.data.success) {
           this.$store.commit("setLogin");
-          this.$router.push({path:"/Login"});
+          this.reload();
           }
       }).catch(err=>{
         console.log(err);

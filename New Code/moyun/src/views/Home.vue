@@ -7,7 +7,7 @@
         router
         background-color="#efeeee"
       >
-        <el-menu-item index="/">首页</el-menu-item>
+        <el-menu-item :to="'/'">首页</el-menu-item>
         <el-submenu index="2">
           <template slot="title">书库</template>
           <el-menu-item index="/Book/BookReview">书评</el-menu-item>
@@ -21,7 +21,7 @@
           <avatar></avatar>
         </template>
         <template v-else>
-          <v-btn class="button" href="/Login">
+          <v-btn class="button" :to="'/Login'">
             <p class="login_">登录</p>
           </v-btn>
         </template>
