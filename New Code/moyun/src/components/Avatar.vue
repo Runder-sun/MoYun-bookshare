@@ -34,7 +34,7 @@
           <v-divider class="my-3"></v-divider>
           <v-btn depressed rounded text @click="toBlogs"> 日志 </v-btn>
           <v-divider class="my-3"></v-divider>
-          <v-btn depressed rounded text @click="$store.commit('setLogout')"> 退出登录 </v-btn>
+          <v-btn depressed rounded text @click="logout"> 退出登录 </v-btn>
         </div>
       </v-list-item-content>
     </v-card>
@@ -63,7 +63,16 @@ export default {
       {
         this.$router.push({path:"/BlogList"});
       },
-      
+      logout(){
+        this.$http({
+          method:'post',
+          url:"/logout"
+        }).then(response=>{
+          if(response.data.success)
+          this.$store.commit('setLogout')
+        })
+        
+      }
   },
 }
 

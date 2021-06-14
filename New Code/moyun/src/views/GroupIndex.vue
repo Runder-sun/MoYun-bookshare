@@ -312,7 +312,7 @@ export default {
             } else {
               this.isMember = false;
             }
-            this.groups = res.data.GroupInfo;
+            this.group = res.data.GroupInfo;
             this.members = res.data.MemberUser;
             this.hotForum = res.data.HotForum;
             this.isCollect = res.data.isCollect;

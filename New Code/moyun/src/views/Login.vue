@@ -103,17 +103,17 @@
           </v-row>
         </v-container>
       </div>
+      <v-snackbar
+        v-model="snackbar"
+        :timeout="3000"
+        color="blue-grey"
+        absolute
+        rounded="pill"
+        top
+      >
+        {{ message }}
+      </v-snackbar>
     </div>
-    <v-snackbar
-      v-model="snackbar"
-      :timeout="3000"
-      color="blue-grey"
-      absolute
-      rounded="pill"
-      top
-    >
-      {{ message }}
-    </v-snackbar>
   </div>
 </template>
 
@@ -127,6 +127,7 @@ export default {
       show2: false,
       show3: false,
       isTop: false,
+      timer: null,
       snackbar: false,
       id: "",
       idRules: [(v) => !!v || "请填写账号"],
@@ -140,7 +141,7 @@ export default {
         (v) => /.+@.+\..+/.test(v) || "邮箱格式不合法",
       ],
       checkbox: false,
-      message: "test",
+      message: "error",
     };
   },
   methods: {
@@ -201,16 +202,20 @@ export default {
         .then((res) => {
           console.log(res.data.message);
           this.message = res.data.message;
-
+          this.snackbar = true;
           if (res.data.success) {
             this.$store.commit("setLogin");
-            this.reload();
+            this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
+          } else {
+            this.clear();
           }
         })
         .catch((err) => {
           console.log(err);
         });
-      this.snackbar = true;
     },
     validate() {
       this.$refs.form.validate();
@@ -218,7 +223,9 @@ export default {
     clear() {
       this.id = "";
       this.password = "";
-      this.message = "";
+      //this.message = "";
+      this.rePassword = "";
+      this.Email = "";
     },
     affirmPass(val) {
       if (val !== this.password) {
