@@ -198,7 +198,7 @@ export default({
       methods: {
       toCollection(){
         this.$router.push({path:"BlogList/PersonalCollection"});
-      },
+      }
       handleDelete(idNum, row) {
         this.$http({
           method:"post",

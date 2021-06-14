@@ -257,9 +257,9 @@ import bar from "../components/Bar.vue"
        bar,
     },
 
-    created(){
-      this.showFriMsg;
-    },
+  //  created(){
+  //    this.showFriMsg;
+   // },
 
     computed: {
         icon () {

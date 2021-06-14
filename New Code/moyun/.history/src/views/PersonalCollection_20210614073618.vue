@@ -112,8 +112,7 @@ export default({
           writer:"AStudent",
           recentFinishTime: "2021/5/21",
         },       
-        ],
-        blogAuthor:[],
+        ]
       }
     },
     components:{
@@ -130,14 +129,6 @@ export default({
       })
         .then((res) => {
           this.tableData=res.data.blogCollectionBlog;
-          this.blogAuthor=res.data.blogAuthor
-          for(var a in tableData){
-            for (var b in blogAuthor){
-              if(a.authorID===b.userID){
-                a.append(writer,b.username);
-              }
-            }
-          }
         })
         .catch((err) => {
           console.log(err);

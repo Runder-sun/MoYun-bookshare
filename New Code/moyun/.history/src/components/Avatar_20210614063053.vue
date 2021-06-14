@@ -48,7 +48,7 @@ export default {
         this.$router.push({ path: "/PersonalInfo" });
       },
       toMSG(){
-        this.$router.push({path:"/MessageListFromFriend"})
+        this.$router.push({path:"/MessageListFromFriends"})
       },
       toBlogs()
       {

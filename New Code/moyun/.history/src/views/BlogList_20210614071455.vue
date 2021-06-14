@@ -80,7 +80,7 @@
         </template>
 
 
-        <v-btn text color="teal" @click="toCollection" rounded> 查看日志收藏 </v-btn>
+        <v-btn text color="teal" href="/BlogList/PersonalCollection" rounded> 查看日志收藏 </v-btn>
         </v-toolbar>
         <template>
         <el-table
@@ -106,9 +106,9 @@
             label="操作"
             style="width: 35%">
             <template slot-scope="scope">
-                <v-btn text color="cyan lighten-1" rounded :to="'/BlogList/ScanBlog/' + scope.row.blogID"> 查看 </v-btn>
-                <v-btn text color="blue darken-1" rounded :to="'/BlogList/EditBlog/' + scope.row.blogID"> 编辑 </v-btn>
-                <v-btn text color="pink lighten-1" rounded @click="handleDelete(scope.row.blogID, scope.row)"> 删除 </v-btn>
+                <v-btn text color="cyan lighten-1" rounded :to="'/BlogList/ScanBlog/' + tableData.$index.blogID"> 查看 </v-btn>
+                <v-btn text color="blue darken-1" rounded > 编辑 </v-btn>
+                <v-btn text color="pink lighten-1" rounded @click="handleDelete(scope.$index.blogID, scope.row)"> 删除 </v-btn>
                 <router-view/>
             </template>
             </el-table-column>
@@ -144,7 +144,8 @@ export default({
           blogID:1,
           blogTitle: "在墨韵的第一天",
           recentFinishTime: "2021/5/21",
-        },{
+        },
+{
           blogID:22,
           blogTitle: "在墨韵的第一天",
           recentFinishTime: "2021/5/21",
@@ -191,14 +192,10 @@ export default({
       },
     },
 
-    created(){
-      this.show;
-    },
+
 
       methods: {
-      toCollection(){
-        this.$router.push({path:"BlogList/PersonalCollection"});
-      },
+
       handleDelete(idNum, row) {
         this.$http({
           method:"post",

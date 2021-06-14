@@ -80,7 +80,7 @@
         </template>
 
 
-        <v-btn text color="teal" @click="toCollection" rounded> 查看日志收藏 </v-btn>
+        <v-btn text color="teal" href="/BlogList/PersonalCollection" rounded> 查看日志收藏 </v-btn>
         </v-toolbar>
         <template>
         <el-table
@@ -191,14 +191,10 @@ export default({
       },
     },
 
-    created(){
-      this.show;
-    },
+
 
       methods: {
-      toCollection(){
-        this.$router.push({path:"BlogList/PersonalCollection"});
-      },
+
       handleDelete(idNum, row) {
         this.$http({
           method:"post",
