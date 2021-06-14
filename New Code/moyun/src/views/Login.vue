@@ -25,23 +25,9 @@
                     @click:append="show1 = !show1"
                   ></v-text-field>
 
-                  <v-btn
-                    :disabled="!valid"
-                    class="button"
-                    @click="Login"
-                    large
-                  >
+                  <v-btn :disabled="!valid" class="button" @click="Login" large>
                     <p class="login_">登录</p>
                   </v-btn>
-                  <v-snackbar
-                    v-model="snackbar"
-                    :timeout="3000"
-                    color="blue-grey"
-                    absolute
-                    rounded="pill"
-                  >
-                    {{ message }}
-                  </v-snackbar>
                 </v-col>
               </v-row>
             </v-container>
@@ -117,13 +103,23 @@
           </v-row>
         </v-container>
       </div>
+      <v-snackbar
+        v-model="snackbar"
+        :timeout="3000"
+        color="blue-grey"
+        absolute
+        rounded="pill"
+        top
+      >
+        {{ message }}
+      </v-snackbar>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  inject:['reload'],
+  inject: ["reload"],
   data() {
     return {
       valid: true,
@@ -131,6 +127,7 @@ export default {
       show2: false,
       show3: false,
       isTop: false,
+      timer: null,
       snackbar: false,
       id: "",
       idRules: [(v) => !!v || "请填写账号"],
@@ -144,7 +141,7 @@ export default {
         (v) => /.+@.+\..+/.test(v) || "邮箱格式不合法",
       ],
       checkbox: false,
-      message: "test",
+      message: "error",
     };
   },
   methods: {
@@ -169,24 +166,28 @@ export default {
           UserID: this.id,
           Password: this.password,
         },
-      }).then((res) => {
-        this.message = res.data.message;
-        this.snackbar = true;
-        if (res.data.success) {
-          this.$store.commit("setLogin");
-          this.$store.commit('setUserID',this.id);
-          if (res.data.isAdmin) {
-            this.$store.commit("setAdmin");
-            this.$router.push({ path: "/Admin" });
-          } else {
-            this.$router.push({ path: "/" });
+      })
+        .then((res) => {
+          this.message = res.data.message;
+
+          if (res.data.success) {
+            this.$store.commit("setLogin");
+            this.$store.commit("setUserID", this.id);
+
+            if (res.data.isAdmin) {
+              this.$store.commit("setAdmin");
+              this.$router.push({ path: "/Admin" });
+            } else {
+              this.$router.push({ path: "/" });
+            }
           }
-        }
-      }).catch(err=>{
-        console.log(err)
-      });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      this.snackbar = true;
     },
-    Register(){
+    Register() {
       this.validate();
       this.$http({
         method: "post",
@@ -194,27 +195,37 @@ export default {
         data: {
           UserID: this.id,
           Password: this.password,
-          rePassword:this.rePassword,
-          Email:this.Email,
+          rePassword: this.rePassword,
+          Email: this.Email,
         },
-      }).then((res) => {
-        this.message = res.data.message;
-        this.snackbar = true;
-        if (res.data.success) {
-          this.$store.commit("setLogin");
-          this.reload();
-          }
-      }).catch(err=>{
-        console.log(err);
       })
+        .then((res) => {
+          console.log(res.data.message);
+          this.message = res.data.message;
+          this.snackbar = true;
+          if (res.data.success) {
+            this.$store.commit("setLogin");
+            this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
+          } else {
+            this.clear();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     validate() {
       this.$refs.form.validate();
     },
-    clear(){
-      this.id="";
-      this.password="";
-      this.message="";
+    clear() {
+      this.id = "";
+      this.password = "";
+      //this.message = "";
+      this.rePassword = "";
+      this.Email = "";
     },
     affirmPass(val) {
       if (val !== this.password) {

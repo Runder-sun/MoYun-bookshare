@@ -14,7 +14,7 @@ import BookWareHouse from "../views/BookWareHouse.vue";
 import SearchBook from "../views/SearchBook.vue";
 import WriteBookReview from "../views/WriteBookReview";
 import CheckBook from "../views/CheckBook";
-import BookRecommmand from "../views/BookRecommand";
+import BookRecommand from "../views/BookRecommand";
 import BookReview from "../views/BookReview";
 import AddBook from "../views/AddBook";
 import EditBook from "../views/EditBook";
@@ -110,7 +110,7 @@ const routes = [
   {
     path:"/Book/BookRecommand",
     name:"BookRecommand",
-    component: BookRecommmand
+    component: BookRecommand
   },
   {
     path:"/Book/BookReview",
