@@ -4,10 +4,7 @@ package com.example.moyun.Controller;
 import com.example.moyun.Entity.*;
 import com.example.moyun.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -96,7 +93,7 @@ public class UserController {
     }
 
     @PostMapping("/ChangePictures")//修改头像和背景（已完成测试）
-    public Map<String,Object> changePictures(HttpServletRequest request,@RequestBody MultipartFile[] files){
+    public Map<String,Object> changePictures(HttpServletRequest request,@RequestParam("files") MultipartFile[] files){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
         String UserID= String.valueOf(session.getAttribute("UserID"));

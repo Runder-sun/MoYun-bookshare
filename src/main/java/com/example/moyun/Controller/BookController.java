@@ -50,7 +50,7 @@ public class BookController {
     }
 
     @PostMapping("/uploadBook")//上传书籍(已完成测试)
-    public Map<String ,Object> uploadBook(HttpServletRequest request, @RequestParam("BookName") String BookName,@RequestParam("Author") String Author,@RequestParam("Publisher") String Publisher,@RequestParam("ISBN") String ISBN,@RequestParam("Kind") String Kind , @RequestBody MultipartFile[] files ){
+    public Map<String ,Object> uploadBook(HttpServletRequest request, @RequestParam("BookName") String BookName,@RequestParam("Author") String Author,@RequestParam("Publisher") String Publisher,@RequestParam("ISBN") String ISBN,@RequestParam("Kind") String Kind , @RequestParam("files") MultipartFile[] files ){
         HttpSession session=request.getSession();
         String UserID=String.valueOf(session.getAttribute("UserID"));
         Map<String,Object> map=new HashMap<>();

@@ -102,7 +102,7 @@ public class GroupController {
     }
 
     @PostMapping("/addGroup")//创建圈子（已完成测试）
-    public Map<String,Object> addGroup(HttpServletRequest request, @RequestParam("GroupName") String GroupName, @RequestParam("Tag") String Tag,@RequestParam("Introduce")String Introduce,@RequestParam("isPrivate") Integer isPrivate,@RequestBody MultipartFile file){
+    public Map<String,Object> addGroup(HttpServletRequest request, @RequestParam("GroupName") String GroupName, @RequestParam("Tag") String Tag,@RequestParam("Introduce")String Introduce,@RequestParam("isPrivate") Integer isPrivate,@RequestParam("file") MultipartFile file){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
         String CreateID= String.valueOf(session.getAttribute("UserID"));
