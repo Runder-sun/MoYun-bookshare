@@ -3,7 +3,7 @@
     <bar></bar>
     <v-navigation-drawer v-model="drawer" absolute bottom temporary right>
       <v-list nav dense two-lines>
-        <v-chip-group column v-if="$store.state.userID == group.createID">
+        <v-chip-group column v-if="$store.state.person.userID == group.createID">
           <v-chip
             v-for="(user,i) in groupApplyUser"
             :key="i"
@@ -30,7 +30,7 @@
             <v-list-item-content>
               <v-list-item-title v-text="member.username"></v-list-item-title>
               <v-btn
-                v-if="$store.state.userID == group.createID"
+                v-if="$store.state.person.userID == group.createID"
                 right
                 @click="removeMember(member)"
                 >删除</v-btn
@@ -140,7 +140,7 @@
 
         <v-card-actions> 
           <v-spacer></v-spacer>
-          <v-btn  icon v-if="$store.state.userID == group.createID" @click="dialog=!dialog">
+          <v-btn  icon v-if="$store.state.person.userID == group.createID" @click="dialog=!dialog">
             <v-icon>
               mdi-circle-edit-outline
             </v-icon>
@@ -152,7 +152,7 @@
         <v-card-title>
           任务版
           <v-spacer></v-spacer>
-          <v-btn icon v-if="$store.state.userID == group.createID" @click="dialog1=!dialog1">
+          <v-btn icon v-if="$store.state.person.userID == group.createID" @click="dialog1=!dialog1">
             <v-icon>
               mdi-clipboard-plus-outline
             </v-icon>
@@ -307,7 +307,7 @@ export default {
       })
         .then((res) => {
           if (res.data.success) {
-            if (isGroupMember(this.$store.state.userID, res.data.MemberList)) {
+            if (isGroupMember(this.$store.state.person.userID, res.data.MemberList)) {
               this.isMember = true;
             } else {
               this.isMember = false;

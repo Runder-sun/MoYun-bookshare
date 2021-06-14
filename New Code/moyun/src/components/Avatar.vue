@@ -2,25 +2,30 @@
   <v-menu bottom min-width="200px" round offset-y>
     <template v-slot:activator="{ on }">
       <v-btn icon v-on="on">
-        <v-avatar  size="40">
-          <img :src="user.userImage">
+        <v-avatar  size="40" color="#96CDCD">
+          <template v-if="$store.state.person.userImage!==''">
+            <img :src="$store.state.person.userImage">
+            </template>
+            <template v-else>
+              <span>{{$store.state.person.userID.substr(0,1)}}</span>
+            </template>
         </v-avatar>
       </v-btn>
     </template>
     <v-card>
       <v-list-item-content class="justify-center">
         <div class="mx-auto text-center">
-          <v-avatar color="brown">
-            <template v-if="user.userImage!=undefined">
-            <img :src="user.userImage" :alt="user.username">
+          <v-avatar color="#96CDCD">
+            <template v-if="user.userImage!==''">
+            <img :src="user.userImage">
             </template>
             <template v-else>
-              <span>{{user.userID.substr(0,1)}}</span>
+              <span>{{$store.state.person.userID.substr(0,1)}}</span>
             </template>
           </v-avatar>
-          <h3>{{user.username}}</h3>
+          <h3>{{$store.state.person.username}}</h3>
           <p class="caption mt-1">
-            {{user.signature}}
+            {{$store.state.person.signature}}
           </p>
           <v-divider class="my-3"></v-divider>
           <v-btn depressed rounded text @click="toPersonalInfo"> 个人主页 </v-btn>
@@ -43,11 +48,10 @@ export default {
       username:"zy",
       userImage:"",
       signature:"",
+      userID:"123",
     }
   }),
-  created(){
-    this.setup()
-  },
+
   methods: {
     toPersonalInfo(){
         this.$router.push({ path: "/PersonalInfo" });
@@ -59,19 +63,8 @@ export default {
       {
         this.$router.push({path:"/BlogList"});
       },
-      setup() {
-    this.$http({
-      method:"get",
-      url:"/PersonnalInfo",
-    }).then(res=>{
-      if (res.data.success){
-        this.user=res.data.personalInfo
-      }
-    }).catch(err=>{
-      console.log(err)
-    })
+      
   },
-  },
-  
 }
+
 </script>
