@@ -8,9 +8,9 @@
 
           <v-spacer></v-spacer>
 
-          <v-btn text color="cyan" :to="'/Group/CreateGroup'"> 创建圈子 </v-btn>
+          <v-btn text color="cyan" to="/Group/CreateGroup"> 创建圈子 </v-btn>
 
-          <v-btn text color="deep-orange" :to="'/Group/AllGroup'">
+          <v-btn text color="deep-orange" to="/Group/AllGroup">
             所有圈子
           </v-btn>
 
@@ -20,7 +20,6 @@
               <v-tab>我的圈子</v-tab>
 
               <v-tab-item>
-                <v-lazy>
                   <v-container class="pa-4 text-center">
                     <v-row class="fill-height" align="center" justify="center">
                       <template v-for="(group, i) in hotGroups">
@@ -32,14 +31,14 @@
                               width="300"
                               :to="'/Group/GroupIndex/' + group.groupID"
                             >
-                              <v-img :src="group.img" height="225px">
+                              <v-img :src="group.groupImage" height="225px">
                                 <v-card-title class="title white--text">
                                   <v-row
                                     class="fill-height flex-column"
                                     justify="space-between"
                                   >
                                     <p class="mt-4 subheading text-left">
-                                      {{ group.title }}
+                                      {{ group.groupName }}
                                     </p>
 
                                     <div>
@@ -51,7 +50,7 @@
                                           text-left
                                         "
                                       >
-                                        {{ group.text }}
+                                        {{ group.tag }}
                                       </p>
                                       <p
                                         class="
@@ -60,7 +59,7 @@
                                           text-left
                                         "
                                       >
-                                        {{ group.subtext }}
+                                        {{ group.introduce }}
                                       </p>
                                     </div>
                                   </v-row>
@@ -72,11 +71,9 @@
                       </template>
                     </v-row>
                   </v-container>
-                </v-lazy>
               </v-tab-item>
 
               <v-tab-item>
-                <v-lazy>
                   <v-container class="pa-4 text-center">
                     <v-row class="fill-height" align="center" justify="center">
                       <template v-for="(group, i) in myGroups">
@@ -88,14 +85,14 @@
                               width="300"
                               :to="'/Group/GroupIndex/' + group.groupID"
                             >
-                              <v-img :src="group.img" height="225px">
+                              <v-img :src="group.groupImage" height="225px">
                                 <v-card-title class="title white--text">
                                   <v-row
                                     class="fill-height flex-column"
                                     justify="space-between"
                                   >
                                     <p class="mt-4 subheading text-left">
-                                      {{ group.title }}
+                                      {{ group.groupName }}
                                     </p>
 
                                     <div>
@@ -107,7 +104,7 @@
                                           text-left
                                         "
                                       >
-                                        {{ group.text }}
+                                        {{ group.tag }}
                                       </p>
                                       <p
                                         class="
@@ -116,7 +113,7 @@
                                           text-left
                                         "
                                       >
-                                        {{ group.subtext }}
+                                        {{ group.introduce }}
                                       </p>
                                     </div>
                                   </v-row>
@@ -128,7 +125,6 @@
                       </template>
                     </v-row>
                   </v-container>
-                </v-lazy>
               </v-tab-item>
             </v-tabs>
           </template>
@@ -143,64 +139,7 @@ import Bar from "../components/Bar.vue";
 export default {
   data: () => ({
     tab:null,
-    hotGroups: [
-      {
-        groupID: 1,
-        title: "Rock",
-        text: "Greatest Rock Hits",
-        subtext: "Lose yourself in rock tunes.",
-        img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
-      },
-      {
-        groupID: 2,
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        groupID: 3,
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        groupID: 4,
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        groupID: 5,
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        groupID: 6,
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        groupID: 7,
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        groupID: 8,
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-    ],
+    hotGroups: [],
     myGroups: [],
   }),
   components: {

@@ -11,7 +11,7 @@
       <v-list-item-content class="justify-center">
         <div class="mx-auto text-center">
           <v-avatar >
-            <img :src="user.userImage">
+            <img :src="user.userImage" :alt="user.username">
           </v-avatar>
           <h3>{{user.username}}</h3>
           <p class="caption mt-1">
@@ -36,8 +36,8 @@ export default {
   data:()=>({
     user:{
       username:"zy",
-      userImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-      signature:"hhh",
+      userImage:"",
+      signature:"",
     }
   }),
   created(){
