@@ -23,30 +23,32 @@
               <div class="demo-image__preview">
               </div>
             </div>
-            <div class="bookinforight"
-            >
+            <div class="bookinforight">
               <!-- 不应该用el-link控件，应该直接就可以显示了 -->
               <v-row>
-                <el-image
+                                <el-image
                   style="width: 200px; height: 200px"
                   :src="bookinfourl"
                   :preview-src-list="bookinfosrcList"
-                  class="imgAlign"
                 >
                 </el-image>
                 <v-col 
                 align="center"
                 class="mx-0">
                 <div >图书名称：图书名称</div>
-                  <div class="text ms-4">
+                  <div class="grey--text ms-4">
                     作者
                 </div>
-                <div class="my-4 text-subtitle-1">图书分类</div>
-                <div class="my-4 text-subtitle-1 ">出版社</div>
+                <div class="my-4 text-subtitle-1">
+                  图书分类
+                </div>
                 <v-card-subtitle>ISBN号：ISBN号</v-card-subtitle>
+                <div class="my-4 text-subtitle-1 ">
+                  出版社
+                </div>
                 <div class="my-4 text-subtitle-1">这里是简介</div>
                 </v-col>
-              </v-row>
+                            </v-row>
             </div>
             </v-col>
           </div>
@@ -228,38 +230,20 @@ export default {
 }
 
 
-.bookinfoleft {
-  font-size: 16px;
-  width: 30%;
-  position: absolute;
-  display: flex;
-  display: -webkit-flex;
-  align-items: center;
-  justify-content: center;
-  color: #008cff;
-  border-right: 1px solid #ebedf0;
-}
-
 .bookinfoleft img {
   width: 100%;
 }
 
 .bookinforight {
-  display:flex;
-  flex-direction: row;
-  align-items: center;
   float: right;
   width: 69%;
   font-size: 25px;
 }
 /*lxt美化部分*/ 
 .comment{
-  margin-top:80px;
+  margin-top:50px;
 }
 .pages{
   text-align: center; 
-}
-.imgAlign{
-  vertical-align: middle;
 }
 </style>

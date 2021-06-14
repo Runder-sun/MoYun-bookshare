@@ -254,7 +254,7 @@ export default {
 }
 /*lxt美化部分*/ 
 .comment{
-  margin-top:80px;
+  margin-top:50px;
 }
 .pages{
   text-align: center; 

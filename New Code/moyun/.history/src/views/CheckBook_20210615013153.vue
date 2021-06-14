@@ -23,8 +23,7 @@
               <div class="demo-image__preview">
               </div>
             </div>
-            <div class="bookinforight"
-            >
+            <div class="bookinforight">
               <!-- 不应该用el-link控件，应该直接就可以显示了 -->
               <v-row>
                 <el-image
@@ -245,16 +244,13 @@ export default {
 }
 
 .bookinforight {
-  display:flex;
-  flex-direction: row;
-  align-items: center;
   float: right;
   width: 69%;
   font-size: 25px;
 }
 /*lxt美化部分*/ 
 .comment{
-  margin-top:80px;
+  margin-top:50px;
 }
 .pages{
   text-align: center; 

@@ -261,5 +261,6 @@ export default {
 }
 .imgAlign{
   vertical-align: middle;
+  margin-left:70px;
 }
 </style>

@@ -5,7 +5,7 @@
       <v-container>
         <v-container>
           <v-card>
-          <v-toolbar class="elevation-0" >
+          <v-toolbar class="elevation-0" width="400px">
           <v-toolbar-title>基本信息</v-toolbar-title>
           <v-spacer></v-spacer>
           <el-button type="primary" round @click="toBookRecommand">推荐</el-button>
@@ -21,32 +21,22 @@
             <v-col>
             <div class="bookinfoleft">
               <div class="demo-image__preview">
-              </div>
-            </div>
-            <div class="bookinforight"
-            >
-              <!-- 不应该用el-link控件，应该直接就可以显示了 -->
-              <v-row>
                 <el-image
                   style="width: 200px; height: 200px"
                   :src="bookinfourl"
                   :preview-src-list="bookinfosrcList"
-                  class="imgAlign"
                 >
                 </el-image>
-                <v-col 
-                align="center"
-                class="mx-0">
-                <div >图书名称：图书名称</div>
-                  <div class="text ms-4">
-                    作者
-                </div>
-                <div class="my-4 text-subtitle-1">图书分类</div>
-                <div class="my-4 text-subtitle-1 ">出版社</div>
-                <v-card-subtitle>ISBN号：ISBN号</v-card-subtitle>
-                <div class="my-4 text-subtitle-1">这里是简介</div>
-                </v-col>
-              </v-row>
+              </div>
+            </div>
+            <div class="bookinforight">
+              <!-- 不应该用el-link控件，应该直接就可以显示了 -->
+              图书名称:<el-link type="info" disabled>图书名称</el-link><br />
+              图书分类:<el-link type="info" disabled>图书分类</el-link><br />
+              作者:<el-link type="info" disabled>作者</el-link><br />
+              ISBN号: <el-link type="info" disabled>ISBN号</el-link><br />
+              出版社: <el-link type="info" disabled>出版社</el-link><br />
+              简介: <el-link type="info" disabled>简介</el-link>
             </div>
             </v-col>
           </div>
@@ -227,7 +217,6 @@ export default {
   height: 200px;
 }
 
-
 .bookinfoleft {
   font-size: 16px;
   width: 30%;
@@ -245,21 +234,15 @@ export default {
 }
 
 .bookinforight {
-  display:flex;
-  flex-direction: row;
-  align-items: center;
   float: right;
   width: 69%;
   font-size: 25px;
 }
 /*lxt美化部分*/ 
 .comment{
-  margin-top:80px;
+  margin-top:50px;
 }
 .pages{
   text-align: center; 
-}
-.imgAlign{
-  vertical-align: middle;
 }
 </style>
