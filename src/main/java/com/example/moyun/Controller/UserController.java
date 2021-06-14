@@ -142,9 +142,11 @@ public class UserController {
             List<Blog> blogs=new ArrayList<>();
             List<Book> books=new ArrayList<>();
             List<User> users=new ArrayList<>();
+            List<User> users1=new ArrayList<>();
             if(blogCollection.size()!=0){
                 for (BlogCollection blogCollection1:blogCollection){
                     blogs.add(blogService.getBlogByBlogID(blogCollection1.getBlogID()));
+                    users1.add(userService.getUserByUserID(blogService.getBlogByBlogID(blogCollection1.getBlogID()).getAuthorID()));
                 }
             }
             if(bookCollection.size()!=0){
@@ -159,6 +161,7 @@ public class UserController {
             }
             map.put("blogCollection",blogCollection);
             map.put("blogCollectionBlog",blogs);
+            map.put("blogAuthor",users1);
             map.put("bookCollection",bookCollection);
             map.put("bookCollectionBook",books);
             map.put("bookReviewCollection",bookReviewCollection);
