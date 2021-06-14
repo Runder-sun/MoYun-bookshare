@@ -12,7 +12,7 @@
           :before-upload="beforeAvatarUpload"
         >
           <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i> </el-upload
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i></el-upload
         ><v-form>
           <v-container fluid>
                 <v-col cols="12" >

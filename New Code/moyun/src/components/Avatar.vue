@@ -35,7 +35,7 @@
 export default {
   methods: {
     toPersonalInfo(){
-        this.$router.push({ path: "/PersonalInfo" });
+        this.$router.push({ path: "/PersonalInfo/"+this.$store.state.userID});
       },
   },
   setup() {
