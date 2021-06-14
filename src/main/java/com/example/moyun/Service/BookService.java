@@ -29,7 +29,7 @@ public interface BookService {
     void addBook(Book book);
 
     //更新书籍信息
-    void updateBook(Integer BookID,String BookName,String Author,String Publisher,String ISBN,String Kind);
+    void updateBook(Integer BookID,String BookName,String Author,String Publisher,String ISBN,String Kind,String Introduce);
 
     //收藏图书
     void collectBook(BookCollection bookCollection);

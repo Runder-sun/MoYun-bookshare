@@ -50,7 +50,7 @@ public class BookController {
     }
 
     @PostMapping("/uploadBook")//上传书籍(已完成测试)
-    public Map<String ,Object> uploadBook(HttpServletRequest request, @RequestParam("BookName") String BookName,@RequestParam("Author") String Author,@RequestParam("Publisher") String Publisher,@RequestParam("ISBN") String ISBN,@RequestParam("Kind") String Kind , @RequestParam("files") MultipartFile[] files ){
+    public Map<String ,Object> uploadBook(HttpServletRequest request, @RequestParam("BookName") String BookName,@RequestParam("Author") String Author,@RequestParam("Publisher") String Publisher,@RequestParam("ISBN") String ISBN,@RequestParam("Kind") String Kind ,@RequestParam("Introduce") String Introduce, @RequestParam("files") MultipartFile[] files ){
         HttpSession session=request.getSession();
         String UserID=String.valueOf(session.getAttribute("UserID"));
         Map<String,Object> map=new HashMap<>();
@@ -79,6 +79,7 @@ public class BookController {
                 book.setPublisher(Publisher);
                 book.setBookImage(BookImage);
                 book.setUserID(UserID);
+                book.setIntroduce(Introduce);
                 bookService.addBook(book);
                 map.put("success",true);
                 return map;
@@ -159,9 +160,10 @@ public class BookController {
         String Publisher=umap.get("Publisher");
         String ISBN=umap.get("ISBN");
         String Kind=umap.get("Kind");
+        String Introduce=umap.get("Introduce");
         Map<String,Object> map=new HashMap<>();
         try {
-            bookService.updateBook(BookID,BookName,Author,Publisher,ISBN,Kind);
+            bookService.updateBook(BookID,BookName,Author,Publisher,ISBN,Kind,Introduce);
             map.put("success",true);
         }
         catch (Exception e){

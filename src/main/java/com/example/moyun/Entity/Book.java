@@ -26,4 +26,5 @@ public class Book {
     private String BookImage;
     private Integer ReadTimes;
     private String UserID;
+    private String Introduce;
 }

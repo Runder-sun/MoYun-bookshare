@@ -49,8 +49,8 @@ public class BookServiceImpl implements BookService {
     public void addBook(Book book){bookDao.addBook(book);}
 
     @Override
-    public void updateBook(Integer BookID,String BookName,String Author,String Publisher,String ISBN,String Kind){
-        bookDao.updateBook(BookID,BookName,Author,Publisher,ISBN,Kind);
+    public void updateBook(Integer BookID,String BookName,String Author,String Publisher,String ISBN,String Kind,String Introduce){
+        bookDao.updateBook(BookID,BookName,Author,Publisher,ISBN,Kind,Introduce);
     }
 
     @Override

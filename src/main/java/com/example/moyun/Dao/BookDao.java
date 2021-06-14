@@ -25,7 +25,7 @@ public interface BookDao {
 
     void addBook(Book book);
 
-    void updateBook(Integer BookID,String BookName,String Author,String Publisher,String ISBN,String Kind);
+    void updateBook(Integer BookID,String BookName,String Author,String Publisher,String ISBN,String Kind,String Introduce);
 
     void collectBook(BookCollection bookCollection);
 

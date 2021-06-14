@@ -31,12 +31,12 @@
         where book_name like '%${BookName}%' and kind=#{Tag}
     </select>
     <insert id="addBook" parameterType="Book">
-        insert into book_info(book_name,author,publisher,ISBN,kind,link,book_image,userid)
-        values(#{BookName},#{Author},#{Publisher},#{ISBN},#{Kind},#{Link},#{BookImage},#{UserID})
+        insert into book_info(book_name,author,publisher,ISBN,kind,link,book_image,userid,introduce)
+        values(#{BookName},#{Author},#{Publisher},#{ISBN},#{Kind},#{Link},#{BookImage},#{UserID},#{Introduce})
     </insert>
     <update id="updateBook" parameterType="Book">
         update book_info
-        set book_name=#{BookName},author=#{Author},publisher=#{Publisher},ISBN=#{ISBN},kind=#{Kind}
+        set book_name=#{BookName},author=#{Author},publisher=#{Publisher},ISBN=#{ISBN},kind=#{Kind},introduce=#{Introduce}
         where bookid=#{BookID}
     </update>
     <insert id="collectBook" parameterType="BookCollection">
