@@ -3,50 +3,62 @@
     <bar></bar>
     <v-container>
       <div class="card">
-          <div class="front">
-        <el-upload
-          class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload"
-        >
-          <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i></el-upload
-        ><v-form>
-          <v-container fluid>
-                <v-col cols="12" >
-                    <v-text-field
-                      v-model="groupName"
-                      color="blue darken-2"
-                      label="圈子名称"
-                      required
-                    ></v-text-field>
-                  <v-textarea 
-                  v-model="groupIntroduce"
-                  color="teal">
-                    <template v-slot:label>
-                      <div>圈子简介</div>
-                    </template>
-                  </v-textarea>
-                  <v-checkbox v-model="checkbox" label="私密"></v-checkbox>
-                    <p>圈子标签</p>
-                    <v-row justify="center">
-                    <v-chip-group  active-class="primary--text">
-                      <v-chip v-for="tag in tags" :key="tag" @click="choosedTag=tag.Tag" > {{tag.Tag}} </v-chip>
-                    </v-chip-group>
-                    </v-row>
-                </v-col>
-                <v-btn
-                class="button"
-                large
-              >
+        <div class="front">
+          <el-upload
+            class="avatar-uploader"
+            action="up"
+            drag
+            :auto-upload="false"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="createGroup"
+          >
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i> </el-upload
+          ><v-form>
+            <v-container fluid>
+              <v-col cols="12">
+                <v-text-field
+                  v-model="groupName"
+                  color="blue darken-2"
+                  label="圈子名称"
+                  required
+                ></v-text-field>
+                <v-textarea v-model="groupIntroduce" color="teal">
+                  <template v-slot:label>
+                    <div>圈子简介</div>
+                  </template>
+                </v-textarea>
+                <v-checkbox v-model="checkbox" label="私密"></v-checkbox>
+                <p>圈子标签</p>
+                <v-row justify="center">
+                  <v-chip-group active-class="primary--text">
+                    <v-chip
+                      v-for="(tag, i) in tags"
+                      :key="i"
+                      @click="choosedTag = tag.Tag"
+                    >
+                      {{ tag.Tag }}
+                    </v-chip>
+                  </v-chip-group>
+                </v-row>
+              </v-col>
+              <v-btn class="button" large>
                 <p class="create">创建</p>
               </v-btn>
-          </v-container>
-        </v-form>
-        
-      </div>
+            </v-container>
+          </v-form>
+        </div>
+        <v-snackbar
+        v-model="snackbar"
+        :timeout="3000"
+        color="blue-grey"
+        absolute
+        rounded="pill"
+        top
+      >
+        {{ message }}
+      </v-snackbar>
       </div>
     </v-container>
   </div>
@@ -58,43 +70,52 @@ import bar from "../components/Bar.vue";
 export default {
   data: () => ({
     Private: false,
-    choosedTag:"",
+    choosedTag: "",
     imageUrl: "",
-    groupIntroduce:"",
-    groupName:"",
-    image:null,
-    checkbox:false,
-    isPrivate:0,
+    groupIntroduce: "",
+    groupName: "",
+    image: null,
+    checkbox: false,
+    isPrivate: 0,
+    snackbar: false,
+    message: "error",
+    timer: null,
+    form:{
+      GroupName: "",
+      Tag: "",
+      Introduce: "",
+      isPrivate: 0,
+    },
     tags: [
       {
-        Tag:"文学",
+        Tag: "文学",
       },
       {
-        Tag:"科幻",
+        Tag: "科幻",
       },
       {
-        Tag:"侦探",
+        Tag: "侦探",
       },
       {
-        Tag:"纪实",
+        Tag: "纪实",
       },
       {
-        Tag:"儿童",
+        Tag: "儿童",
       },
       {
-        Tag:"艺术",
+        Tag: "艺术",
       },
       {
-        Tag:"历史",
+        Tag: "历史",
       },
       {
-        Tag:"武侠小说",
+        Tag: "武侠小说",
       },
       {
         Tag: "地理",
       },
       {
-        Tag:"IT",
+        Tag: "IT",
       },
     ],
   }),
@@ -103,7 +124,6 @@ export default {
   },
   methods: {
     handleAvatarSuccess(res, file) {
-      this.image = file;
       this.imageUrl = URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {
@@ -111,34 +131,47 @@ export default {
       const isLt2M = file.size / 1024 / 1024 < 2;
 
       if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
+        this.message="上传头像图片只能是 JPG 格式!"
+        this.snackbar = true
       }
       if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
+        this.message="上传头像图片大小不能超过 2MB!"
+        this.snackbar = true
       }
-      
+
       return isJPG && isLt2M;
     },
-    createGroup(){
-      if(this.checkbox) this.isPrivate=1;
-      else this.isPrivate=0;
+    createGroup(file) {
+      this.beforeAvatarUpload(file)
+      if (this.checkbox) this.isPrivate = 1;
+      else this.isPrivate = 0;
+      let fd = new FormData();
+      fd.append('file', file)
+      fd.append('GroupName',this.groupname)
+      fd.append('Tag',this.choosedTag)
+      fd.append('Introduce',this.groupIntroduce)
+      fd.append('isPrivate',this.isPrivate)
       this.$http({
         method: "post",
-        url: "/Login",
-        data: {
-          GroupName: this.groupname,
-          Tag: this.choosedTag,
-          Introduce:this.groupIntroduce,
-          file:this.image,
-          isPrivate:this.isPrivate
-        },
-    }).then(res=>{
-      if(res.data.success){
-        this.$router.push({path:"/Group/GroupList"});
-      }
-    });
-  }
-},
+        url: "/addGroup",
+        data: fd,
+      }).then((res) => {
+        if (res.data.success) {
+          this.message="创建成功！"
+          this.snackbar=true
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.$router.push({ path: "/Group/GroupList" });
+            }, 1000);
+        }else{
+          this.message="创建失败！"
+          this.snackbar=true
+        }
+      });
+      this.message="创建成功！"
+          this.snackbar=true
+    },
+  },
 };
 </script>
 
@@ -183,7 +216,7 @@ export default {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  top:10px;
+  top: 10px;
 }
 .avatar-uploader .el-upload:hover {
   border-color: #409eff;

@@ -1,218 +1,106 @@
 <template>
-<div class="forumhome">
-  <v-app>
-  <bar></bar>
-    <v-container>
-    <v-toolbar flat>
-      <v-toolbar-title>讨论</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-        <el-button type="text" @click="open">发起讨论</el-button>
-        <template v-slot:extension>
-        <v-tabs v-model="tab" >
-          <v-tab>按时间排序</v-tab>
-          <v-tab>按热度排序</v-tab>
-
-          <v-tab-item>
-              <v-card flat>
-            <v-container class="pa-4 text-center">
-            <v-row class="fill-height" align="center" justify="center">
-              <template v-for="(group, i) in groups">
-                <v-col :key="i" cols="auto"  >
-                  <v-hover v-slot="{ hover }">
-                    <v-card
-                      :elevation="hover ? 24 : 2"
-                      :class="{ 'on-hover': hover }"
-                      href="/Group/Forum/Forum"
-                      height=60px
-                    >
-                      <v-img :src="group.img" height="60px">
-                        <v-card-title class="title white--text">
-                          <v-row
-                            class="fill-height flex-column"
-                            justify="space-between"
-                          >
-                            <p class="mt-4 subheading text-left">
-                              {{ group.title }}
-                            </p>
-
-                            <div>
-                              <p
-                                class="
-                                  ma-0
-                                  body-1
-                                  font-weight-bold font-italic
-                                  text-left
-                                "
-                              >
-                                {{ group.text }}
-                              </p>
-                              <p
-                                class="
-                                  caption
-                                  font-weight-medium font-italic
-                                  text-left
-                                "
-                              >
-                                {{ group.subtext }}
-                              </p>
-                            </div>
-
-                          </v-row>
-                        </v-card-title>
-                      </v-img>
-                    </v-card>
-                  </v-hover>
+  <div class="forumhome">
+    <v-row justify="center">
+      <v-dialog v-model="dialog" persistent max-width="600px">
+        <v-card>
+          <v-card-title>
+            <span class="text-h5">发起讨论</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12" >
+                  <v-text-field
+                    v-model="newTopic"
+                    color="blue darken-2"
+                    label="讨论主题"
+                    required
+                  ></v-text-field>
                 </v-col>
-              </template>
-            </v-row>
-          </v-container>
-              </v-card>
-          </v-tab-item>
-          
-          <v-tab-item>
-            <v-container class="pa-4 text-center">
-            <v-row class="fill-height" align="center" justify="center">
-              <template v-for="(group, i) in groups">
-                <v-col :key="i" cols="auto"  >
-                  <v-hover v-slot="{ hover }">
-                    <v-card
-                      :elevation="hover ? 24 : 2"
-                      :class="{ 'on-hover': hover }"
-                      height=60px
-                      
-                    >
-                      <v-img :src="group.img" height="60px">
-                        <v-card-title class="title white--text">
-                          <v-row
-                            class="fill-height flex-column"
-                            justify="space-between"
-                          >
-                            <p class="mt-4 subheading text-left">
-                              {{ group.title }}
-                            </p>
-
-                            <div>
-                              <p
-                                class="
-                                  ma-0
-                                  body-1
-                                  font-weight-bold font-italic
-                                  text-left
-                                "
-                              >
-                                {{ group.text }}
-                              </p>
-                              <p
-                                class="
-                                  caption
-                                  font-weight-medium font-italic
-                                  text-left
-                                "
-                              >
-                                {{ group.subtext }}
-                              </p>
-                            </div>
-
-                          </v-row>
-                          
-                        </v-card-title>
-                      </v-img>
-                    </v-card>
-                  </v-hover>
-                </v-col>
-              </template>
-            </v-row>
-            
-          </v-container>
-          </v-tab-item>
-        </v-tabs>
-        </template>
-      </v-toolbar>
+              </v-row>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="addForum">
+              发起
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
+    <v-app>
+      <bar></bar>
       
-    </v-container>
-  </v-app>
-  
-</div>
+      <v-container>
+        <v-card>
+          <v-toolbar flat>
+            <v-toolbar-title>讨论区</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn text @click="dialog=!dialog">发起讨论</v-btn>
+          </v-toolbar>
+          <v-card flat>
+            <v-container class="pa-4 text-center">
+              <v-row align="center" justify="center">
+                <template v-for="(forum, i) in forums">
+                  <v-col :key="i" cols="12">
+                    <v-hover v-slot="{ hover }">
+                      <v-card
+                        :elevation="hover ? 24 : 2"
+                        :class="{ 'on-hover': hover }"
+                        :to="'/Group/Forum/Forum/' + forum.forumID"
+                      >
+                        <v-card-title >
+                          <v-row
+                            class="fill-height flex-column"
+                            justify="space-between"
+                          >
+                            <p class="mt-4 subheading text-left">
+                              {{ forum.topic }}
+                            </p>
+                          </v-row>
+                        </v-card-title>
+                      </v-card>
+                    </v-hover>
+                  </v-col>
+                </template>
+              </v-row>
+            </v-container>
+          </v-card>
+        </v-card>
+      </v-container>
+    </v-app>
+  </div>
 </template>
 
-<script >
-import Bar from "../components/Bar.vue"
-export default ({
-    methods: {
-      open() {
-        this.$prompt('请输入讨论名称', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          showInput:true,
-          inputValue:"讨论内容",
-        }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '提交成功'
-          });
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '取消输入'
-          });       
-        });
-      }
+<script>
+import Bar from "../components/Bar.vue";
+export default {
+  methods: {
+    addForum(){
+      this.dialog=false;
+      this.$http({
+        method: "post",
+        url:"/addForum",
+        data: {
+          GroupID:this.$route.params.id,
+          Topic:this.newTopic,
+        }
+      });
+      this.newTopic="";
     },
+  },
   data: () => ({
-    groups: [
+    dialog:false,
+    newTopic:"",
+    forums: [
       {
-        title: "Rock",
-        text: "Greatest Rock Hits",
-        subtext: "Lose yourself in rock tunes.",
-        img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
-      },
-      {
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
-      },
-      {
-        title: "Mellow Moods",
-        text: "Ambient Bass",
-        subtext: "Chill beats to mellow you out.",
-        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+        topic: "Rock",
       },
     ],
   }),
-    components: {
-        Bar
-    }
-})
+  components: {
+    Bar,
+  },
+};
 </script>

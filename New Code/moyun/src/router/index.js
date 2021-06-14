@@ -2,36 +2,39 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 
-const Admin = () => import("../views/Admin.vue");
-const Login = () => import("../views/Login.vue");
-const Register = () => import("../views/Register.vue");
-const ForgetPassword = () => import("../views/ForgetPassword.vue");
-const GroupList = () => import("../views/GroupList.vue");
-const GroupIndex = () => import("../views/GroupIndex.vue");
-const CreatGroup = () => import("../views/CreateGroup.vue");
-const AllGroup = () => import("../views/AllGroup.vue");
-const BookWareHouse = () => import("../views/BookWareHouse.vue");
-const SearchBook = () => import("../views/SearchBook.vue");
-const WriteBookReview = () => import("../views/WriteBookReview");
-const CheckBook = () => import("../views/CheckBook");
-const BookRecommmand = () => import("../views/BookRecommand");
-const BookReview = () =>import("../views/BookReview");
-const AddBook = () =>import("../views/AddBook");
-const EditBook = () =>import("../views/EditBook")
-const Reading = () =>import("../views/Reading")
-const Forum = () => import("../views/Forum.vue");
-const ForumHome = () => import("../views/ForumHome.vue");
-const BlogList = () => import("../views/BlogList.vue");
-const WriteBlog = () => import("../views/WriteBlog.vue");
-const PersonalCollection = () => import("../views/PersonalCollection.vue");
-const EditBlog = () => import("../views/EditBlog.vue");
-const ScanBlog = () => import("../views/ScanBlog.vue");
-const CheckBookReview = () => import("../views/CheckBookReview");
-const EditBookReview = () => import("../views/EditBookReview");
-const PersonalInfo = () => import("../views/PersonalInfo");
-const ChangePersonalInfo = () => import("../views/ChangePersonalInfo");
-const ChangePictures = () => import("../views/ChangePictures");
-const MyCollections = () => import("../views/MyCollections")
+import Admin from "../views/Admin.vue";
+import Login from "../views/Login.vue";
+import Register from "../views/Register.vue";
+import ForgetPassword from "../views/ForgetPassword.vue";
+import GroupList from "../views/GroupList.vue";
+import GroupIndex from "../views/GroupIndex.vue";
+import CreatGroup from "../views/CreateGroup.vue";
+import AllGroup from "../views/AllGroup.vue";
+import BookWareHouse from "../views/BookWareHouse.vue";
+import SearchBook from "../views/SearchBook.vue";
+import WriteBookReview from "../views/WriteBookReview";
+import CheckBook from "../views/CheckBook";
+import BookRecommand from "../views/BookRecommand";
+import BookReview from "../views/BookReview";
+import AddBook from "../views/AddBook";
+import EditBook from "../views/EditBook";
+import Reading from "../views/Reading";
+import Forum from "../views/Forum.vue";
+import ForumHome from "../views/ForumHome.vue";
+import BlogList from "../views/BlogList.vue";
+import WriteBlog from "../views/WriteBlog.vue";
+import PersonalCollection from "../views/PersonalCollection.vue";
+import EditBlog from "../views/EditBlog.vue";
+import ScanBlog from "../views/ScanBlog.vue";
+import CheckBookReview from "../views/CheckBookReview";
+import EditBookReview from "../views/EditBookReview";
+import PersonalInfo from "../views/PersonalInfo";
+import ChangePersonalInfo from "../views/ChangePersonalInfo";
+import ChangePictures from "../views/ChangePictures";
+import MyCollections from "../views/MyCollections";
+import Updates from "../views/Updates";
+import MessageListFromFriend from "../views/MessageListFromFriend";
+import BlockPerson from "../views/BlockPerson";
 Vue.use(VueRouter);
 
 const routes = [
@@ -41,54 +44,14 @@ const routes = [
     component: Home,
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
-  {
     path:"/Admin",
     name:"Admin",
     component:Admin,
   },
   {
-    path:"/updates",
-    name:"Updates",
-    component: () =>
-    import("../views/Updates.vue"),
-  },
-  {
-    path:"/message",
-    name:"Message",
-    component: () =>
-    import("../views/Message.vue"),
-  },
-  {
-    path:"/messageListFromFriend",
-    name:"MessageListFromFriend",
-    component: () =>
-    import("../views/MessageListFromFriend.vue"),
-  },
-  {
-    path:"/messageListFromSystem",
-    name:"MessageListFromSystem",
-    component: () =>
-    import("../views/MessageListFromSystem.vue"),
-  },
-  {
-    path:"/recommend",
-    name:"Recommend",
-    component: () =>
-    import("../views/Recommend.vue"),
-  },
-  {
     path:"/updates/block",
     name:"BlockPerson",
-    component: () =>
-    import("../views/BlockPerson.vue"),
+    component: BlockPerson,
   },
     {
     path:"/Login",
@@ -148,7 +111,7 @@ const routes = [
   {
     path:"/Book/BookRecommand",
     name:"BookRecommand",
-    component: BookRecommmand
+    component: BookRecommand
   },
   {
     path:"/Book/BookReview",
@@ -191,49 +154,59 @@ const routes = [
     component:PersonalCollection,
   },
   {
-    path:"/BlogList/WriteBlog",
+    path:"/BlogList/WriteBlog/:id",
     name:"WriteBlog",
     component:WriteBlog,
   },
   {
-    path:"/BlogList/EditBlog",
+    path:"/BlogList/EditBlog/:id",
     name:"EditBlog",
     component:EditBlog,
   },
   {
-    path:"/BlogList/ScanBlog",
+    path:"/BlogList/ScanBlog/:id",
     name:"ScanBlog",
     component:ScanBlog,
   },
   {
     path:"/Book/CheckBookReview",
     name:"CheckBookReview",
-    component: CheckBookReview
+    component: CheckBookReview,
   },
   {
     path:"/Book/EditBookReview",
     name:"EditBookReview",
-    component: EditBookReview
+    component: EditBookReview,
   },
   {
     path:"/PersonalInfo/:id",
     name:"PersonalInfo",
-    component: PersonalInfo
+    component: PersonalInfo,
   },
   {
     path:"/ChangePersonalInfo",
     name:"ChangePersonalInfo",
-    component: ChangePersonalInfo
+    component: ChangePersonalInfo,
   },
   {
     path:"/ChangePictures",
     name:"ChangePictures",
-    component: ChangePictures
+    component: ChangePictures,
   },
   {
     path:"/MyCollections",
     name:"MyCollections",
-    component: MyCollections
+    component: MyCollections,
+  },
+  {
+    path:"/Updates",
+    name:"Updates",
+    component: Updates,
+  },
+  {
+    path:"/MessageListFromFriend/:id",
+    name:"MessageListFromFriend",
+    component: MessageListFromFriend,
   },
 ];
 

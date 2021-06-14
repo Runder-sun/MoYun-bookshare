@@ -5,19 +5,32 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    login:false,
-    isAdmin:false,
-    userID:"",
+    login: true,
+    isAdmin: false,
+    person: {
+      userID: "",
+      username: "",
+      isTeacher: false,
+      email: "",
+      signature: "",
+      headImage: "",
+    }
   },
   mutations: {
-    setLogin(state){
-      state.login=true
+    setLogin(state) {
+      state.login = true
     },
-    setAdmin(state){
-      state.isAdmin=true
+    setAdmin(state) {
+      state.isAdmin = true
     },
-    setUserID(state,UserID){
-      state.userID=UserID
+    setUserID(state, UserID) {
+      state.person.userID = UserID
+    },
+    setLogout(state) {
+      state.login = false
+    },
+    setUser(state, Person){
+      state.person=Person
     }
   },
   actions: {},
