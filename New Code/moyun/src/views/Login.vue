@@ -172,8 +172,7 @@ export default {
 
           if (res.data.success) {
             this.$store.commit("setLogin");
-            this.$store.commit("setUserID", this.id);
-            if(this.id.length===5) this.$store.commit("setIsTeacher",1)
+            this.$store.commit("setUser",res.data.user);
             if (res.data.isAdmin) {
               this.$store.commit("setAdmin");
               this.$router.push({ path: "/Admin" });

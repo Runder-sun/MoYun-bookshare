@@ -44,7 +44,7 @@
                       :to="'/Group/GroupIndex/' + group.groupID"
                       width="300"
                     >
-                      <v-img :src="group.groupImage" height="225px">
+                      <v-img :src="'/home/moyun/file/'+group.groupImage" height="225px">
                         <v-card-title >
                           <v-row
                             class="fill-height flex-column"
@@ -100,7 +100,7 @@
                       width="300"
                     >
                       <v-img
-                        :src="book.bookImage"
+                        :src="'/home/moyun/file/'+book.bookImage"
                         height="225px"
                         @click="toCheckBook"
                       >

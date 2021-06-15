@@ -4,7 +4,7 @@
       <v-btn icon v-on="on">
         <v-avatar  size="40" color="#96CDCD">
           <template v-if="$store.state.person.userImage!==''">
-            <img :src="$store.state.person.userImage">
+            <img :src="'/home/moyun/file/'+$store.state.person.userImage">
             </template>
             <template v-else>
               <span>{{$store.state.person.userID.substr(0,1)}}</span>
@@ -16,8 +16,8 @@
       <v-list-item-content class="justify-center">
         <div class="mx-auto text-center">
           <v-avatar color="#96CDCD">
-            <template v-if="user.userImage!==''">
-            <img :src="user.userImage">
+            <template v-if="$store.state.person.userImage!==''">
+            <img :src="'/home/moyun/file/'+$store.state.person.userImage">
             </template>
             <template v-else>
               <span>{{$store.state.person.userID.substr(0,1)}}</span>

@@ -14,7 +14,7 @@
               
             <p >
               <v-avatar size="30">
-              <img :src="forumMessageUser[i].headImage"/>
+              <img :src="'/home/moyun/file/'+forumMessageUser[i].headImage"/>
             </v-avatar>
               {{forumMessageUser[i].username}} :
               </p>
