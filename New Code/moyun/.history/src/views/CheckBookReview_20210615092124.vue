@@ -17,7 +17,7 @@
             </template>
             <el-button type="info" round v-if="isCollect" @click="cancelCollect" class="applyBtn">取消收藏</el-button>
             <el-button color="#8fc19c" round v-else @click="collect" class="applyBtn">收藏书评</el-button>
-            <el-button 	color="#45a165" @click="toEditBook" class="applyBtn">修改书评</el-button>
+            <el-button 	color="#45a165d" @click="toEditBook" class="applyBtn">修改书评</el-button>
           </v-toolbar>
 
           <v-list-item three-line>

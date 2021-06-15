@@ -16,8 +16,8 @@
               </v-btn>
             </template>
             <el-button type="info" round v-if="isCollect" @click="cancelCollect" class="applyBtn">取消收藏</el-button>
-            <el-button color="#8fc19c" round v-else @click="collect" class="applyBtn">收藏书评</el-button>
-            <el-button 	color="#45a165" @click="toEditBook" class="applyBtn">修改书评</el-button>
+            <el-button type="success" round v-else @click="collect" class="applyBtn">收藏书评</el-button>
+            <el-button type="cyan" @click="toEditBook" class="applyBtn">修改书评</el-button>
           </v-toolbar>
 
           <v-list-item three-line>
@@ -41,7 +41,7 @@
           <v-toolbar class="elevation-1">
             <v-toolbar-title>书评评论区</v-toolbar-title>
             <v-spacer></v-spacer>
-            <el-button color="#44887a" @click="commment" class="applyBtn">我要评论</el-button>
+            <el-button type="text" @click="commment" class="applyBtn">我要评论</el-button>
           </v-toolbar>
             <v-container class="pa-4 text-center">
               <v-row class="fill-height" align="center" justify="center">
@@ -190,7 +190,8 @@ export default {
 }
 
 .lxtBtn{
-  margin-right: 80px;
+  color: #493842;
+  margin-right: 50px;
 
 box-shadow:  18px 18px 36px rgba(0, 0, 0, 0.1),
              -18px -18px 36px #ffffff;
@@ -203,7 +204,7 @@ box-shadow:  18px 18px 36px rgba(0, 0, 0, 0.1),
 
 .applyBtn{
     margin-right:15px;
-  	
+  		color: #2b7c4d;
 		box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
 			-9px -9px 18px rgba(255, 255, 255, 1);
 		border-radius: 3rem;
@@ -216,6 +217,5 @@ box-shadow:  18px 18px 36px rgba(0, 0, 0, 0.1),
 		outline: none;
 		border: none;
 }
-
 
 </style>

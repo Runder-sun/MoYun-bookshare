@@ -37,7 +37,7 @@
 
                   <v-list-item-avatar>
                     <img
-                      :src="'/home/moyun/file/'+item.headImage"
+                      :src="item.headImage"
                       :alt="item.username"
                     >
                   </v-list-item-avatar>
@@ -94,7 +94,7 @@
                               v-if="getUser[0].userID===item.getID"
                               >
                               <v-list-item-avatar>
-                                  <v-img :src="'/home/moyun/file/'+getUser[0].headImage"></v-img>
+                                  <v-img :src="getUser[0].headImage"></v-img>
                               </v-list-item-avatar>
 
                               <v-list-item-content>
@@ -108,7 +108,7 @@
                                v-else
                               >
                               <v-list-item-avatar>
-                                  <v-img :src="'/home/moyun/file/'+sendUser[0].headImage"></v-img>
+                                  <v-img :src="sendUser[0].headImage"></v-img>
                               </v-list-item-avatar>
 
                               <v-list-item-content>

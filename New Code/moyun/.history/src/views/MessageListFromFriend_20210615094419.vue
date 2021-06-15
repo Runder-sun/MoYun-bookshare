@@ -1,6 +1,7 @@
 <template>
-  <div class="friMsg">
+  <div >
     <template>
+      <v-app class="friMsg">
       <bar></bar>
         <v-row>
             <v-navigation-drawer
@@ -37,7 +38,7 @@
 
                   <v-list-item-avatar>
                     <img
-                      :src="'/home/moyun/file/'+item.headImage"
+                      :src="item.headImage"
                       :alt="item.username"
                     >
                   </v-list-item-avatar>
@@ -58,6 +59,7 @@
                           width="1200px"
                           class="mx-auto"
                           style="margin-top:50px"
+                          height="600px"
                       >
                       <v-toolbar dense             
                       text-align="center"
@@ -94,7 +96,7 @@
                               v-if="getUser[0].userID===item.getID"
                               >
                               <v-list-item-avatar>
-                                  <v-img :src="'/home/moyun/file/'+getUser[0].headImage"></v-img>
+                                  <v-img :src="getUser[0].headImage"></v-img>
                               </v-list-item-avatar>
 
                               <v-list-item-content>
@@ -108,7 +110,7 @@
                                v-else
                               >
                               <v-list-item-avatar>
-                                  <v-img :src="'/home/moyun/file/'+sendUser[0].headImage"></v-img>
+                                  <v-img :src="sendUser[0].headImage"></v-img>
                               </v-list-item-avatar>
 
                               <v-list-item-content>
@@ -151,6 +153,7 @@
               </v-container>     
             </v-main>
             </v-row>
+        </v-app>
       </template>
      
   </div>

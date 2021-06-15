@@ -8,16 +8,16 @@
             <v-toolbar-title>书评信息</v-toolbar-title>
             <v-spacer></v-spacer>
             <template>
-              <v-btn class="ma-2 lxtBtn" text icon color="blue lighten-2" v-if="isLike" @click="cancelLike" >
+              <v-btn class="ma-2" text icon color="blue lighten-2" v-if="isLike" @click="cancelLike" >
                  <v-icon>mdi-thumb-up</v-icon>
               </v-btn>
-              <v-btn class="ma-2 lxtBtn" text icon v-else @click="like" >
+              <v-btn class="ma-2" text icon v-else @click="like">
                  <v-icon>mdi-thumb-up</v-icon>
               </v-btn>
             </template>
-            <el-button type="info" round v-if="isCollect" @click="cancelCollect" class="applyBtn">取消收藏</el-button>
-            <el-button color="#8fc19c" round v-else @click="collect" class="applyBtn">收藏书评</el-button>
-            <el-button 	color="#45a165" @click="toEditBook" class="applyBtn">修改书评</el-button>
+            <el-button type="info" round v-if="isCollect" @click="cancelCollect">取消收藏</el-button>
+            <el-button type="success" round v-else @click="collect">收藏书评</el-button>
+            <el-button type="text" @click="toEditBook">修改书评</el-button>
           </v-toolbar>
 
           <v-list-item three-line>
@@ -41,7 +41,7 @@
           <v-toolbar class="elevation-1">
             <v-toolbar-title>书评评论区</v-toolbar-title>
             <v-spacer></v-spacer>
-            <el-button color="#44887a" @click="commment" class="applyBtn">我要评论</el-button>
+            <el-button type="text" @click="commment">我要评论</el-button>
           </v-toolbar>
             <v-container class="pa-4 text-center">
               <v-row class="fill-height" align="center" justify="center">
@@ -188,34 +188,4 @@ export default {
 .pages{
   text-align: center; 
 }
-
-.lxtBtn{
-  margin-right: 80px;
-
-box-shadow:  18px 18px 36px rgba(0, 0, 0, 0.1),
-             -18px -18px 36px #ffffff;
-    		transition: box-shadow 0.2s ease-out;         
-		background-color: #efeeee;
-		position: relative;  
-    		outline: none;
-		border: none;                   
-}
-
-.applyBtn{
-    margin-right:15px;
-  	
-		box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
-			-9px -9px 18px rgba(255, 255, 255, 1);
-		border-radius: 3rem;
-		transition: box-shadow 0.2s ease-out;
-		background-color: #efeeee;
-		position: relative;
-		top: 0px;
-		width: 140px;
-		height: 70 px;
-		outline: none;
-		border: none;
-}
-
-
 </style>

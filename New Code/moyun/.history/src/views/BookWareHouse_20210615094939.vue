@@ -3,7 +3,7 @@
     <v-app>
       <bar></bar>
       <v-container>
-        <v-card style="margin-top:30px">
+        <v-card               style="margin-top:30px">
           <v-card-title>
             <v-text-field
               v-model="search"
@@ -25,9 +25,8 @@
               </v-chip>
             </v-chip-group>
           </v-row>
-        </v-card>
 
-          <v-card style="margin-top:30px">
+          <v-container>
             <v-toolbar flat>
               <v-toolbar-title>书库</v-toolbar-title>
 
@@ -41,7 +40,8 @@
                   <v-tab>热门书籍</v-tab>
                   <v-tab>我的关注</v-tab>
 
-                  <v-tab-item style="margin-top:20px">
+                  <v-tab-item>
+                    <v-container class="pa-4 text-center">
                       <v-row
                         class="fill-height"
                         align="center"
@@ -95,9 +95,11 @@
                           </v-col>
                         </template>
                       </v-row>
+                    </v-container>
                   </v-tab-item>
 
-                  <v-tab-item style="margin-top:20px">
+                  <v-tab-item>
+                    <v-container class="pa-4 text-center">
                       <v-row
                         class="fill-height"
                         align="center"
@@ -128,11 +130,13 @@
                           </v-col>
                         </template>
                       </v-row>
+                    </v-container>
                   </v-tab-item>
                 </v-tabs>
               </template>
             </v-toolbar>
-          </v-card>
+          </v-container>
+        </v-card>
       </v-container>
     </v-app>
   </div>
