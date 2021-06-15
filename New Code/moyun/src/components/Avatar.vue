@@ -3,8 +3,8 @@
     <template v-slot:activator="{ on }">
       <v-btn icon v-on="on">
         <v-avatar  size="40" color="#96CDCD">
-          <template v-if="$store.state.person.userImage!==''">
-            <img :src="'/home/moyun/file/'+$store.state.person.userImage">
+          <template v-if="$store.state.person.headImage!==''">
+            <img :src="'/home/moyun/file/'+$store.state.person.headImage">
             </template>
             <template v-else>
               <span>{{$store.state.person.userID.substr(0,1)}}</span>
@@ -66,8 +66,17 @@ export default {
         this.$router.push({path:"/BlogList"});
       },
       logout(){
-        this.$store.commit('setLogout')
-        this.$router.push({path:"/"});
+        
+        this.$http({
+          method:'POST',
+          url:"/logout",
+        }).then(res=>{
+          if(res.data.success){
+            this.$store.commit('setLogout')
+            this.$router.push({path:"/"});
+          }
+        })
+        
       }
   },
 }
