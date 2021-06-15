@@ -22,10 +22,10 @@
                       <el-table :data="commentsData" style="width: 100%" height="600" width="1600" :header-cell-style="{'text-align':'center'}"
     :cell-style="{'text-align':'center'}">
                         <el-table-column fixed prop="date" label="发布日期" width="150" ></el-table-column>
-                        <el-table-column prop="title" label="题目" width="170"></el-table-column>
-                        <el-table-column prop="author" label="作者" width="120"></el-table-column>
-                        <el-table-column prop="bookReview" label="书评内容" width="320"></el-table-column>
-                        <el-table-column prop="scores" label="评分" width="50"></el-table-column>
+                        <el-table-column prop="title" label="题目" width="150"></el-table-column>
+                        <el-table-column prop="author" label="作者" width="150"></el-table-column>
+                        <el-table-column prop="bookReview" label="书评内容" width="150"></el-table-column>
+                        <el-table-column prop="scores" label="评分" width="300"></el-table-column>
                         <el-table-column align="right">
                           <template slot-scope="scope">
                             <el-button
@@ -48,11 +48,11 @@
                     <v-container>
                       <el-table :data="commentsData" style="width: 100%" height="600" width="1600" :header-cell-style="{'text-align':'center'}"
     :cell-style="{'text-align':'center'}">
-                        <el-table-column fixed prop="date" label="发布日期" width="150"></el-table-column>
-                        <el-table-column prop="title" label="题目" width="170"></el-table-column>
+                        <el-table-column fixed prop="date" label="发布日期" width="200"></el-table-column>
+                        <el-table-column prop="title" label="题目" width="120"></el-table-column>
                         <el-table-column prop="author" label="作者" width="120"></el-table-column>
-                        <el-table-column prop="bookReview" label="书评内容" width="320"></el-table-column>
-                        <el-table-column prop="scores" label="评分" width="50"></el-table-column>
+                        <el-table-column prop="bookReview" label="书评内容" width="220"></el-table-column>
+                        <el-table-column prop="scores" label="评分" width="150"></el-table-column>
                         <el-table-column align="right">
                           <template slot-scope="scope">
                             <el-button type="warning" round @click="toCheckBookReview(scope.$index, scope.row)">查看</el-button>
@@ -73,10 +73,10 @@
                       <el-table :data="commentsData" style="width: 100%" height="600" width="1600" :header-cell-style="{'text-align':'center'}"
     :cell-style="{'text-align':'center'}" >
                         <el-table-column fixed prop="date" label="发布日期" width="150"></el-table-column>
-                        <el-table-column prop="title" label="题目" width="170"></el-table-column>
+                        <el-table-column prop="title" label="题目" width="120"></el-table-column>
                         <el-table-column prop="author" label="作者" width="120"></el-table-column>
-                        <el-table-column prop="bookReview" label="书评内容" width="320"></el-table-column>
-                        <el-table-column prop="scores" label="评分"  width="50" ></el-table-column>
+                        <el-table-column prop="bookReview" label="书评内容" width="120"></el-table-column>
+                        <el-table-column prop="scores" label="评分"  width="300" ></el-table-column>
                         <el-table-column align="right">
                           <template slot-scope="scope">
                             <el-button type="warning" round @click="toCheckBookReview(scope.$index, scope.row)">查看</el-button >
