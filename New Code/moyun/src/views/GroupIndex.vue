@@ -25,7 +25,7 @@
         <v-list-item-group active-class="deep-purple--text text--accent-4">
           <v-list-item v-for="(member, i) in members" :key="i">
             <v-list-item-avatar :to="'/PersonalInfo/'+member.userID">
-              <img :src="member.headImage" />
+              <img :src="'/home/moyun/file/'+member.headImage" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-text="member.username"></v-list-item-title>
@@ -129,7 +129,7 @@
 
         <v-list-item three-line>
           <v-list-item-avatar left size="200" color="grey">
-            <img :src="group.groupImage">
+            <img :src="'/home/moyun/file/'+group.groupImage">
           </v-list-item-avatar>
           <v-list-item-content>
             <div class="headline mb-3" style="margin-left:70px">{{group.groupName}}</div>

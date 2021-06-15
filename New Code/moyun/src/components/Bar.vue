@@ -20,7 +20,7 @@
           <avatar></avatar>
         </template>
         <template v-else>
-          <v-btn class="button" href="/Login">
+          <v-btn class="button" max-width="30px" to="/Login">
             <p class="login_">登录</p>
           </v-btn>
         </template>
@@ -54,7 +54,8 @@ export default {
   transition: box-shadow 0.2s ease-out;
   background-color: #efeeee;
   position: relative;
-  top: 15%;
+  top: 10%;
+  margin-top: 5px;
   outline: none;
   border: none;
 }

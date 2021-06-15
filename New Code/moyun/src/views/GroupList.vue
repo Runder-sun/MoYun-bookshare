@@ -31,7 +31,7 @@
                               width="300"
                               :to="'/Group/GroupIndex/' + group.groupID"
                             >
-                              <v-img :src="group.groupImage" height="225px">
+                              <v-img :src="'/home/moyun/file/'+group.groupImage" height="225px">
                                 <v-card-title class="title white--text">
                                   <v-row
                                     class="fill-height flex-column"
@@ -85,7 +85,7 @@
                               width="300"
                               :to="'/Group/GroupIndex/' + group.groupID"
                             >
-                              <v-img :src="group.groupImage" height="225px">
+                              <v-img :src="'/home/moyun/file/'+group.groupImage" height="225px">
                                 <v-card-title class="title white--text">
                                   <v-row
                                     class="fill-height flex-column"
