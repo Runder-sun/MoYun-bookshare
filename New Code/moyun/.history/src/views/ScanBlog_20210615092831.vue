@@ -39,7 +39,7 @@
                     color="purple lighten-2"
                     dark
                     @click.stop="dialog = true"
-                    class="button lxtBtn"
+                    class="button"
                     style="margin-left:40px"
                     >
                     <v-icon>mdi-share-variant</v-icon>
@@ -444,14 +444,5 @@ export default({
   .button{
     margin-right: 25px;
 
-  }
-  .lxtBtn{
-    box-shadow:  18px 18px 36px rgba(0, 0, 0, 0.1),
-             -18px -18px 36px #ffffff;
-    transition: box-shadow 0.2s ease-out;         
-		background-color: #efeeee;
-		position: relative;  
-    outline: none;
-		border: none;   
   }
 </style>

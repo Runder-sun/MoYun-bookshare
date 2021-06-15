@@ -1,6 +1,7 @@
 <template>
   <div class="friMsg">
     <template>
+      <v-app>
       <bar></bar>
         <v-row>
             <v-navigation-drawer
@@ -58,6 +59,7 @@
                           width="1200px"
                           class="mx-auto"
                           style="margin-top:50px"
+                          height="600px"
                       >
                       <v-toolbar dense             
                       text-align="center"
@@ -151,6 +153,7 @@
               </v-container>     
             </v-main>
             </v-row>
+        </v-app>
       </template>
      
   </div>

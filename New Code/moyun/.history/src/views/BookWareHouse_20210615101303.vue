@@ -97,7 +97,7 @@
                       </v-row>
                   </v-tab-item>
 
-                  <v-tab-item style="margin-top:20px">
+                  <v-tab-item>
                       <v-row
                         class="fill-height"
                         align="center"

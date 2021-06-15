@@ -3,7 +3,7 @@
     <v-app>
       <v-img src="../assets/widthPic.jpg" width="100%" height="100%">
       <bar></bar>
-      <v-container style="margin-top:30px" >
+      <v-container>
         <v-toolbar flat>
           <v-toolbar-title>书评</v-toolbar-title>
 

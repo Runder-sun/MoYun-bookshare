@@ -26,7 +26,7 @@
             </v-chip-group>
           </v-row>
         </v-card>
-
+        
           <v-card style="margin-top:30px">
             <v-toolbar flat>
               <v-toolbar-title>书库</v-toolbar-title>
@@ -41,7 +41,7 @@
                   <v-tab>热门书籍</v-tab>
                   <v-tab>我的关注</v-tab>
 
-                  <v-tab-item style="margin-top:20px">
+                  <v-tab-item>
                       <v-row
                         class="fill-height"
                         align="center"
@@ -97,7 +97,7 @@
                       </v-row>
                   </v-tab-item>
 
-                  <v-tab-item style="margin-top:20px">
+                  <v-tab-item>
                       <v-row
                         class="fill-height"
                         align="center"

@@ -58,6 +58,7 @@
                           width="1200px"
                           class="mx-auto"
                           style="margin-top:50px"
+                          height="600px"
                       >
                       <v-toolbar dense             
                       text-align="center"

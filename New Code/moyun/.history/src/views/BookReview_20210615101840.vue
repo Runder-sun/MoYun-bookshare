@@ -3,7 +3,7 @@
     <v-app>
       <v-img src="../assets/widthPic.jpg" width="100%" height="100%">
       <bar></bar>
-      <v-container style="margin-top:30px" >
+      <v-card style="margin-top:30px">
         <v-toolbar flat>
           <v-toolbar-title>书评</v-toolbar-title>
 
@@ -102,7 +102,7 @@
             </v-tabs>
           </template>
         </v-toolbar>
-      </v-container>
+      </v-card>
       </v-img>
     </v-app>
   </div>

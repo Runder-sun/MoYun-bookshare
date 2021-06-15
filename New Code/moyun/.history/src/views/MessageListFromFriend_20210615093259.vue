@@ -1,6 +1,7 @@
 <template>
   <div class="friMsg">
     <template>
+      <v-app>
       <bar></bar>
         <v-row>
             <v-navigation-drawer
@@ -58,6 +59,7 @@
                           width="1200px"
                           class="mx-auto"
                           style="margin-top:50px"
+                          height="300px"
                       >
                       <v-toolbar dense             
                       text-align="center"
@@ -137,8 +139,6 @@
                                   @click:append-outer="sendMessage"
                                   @click:prepend="changeIcon"
                                   @click:clear="clearMessage"
-                                  position:bottom
-                                  relative
                               ></v-text-field>
                               </v-col>
 
@@ -151,6 +151,7 @@
               </v-container>     
             </v-main>
             </v-row>
+        </v-app>
       </template>
      
   </div>
@@ -345,6 +346,11 @@ import bar from "../components/Bar.vue"
 
               
 <style scoped>
+.friMsg{
+    background:url("../assets/widthPic.jpg");
+    width:100%;
+    height:100%;
+    background-size:100% 100%;};
 
 .RList v-snackbar{
     text-align:"right";
@@ -364,9 +370,9 @@ import bar from "../components/Bar.vue"
 };  
 
 .friMsg{
-	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
-  };
+    background:url("../assets/widthPic.jpg");
+    width:100%;
+    height:100%;
+    background-size:100% 100%;};
 </style>   
 
