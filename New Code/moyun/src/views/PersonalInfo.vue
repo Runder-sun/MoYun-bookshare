@@ -14,12 +14,12 @@
 
       <v-img
         height="250"
-        :src="this.backGroundImg"
+        :src="'/home/moyun/file/'+this.backGroundImage"
       >
         <v-card-title class="white--text mt-8">
           <v-avatar size="56">
             <img
-                :src="this.headImage"
+                :src="'/home/moyun/file/'+this.headImage"
                 :alt="this.username"
               />
           </v-avatar>
@@ -61,7 +61,7 @@ export default {
       email:"xiebudongle@qq.com",
       birthday:2004-2-29,
       headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-      backGroundImg:"https://cdn.vuetifyjs.com/images/cards/cooking.png",
+      backGroundImage:"https://cdn.vuetifyjs.com/images/cards/cooking.png",
       signature:"签名：什么时候能写完软工呢？",
       password:"000000",
       userID:"",
@@ -91,8 +91,8 @@ export default {
       })
         .then((res) => {
           if (res.data.success) {
-            this.backGroundImg = res.data.userinfo.backGroundImage;
-            this.headImg = res.data.userinfo.headImage;
+            this.backGroundImage = res.data.userinfo.backGroundImage;
+            this.headImage = res.data.userinfo.headImage;
             this.email = res.data.userinfo.email;
             this.birthday = res.data.userinfo.birthday;
             this.userID = res.data.userinfo.userID;

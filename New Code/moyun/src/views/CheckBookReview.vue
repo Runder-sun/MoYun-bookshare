@@ -8,10 +8,10 @@
             <v-toolbar-title>书评信息</v-toolbar-title>
             <v-spacer></v-spacer>
             <template>
-              <v-btn class="ma-2 lxtBtn" text icon color="blue lighten-2" v-if="isLike" @click="cancelLike" >
+              <v-btn class="ma-2 lxtBtn" color="#BDBDBD" v-if="isLike" text icon @click="cancleLike" >
                  <v-icon>mdi-thumb-up</v-icon>
               </v-btn>
-              <v-btn class="ma-2 lxtBtn" text icon v-else @click="like" >
+              <v-btn class="ma-2 lxtBtn" v-else text icon @click="like" >
                  <v-icon>mdi-thumb-up</v-icon>
               </v-btn>
             </template>
@@ -28,9 +28,9 @@
               />
             </v-list-item-avatar>
             <v-list-item-content>
-              <div class="headline mb-4" style="margin-left:70px">《书评标题》</div>
-              <v-list-item-title style="margin-left:70px"> 书评内容</v-list-item-title>
-              <v-list-item-subtitle style="margin-left:70px">该书评给该书的打分</v-list-item-subtitle>
+              <div class="headline mb-4" style="margin-left:70px">{{bookReviewInfo.title}}</div>
+              <v-list-item-title style="margin-left:70px"> {{bookReviewInfo.content}}</v-list-item-title>
+              <v-list-item-subtitle style="margin-left:70px">{{bookReviewInfo.score}}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -41,30 +41,44 @@
           <v-toolbar class="elevation-1">
             <v-toolbar-title>书评评论区</v-toolbar-title>
             <v-spacer></v-spacer>
-            <el-button color="#44887a" @click="commment" class="applyBtn">我要评论</el-button>
+            <el-button color="#44887a" @click="addmessage" class="applyBtn">我要评论</el-button>
           </v-toolbar>
             <v-container class="pa-4 text-center">
-              <v-row class="fill-height" align="center" justify="center">
-                <el-table :data="tableData" style="width: 100%" height="400" stripe :header-cell-style="{'text-align':'center'}"
-    :cell-style="{'text-align':'center'}">
-                  <el-table-column
-                    fixed
-                    prop="date"
-                    label="发布日期"
-                    width="150"
-                  ></el-table-column>
-                  <el-table-column
-                    prop="author"
-                    label="用户"
-                    width="120"
-                  ></el-table-column>
-                  <el-table-column
-                    prop="bookReview"
-                    label="评论内容"
-                    width="900"
-                  ></el-table-column>
-                </el-table>
-              </v-row>
+               <v-card>>
+        <v-expansion-panels v-model="panel" multiple>
+          <v-expansion-panel v-for="(bookReviewComment, i) in bookReviewCommentList" :key="i">
+            <v-expansion-panel-header>
+              <template>
+                <v-container>
+              
+            <p >
+              <v-avatar size="30">
+              <img :src="'/home/moyun/file/'+bookReviewCommentUser[i].headImage"/>
+            </v-avatar>
+              {{bookReviewCommentUser[i].username}}
+              ——
+              {{bookReviewComment.commentTime}} :
+              </p>
+              </v-container>
+              </template>
+              </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              {{ bookReviewComment.content }}
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-card>
+      <v-card>
+          <v-container fluid>
+        <v-textarea v-model="content" color="teal">
+          <template v-slot:label>
+            <div>内容</div>
+          </template>
+        </v-textarea>
+          </v-container>
+              <v-spacer></v-spacer>
+              <v-btn text color="cyan" @click="addMessage">发布评论</v-btn>
+      </v-card>
             </v-container>
         </v-card>
       </v-container>
@@ -76,97 +90,113 @@
 import Bar from "../components/Bar.vue";
 export default {
   setup() {},
+  created() {
+    this.initCheckBookReview();
+  },
   data: () => ({
-    isLike: false,
+    content:"",
+    isLike:false,
+    panel:[0],
+    bookReviewInfo:{
+      
+    },
     isCollect: false,
-
-    tableData: [
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores: 8.0,
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores: 8.0,
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores: 8.0,
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores: 8.0,
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores: 8.0,
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores: 8.0,
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores: 8.0,
-      },
+    bookReviewCommentList:[
+      {content:"从前有座山.........",
+       commentTime:"2020-4-12"}
+    ],
+    bookReviewCommentUser:[
+      {username:"LONG"}
     ],
   }),
   methods: {
-    comment() {
-      this.$prompt("请输入评论内容", "提示", {
-        confirmButtonText: "评论",
-        cancelButtonText: "取消",
-        showInput: true,
-        inputValue: "评论内容",
-      })
-        .then(() => {
-          this.$message({
-            type: "success",
-            message: "评论成功",
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "取消评论",
-          });
-        });
-    },
     toEditBookReview() {
-      this.$router.push({ path: "/Book/EditBookReview" });
+      this.$router.push({ path: "/Book/EditBookReview"+this.$route.params.id });
     },
     cancelLike() {
       this.isLike = false;
     },
     like() {
-      this.isLike = true;
+      this.$http({
+        method: "post",
+        url: "/likeBookReview",
+        data: {
+          bookReviewID:this.$route.params.id,
+        },
+      })
+        .then((res) => {
+          if (res.data.success) {
+            this.isLike=true;
+          } 
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     cancelCollect() {
-      this.isCollect = false;
+      this.$http({
+        method: "post",
+        url: "/cancelCollectBookReview",
+        data: {
+          bookReviewID:this.$route.params.id,
+        },
+      })
+        .then((res) => {
+          if (res.data.success) {
+            this.isCollect=false;
+          } 
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     collect() {
-      this.isCollect = true;
+      this.$http({
+        method: "post",
+        url: "/collectBookReview",
+        data: {
+          bookReviewID:this.$route.params.id,
+        },
+      })
+        .then((res) => {
+          if (res.data.success) {
+            this.isCollect=true;
+          } 
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    addMessage(){
+        this.$http({
+          method:'post',
+          url:"/commentReview",
+          data:{
+            ReviewID:this.$route.params.id,
+            Content:this.content,
+          }
+        }).then(res=>{
+          this.getInit()
+        })
+        this.content="";
+      },
+    initCheckBookReview() {
+      this.$http({
+        method: "get",
+        url: "/inspectBookReview",
+        params: this.$route.params.id,
+      })
+        .then((res) => {
+          if (res.data.success) {
+            this.bookReviewInfo = res.data.bookReviewInfo;
+            this.bookReviewCommentList = res.data.bookReviewCommentList;
+            this.bookReviewCommentUser = res.data.bookReviewCommentUser;
+            this.isCollect = res.data.isCollect;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   components: {

@@ -20,7 +20,7 @@
 										</template>
 									</v-textarea>
 									<v-col class="d-flex" cols="12" sm="6">
-										<v-select :items="items" :rules="[v => !!v || '评分不能为空']"
+										<v-select  v-model="score" :items="items" :rules="[v => !!v || '评分不能为空']"
 											label="下拉选择给该书评分" solo></v-select>
 									</v-col>
 								</v-col>
@@ -44,6 +44,7 @@
 			Bar,
 		},
 		data: () => ({
+			score:0,
 			valid: true,
 			title: "",
 			titleRules: [
@@ -61,16 +62,32 @@
 
 		methods: {
 
-			commitSuccess() {
-				// var vd=	this.$refs.form.validate();
-				// 	alert(vd);
-				if (this.$refs.form.validate()) {
-					alert("发布成功");
-				this.$router.push({
-					path: "/Book/CheckBook"
-				});
-			}
-		}
+			writeReview() {
+      this.$refs.form.validate()
+      this.$http({
+        method: "post",
+        url: "/updateBookReview",
+        data: {
+          bookReviewID:this.$route.params.id,
+          title:this.title,
+          content:this.content,
+          score:this.score,
+        },
+      })
+        .then((res) => {
+          if (res.data.success) {
+            alert("书评成功发布");
+			this.$router.push({
+          path: "/Book/CheckBookReview/"+this.$route.params.id,
+        });
+          } else {
+            this.clear();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
 	},
 
 	};
