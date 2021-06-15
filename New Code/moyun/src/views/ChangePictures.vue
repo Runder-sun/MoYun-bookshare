@@ -7,22 +7,35 @@
         点击“+”号上传个人头像
         <el-upload
           class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action="up"
+          drag
+          :auto-upload="false"
           :show-file-list="false"
           :on-success="handleAvatarSuccess1"
           :before-upload="beforeAvatarUpload1"
         >
           <img v-if="imageUrl1" :src="imageUrl1" class="avatar" />
           <i v-else class="el-icon-plus avatar-uploader-icon"></i></el-upload>
-
-          <v-row></v-row>
+          <v-form>
+          <v-container fluid>
+                <v-btn
+                class="button"
+                large
+              >
+                <p class="create" @click="changePictures1">保存更改</p>
+              </v-btn>
+          </v-container>
+        </v-form>
+          
           <v-row></v-row>
           <v-row></v-row>
           <v-row></v-row>
         点击“+”号上传个人背景
           <el-upload
           class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action="up"
+          drag
+          :auto-upload="false"
           :show-file-list="false"
           :on-success="handleAvatarSuccess2"
           :before-upload="beforeAvatarUpload2"
@@ -35,7 +48,7 @@
                 class="button"
                 large
               >
-                <p class="create" @click="changePictures">保存更改</p>
+                <p class="create" @click="changePictures2">保存更改</p>
               </v-btn>
           </v-container>
         </v-form>
@@ -50,10 +63,8 @@ import bar from "../components/Bar.vue";
 
 export default {
   data: () => ({
-    files:[
-      {image1:null},
-      {image2:null}
-    ],
+    file1:null,
+    file2:null,
     imageUrl1: "",
     imageUrl2: "",
   }),
@@ -62,11 +73,11 @@ export default {
   },
   methods: {
     handleAvatarSuccess1(res, file) {
-      this.files.image1 = file;
+      this.file1 = file;
       this.imageUrl1 = URL.createObjectURL(file.raw);
     },
     handleAvatarSuccess2(res, file) {
-      this.files.image2 = file;
+      this.file2 = file;
       this.imageUrl2 = URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload1(file) {
@@ -95,18 +106,31 @@ export default {
       
       return isJPG && isLt2M;
     },
-    changePictures(){
+    changePictures1(){
       this.$http({
         method: "post",
-        url: "/ChangePicture",
+        url: "/ChangeHeadImage",
         data: {
-          files:this.files
+          file:this.file1
         },
     }).then(res=>{
       if(res.data.success){
-        this.$router.push({ path: "/PersonalInfo/"+this.$store.state.userID});
+        this.$store.commit("setUserHeadImage", this.imageUrl1);
       }
-    });
+    });    
+  },
+
+  changePictures2(){
+      this.$http({
+        method: "post",
+        url: "/ChangeBackgroundImage",
+        data: {
+          file:this.file2
+        },
+    }).then(res=>{
+      if(res.data.success){
+      }
+    });    
   }
 },
 };

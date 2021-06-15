@@ -29,7 +29,7 @@
 
       <v-card-text>
         <div class="my-4 text-subtitle-1">学号：{{userID}}</div>
-        <div v-if="$store.state.userID==this.userID" class="my-4 text-subtitle-1">密码：{{password}}</div> 
+        <div v-if="$store.state.person.userID==this.userID" class="my-4 text-subtitle-1">密码：{{password}}</div> 
         <div class="my-4 text-subtitle-1">生日：{{birthday}}</div>
         <div class="my-4 text-subtitle-1">邮箱：{{email}}</div>
         <div>
@@ -41,7 +41,7 @@
 
       <v-card-title>操作</v-card-title>
          
-      <v-card-text v-if="$store.state.userID==this.userID">
+      <v-card-text v-if="$store.state.person.userID==this.userID">
          <el-button type="warning" round @click="toChangePersonalInfo">修改个人信息</el-button>
          <el-button type="success" round @click="toChangePictures">编辑个人页面</el-button>
          <el-button type="primary" round @click="toMyCollections">查看个人收藏</el-button>
@@ -59,7 +59,7 @@ export default {
   data: () => ({
       loading: false,
       email:"xiebudongle@qq.com",
-      birthday:2004/2/29,
+      birthday:2004-2-29,
       headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
       backGroundImg:"https://cdn.vuetifyjs.com/images/cards/cooking.png",
       signature:"签名：什么时候能写完软工呢？",
@@ -91,13 +91,13 @@ export default {
       })
         .then((res) => {
           if (res.data.success) {
-            this.backGroundImg = res.data.backGroundImg;
-            this.headImg = res.data.headImg;
-            this.email = res.data.email;
-            this.birthDay = res.data.birthDay;
-            this.userID = res.data.userID;
-            this.password = res.data.password;
-            this.signature = res.data.signature;
+            this.backGroundImg = res.data.userinfo.backGroundImage;
+            this.headImg = res.data.userinfo.headImage;
+            this.email = res.data.userinfo.email;
+            this.birthday = res.data.userinfo.birthday;
+            this.userID = res.data.userinfo.userID;
+            this.password = res.data.userinfo.password;
+            this.signature = res.data.userinfo.signature;
           }
         })
         .catch((err) => {

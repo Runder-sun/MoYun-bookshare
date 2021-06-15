@@ -26,6 +26,18 @@ export default new Vuex.Store({
     setUserID(state, UserID) {
       state.person.userID = UserID
     },
+    setUserName(state, username) {
+      state.person.username = username
+    },
+    setUserEmail(state, email) {
+      state.person.email = email
+    },
+    setUserSignature(state, signature) {
+      state.person.signature = signature
+    },
+    setUserHeadImage(state, headImage) {
+      state.person.headImage = headImage
+    },
     setLogout(state) {
       state.login = false
     },

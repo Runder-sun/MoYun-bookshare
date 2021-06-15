@@ -37,7 +37,7 @@
               <template v-slot:extension>
                 <v-tabs v-model="tab">
                   <v-tab>热门书籍</v-tab>
-                  <v-tab>我的关注</v-tab>
+                  <v-tab>我关注的图书</v-tab>
 
                   <v-tab-item>
                     <v-container class="pa-4 text-center">
@@ -53,8 +53,9 @@
                                 :elevation="hover ? 24 : 2"
                                 :class="{ 'on-hover': hover }"
                                 width="300"
+                                @click="toCheckBook"
                               >
-                                <v-img :src="group.img" height="225px" @click="toCheckBook">
+                                <v-img :src="group.img" height="225px">
                                   <v-card-title class="title white--text">
                                     <v-row
                                       class="fill-height flex-column"
