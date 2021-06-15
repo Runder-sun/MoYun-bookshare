@@ -51,10 +51,10 @@ public class UserController {
     }
 
     @GetMapping("/inspectUser")//查看其他用户信息（已完成测试）
-    public Map<String,Object> inspectUser(HttpServletRequest request,@RequestBody Map<String,String> insmap){
+    public Map<String,Object> inspectUser(HttpServletRequest request,@RequestParam("UserID")String UserID){
         HttpSession session=request.getSession();
         String MyID= String.valueOf(session.getAttribute("UserID"));
-        String UserID=insmap.get("UserID");
+        //String UserID=insmap.get("UserID");
         Map<String,Object> map=new HashMap<>();
         try{
             User user=userService.getUserByUserID(UserID);
