@@ -468,11 +468,11 @@ export default {
       });
     },
     cancelCollectGroup() {
-      var a = { GroupID: this.$route.params.id };
+      var a = { GroupCollectionID: this.$route.params.id };
       this.$http({
         method: "post",
         url: "/cancelCollectGroup",
-        data: { GroupID: this.$route.params.id },
+        data: { GroupCollectionID: this.$route.params.id },
       }).then((res) => {
         if (res.data.success) this.isCollect = false;
       });
