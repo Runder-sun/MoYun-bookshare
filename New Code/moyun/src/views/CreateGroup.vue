@@ -34,7 +34,7 @@
                   </v-chip-group>
                 </v-row>
               </v-col>
-              <v-btn class="button" large>
+              <v-btn class="button" large @click="createGroup">
                 <p class="create">创建</p>
               </v-btn>
             </v-container>
