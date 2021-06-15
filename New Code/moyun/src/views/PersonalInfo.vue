@@ -14,26 +14,26 @@
 
       <v-img
         height="250"
-        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+        :src="this.backGroundImg"
       >
         <v-card-title class="white--text mt-8">
           <v-avatar size="56">
             <img
-                src="https://cdn.vuetifyjs.com/images/john.jpg"
-                alt="用户"
+                :src="this.headImage"
+                :alt="this.username"
               />
           </v-avatar>
-          <p class="ml-3">John Doe</p>
+          <p class="ml-3">{{username}}</p>
         </v-card-title>
       </v-img>
 
       <v-card-text>
-        <div class="my-4 text-subtitle-1">学号：19231097</div>
-        <div class="my-4 text-subtitle-1">密码：000000</div> 
-        <div class="my-4 text-subtitle-1">生日：2004.2.29</div>
-        <div class="my-4 text-subtitle-1">邮箱：xiebudongle@qq.com</div>
+        <div class="my-4 text-subtitle-1">学号：{{userID}}</div>
+        <div v-if="$store.state.userID==this.userID" class="my-4 text-subtitle-1">密码：{{password}}</div> 
+        <div class="my-4 text-subtitle-1">生日：{{birthday}}</div>
+        <div class="my-4 text-subtitle-1">邮箱：{{email}}</div>
         <div>
-          签名：什么时候能写完软工呢？
+          {{signature}}
         </div>
       </v-card-text>
 
@@ -41,7 +41,7 @@
 
       <v-card-title>操作</v-card-title>
          
-      <v-card-text>
+      <v-card-text v-if="$store.state.userID==this.userID">
          <el-button type="warning" round @click="toChangePersonalInfo">修改个人信息</el-button>
          <el-button type="success" round @click="toChangePictures">编辑个人页面</el-button>
          <el-button type="primary" round @click="toMyCollections">查看个人收藏</el-button>
@@ -58,7 +58,20 @@ import Bar from "../components/Bar.vue";
 export default {
   data: () => ({
       loading: false,
+      email:"xiebudongle@qq.com",
+      birthday:2004/2/29,
+      headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
+      backGroundImg:"https://cdn.vuetifyjs.com/images/cards/cooking.png",
+      signature:"签名：什么时候能写完软工呢？",
+      password:"000000",
+      userID:"",
+      username:"John Doe"
   }),
+
+  created() {
+    this.getInit();
+  },
+
   methods: {
     toChangePersonalInfo() {
       this.$router.push({ path: "/ChangePersonalInfo" });
@@ -68,6 +81,28 @@ export default {
     },
     toMyCollections() {
       this.$router.push({ path: "/MyCollections" });
+    },
+
+    getInit() {
+      this.$http({
+        method: "get",
+        url: "/inspectUser",
+        params: this.$route.params.id,
+      })
+        .then((res) => {
+          if (res.data.success) {
+            this.backGroundImg = res.data.backGroundImg;
+            this.headImg = res.data.headImg;
+            this.email = res.data.email;
+            this.birthDay = res.data.birthDay;
+            this.userID = res.data.userID;
+            this.password = res.data.password;
+            this.signature = res.data.signature;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   setup() {},

@@ -13,7 +13,7 @@
           <el-menu-item index="/Book/BookWareHouse">书籍</el-menu-item>
         </el-submenu>
         <el-menu-item index="/Group/GroupList">圈子</el-menu-item>
-        <el-menu-item index="/updates">动态</el-menu-item>
+        <el-menu-item index="/Updates">动态</el-menu-item>
       </el-menu>
       <v-row justify="end">
         <template v-if="this.$store.state.login">
@@ -60,7 +60,7 @@ export default {
   border: none;
 }
 .login_ {
-  margin-top: 40%;
+  margin-top: 20%;
   font-size: 15px;
 }
 </style>

@@ -222,7 +222,7 @@ export default {
   border: none;
 }
 .login_ {
-  margin-top: 40%;
+  margin-top: 20%;
   font-size: 15px;
 }
 </style>

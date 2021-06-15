@@ -13,7 +13,7 @@
             text-color="white"
             @click:close="refuse(user)"
           >
-            <v-avatar left size="10" :to="'/PersonalInfo/'+user.userID">
+            <v-avatar left size="10" :to="'/PersonalInfo/'+user.userID" class="lxtAva">
               <img :src="user.headImage" :alt="user.username" />
             </v-avatar>
             {{ user.username }}
@@ -105,24 +105,24 @@
       </v-dialog>
     </v-row>
     <v-container>
-      <v-card class="mx-auto" outlined>
-        <v-toolbar>
+      <v-card class="mx-auto" >
+        <v-toolbar class="lxtToolbar elevation-1" >
           <v-toolbar-title>圈子主页</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn v-if="!isMember" color="#76EEC6" @click="apply"
+          <v-btn v-if="!isMember" @click="apply" class="applyBtn"
             >申请加入</v-btn
           >
           <template v-if="isCollect">
-            <v-btn icon @click="cancelCollectGroup">
+            <v-btn icon @click="cancelCollectGroup" class="lxtBtn">
               <v-icon>mdi-heart-remove</v-icon>
             </v-btn>
           </template>
           <template v-else>
-            <v-btn icon @click="collectGroup">
+            <v-btn icon @click="collectGroup" class="lxtBtn">
               <v-icon>mdi-heart</v-icon>
             </v-btn>
           </template>
-          <v-btn icon @click.stop="drawer = !drawer">
+          <v-btn icon @click.stop="drawer = !drawer" class="lxtBtn">
             <v-icon>mdi-account-details</v-icon>
           </v-btn>
         </v-toolbar>
@@ -132,9 +132,9 @@
             <img :src="'/home/moyun/file/'+group.groupImage">
           </v-list-item-avatar>
           <v-list-item-content>
-            <div class="headline mb-4">{{group.groupName}}</div>
-            <v-list-item-title> {{group.tag}}</v-list-item-title>
-            <v-list-item-subtitle>{{group.introduce}}</v-list-item-subtitle>
+            <div class="headline mb-3" style="margin-left:70px">{{group.groupName}}</div>
+            <v-list-item-title style="margin-left:70px"> {{group.tag}}</v-list-item-title>
+            <v-list-item-subtitle style="margin-left:70px">{{group.introduce}}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
@@ -148,7 +148,7 @@
         </v-card-actions>
       </v-card>
 
-      <v-card>
+      <v-card class="task">
         <v-card-title>
           任务版
           <v-spacer></v-spacer>
@@ -159,42 +159,43 @@
             </v-btn
           >
         </v-card-title>
+        <v-divider></v-divider>
         <v-simple-table>
           <template v-slot:default>
             <thead>
               <tr>
-                <th class="text-left">任务</th>
-                <th class="text-left">创建时间</th>
+                <th class="text-center">任务</th>
+                <th class="text-center">创建时间</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(task,i) in tasks" :key="i">
-                <td>{{ task.taskContent }}</td>
-                <td>{{ task.createTime }}</td>
+                <td class="text-center">{{ task.taskContent }}</td>
+                <td class="text-center">{{ task.createTime }}</td>
               </tr>
             </tbody>
           </template>
         </v-simple-table>
       </v-card>
 
-      <v-card>
-        <v-toolbar>
+      <v-card class="discussion">
+        <v-toolbar class=" elevation-1">
           <v-toolbar-title>热门讨论</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn
-            color="cyan"
             :to="'/Group/Forum/ForumHome/' + this.$route.params.id"
+            class="discussionBtn"
             >讨论区</v-btn
           >
         </v-toolbar>
-        <v-card flat>
+        <v-card flat class="topic">
           <v-container class="pa-4 text-center">
             <v-row class="fill-height" align="center" justify="center">
               <template v-for="(forum, i) in hotForum">
                 <v-col :key="i" cols="12">
                   <v-hover v-slot="{ hover }">
                     <v-card
-                      :elevation="hover ? 24 : 2"
+                      :elevation="hover ? 7 : 2"
                       :class="{ 'on-hover': hover }"
                       :to="'/Group/Forum/Forum/' + forum.forumID"
                     >
@@ -203,7 +204,7 @@
                           class="fill-height flex-column"
                           justify="space-between"
                         >
-                          <p class="mt-4 subheading text-left">
+                          <p class="mt-4 subheading text-center font-weight-medium">
                             {{ forum.topic }}
                           </p>
                         </v-row>
@@ -215,7 +216,7 @@
                               ma-0
                               body-1
                               font-weight-bold font-italic
-                              text-left
+                              text-right
                             "
                           >
                             {{ forum.createTime }}
@@ -276,8 +277,27 @@ export default {
     hotForum: [
       {
         forumID: 1,
+        topic: "主题:今天宁吃了吗",
+        forumMessages: "内容",
+        createTime:"2020-1-1"
+      },
+      {
+        forumID: 1,
+        topic: "主题：这是一个主题",
+        forumMessages: "内容",
+        createTime:"2020-1-1"
+      },
+      {
+        forumID: 1,
         topic: "主题",
         forumMessages: "内容",
+        createTime:"2020-1-1"
+      },
+      {
+        forumID: 1,
+        topic: "主题",
+        forumMessages: "内容",
+        createTime:"2020-1-1"
       },
     ],
     groupApplyUser: [
@@ -449,3 +469,73 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.lxtAva{
+    border-radius: 137px;
+    background: #eee7e7;
+    box-shadow: inset -20px 20px 41px #b3adad,
+    inset 20px -20px 41px #ffffff;
+}
+
+.lxtToolbar{
+  margin-top:40px;
+  padding-right:10px;
+}
+
+.lxtBtn{
+  color: #493842;
+  margin-right: 30px;
+
+box-shadow:  18px 18px 36px rgba(0, 0, 0, 0.1),
+             -18px -18px 36px #ffffff;
+    		transition: box-shadow 0.2s ease-out;         
+		background-color: #efeeee;
+		position: relative;  
+    		outline: none;
+		border: none;                   
+}
+
+.applyBtn{
+    margin-right:35px;
+  		color: #2b7c4d;
+		box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
+			-9px -9px 18px rgba(255, 255, 255, 1);
+		border-radius: 3rem;
+		transition: box-shadow 0.2s ease-out;
+		background-color: #efeeee;
+		position: relative;
+		top: 0px;
+		width: 140px;
+		height: 70 px;
+		outline: none;
+		border: none;
+}
+
+.task{
+  margin-top:30px;
+}
+
+.discussion{
+  margin-top:30px;
+}
+
+.discussionBtn{
+  		color: #105a6d;
+		box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
+			-9px -9px 18px rgba(255, 255, 255, 1);
+		border-radius: 3rem;
+		transition: box-shadow 0.2s ease-out;
+		background-color: #efeeee;
+		position: relative;
+		top: 0px;
+		width: 140px;
+		height: 70 px;
+		outline: none;
+		border: none;
+}
+
+.topic{
+  margin-top:20px;
+}
+</style>

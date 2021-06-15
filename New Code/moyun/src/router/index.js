@@ -22,7 +22,6 @@ import Reading from "../views/Reading";
 import Forum from "../views/Forum.vue";
 import ForumHome from "../views/ForumHome.vue";
 import BlogList from "../views/BlogList.vue";
-import WriteBlog from "../views/WriteBlog.vue";
 import PersonalCollection from "../views/PersonalCollection.vue";
 import EditBlog from "../views/EditBlog.vue";
 import ScanBlog from "../views/ScanBlog.vue";
@@ -154,11 +153,6 @@ const routes = [
     component:PersonalCollection,
   },
   {
-    path:"/BlogList/WriteBlog/:id",
-    name:"WriteBlog",
-    component:WriteBlog,
-  },
-  {
     path:"/BlogList/EditBlog/:id",
     name:"EditBlog",
     component:EditBlog,
@@ -179,7 +173,7 @@ const routes = [
     component: EditBookReview,
   },
   {
-    path:"/PersonalInfo",
+    path:"/PersonalInfo/:id",
     name:"PersonalInfo",
     component: PersonalInfo,
   },
@@ -208,6 +202,7 @@ const routes = [
     name:"MessageListFromFriend",
     component: MessageListFromFriend,
   },
+
 ];
 
 const router = new VueRouter({
