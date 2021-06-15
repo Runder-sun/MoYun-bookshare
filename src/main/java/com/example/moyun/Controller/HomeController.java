@@ -103,7 +103,7 @@ public class HomeController {
                         map.put("success", true);
                         map.put("message", "用户登录成功！");
                         map.put("isAdmin",false);
-                        map.put("User",user);
+                        map.put("user",user);
                     }
                     else{
                         map.put("success",false);

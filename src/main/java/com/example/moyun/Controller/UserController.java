@@ -92,26 +92,52 @@ public class UserController {
         return map;
     }
 
-    @PostMapping("/ChangePictures")//修改头像和背景（已完成测试）
-    public Map<String,Object> changePictures(HttpServletRequest request,@RequestParam("files") MultipartFile[] files){
+    @PostMapping("/ChangeHeadImage")//修改头像（已完成测试）
+    public Map<String,Object> changeHeadImage(HttpServletRequest request,@RequestParam("file") MultipartFile file){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
         String UserID= String.valueOf(session.getAttribute("UserID"));
-        if (files[0].isEmpty()||files[1].isEmpty()){
+        if (file.isEmpty()){
             map.put("success",false);
             map.put("message","上传失败");
         }
-        String filename1=files[0].getOriginalFilename();
-        String filename2=files[1].getOriginalFilename();
+        String filename1=file.getOriginalFilename();
         String newName1= UUID.randomUUID()+filename1;
-        String newName2= UUID.randomUUID()+filename2;
         File dest1=new File(newName1);
-        File dest2=new File(newName2);
         try {
-            files[0].transferTo(dest1);
-            files[1].transferTo(dest2);
+            file.transferTo(dest1);
             String HeadImage=dest1.getPath();
-            String BackgroundImage=dest2.getPath();
+            String BackgroundImage=userService.getUserByUserID(UserID).getBackgroundImage();
+            try{
+                userService.updatePictures(UserID,HeadImage,BackgroundImage);
+                map.put("success",true);
+            }catch (Exception e){
+                e.printStackTrace();
+                map.put("success",false);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            map.put("success",false);
+        }
+        return map;
+    }
+
+    @PostMapping("/ChangeBackgroundImage")//修改背景（已完成测试）
+    public Map<String,Object> ChangeBackgroundImage(HttpServletRequest request,@RequestParam("file") MultipartFile file){
+        Map<String,Object> map=new HashMap<>();
+        HttpSession session=request.getSession();
+        String UserID= String.valueOf(session.getAttribute("UserID"));
+        if (file.isEmpty()){
+            map.put("success",false);
+            map.put("message","上传失败");
+        }
+        String filename1=file.getOriginalFilename();
+        String newName1= UUID.randomUUID()+filename1;
+        File dest1=new File(newName1);
+        try {
+            file.transferTo(dest1);
+            String BackgroundImage=dest1.getPath();
+            String HeadImage=userService.getUserByUserID(UserID).getHeadImage();
             try{
                 userService.updatePictures(UserID,HeadImage,BackgroundImage);
                 map.put("success",true);

@@ -67,4 +67,7 @@ public interface BookReviewService {
 
     //判断是否收藏
     BookReviewCollection isCollect(String UserID,Integer BookReviewID);
+
+    //获取我的书评
+    List<BookReview> getMyBookReview(String UserID);
 }

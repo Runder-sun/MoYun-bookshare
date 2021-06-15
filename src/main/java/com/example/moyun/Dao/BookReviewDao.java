@@ -49,4 +49,6 @@ public interface BookReviewDao {
     List<BookReview> getBookReviewDT(String UserID);
 
     List<BookReview> getBookReviewListByBookID(Integer BookID);
+
+    List<BookReview> getMyBookReview(String UserID);
 }

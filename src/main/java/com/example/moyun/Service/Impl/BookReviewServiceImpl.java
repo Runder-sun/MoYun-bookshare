@@ -111,4 +111,9 @@ public class BookReviewServiceImpl implements BookReviewService {
     public BookReviewCollection isCollect(String UserID, Integer BookReviewID){
         return bookReviewDao.isCollect(UserID,BookReviewID);
     }
+
+    @Override
+    public List<BookReview> getMyBookReview(String UserID){
+        return bookReviewDao.getMyBookReview(UserID);
+    }
 }

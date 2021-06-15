@@ -107,4 +107,9 @@
         from book_review_collection
         where userid=#{UserID} and book_reviewid=#{BookReviewID}
     </select>
+    <select id="getMyBookReview" resultType="BookReview">
+        select *
+        from book_review
+        where userid=#{UserID}
+    </select>
 </mapper>

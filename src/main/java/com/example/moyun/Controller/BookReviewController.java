@@ -36,6 +36,31 @@ public class BookReviewController {
     @Autowired
     private UserMessageService userMessageService;
 
+    @GetMapping("/BookReview")//书评主页
+    public Map<String,Object> bookReview(HttpServletRequest request){
+        HttpSession session=request.getSession();
+        String UserID= String.valueOf(session.getAttribute("UserID"));
+        Map<String,Object> map=new HashMap<>();
+        try {
+            List<BookReview> bookReviewCollection=bookReviewService.getBookReviewCollectionByUserID(UserID);
+            List<BookReview> myBookReview=bookReviewService.getMyBookReview(UserID);
+            List<User> users=new ArrayList<>();
+            if(bookReviewCollection.size()!=0){
+                for (BookReview bookReview:bookReviewCollection){
+                    users.add(userService.getUserByUserID(bookReview.getUserID()));
+                }
+            }
+            map.put("bookReviewCollection",bookReviewCollection);
+            map.put("bookReviewUser",users);
+            map.put("MyBookReview",myBookReview);
+            map.put("success",true);
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("success",false);
+        }
+        return map;
+    }
+
     @PostMapping("/likeBookReview")//点赞书评(已完成测试)
     public Map<String,Object> likeBookReview(HttpServletRequest request,@RequestBody Map<String,String> lmap){
         HttpSession session=request.getSession();
