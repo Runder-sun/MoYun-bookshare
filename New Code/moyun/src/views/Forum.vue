@@ -45,6 +45,7 @@
 <script>
 import bar from "../components/Bar.vue";
 export default {
+  inject: ["reload"],
   create(){
     this.getInit()
     },
@@ -67,13 +68,13 @@ export default {
       addMessage(){
         this.$http({
           method:'post',
-          url:"addMessage",
+          url:"/addMessage",
           data:{
             ForumID:this.$route.params.id,
             Comment:this.content,
           }
         }).then(res=>{
-          this.getInit()
+          this.reload()
         })
         this.content="";
       },
@@ -82,51 +83,13 @@ export default {
       panel:[0],
       content:"",
       forumMessageUser:[
-        {
-          username:"赵阳",
-          headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-        },
-        {
-          username:"zy",
-          headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-        },
-        {
-          username:"zy",
-          headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-        },
-        {
-          username:"zy",
-          headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-        },
-        {
-          username:"zy",
-          headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-        },
+        
       ],
       forum:{
-        topic:"羊为什么吃草",
+        
       },
       messages: [
-      {
-        title: "讨论1",
-        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      },
-      {
-        title: "讨论2",
-        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      },
-      {
-        title: "讨论3",
-        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      },
-      {
-        title: "讨论4",
-        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      },
-      {
-        title: "讨论5",
-        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      },
+      
     ],
   }),
   components: {
