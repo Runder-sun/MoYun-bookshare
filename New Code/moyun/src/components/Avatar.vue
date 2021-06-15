@@ -42,7 +42,9 @@
 </template>
 
 <script>
+
 export default {
+  
   data:()=>({
     user:{
       username:"zy",
@@ -64,14 +66,8 @@ export default {
         this.$router.push({path:"/BlogList"});
       },
       logout(){
-        this.$http({
-          method:'post',
-          url:"/logout"
-        }).then(response=>{
-          if(response.data.success)
-          this.$store.commit('setLogout')
-        })
-        
+        this.$store.commit('setLogout')
+        this.$router.push({path:"/"});
       }
   },
 }

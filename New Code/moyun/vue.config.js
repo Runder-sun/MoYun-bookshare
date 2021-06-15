@@ -7,6 +7,6 @@ module.exports = {
             errors: false
         },
     },
-    publicPath: '/moyun/',
+    publicPath: '/',
     outputDir: 'dist'
 };
