@@ -20,11 +20,12 @@
               <v-col cols="12">
                 <v-text-field
                   v-model="groupName"
+                  :rules="groupNameRules"
                   color="blue darken-2"
                   label="圈子名称"
                   required
                 ></v-text-field>
-                <v-textarea v-model="groupIntroduce" color="teal">
+                <v-textarea v-model="groupIntroduce" :rules="groupIntroduceRules" color="teal">
                   <template v-slot:label>
                     <div>圈子简介</div>
                   </template>
@@ -74,6 +75,8 @@ export default {
     imageUrl: "",
     groupIntroduce: "",
     groupName: "",
+    groupNameRules: [(v) => !!v || "请填写圈子名称"],
+    groupIntroduceRules: [(v) => !!v || "请填写圈子简介"],
     image: null,
     checkbox: false,
     isPrivate: 0,

@@ -13,6 +13,7 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false;
 axios.defaults.baseURL ='/api/'
 Vue.prototype.$http = axios
+Vue.config.devtools = true;
 
 new Vue({
   router,

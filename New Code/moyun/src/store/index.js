@@ -2,15 +2,16 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 Vue.use(Vuex);
+Vue.config.devtools = true
 
 export default new Vuex.Store({
   state: {
-    login: true,
+    login: false,
     isAdmin: false,
     person: {
       userID: "",
       username: "",
-      isTeacher: false,
+      isTeacher: 0,
       email: "",
       signature: "",
       headImage: "",
@@ -38,12 +39,16 @@ export default new Vuex.Store({
     setUserHeadImage(state, headImage) {
       state.person.headImage = headImage
     },
+    setIsTeacher(state,isTeacher){
+      state.person.isTeacher=isTeacher;
+    },
     setLogout(state) {
       state.login = false
     },
     setUser(state, Person){
       state.person=Person
-    }
+    },
+    
   },
   actions: {},
   modules: {},
