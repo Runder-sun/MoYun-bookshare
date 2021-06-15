@@ -8,12 +8,10 @@
           <v-toolbar class="elevation-0" >
           <v-toolbar-title>基本信息</v-toolbar-title>
           <v-spacer></v-spacer>
-          <el-button type="primary" round @click="toBookRecommand">推荐</el-button>
-          <el-button type="success" round v-if="careBoolean" @click="cancelCare">取消关注</el-button>
-          <el-button type="success" round v-else @click="care">关注</el-button>
-          <el-button type="info" round @click="toEditBook">编辑</el-button>
-          <el-button type="warning" round @click="deleteBook">删除</el-button>
-          <el-button type="danger" round @click="onReadingBook('1234')">阅读</el-button>
+          <el-button type="success" round v-if="careBoolean" @click="cancelCare">取消收藏（关注）</el-button>
+          <el-button type="success" round v-else @click="care">收藏（关注）</el-button>
+          <el-button type="info" round v-if="$store.state.person.userID==this.bookAdder.userID" @click="toEditBook">编辑</el-button>
+          <el-button type="warning" v-if="$store.state.person.userID==this.bookAdder.userID" round @click="deleteBook">删除</el-button>
           <el-button type="danger" round @click="downloadBook">下载</el-button>
         </v-toolbar>
           <div class="line" />
@@ -25,26 +23,24 @@
             </div>
             <div class="bookinforight"
             >
-              <!-- 不应该用el-link控件，应该直接就可以显示了 -->
               <v-row>
                 <el-image
                   style="width: 200px; height: 200px"
-                  :src="bookinfourl"
-                  :preview-src-list="bookinfosrcList"
+                  :src="'/home/moyun/file/'+this.book.BookImage"
                   class="imgAlign"
                 >
                 </el-image>
                 <v-col 
                 align="center"
                 class="mx-0">
-                <div >图书名称：图书名称</div>
+                <div >图书名称：{{this.book.bookName}}</div>
                   <div class="text ms-4">
-                    作者
+                    {{this.book.author}}
                 </div>
-                <div class="my-4 text-subtitle-1">图书分类</div>
-                <div class="my-4 text-subtitle-1 ">出版社</div>
-                <v-card-subtitle>ISBN号：ISBN号</v-card-subtitle>
-                <div class="my-4 text-subtitle-1">这里是简介</div>
+                <div class="my-4 text-subtitle-1">书籍类别：{{this.book.kind}}</div>
+                <div class="my-4 text-subtitle-1 ">出版社：{{this.book.publisher}}</div>
+                <v-card-subtitle>ISBN号：{{this.book.ISBN}}</v-card-subtitle>
+                <div class="my-4 text-subtitle-1">简介;{{this.book.introduce}}</div>
                 </v-col>
               </v-row>
             </div>
@@ -61,17 +57,15 @@
             <el-button type="primary" round @click="toWriteBookReview">撰写书评</el-button>
         </v-toolbar>
         <v-divider></v-divider>
-        <el-table :data="tableData" style="width: 100%" height="400" stripe :header-cell-style="{'text-align':'center'}"
+        <el-table :data="bookReviewList" style="width: 100%" height="400" stripe :header-cell-style="{'text-align':'center'}"
     :cell-style="{'text-align':'center'}">
-          <el-table-column fixed prop="date" label="发布日期" width="150" ></el-table-column>
+          <el-table-column fixed prop="reviewTime" label="发布日期" width="150" ></el-table-column>
           <el-table-column prop="title" label="题目" width="120"></el-table-column>
           <el-table-column prop="author" label="作者" width="120"></el-table-column>
-          <el-table-column prop="bookReview" label="书评内容" width="120"></el-table-column>
-          <el-table-column prop="scores" label="评分" width="300"></el-table-column>
+          <el-table-column prop="content" label="书评内容" width="120"></el-table-column>
+          <el-table-column prop="score" label="评分" width="300"></el-table-column>
           <el-table-column align="right">
-            <template slot-scope="scope">
-              <el-button type="warning" round @click="toCheckBookReview(scope.$index, scope.row)">查看</el-button>
-            </template>
+              <el-button type="warning" round @click="toCheckBookReview('bookReviewID')">查看</el-button>
           </el-table-column>
         </el-table>
         <el-pagination background center layout="prev, pager, next" :total="1000" class="pages">
@@ -90,64 +84,12 @@
 import Bar from "../components/Bar.vue";
 export default {
   data: () => ({
-    careBoolean:false,
-    
-    bookinfourl:"https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
-    bookinfosrcList: [
-      "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg",
-      "https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg",
-    ],
-    tableData: [
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-    ],
+    book:[],
+    bookAdder:{
+      userID:"2"
+    },
+    bookReviewList:[],
+    isCollect:false,
     form: {
       name: "",
       region: "",
@@ -159,7 +101,31 @@ export default {
       desc: "",
     },
   }),
+
+  created() {
+    this.initCheckBook();
+  },
+  
   methods: {
+    initCheckBook() {
+      this.$http({
+        method: "get",
+        url: "/inspectBook",
+        params: this.$route.params.id,
+      })
+        .then((res) => {
+          if (res.data.success) {
+            this.book = res.data.book;
+            this.bookAdder = res.data.bookAdder;
+            this.bookReviewList=res.data.bookReviewList;
+            this.isCollect = res.data.isCollect;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    
     onSubmit() {
       console.log("submit!");
     },
@@ -172,32 +138,69 @@ export default {
     handlePreview(file) {
       console.log(file);
     },
-    onReadingBook(bookid) {
-      this.$router.push("/Book/Reading?BookID=" + bookid);
-    },
-    toBookRecommand(){
-      this.$router.push({ path: "/Book/BookRecommand" });
-    },
     toWriteBookReview(){
-      this.$router.push({ path: "/Book/WriteBookReview" });
+      this.$router.push({ path: "/Book/WriteBookReview" +this.book.bookID});
     },
     toEditBook(){
-        this.$router.push({ path: "/Book/EditBook" });
+        this.$router.push({ path: "/Book/EditBook/" +this.book.bookID});
     },
-    toCheckBookReview(){
-        this.$router.push({ path: "/Book/CheckBookReview" });
+    toCheckBookReview(bookReviewID){
+        this.$router.push({ path: "/Book/CheckBookReview"+ bookReviewID});
     },
     deleteBook(){
-        alert("删除成功");
+        this.$http({
+        method: "get",
+        url: "/deleteBook",
+        params: this.$route.params.id,
+      })
+        .then((res) => {
+          if (res.data.success) {
+            alert("删除成功");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     downloadBook(){
         alert("下载成功");
     },
     cancelCare(){
-        this.careBoolean =false;
+        this.$http({
+        method: "post",
+        url: "/cancelCollectionBook",
+        data: {
+          bookCollectionID:this.$route.params.id,
+        },
+      })
+        .then((res) => {
+          console.log(res.data.message);
+          this.message = res.data.message;
+          this.snackbar = true;
+          if (res.data.success) {
+            this.isCollect=false;
+          } 
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     care(){
-        this.careBoolean = true;
+        this.$http({
+        method: "post",
+        url: "/collectBook",
+        data: {
+          bookID:this.$route.params.id,
+        },
+      })
+        .then((res) => {
+          if (res.data.success) {
+            this.isCollect=true;
+          } 
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   },
   components: {
