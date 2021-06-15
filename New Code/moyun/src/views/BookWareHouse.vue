@@ -139,8 +139,10 @@ export default {
       "IT",
       "数学",
     ],
-    hotBook: [],
-    bookCollectionBook: [],
+    hotBook: [
+    ],
+    bookCollectionBook: [
+    ],
 
   }),
   setup() {},
