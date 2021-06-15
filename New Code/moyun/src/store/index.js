@@ -10,7 +10,7 @@ export default new Vuex.Store({
     person: {
       userID: "",
       username: "",
-      isTeacher: false,
+      isTeacher: 0,
       email: "",
       signature: "",
       headImage: "",
@@ -26,12 +26,16 @@ export default new Vuex.Store({
     setUserID(state, UserID) {
       state.person.userID = UserID
     },
+    setIsTeacher(state,isTeacher){
+      state.person.isTeacher=isTeacher;
+    },
     setLogout(state) {
       state.login = false
     },
     setUser(state, Person){
       state.person=Person
-    }
+    },
+    
   },
   actions: {},
   modules: {},

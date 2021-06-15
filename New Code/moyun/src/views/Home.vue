@@ -45,7 +45,7 @@
                       width="300"
                     >
                       <v-img :src="group.groupImage" height="225px">
-                        <v-card-title class="title white--text">
+                        <v-card-title >
                           <v-row
                             class="fill-height flex-column"
                             justify="space-between"
@@ -104,7 +104,7 @@
                         height="225px"
                         @click="toCheckBook"
                       >
-                        <v-card-title class="title white--text">
+                        <v-card-title >
                           <v-row
                             class="fill-height flex-column"
                             justify="space-between"
