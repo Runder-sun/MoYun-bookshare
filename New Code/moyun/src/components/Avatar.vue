@@ -3,8 +3,8 @@
     <template v-slot:activator="{ on }">
       <v-btn icon v-on="on">
         <v-avatar  size="40" color="#96CDCD">
-          <template v-if="$store.state.person.userImage!==''">
-            <img :src="'/home/moyun/file/'+$store.state.person.userImage">
+          <template v-if="$store.state.person.headImage!==''">
+            <img :src="'/home/moyun/file/'+$store.state.person.headImage">
             </template>
             <template v-else>
               <span>{{$store.state.person.userID.substr(0,1)}}</span>
@@ -56,7 +56,7 @@ export default {
 
   methods: {
     toPersonalInfo(){
-        this.$router.push({ path: "/PersonalInfo/"+this.$store.state.userID});
+        this.$router.push({ path: "/PersonalInfo/"+this.$store.state.person.userID});
       },
       toMSG(){
         this.$router.push({path:"/MessageListFromFriend/0"})
@@ -68,8 +68,17 @@ export default {
       logout(){
         this.$store.commit('setLogout')
         this.$router.push({path:"/"});
+//        this.$http({
+//          method:'post',
+//          url:"/logout",
+//        }).then(res=>{
+//          if(res.data.success){
+//            this.$store.commit('setLogout')
+//            this.$router.push({path:"/"});
+//          }
+//        })
+        
       }
   },
 }
-
 </script>

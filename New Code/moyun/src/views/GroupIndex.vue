@@ -12,6 +12,7 @@
             label
             text-color="white"
             @click:close="refuse(user)"
+            :to="'/PersonalInfo/'+user.userID"
           >
             <v-avatar left size="10" :to="'/PersonalInfo/'+user.userID" class="lxtAva">
               <img :src="user.headImage" :alt="user.username" />
@@ -320,10 +321,11 @@ export default {
   },
   methods: {
     getInit() {
+      var a={GroupID:this.$route.params.id,}
       this.$http({
         method: "get",
         url: "/GroupInfo",
-        params: this.$route.params.id,
+        params:qs.stringify(a)
       })
         .then((res) => {
           if (res.data.success) {
@@ -357,10 +359,11 @@ export default {
       return null;
     },
     getApply() {
+      var a={GroupID:this.$route.params.id}
       this.$http({
         method: "get",
         url: "/GroupApplyList",
-        params: this.$route.params.id,
+        params:qs.stringify(a)
       })
         .then((res) => {
           if (res.data.success) {
@@ -374,96 +377,80 @@ export default {
     refuse(item) {
       this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
       this.groupApplyUser = [...this.groupApplyUser];
+      var a={GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),GroupID: this.$route.params.id}
       this.$http({
         method: "post",
         url: "/refuseApply",
-        params: {
-          GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
-          GroupID: this.$route.params.id,
-        },
+        data: qs.stringify(a)
       });
     },
     acceptApply(item) {
       this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
       this.groupApplyUser = [...this.groupApplyUser];
+      var a={GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),GroupID: this.$route.params.id,UserID: item.userID,}
       this.$http({
         method: "post",
         url: "/addMember",
-        params: {
-          GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
-          GroupID: this.$route.params.id,
-          UserID: item.userID,
-        },
+        data: qs.stringify(a)
       });
     },
     apply() {
+      var a={GroupID:this.$route.params.id}
       this.$http({
         method: "post",
         url: "/applyGroup",
-        params: {
-          GroupID: this.$route.params.id,
-        },
+        data: qs.stringify(a)
       });
     },
     removeMember(member) {
       this.members.splice(this.members.indexOf(member), 1);
       this.members = [...this.members];
+      var a={MemberID: member.userID}
       this.$http({
         method: "post",
         url: "/deleteMember",
-        params: {
-          MemberID: member.userID,
-        },
+        data: qs.stringify(a)
       });
     },
     collectGroup() {
+      var a={GroupID:this.$route.params.id}
       this.$http({
         method: "post",
         url: "/CollectGroup",
-        params: {
-          GroupID: this.$route.params.id,
-        },
+        data: qs.stringify(a)
       }).then((res) => {
         if (res.data.success) this.isCollect = true;
       });
     },
     cancelCollectGroup() {
+      var a={GroupID:this.$route.params.id}
       this.$http({
         method: "post",
         url: "/cancelCollectGroup",
-        params: {
-          GroupID: this.$route.params.id,
-        },
+        data: qs.stringify(a)
       }).then((res) => {
         if (res.data.success) this.isCollect = false;
       });
     },
     addTask() {
       //TODO:生成弹窗输入任务
+      var a={GroupID:this.$route.params.id,TaskContent:this.newTask}
       this.dialog1 = false;
       this.$http({
         method: "post",
         url:"/addTask",
-        data: {
-          GroupID:this.$route.params.id,
-          TaskContent:this.newTask,
-        }
+        data: qs.stringify(a)
       });
       this.getInit();
       newTask="";
     },
     changeGroupInfo(){
+      var a={GroupID:this.$route.params.id,GroupName:this.group.groupName,Introduce:this.group.introduce,isPrivate:this.group.isPrivate,Tag:this.group.tag}
       this.dialog = false
       this.$http({
         method: "post",
         url:"/changeGroupInfo",
-        data: {
-          GroupID:this.$route.params.id,
-          GroupName:this.group.groupName,
-          Introduce:this.group.introduce,
-          isPrivate:this.group.isPrivate,
-          Tag:this.group.tag,
-        }
+        data: qs.stringify(a)
       })
     }
   },

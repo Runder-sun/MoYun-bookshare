@@ -7,6 +7,7 @@ import vuetify from "./plugins/vuetify";
 import ElementUI from "element-ui";
 import "./styles.scss";
 import axios from "axios"
+import qs from "qs";
 
 Vue.use(ElementUI);
 
@@ -20,5 +21,6 @@ new Vue({
   store,
   vuetify,
   axios,
+  qs,
   render: (h) => h(App),
 }).$mount("#app");

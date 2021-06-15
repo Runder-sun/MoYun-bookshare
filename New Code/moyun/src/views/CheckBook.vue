@@ -2,10 +2,9 @@
   <div class="CheckBook">
     <v-app>
       <bar></bar>
-      <v-container>
-        <v-container>
-          <v-card>
-          <v-toolbar class="elevation-0" >
+      <v-container>  
+          <v-card class="mx-auto" style="margin-top:30px" width="1000px" height="500">
+          <v-toolbar class="elevation-1 btns" >
           <v-toolbar-title>基本信息</v-toolbar-title>
           <v-spacer></v-spacer>
           <el-button type="success" round v-if="careBoolean" @click="cancelCare">取消收藏（关注）</el-button>
@@ -14,58 +13,50 @@
           <el-button type="warning" v-if="$store.state.person.userID==this.bookAdder.userID" round @click="deleteBook">删除</el-button>
           <el-button type="danger" round @click="downloadBook">下载</el-button>
         </v-toolbar>
-          <div class="line" />
-          <div class="bookinfocontainer">
-            <v-col>
-            <div class="bookinfoleft">
-              <div class="demo-image__preview">
-              </div>
-            </div>
-            <div class="bookinforight"
+            <v-img
+              class="white--text align-end"
+              height="250px"
+              :src="'/home/moyun/file/'+this.book.BookImage"
             >
-              <v-row>
-                <el-image
-                  style="width: 200px; height: 200px"
-                  :src="'/home/moyun/file/'+this.book.BookImage"
-                  class="imgAlign"
-                >
-                </el-image>
-                <v-col 
-                align="center"
-                class="mx-0">
-                <div >图书名称：{{this.book.bookName}}</div>
-                  <div class="text ms-4">
-                    {{this.book.author}}
-                </div>
-                <div class="my-4 text-subtitle-1">书籍类别：{{this.book.kind}}</div>
-                <div class="my-4 text-subtitle-1 ">出版社：{{this.book.publisher}}</div>
-                <v-card-subtitle>ISBN号：{{this.book.ISBN}}</v-card-subtitle>
-                <div class="my-4 text-subtitle-1">简介;{{this.book.introduce}}</div>
+              <v-card-title>
+                <v-col>
+                <h2>{{this.book.bookName}}</h2>
+                                <br>
+                <h4> {{this.book.author}}</h4>
+                <br>
+                <h4> {{this.book.kind}}</h4>
                 </v-col>
-              </v-row>
-            </div>
-            </v-col>
-          </div>
+                </v-card-title>
+            </v-img>
+
+            <v-card-subtitle class="pb-0 text-right" >
+              <p>{{this.book.publisher}}</p>
+              <p>ISBN号：{{this.book.ISBN}}</p>
+            </v-card-subtitle>
+
+            <v-card-text class="text--primary short">
+              简介:{{this.book.introduce}}
+        </v-card-text>
+
           </v-card>
         </v-container>
-      </v-container>
       <v-container class="comment">
-        <v-card>
+        <v-card width="1000px" class="mx-auto" >
         <v-toolbar class="elevation-0">
             <v-toolbar-title>书评列表</v-toolbar-title>
             <v-spacer></v-spacer>
-            <el-button type="primary" round @click="toWriteBookReview">撰写书评</el-button>
+            <el-button type="primary" round @click="toWriteBookReview" class="write">撰写书评</el-button>
         </v-toolbar>
         <v-divider></v-divider>
         <el-table :data="bookReviewList" style="width: 100%" height="400" stripe :header-cell-style="{'text-align':'center'}"
     :cell-style="{'text-align':'center'}">
           <el-table-column fixed prop="reviewTime" label="发布日期" width="150" ></el-table-column>
-          <el-table-column prop="title" label="题目" width="120"></el-table-column>
+          <el-table-column prop="title" label="题目" width="200"></el-table-column>
           <el-table-column prop="author" label="作者" width="120"></el-table-column>
-          <el-table-column prop="content" label="书评内容" width="120"></el-table-column>
-          <el-table-column prop="score" label="评分" width="300"></el-table-column>
+          <el-table-column prop="content" label="书评内容" width="200"></el-table-column>
+          <el-table-column prop="score" label="评分" width="100"></el-table-column>
           <el-table-column align="right">
-              <el-button type="warning" round @click="toCheckBookReview('bookReviewID')">查看</el-button>
+              <el-button type="warning" round class="check" @click="toCheckBookReview('bookReviewID')">查看</el-button>
           </el-table-column>
         </el-table>
         <el-pagination background center layout="prev, pager, next" :total="1000" class="pages">
@@ -257,12 +248,36 @@ export default {
 }
 /*lxt美化部分*/ 
 .comment{
-  margin-top:80px;
+  margin-top:20px;
 }
 .pages{
   text-align: center; 
 }
 .imgAlign{
   vertical-align: middle;
+}
+
+.detail{
+  padding:10px;
+  height:300px;
+}
+
+.short{
+  margin-top: 20px auto;
+}
+
+.btns .el-button{
+  width: 74px;
+  height: 37px;
+  margin-right:16px auto;
+}
+
+.write{
+  margin-right: 10px;
+}
+
+.check{
+    width: 76px;
+  height: 38px;
 }
 </style>
