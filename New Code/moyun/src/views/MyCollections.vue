@@ -27,6 +27,20 @@
               </v-col>
 
               <v-col cols="12">
+                <v-card color="#4A148C" dark>
+                  <v-card-title class="text-h5"> 我收藏的书评 </v-card-title>
+
+                  <v-card-subtitle
+                    >在书评浏览界面收藏的书评将会存放在此，点击查看按钮转到我收藏的书评界面</v-card-subtitle
+                  >
+
+                  <v-card-actions>
+                      <v-btn class="ml-2 mt-5" outlined rounded small @click="toBookReviewCollection"> 查看 </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+
+              <v-col cols="12">
                 <v-card color="#1F7087" dark>
                   <v-card-title class="text-h5"> 我收藏的圈子 </v-card-title>
 
@@ -93,6 +107,9 @@ export default {
       toBookCollection(){
         this.$router.push({ path: "/Book/BookWareHouse" });
       },
+      toBookReviewCollection(){
+        this.$router.push({ path: "/Book/BookReview" });
+      }
   },
 };
 </script>

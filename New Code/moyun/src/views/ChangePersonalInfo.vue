@@ -19,7 +19,7 @@
               ></v-text-field>
 
               <v-text-field
-                v-model="Email"
+                v-model="email"
                 :rules="emailRules"
                 label="E-mail"
                 required
@@ -28,7 +28,7 @@
               <v-text-field
                 v-model="birth"
                 :rules="birthRules"
-                label="生日"
+                label="生日（格式为xxxx-xx-xx）"
                 required
               ></v-text-field>
 
@@ -70,13 +70,16 @@ export default {
     sex:"",
     username:"",
     usernameRules:[(v) => !!v || "username is required"],
-    Email: "",
+    email: "",
     emailRules: [
       (v) => !!v || "E-mail is required",
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
     birth: "",
-    birthRules: [(v) => !!v || "birth is required"],
+    birthRules: [
+      (v) => !!v || "birth is required",
+      (v) => /\d{4}[-]\d{2}[-]\d{2}/.test(v) || "BirthDay must be valid",
+    ],
     checkbox: false,
     signature: "",
 	  sigRules: [
@@ -93,6 +96,7 @@ export default {
   methods: {
     saveChange() {
       this.$refs.form.validate();
+      
       this.$http({
         method: "post",
         url: "/ChangePersonalInfo",
@@ -106,6 +110,9 @@ export default {
       }).then((res) => {
         this.message = res.data.message;
         if (res.data.success) {
+          this.$store.commit("setUserName", this.username);
+          this.$store.commit("setUserEmail", this.email);
+          this.$store.commit("setUserSignature",this.signature);
           alert("更改成功");
           this.$router.push({ path: "/PersonalInfo/"+this.$store.state.userID});
         }
@@ -122,10 +129,10 @@ export default {
       })
         .then((res) => {
           if (res.data.success) {
-            this.username = res.data.username;
-            this.email = res.data.email;
-            this.birth = res.data.birthDay;
-            this.signature = res.data.signature;
+            this.username = res.data.userinfo.username;
+            this.email = res.data.userinfo.email;
+            this.birth = res.data.userinfo.birthDay;
+            this.signature = res.data.userinfo.signature;
           }
         })
         .catch((err) => {
