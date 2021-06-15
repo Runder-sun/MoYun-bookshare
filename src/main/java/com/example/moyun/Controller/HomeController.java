@@ -99,7 +99,6 @@ public class HomeController {
                     if(user.getIsForbidden()==0){
                         HttpSession session=request.getSession();
                         session.setAttribute("UserID",UserID);
-                        session.setAttribute("isTeacher",user.getIsTeacher());
                         map.put("success", true);
                         map.put("message", "用户登录成功！");
                         map.put("isAdmin",false);
