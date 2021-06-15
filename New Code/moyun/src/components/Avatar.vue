@@ -56,7 +56,7 @@ export default {
 
   methods: {
     toPersonalInfo(){
-        this.$router.push({ path: "/PersonalInfo/"+this.$store.state.userID});
+        this.$router.push({ path: "/PersonalInfo/"+this.$store.state.person.userID});
       },
       toMSG(){
         this.$router.push({path:"/MessageListFromFriend/0"})
@@ -81,5 +81,4 @@ export default {
       }
   },
 }
-
 </script>

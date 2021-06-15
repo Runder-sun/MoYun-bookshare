@@ -154,6 +154,7 @@ export default {
         method: "get",
         url: "/GroupHome",
       }).then((res) => {
+        console.log(res.data)
           this.hotGroups = res.data.hotGroup;
           this.myGroups = res.data.UserGroup;
         }).catch((err) => {
