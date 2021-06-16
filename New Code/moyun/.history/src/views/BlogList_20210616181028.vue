@@ -160,7 +160,7 @@ export default({
       },
     },
 
-    mounted(){
+    created(){
       this.show;
     },
 
@@ -201,7 +201,6 @@ export default({
         })
           .then((res)=>{
             this.tableData = res.data.blogList;
-            console.log(success);
             if(!res.data.success){
               alert("获取信息失败！");
             }
