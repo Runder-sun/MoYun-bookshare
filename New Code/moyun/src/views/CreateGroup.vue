@@ -126,7 +126,7 @@ export default {
       for(let file of this.files){
         data.append("file", file,file.name)
       }
-      data.append('GroupName',this.groupname)
+      data.append('GroupName',this.groupName)
       data.append('Tag',this.choosedTag)
       data.append('Introduce',this.groupIntroduce)
       data.append('isPrivate',this.isPrivate)

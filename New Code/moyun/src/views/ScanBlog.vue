@@ -276,7 +276,9 @@ export default({
         this.$http({
         method: "get",
         url: "/inspectBlog",
-        params: this.$router.params.id,
+        params:{
+          blogID: this.$router.param.id,
+        }
           }).then((res) => {
             if (res.data.success) {
               this.blog=res.data.blog;

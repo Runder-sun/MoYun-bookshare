@@ -274,6 +274,7 @@
 import bar from "../components/Bar.vue";
 import qs from "qs";
 export default {
+  inject: ["reload"],
   data: () => ({
     drawer: null,
     dialog: false,
@@ -356,7 +357,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             if (
-              isGroupMember(
+              this.isGroupMember(
                 this.$store.state.person.userID,
                 res.data.MemberList
               )

@@ -7,11 +7,12 @@
           <v-toolbar class="elevation-1 btns" >
           <v-toolbar-title>基本信息</v-toolbar-title>
           <v-spacer></v-spacer>
-          <el-button type="success" round v-if="careBoolean" @click="cancelCare">取消收藏（关注）</el-button>
-          <el-button type="success" round v-else @click="care">收藏（关注）</el-button>
+          <el-button type="success" round v-if="isCollect" @click="cancelCare">取消收藏</el-button>
+          <el-button type="success" round v-else @click="care">收藏</el-button>
           <el-button type="info" round v-if="$store.state.person.userID==this.bookAdder.userID" @click="toEditBook">编辑</el-button>
           <el-button type="warning" v-if="$store.state.person.userID==this.bookAdder.userID" round @click="deleteBook">删除</el-button>
           <el-button type="danger" round @click="downloadBook">下载</el-button>
+          
         </v-toolbar>
             <v-img
               class="white--text align-end"
@@ -102,7 +103,7 @@ export default {
       this.$http({
         method: "get",
         url: "/inspectBook",
-        params: this.$route.params.id,
+        params: { bookID :this.$route.params.id,}
       })
         .then((res) => {
           if (res.data.success) {
@@ -142,7 +143,7 @@ export default {
         this.$http({
         method: "get",
         url: "/deleteBook",
-        params: this.$route.params.id,
+        params: {bookID: this.$route.params.id,}
       })
         .then((res) => {
           if (res.data.success) {
@@ -154,7 +155,7 @@ export default {
         });
     },
     downloadBook(){
-        alert("下载成功");
+       alert("下载成功");
     },
     cancelCare(){
         this.$http({
@@ -165,9 +166,6 @@ export default {
         },
       })
         .then((res) => {
-          console.log(res.data.message);
-          this.message = res.data.message;
-          this.snackbar = true;
           if (res.data.success) {
             this.isCollect=false;
           } 

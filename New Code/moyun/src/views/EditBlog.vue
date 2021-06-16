@@ -34,7 +34,7 @@
                             class="buttonleft button" 
                             margin-left="20px"
                             @click="cancelBlog">
-                            <p class="create">Cancel Edit</p>
+                            <p >Cancel Edit</p>
                             </v-btn>
                             <v-spacer></v-spacer>
                             <v-btn
@@ -44,7 +44,7 @@
                             class="buttonright button"
                             @click="saveBlog"
                             margin-right="20px">
-                               <p class="create">Save Edit</p>
+                               <p >Save Edit</p>
                             </v-btn>
                             <v-snackbar
                             v-model="snackbar"
@@ -125,7 +125,9 @@ import bar from "../components/Bar.vue"
           this.$http({
           method:"get",
           url:"/inspectBlog",
-          params: this.$router.params.id,
+          params:{
+            bookID : this.$router.params.id,
+          }
         })
           .then((res)=>{
             this.blog=res.data.blog;

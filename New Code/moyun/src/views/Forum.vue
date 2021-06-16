@@ -46,7 +46,7 @@
 import bar from "../components/Bar.vue";
 export default {
   inject: ["reload"],
-  create(){
+  mounted(){
     this.getInit()
     },
     methods: {
@@ -58,8 +58,11 @@ export default {
             ForumID:this.$route.params.id,
           }
         }).then(res=>{
+          console.log(res.data)
           if(res.data.success){
             this.messages = res.data.ForumMessageList
+            this.forum=res.data.Forum
+            this.forumMessageUser=res.data.ForumMessageUser
           }
         }).catch(err=>{
           console.log(err)
