@@ -291,7 +291,6 @@ export default({
       },
       postComment(){
         console.log(this.blog);
-        console.log(this.form.content);
         this.$http({
         method: "post",
         url: "/WriteBlogComment",
@@ -317,7 +316,6 @@ export default({
       },
       post(){
         //this.alert1=true
-        console.log(this.blog);
         this.$http({
         method: "post",
         url: "/ReprintBlog",

@@ -196,13 +196,13 @@ export default({
       },
       //初始化函数
       show2(){
-        console.log("here");
         this.$http({
           method:"get",
           url:"/BlogList",
         }).then((res)=>{
-            console.log(res.data);
             this.tableData = res.data.blogList;
+            alert("Handling..");
+            console.log(res.data);
             if(!res.data.success){
               alert("获取信息失败！");
             }
