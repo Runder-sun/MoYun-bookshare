@@ -7,14 +7,9 @@
           <v-toolbar class="lxtToolbar ">
             <v-toolbar-title>书评信息</v-toolbar-title>
             <v-spacer></v-spacer>
-            <template>
-              <v-btn class="ma-2 lxtBtn" color="#BDBDBD" v-if="isLike" text icon @click="cancleLike" >
+              <v-btn class="ma-2 lxtBtn" text icon @click="like" >
                  <v-icon>mdi-thumb-up</v-icon>
               </v-btn>
-              <v-btn class="ma-2 lxtBtn" v-else text icon @click="like" >
-                 <v-icon>mdi-thumb-up</v-icon>
-              </v-btn>
-            </template>
             <el-button type="info" round v-if="isCollect" @click="cancelCollect" class="applyBtn">取消收藏</el-button>
             <el-button color="#8fc19c" round v-else @click="collect" class="applyBtn">收藏书评</el-button>
             <el-button 	color="#45a165" @click="toEditBookReview" class="applyBtn">修改书评</el-button>
@@ -94,7 +89,6 @@ export default {
   },
   data: () => ({
     content:"",
-    isLike:false,
     panel:[0],
     bookReviewInfo:{
       
@@ -112,9 +106,6 @@ export default {
     toEditBookReview() {
       this.$router.push({ path: "/Book/EditBookReview/"+this.$route.params.id });
     },
-    cancelLike() {
-      this.isLike = false;
-    },
     like() {
       this.$http({
         method: "post",
@@ -125,7 +116,7 @@ export default {
       })
         .then((res) => {
           if (res.data.success) {
-            this.isLike=true;
+            alert("点赞成功");
           } 
         })
         .catch((err) => {
@@ -137,7 +128,7 @@ export default {
         method: "post",
         url: "/cancelCollectBookReview",
         data: {
-          bookReviewCollectionID:this.$route.params.id,
+          BookReviewCollectionID:this.$route.params.id,
         },
       })
         .then((res) => {
@@ -154,7 +145,7 @@ export default {
         method: "post",
         url: "/collectBookReview",
         data: {
-          bookReviewID:this.$route.params.id,
+          BookReviewID:this.$route.params.id,
         },
       })
         .then((res) => {
@@ -171,8 +162,8 @@ export default {
           method:'post',
           url:"/commentReview",
           data:{
-            reviewID:this.$route.params.id,
-            content:this.content,
+            BookReviewID:this.$route.params.id,
+            Content:this.content,
           }
         }).then(res=>{
           this.getInit()
