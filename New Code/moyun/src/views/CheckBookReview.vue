@@ -137,7 +137,7 @@ export default {
         method: "post",
         url: "/cancelCollectBookReview",
         data: {
-          bookReviewCollectionID:this.$route.params.id,
+          BookReviewCollectionID:this.$route.params.id,
         },
       })
         .then((res) => {
@@ -154,7 +154,7 @@ export default {
         method: "post",
         url: "/collectBookReview",
         data: {
-          bookReviewID:this.$route.params.id,
+          BookReviewID:this.$route.params.id,
         },
       })
         .then((res) => {

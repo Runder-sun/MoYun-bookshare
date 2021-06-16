@@ -57,7 +57,9 @@
           <el-table-column prop="content" label="书评内容" width="200"></el-table-column>
           <el-table-column prop="score" label="评分" width="100"></el-table-column>
           <el-table-column align="right">
-              <el-button type="warning" round class="check" @click="toCheckBookReview(bookReviewID)">查看</el-button>
+               <template slot-scope="scope">
+              <el-button type="warning" round class="check" @click="toCheckBookReview(scope.row.bookReviewID)">查看</el-button>
+              </template>
           </el-table-column>
         </el-table>
         <el-pagination background center layout="prev, pager, next" :total="1000" class="pages">
