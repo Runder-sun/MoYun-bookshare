@@ -7,7 +7,7 @@
           <v-toolbar class="lxtToolbar ">
             <v-toolbar-title>书评信息</v-toolbar-title>
             <v-spacer></v-spacer>
-              <v-btn class="ma-2 lxtBtn" text icon @click="like" >
+              <v-btn class="ma-2" text icon color="blue lighten-2" @click="like">
                  <v-icon>mdi-thumb-up</v-icon>
               </v-btn>
             <el-button type="info" round v-if="isCollect" @click="cancelCollect" class="applyBtn">取消收藏</el-button>
@@ -128,7 +128,7 @@ export default {
         method: "post",
         url: "/cancelCollectBookReview",
         data: {
-          BookReviewCollectionID:this.$route.params.id,
+          BookReviewID:this.$route.params.id,
         },
       })
         .then((res) => {

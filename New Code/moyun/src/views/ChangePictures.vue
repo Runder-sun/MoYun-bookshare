@@ -2,22 +2,11 @@
   <div class="createGroup">
     <bar></bar>
     <v-container>
-      <div class="card">
+      <div class="picturescard">
           <div class="front"> 
-        点击“+”号上传个人头像
-        <el-upload
-          class="avatar-uploader"
-          action="up"
-          drag
-          :auto-upload="false"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess1"
-          :before-upload="beforeAvatarUpload1"
-        >
-          <img v-if="imageUrl1" :src="imageUrl1" class="avatar" />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i></el-upload>
           <v-form>
           <v-container fluid>
+                <v-file-input show-size counter chips multiple label="上传用户个人头像图片" v-model="files1"></v-file-input>
                 <v-btn
                 class="button"
                 large
@@ -27,23 +16,9 @@
           </v-container>
         </v-form>
           
-          <v-row></v-row>
-          <v-row></v-row>
-          <v-row></v-row>
-        点击“+”号上传个人背景
-          <el-upload
-          class="avatar-uploader"
-          action="up"
-          drag
-          :auto-upload="false"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess2"
-          :before-upload="beforeAvatarUpload2"
-        >
-          <img v-if="imageUrl2" :src="imageUrl2" class="avatar" />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i></el-upload>
           <v-form>
           <v-container fluid>
+                <v-file-input show-size counter chips multiple label="上传用户个人背景图片" v-model="files2"></v-file-input>
                 <v-btn
                 class="button"
                 large
@@ -63,56 +38,23 @@ import bar from "../components/Bar.vue";
 
 export default {
   data: () => ({
-    file1:null,
-    file2:null,
-    imageUrl1: "",
-    imageUrl2: "",
+    files1:null,
+    files2:null,
   }),
   components: {
     bar,
   },
   methods: {
-    handleAvatarSuccess1(res, file) {
-      this.file1 = file;
-      this.imageUrl1 = URL.createObjectURL(file.raw);
-    },
-    handleAvatarSuccess2(res, file) {
-      this.file2 = file;
-      this.imageUrl2 = URL.createObjectURL(file.raw);
-    },
-    beforeAvatarUpload1(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
 
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
-      }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
-      }
-      
-      return isJPG && isLt2M;
-    },
-    beforeAvatarUpload2(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
-      }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
-      }
-      
-      return isJPG && isLt2M;
-    },
     changePictures1(){
+      let data = new FormData();
+      for(let file of this.files1){
+        data.append("file", file,file.name)
+      }
       this.$http({
         method: "post",
         url: "/ChangeHeadImage",
-        data: {
-          file:this.file1
-        },
+        data: data,
     }).then(res=>{
       if(res.data.success){
         this.$store.commit("setUserHeadImage", this.imageUrl1);
@@ -121,12 +63,14 @@ export default {
   },
 
   changePictures2(){
+      let data = new FormData();
+      for(let file of this.files2){
+        data.append("file", file,file.name)
+      }
       this.$http({
         method: "post",
         url: "/ChangeBackgroundImage",
-        data: {
-          file:this.file2
-        },
+        data: data,
     }).then(res=>{
       if(res.data.success){
       }
@@ -145,17 +89,17 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.card {
+.picturescard {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  height: 700px;
+  height: 400px;
   width: 600px;
   z-index: 1;
   transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.card .front {
+.picturescard .front {
   position: absolute;
   text-align: center;
   box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.1),
@@ -168,7 +112,7 @@ export default {
   flex-direction: column;
   transition: 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-.card .front {
+.picturescard .front {
   z-index: 1;
 }
 .avatar-uploader .el-upload {
