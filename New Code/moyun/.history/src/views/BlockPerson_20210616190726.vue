@@ -15,7 +15,6 @@
                         max-height="30000"
                         :elevation="hover ? 12 : 2"
                         :class="{ 'on-hover': hover }"
-                        min-height="600"
                     >
                     <v-toolbar
                     flat
@@ -114,7 +113,6 @@
                         width="500"
                         :elevation="hover ? 12 : 2"
                         :class="{ 'on-hover': hover }"
-                        min-height="600"
                     >
                     <v-toolbar
                     flat

@@ -418,4 +418,8 @@ export default {
 	.card .front {
 		z-index: 1;
 	}
+
+  v-btn{
+    position: relative right bottom;
+  }
 </style>

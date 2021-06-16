@@ -269,7 +269,7 @@ export default({
         method: "get",
         url: "/inspectBlog",
         params:{
-          BlogID: this.$route.params.id,
+          BlogID: this.$router.params.id,
         }
           }).then((res) => {
             console.log(res.data);

@@ -114,7 +114,6 @@
                         width="500"
                         :elevation="hover ? 12 : 2"
                         :class="{ 'on-hover': hover }"
-                        min-height="600"
                     >
                     <v-toolbar
                     flat
