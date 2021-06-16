@@ -26,7 +26,7 @@ methods:{
 h1 {
     text-align: center;
     margin:0 auto;
-    font-size: 70px;
+    font-size: 80px;
     line-height:60vh;
     font-family: "微雅软黑";
     color: #000;

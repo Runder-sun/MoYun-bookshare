@@ -29,16 +29,15 @@
     </v-app-bar>
     <v-img :src="require('@/assets/墨韵.jpg')" class="mainPage"></v-img>
     <h1 class="words g-img1 font-weight-bold">热门圈子</h1>
-    <div class="groups">
-      <v-row align="auto">
+    <v-card>
               <template v-for="(group, i) in groups">
-                <v-col :key="i" cols="12" md="3">
+                <v-col :key="i" cols="12" md="4">
                   <v-hover v-slot="{ hover }">
                     <v-card
-                      :elevation="hover ? 8 : 2"
+                      :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
                       :to="'/Group/GroupIndex/' + group.groupID"
-                      width="200"
+                      width="300"
                     >
                       <v-img :src="'/home/moyun/file/'+group.groupImage" height="225px">
                         <v-card-title >
@@ -78,8 +77,9 @@
                   </v-hover>
                 </v-col>
               </template>
-              </v-row>
-    </div>
+    </v-card>
+
+    <h1 class="words">热门书籍</h1>
     <div class="g-img3 myimg"></div>
   </div>
 </template>
@@ -102,6 +102,10 @@ export default {
       tag:"Story",
       introduce:"This is a story about a prince and his travel..."},
       {groupID:4,
+      groupImage:"../asset/prince.jpg",
+      tag:"Story",
+      introduce:"This is a story about a prince and his travel..."},
+      {groupID:5,
       groupImage:"../asset/prince.jpg",
       tag:"Story",
       introduce:"This is a story about a prince and his travel..."},
@@ -224,10 +228,4 @@ export default {
     background-size: cover;
     background-position: center center;
 } 
-.groups{
- background-color: #596275;
- width: 100vw;
-  height: 100vh;
-}
-
 </style>

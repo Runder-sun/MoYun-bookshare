@@ -1,7 +1,7 @@
 <template>
 <div>
-    <h1 class="g-word">Header</h1>
-<h1 class="g-img">IMG1</h1>
+    <p class="g-word">Header</p>
+<p class="g-img">IMG1</p>
 <p class="g-word">Content1</p>
 <p class="g-img">IMG2</p>
 <p class="g-word">Content2</p>
@@ -23,21 +23,10 @@ methods:{
 
 <style>
 
-h1 {
-    text-align: center;
-    margin:0 auto;
-    font-size: 70px;
-    line-height:60vh;
-    font-family: "微雅软黑";
-    color: #000;
-}
- 
 p {
     height: 100vh;
     text-align: center;
-    margin:auto;
-    padding-top: 40%;
-    padding-bottom: 40%;
+    vertical-align: center;
 }
  
 .g-img {

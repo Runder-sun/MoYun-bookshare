@@ -24,12 +24,11 @@ methods:{
 <style>
 
 h1 {
+    height: 100vh;
     text-align: center;
-    margin:0 auto;
-    font-size: 70px;
-    line-height:60vh;
-    font-family: "微雅软黑";
-    color: #000;
+    margin:auto;
+    padding-top: 40%;
+    padding-bottom: 40%;
 }
  
 p {

@@ -27,18 +27,20 @@
         </template>
       </v-row>
     </v-app-bar>
-    <v-img :src="require('@/assets/墨韵.jpg')" class="mainPage"></v-img>
-    <h1 class="words g-img1 font-weight-bold">热门圈子</h1>
-    <div class="groups">
-      <v-row align="auto">
+    <v-img :src="require('@/assets/墨韵.jpg')" ></v-img>
+    <v-main>
+      <v-container fluid>
+        <p class="groupTitle"> 热门圈子</p>
+          <v-container class="pa-4 text-center">
+            <v-row class="fill-height" align="center" justify="center">
               <template v-for="(group, i) in groups">
-                <v-col :key="i" cols="12" md="3">
+                <v-col :key="i" cols="12" md="2">
                   <v-hover v-slot="{ hover }">
                     <v-card
-                      :elevation="hover ? 8 : 2"
+                      :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
                       :to="'/Group/GroupIndex/' + group.groupID"
-                      width="200"
+                      width="300"
                     >
                       <v-img :src="'/home/moyun/file/'+group.groupImage" height="225px">
                         <v-card-title >
@@ -78,9 +80,69 @@
                   </v-hover>
                 </v-col>
               </template>
-              </v-row>
-    </div>
-    <div class="g-img3 myimg"></div>
+            </v-row>
+          </v-container>
+      </v-container>
+      <v-container fluid>
+        <h2 class="text-center">
+          热门书籍
+          <v-container class="pa-4 text-center">
+            <v-row class="fill-height" align="center" justify="center">
+              <template v-for="(book, i) in books">
+                <v-col :key="i" cols="12" md="2">
+                  <v-hover v-slot="{ hover }">
+                    <v-card
+                      :elevation="hover ? 24 : 2"
+                      :class="{ 'on-hover': hover }"
+                      width="300"
+                    >
+                      <v-img
+                        :src="'/home/moyun/file/'+book.bookImage"
+                        height="225px"
+                        @click="toCheckBook"
+                      >
+                        <v-card-title >
+                          <v-row
+                            class="fill-height flex-column"
+                            justify="space-between"
+                          >
+                            <p class="mt-4 subheading text-left">
+                              {{ book.bookName }}
+                            </p>
+
+                            <div>
+                              <p
+                                class="
+                                  ma-0
+                                  body-1
+                                  font-weight-bold font-italic
+                                  text-left
+                                "
+                              >
+                                {{ book.author }}
+                              </p>
+                              <p
+                                class="
+                                  caption
+                                  font-weight-medium font-italic
+                                  text-left
+                                "
+                              >
+                                {{ book.kind }}
+                              </p>
+                            </div>
+                          </v-row>
+                        </v-card-title>
+                      </v-img>
+                    </v-card>
+                  </v-hover>
+                </v-col>
+              </template>
+            </v-row>
+          </v-container>
+        </h2>
+      </v-container>
+    </v-main>
   </div>
 </template>
 
@@ -88,24 +150,7 @@
 import avatar from "../components/Avatar.vue";
 export default {
   data: () => ({
-    groups: [
-      {groupID:1,
-      groupImage:"../asset/prince.jpg",
-      tag:"Story",
-      introduce:"This is a story about a prince and his travel..."},
-      {groupID:2,
-      groupImage:"../asset/prince.jpg",
-      tag:"Story",
-      introduce:"This is a story about a prince and his travel..."},
-      {groupID:3,
-      groupImage:"../asset/prince.jpg",
-      tag:"Story",
-      introduce:"This is a story about a prince and his travel..."},
-      {groupID:4,
-      groupImage:"../asset/prince.jpg",
-      tag:"Story",
-      introduce:"This is a story about a prince and his travel..."},
-    ],
+    groups: [],
     books: [],
     transparent: "rgba(255, 255, 255, 0)",
   }),
@@ -137,15 +182,6 @@ export default {
 </script>
 
 <style scoped>
-.mainPage{
-  height:100vh;
-  width:100vw;
-}
-
-.myimg {
-  width: 100vw;
-  height: 100vh;
-}
 .home {
   width: 100%;
   height: 100vh;
@@ -194,40 +230,4 @@ export default {
   background-size: cover;
   background-position: center center;
 }
-
-.words {
-    text-align: center;
-    margin:0 auto;
-    font-size: 70px;
-    line-height:60vh;
-    font-family: "黑体";
-    color: #fff;
-}
-
-.g-img1 {
-    background-image: url('../assets/1.png');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-} 
-
-.g-img2 {
-    background-image: url('../assets/2.png');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-} 
-
-.g-img3 {
-    background-image: url('../assets/UpdatesB3.jpg');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-} 
-.groups{
- background-color: #596275;
- width: 100vw;
-  height: 100vh;
-}
-
 </style>

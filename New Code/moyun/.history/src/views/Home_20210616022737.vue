@@ -35,7 +35,7 @@
                 <v-col :key="i" cols="12" md="3">
                   <v-hover v-slot="{ hover }">
                     <v-card
-                      :elevation="hover ? 8 : 2"
+                      :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
                       :to="'/Group/GroupIndex/' + group.groupID"
                       width="200"
@@ -226,8 +226,6 @@ export default {
 } 
 .groups{
  background-color: #596275;
- width: 100vw;
-  height: 100vh;
 }
 
 </style>

@@ -64,7 +64,7 @@
                       justify="center">
                       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-                      <v-toolbar-title>{{this.messageBoxTitle}}</v-toolbar-title>
+                      <v-toolbar-title>System Messages</v-toolbar-title>
 
                       <v-spacer></v-spacer>
 
@@ -161,7 +161,6 @@ import avatar from "../components/Avatar.vue"
 import bar from "../components/Bar.vue"
   export default {
     data: () => ({
-        myInterval:null,
         messageBoxTitle:'System',
         password: 'Password',
         divider:true,
@@ -195,7 +194,6 @@ import bar from "../components/Bar.vue"
 
     created(){
       this.showFriMsg;
-      this.initList;
     },
 
     computed: {
@@ -245,7 +243,6 @@ import bar from "../components/Bar.vue"
               this.getUser=res.data.getUser;
               if(res.data.success){
                 this.friends=this.userMessageList;
-                this.messageBoxTitle=this.getUser.username;
               }
             })
             .catch((err) => {
@@ -283,7 +280,7 @@ import bar from "../components/Bar.vue"
         initList () {
           this.myInterval = window.setInterval(() => {
             setTimeout(() => {
-              this.showFriMsg();
+              this.polling() //调用接口的方法
             }, 1)
           }, 5000);
         },

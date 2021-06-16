@@ -24,9 +24,11 @@ methods:{
 <style>
 
 h1 {
+    height: 100vh;
     text-align: center;
     margin:0 auto;
-    font-size: 70px;
+    padding-top: 40%;
+    padding-bottom: 40%;
     line-height:60vh;
     font-family: "微雅软黑";
     color: #000;

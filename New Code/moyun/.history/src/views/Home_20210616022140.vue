@@ -29,13 +29,13 @@
     </v-app-bar>
     <v-img :src="require('@/assets/墨韵.jpg')" class="mainPage"></v-img>
     <h1 class="words g-img1 font-weight-bold">热门圈子</h1>
-    <div class="groups">
-      <v-row align="auto">
+    <v-card>
+      <v-row>
               <template v-for="(group, i) in groups">
                 <v-col :key="i" cols="12" md="3">
                   <v-hover v-slot="{ hover }">
                     <v-card
-                      :elevation="hover ? 8 : 2"
+                      :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
                       :to="'/Group/GroupIndex/' + group.groupID"
                       width="200"
@@ -79,7 +79,9 @@
                 </v-col>
               </template>
               </v-row>
-    </div>
+    </v-card>
+
+    <h1 class="words">热门书籍</h1>
     <div class="g-img3 myimg"></div>
   </div>
 </template>
@@ -224,10 +226,4 @@ export default {
     background-size: cover;
     background-position: center center;
 } 
-.groups{
- background-color: #596275;
- width: 100vw;
-  height: 100vh;
-}
-
 </style>

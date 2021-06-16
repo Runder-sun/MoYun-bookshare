@@ -24,12 +24,13 @@ methods:{
 <style>
 
 h1 {
+    height: 100vh;
     text-align: center;
     margin:0 auto;
-    font-size: 70px;
-    line-height:60vh;
+
     font-family: "微雅软黑";
-    color: #000;
+    width:55vw;
+    height:50vh;
 }
  
 p {
