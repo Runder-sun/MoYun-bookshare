@@ -245,7 +245,9 @@ export default({
         tabs: null,
         transition: 'slide-y-reverse-transition',
         //backend content
-        blog:[],
+        blog:[
+          blogID:3;
+        ]
       }
     },
     components:{
@@ -290,8 +292,6 @@ export default({
         this.resetForm()
       },
       postComment(){
-        var a=this.blog.blogID;
-        console.log(a);
         console.log(this.blog);
         console.log(this.form.content);
         this.$http({
@@ -346,7 +346,7 @@ export default({
         this.dialog=false
       },
       collect(){
-        if(this.isCollect===0){
+        if(this.isCollect===1){
           this.$http({
           method: "post",
           url: "/CollectBlog",
@@ -370,7 +370,7 @@ export default({
           method: "post",
           url: "/CancelCollectBlog",
           data: {
-            BlogID: this.blog.blogID,
+            blogID: this.blog.blogID,
 
           },
             }).then((res) => {
