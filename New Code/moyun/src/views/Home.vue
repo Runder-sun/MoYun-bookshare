@@ -104,11 +104,12 @@
                       :class="{ 'on-hover': hover }"
                       width="300"
                       height="400"
+                      :to="'/Book/CheckBook/'+book.bookID"
                     >
                       <v-img
                         :src="'/images/'+book.bookImage"
                         height="225px"
-                        :to="'/Book/CheckBook/'+book.bookID"
+                        
                       >
                         <v-card-title >
                           <v-row
@@ -180,6 +181,7 @@ export default {
         url: "/Home",
       })
         .then((res) => {
+          console.log(res.data)
           this.books = res.data.hotBook;
           this.groups = res.data.hotGroup;
         })
