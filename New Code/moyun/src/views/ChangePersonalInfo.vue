@@ -101,11 +101,11 @@ export default {
         method: "post",
         url: "/ChangePersonalInfo",
         data: {
-          username: this.username,
-          sex: this.sex,
-          email: this.email,
-          birthday: this.birth,
-          signature:this.signature,
+          Username: this.username,
+          Sex: this.sex,
+          Email: this.email,
+          Birthday: this.birth,
+          Signature:this.signature,
         },
       }).then((res) => {
         this.message = res.data.message;
@@ -131,7 +131,7 @@ export default {
           if (res.data.success) {
             this.username = res.data.userInfo.username;
             this.email = res.data.userInfo.email;
-            this.birth = res.data.userInfo.birthDay;
+            this.birth = res.data.userInfo.birthday;
             this.signature = res.data.userInfo.signature;
           }
         })

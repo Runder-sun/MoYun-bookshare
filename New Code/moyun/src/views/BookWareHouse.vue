@@ -159,8 +159,8 @@ export default {
         method: "get",
         url: "/bookWareHouse",
       }).then((res) => {
-          this.hotBook = res.data.hotBook;
-          this.bookCollectionBook = res.data.bookCollectionBook;
+          this.hotBook = res.data.HotBook;
+          this.bookCollectionBook = res.data.BookCollectionBook;
         }).catch((err) => {
           console.log(err);
       });

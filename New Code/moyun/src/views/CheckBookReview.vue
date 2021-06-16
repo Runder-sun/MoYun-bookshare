@@ -120,7 +120,7 @@ export default {
         method: "post",
         url: "/likeBookReview",
         data: {
-          bookReviewID:this.$route.params.id,
+          BookReviewID:this.$route.params.id,
         },
       })
         .then((res) => {
@@ -183,7 +183,7 @@ export default {
       this.$http({
         method: "get",
         url: "/inspectBookReview",
-        params:{ bookReviewID:this.$route.params.id,}
+        params:{ BookReviewID:this.$route.params.id,}
       })
         .then((res) => {
           if (res.data.success) {
