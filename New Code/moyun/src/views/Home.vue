@@ -21,39 +21,37 @@
           <avatar></avatar>
         </template>
         <template v-else>
-          <v-btn class="button" max-width="30px" :to="'/Login'">
+          <v-btn class="button" :to="'/Login'">
             <p class="login_">登录</p>
           </v-btn>
         </template>
       </v-row>
     </v-app-bar>
-    <v-img :src="require('@/assets/墨韵.jpg')" class="mainPage"></v-img>
-    <div class=" g-img1 ">
-      <div class="font-weight-bold words1">热门圈子</div>
-      <div class="font-weight-bold words2">为您推荐墨韵读书会热门读书圈</div>
-    </div>
-    <div class="groups">
-      <div style="height:1px"></div>
-      <div class="cardsMid">
-      <v-row align="auto">
+    <v-img src="../assets/widthPic.jpg" dark></v-img>
+    <h1 class="textCenter">墨韵</h1>
+    <v-main>
+      <v-container fluid>
+        <h2 class="text-center">
+          热门圈子
+          <v-container class="pa-4 text-center">
+            <v-row class="fill-height" align="center" justify="center">
               <template v-for="(group, i) in groups">
-                <v-col :key="i" cols="12" md="4" >
+                <v-col :key="i" cols="12" md="2">
                   <v-hover v-slot="{ hover }">
                     <v-card
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
                       :to="'/Group/GroupIndex/' + group.groupID"
                       width="300"
-                      height="400"
                     >
-                      <v-img :src="'/home/moyun/file/'+group.groupImage" height="225px">
-                        <v-card-title >
+                      <v-img :src="group.img" height="225px">
+                        <v-card-title class="title white--text">
                           <v-row
                             class="fill-height flex-column"
                             justify="space-between"
                           >
                             <p class="mt-4 subheading text-left">
-                              {{ group.groupName }}
+                              {{ group.title }}
                             </p>
 
                             <div>
@@ -65,7 +63,7 @@
                                   text-left
                                 "
                               >
-                                {{ group.tag}}
+                                {{ group.text }}
                               </p>
                               <p
                                 class="
@@ -74,69 +72,7 @@
                                   text-left
                                 "
                               >
-                                {{ group.introduce }}
-                              </p>
-                            </div>
-                          </v-row>
-                        </v-card-title>
-                      </v-img>
-                    </v-card>
-                  </v-hover>
-              </v-col>
-            </template>
-          </v-row>
-        </div>
-    </div>
-    <div class="g-img3 myimg">
-      <div class="font-weight-bold words1">热门书籍</div>
-      <div class="font-weight-bold words2">为您推荐墨韵读书会热门书籍</div>
-    </div>
-        <div class="groups2">
-      <div style="height:1px"></div>
-      <div class="cardsMid">
-      <v-row align="center auto" justify="center">
-              <template v-for="(book, i) in books">
-                <v-col :key="i" cols="12" md="4">
-                  <v-hover v-slot="{ hover }">
-                    <v-card
-                      :elevation="hover ? 24 : 2"
-                      :class="{ 'on-hover': hover }"
-                      width="300"
-                      height="400"
-                    >
-                      <v-img
-                        :src="'/home/moyun/file/'+book.bookImage"
-                        height="225px"
-                        @click="toCheckBook"
-                      >
-                        <v-card-title >
-                          <v-row
-                            class="fill-height flex-column"
-                            justify="space-between"
-                          >
-                            <p class="mt-4 subheading text-left">
-                              {{ book.bookName }}
-                            </p>
-
-                            <div>
-                              <p
-                                class="
-                                  ma-0
-                                  body-1
-                                  font-weight-bold font-italic
-                                  text-left
-                                "
-                              >
-                                {{ book.author }}
-                              </p>
-                              <p
-                                class="
-                                  caption
-                                  font-weight-medium font-italic
-                                  text-left
-                                "
-                              >
-                                {{ book.kind }}
+                                {{ group.subtext }}
                               </p>
                             </div>
                           </v-row>
@@ -147,8 +83,69 @@
                 </v-col>
               </template>
             </v-row>
-        </div>
-    </div>
+          </v-container>
+        </h2>
+      </v-container>
+      <v-container fluid>
+        <h2 class="text-center">
+          热门书籍
+          <v-container class="pa-4 text-center">
+            <v-row class="fill-height" align="center" justify="center">
+              <template v-for="(group, i) in groups">
+                <v-col :key="i" cols="12" md="2">
+                  <v-hover v-slot="{ hover }">
+                    <v-card
+                      :elevation="hover ? 24 : 2"
+                      :class="{ 'on-hover': hover }"
+                      width="300"
+                    >
+                      <v-img
+                        :src="group.img"
+                        height="225px"
+                        @click="toCheckBook"
+                      >
+                        <v-card-title class="title white--text">
+                          <v-row
+                            class="fill-height flex-column"
+                            justify="space-between"
+                          >
+                            <p class="mt-4 subheading text-left">
+                              {{ group.title }}
+                            </p>
+
+                            <div>
+                              <p
+                                class="
+                                  ma-0
+                                  body-1
+                                  font-weight-bold font-italic
+                                  text-left
+                                "
+                              >
+                                {{ group.text }}
+                              </p>
+                              <p
+                                class="
+                                  caption
+                                  font-weight-medium font-italic
+                                  text-left
+                                "
+                              >
+                                {{ group.subtext }}
+                              </p>
+                            </div>
+                          </v-row>
+                        </v-card-title>
+                      </v-img>
+                    </v-card>
+                  </v-hover>
+                </v-col>
+              </template>
+            </v-row>
+          </v-container>
+        </h2>
+      </v-container>
+    </v-main>
   </div>
 </template>
 
@@ -157,35 +154,152 @@ import avatar from "../components/Avatar.vue";
 export default {
   data: () => ({
     groups: [
-      {groupID:1,
-      groupImage:"../asset/prince.jpg",
-      tag:"Story",
-      introduce:"This is a story about a prince and his travel..."},
-      {groupID:2,
-      groupImage:"../asset/prince.jpg",
-      tag:"Story",
-      introduce:"This is a story about a prince and his travel..."},
-      {groupID:3,
-      groupImage:"../asset/prince.jpg",
-      tag:"Story",
-      introduce:"This is a story about a prince and his travel..."},
+      {
+        title: "New Releases",
+        text: `It's New Release Friday`,
+        subtext: "Newly released songs. Updated daily.",
+        img: "https://images.unsplash.com/photo-1429514513361-8fa32282fd5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3264&q=80",
+      },
+      {
+        title: "Rock",
+        text: "Greatest Rock Hits",
+        subtext: "Lose yourself in rock tunes.",
+        img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
     ],
-    books: [{
-      bookImage:"1",
-      bookName:"1",
-      author:"123",
-      kind:"story",
-    },{
-      bookImage:"1",
-      bookName:"1",
-      author:"123",
-      kind:"story",
-    },{
-      bookImage:"1",
-      bookName:"1",
-      author:"123",
-      kind:"story",
-    },
+    books: [
+      {
+        title: "New Releases",
+        text: `It's New Release Friday`,
+        subtext: "Newly released songs. Updated daily.",
+        img: "https://images.unsplash.com/photo-1429514513361-8fa32282fd5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3264&q=80",
+      },
+      {
+        title: "Rock",
+        text: "Greatest Rock Hits",
+        subtext: "Lose yourself in rock tunes.",
+        img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
+      {
+        title: "Mellow Moods",
+        text: "Ambient Bass",
+        subtext: "Chill beats to mellow you out.",
+        img: "https://images.unsplash.com/photo-1542320868-f4d80389e1c4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3750&q=80",
+      },
     ],
     transparent: "rgba(255, 255, 255, 0)",
   }),
@@ -217,15 +331,6 @@ export default {
 </script>
 
 <style scoped>
-.mainPage{
-  height:100vh;
-  width:100vw;
-}
-
-.myimg {
-  width: 100vw;
-  height: 100vh;
-}
 .home {
   width: 100%;
   height: 100vh;
@@ -257,8 +362,7 @@ export default {
   transition: box-shadow 0.2s ease-out;
   background-color: #efeeee;
   position: relative;
-  top:10%;
-  margin-top: 5px;
+  top: 5%;
   outline: none;
   border: none;
 }
@@ -266,77 +370,4 @@ export default {
   margin-top: 20%;
   font-size: 15px;
 }
-
-.groupTitle{
-  height:100vh;
-  background-image: url('../assets/UpdatesB3.jpg');
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center center;
-}
-
-.words1 {
-    text-align: center;
-    margin:0 auto;
-    font-size: 70px;
-    position: 40vh;
-    line-height:60vh;
-    font-family: "宋体";
-    color: #fff;
-    
-}
-
-.words2 {
-    text-align: center;
-    margin:0 auto;
-    font-size: 40px;
-
-    position: 50vh;
-    font-family: "宋体";
-    color: #fff;
-}
-
-.g-img1 {
-   width: 100vw;
-  height: 100vh;
-    background-image: url('../assets/set9.jpg');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-} 
-
-.g-img2 {
-    background-image: url('../assets/set7.jpg');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-} 
-
-.g-img3 {
-    background-image: url('../assets/set7.jpg');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center center;
-} 
-.groups{
- background-color: #6d7175;
- width: 100vw;
-  height: 100vh;
-  justify-content: center;
-}
-
-.cardsMid{
-  height: 80vh;
-  width:80vw;
-    margin:0px auto;
-  margin-top:25vh;
-}
-
-.groups2{
- background-color: #4f5153;
- width: 100vw;
-  height: 100vh;
-  justify-content: center;
-}
-
 </style>

@@ -329,13 +329,14 @@ export default {
       })
         .then((res) => {
           if (res.data.success) {
-            if (isGroupMember(this.$store.state.person.userID, res.data.MemberList)) {
+            if (this.isGroupMember(this.$store.state.person.userID, res.data.MemberList)) {
               this.isMember = true;
             } else {
               this.isMember = false;
             }
             this.group = res.data.GroupInfo;
             this.members = res.data.MemberUser;
+            this.tasks = res.data.TaskLists;
             this.hotForum = res.data.HotForum;
             this.isCollect = res.data.isCollect;
           }
