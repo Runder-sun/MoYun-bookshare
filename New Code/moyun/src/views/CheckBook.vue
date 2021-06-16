@@ -17,7 +17,7 @@
             <v-img
               class="white--text align-end"
               height="250px"
-              :src="'/images/'+this.book.BookImage"
+              :src="'/images/'+this.book.bookImage"
             >
               <v-card-title>
                 <v-col>
@@ -32,7 +32,7 @@
 
             <v-card-subtitle class="pb-0 text-right" >
               <p>{{this.book.publisher}}</p>
-              <p>ISBN号：{{this.book.ISBN}}</p>
+              <p>ISBN号：{{this.book.isbn}}</p>
             </v-card-subtitle>
 
             <v-card-text class="text--primary short">
@@ -101,9 +101,9 @@ export default {
   methods: {
     initCheckBook() {
       this.$http({
-        method: "get",
+        method: "post",
         url: "/inspectBook",
-        params: { BookID :this.$route.params.id,}
+        data: { BookID :this.$route.params.id,}
       })
         .then((res) => {
           if (res.data.success) {
@@ -162,7 +162,7 @@ export default {
         method: "post",
         url: "/cancelCollectionBook",
         data: {
-          bookCollectionID:this.$route.params.id,
+          BookCollectionID:this.$route.params.id,
         },
       })
         .then((res) => {
@@ -179,7 +179,7 @@ export default {
         method: "post",
         url: "/collectBook",
         data: {
-          bookID:this.$route.params.id,
+          BookID:this.$route.params.id,
         },
       })
         .then((res) => {
