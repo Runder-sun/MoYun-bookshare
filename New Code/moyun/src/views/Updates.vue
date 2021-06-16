@@ -39,7 +39,7 @@
                                 <v-list-item-avatar color="grey darken-3">
                                   <v-img
                                     class="elevation-6"
-                                    :src="'/home/moyun/file/'+item.authorImage"
+                                    :src="'/images/'+item.authorImage"
                                   ></v-img>
                                 </v-list-item-avatar>
 
@@ -85,7 +85,7 @@
                                      
                                   <v-img
                                     class="elevation-6"
-                                    :src="'/home/moyun/file/'+item.authorImage"
+                                    :src="'/images/'+item.authorImage"
                                   ></v-img>
                                 </v-list-item-avatar>                       
                                 </v-list-item>

@@ -47,7 +47,7 @@
                       width="300"
                       height="400"
                     >
-                      <v-img :src="'/home/moyun/file/'+group.groupImage" height="225px">
+                      <v-img :src="'/images/'+group.groupImage" height="225px">
                         <v-card-title >
                           <v-row
                             class="fill-height flex-column"
@@ -106,9 +106,9 @@
                       height="400"
                     >
                       <v-img
-                        :src="'/home/moyun/file/'+book.bookImage"
+                        :src="'/images/'+book.bookImage"
                         height="225px"
-                        @click="toCheckBook"
+                        :to="'/Book/CheckBook'+book.bookID"
                       >
                         <v-card-title >
                           <v-row
@@ -198,9 +198,7 @@ export default {
     this.show();
   },
   methods: {
-    toCheckBook() {
-      this.$router.push({ path: "/Book/CheckBook" });
-    },
+    
     show() {
       this.$http({
         method: "get",

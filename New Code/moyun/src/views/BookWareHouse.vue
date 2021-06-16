@@ -36,7 +36,7 @@
                                 width="300"
                                 :to="'/Book/CheckBook/' + book.bookID"
                               >
-                                <v-img :src="'/home/moyun/file/'+book.bookImage" height="225px">
+                                <v-img :src="'/images/'+book.bookImage" height="225px">
                                   <v-card-title class="title white--text">
                                     <v-row
                                       class="fill-height flex-column"
@@ -93,7 +93,7 @@
                                 width="300"
                                 :to="'/Book/CheckBook/' + book.bookID"
                               >
-                                <v-img :src="'/home/moyun/file/'+book.bookImage" height="225px" >
+                                <v-img :src="'/images/'+book.bookImage" height="225px" >
                                   <v-card-title class="title white--text">
                                     <v-row
                                       class="fill-height flex-column"

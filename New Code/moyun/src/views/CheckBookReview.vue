@@ -52,7 +52,7 @@
               
             <p >
               <v-avatar size="30">
-              <img :src="'/home/moyun/file/'+bookReviewCommentUser[i].headImage"/>
+              <img :src="'/images/'+bookReviewCommentUser[i].headImage"/>
             </v-avatar>
               {{bookReviewCommentUser[i].username}}
               ——
