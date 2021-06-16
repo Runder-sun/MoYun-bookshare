@@ -15,7 +15,6 @@
             label
             text-color="white"
             @click:close="refuse(user)"
-            :to="'/PersonalInfo/' + user.userID"
           >
             <v-avatar
               left
@@ -81,7 +80,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" text @click="changeGroupInfo">
-              关闭
+              确认
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -109,7 +108,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="addTask"> 关闭 </v-btn>
+            <v-btn color="blue darken-1" text @click="addTask"> 确认 </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -338,6 +337,7 @@ export default {
             this.members = res.data.MemberUser;
             this.hotForum = res.data.HotForum;
             this.isCollect = res.data.isCollect;
+            this.tasks=res.data.TaskList
           }
         })
         .catch((err) => {
@@ -414,6 +414,9 @@ export default {
         method: "post",
         url: "/applyGroup",
         data: { GroupID: this.$route.params.id },
+      }).then(res=>{
+        this.message="申请成功！"
+        this.snackbar=true;
       });
     },
     removeMember(member) {
@@ -455,8 +458,7 @@ export default {
         url: "/addTask",
         data: { GroupID: this.$route.params.id, TaskContent: this.newTask },
       });
-      this.getInit();
-      newTask = "";
+      this.reload();
     },
     changeGroupInfo() {
       var a = {

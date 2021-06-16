@@ -108,7 +108,7 @@
                       <v-img
                         :src="'/images/'+book.bookImage"
                         height="225px"
-                        :to="'/Book/CheckBook'+book.bookID"
+                        :to="'/Book/CheckBook/'+book.bookID"
                       >
                         <v-card-title >
                           <v-row
