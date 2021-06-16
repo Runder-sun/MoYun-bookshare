@@ -17,7 +17,7 @@
             <v-img
               class="white--text align-end"
               height="250px"
-              :src="'/home/moyun/file/'+this.book.BookImage"
+              :src="'/images/'+this.book.BookImage"
             >
               <v-card-title>
                 <v-col>

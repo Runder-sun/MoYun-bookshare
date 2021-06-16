@@ -14,12 +14,12 @@
 
       <v-img
         height="250"
-        :src="'/home/moyun/file/'+this.backGroundImage"
+        :src="'/images/'+this.backGroundImage"
       >
         <v-card-title class="white--text mt-8">
           <v-avatar size="56">
             <img
-                :src="'/home/moyun/file/'+this.headImage"
+                :src="'/images/'+this.headImage"
                 :alt="this.username"
               />
           </v-avatar>
