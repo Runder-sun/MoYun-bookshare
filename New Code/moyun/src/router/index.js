@@ -34,9 +34,15 @@ import MyCollections from "../views/MyCollections";
 import Updates from "../views/Updates";
 import MessageListFromFriend from "../views/MessageListFromFriend";
 import BlockPerson from "../views/BlockPerson";
+import test from "../views/test.vue"
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path:"/test",
+    name:"test",
+    component:test,
+  },
   {
     path: "/",
     name: "Home",
