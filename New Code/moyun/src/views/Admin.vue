@@ -23,14 +23,14 @@
                 <el-table-column label="操作">
                   <template slot-scope="scope">
                     <el-button
-                      :to="'/Person/PersonalInfo' + scope.row.UserID"
+                      :to="'/Person/PersonalInfo' + scope.row.userID"
                       type="text"
                       >查看</el-button
                     >
-                    <el-button type="text" @click="shield(scope.row.UserID)"
+                    <el-button type="text" @click="shield(scope.row.userID)"
                       >封禁</el-button
                     >
-                    <el-button type="text" @click="deShield(scope.row.UserID)"
+                    <el-button type="text" @click="deShield(scope.row.userID)"
                       >解封</el-button
                     >
                   </template>
@@ -54,11 +54,11 @@
                   <template slot-scope="scope">
                     <el-button
                       @click="seeBlog(scope.row.BlogID)"
-                      :to="'/BlogList/ScanBlog/' + scope.row.BlogID"
+                      :to="'/BlogList/ScanBlog/' + scope.row.blogID"
                       type="text"
                       >查看</el-button
                     >
-                    <el-button type="text" @click="delBlog(scope.row.BlogID)"
+                    <el-button type="text" @click="delBlog(scope.row.blogID)"
                       >删除</el-button
                     >
                   </template>
@@ -87,11 +87,11 @@
                 <el-table-column label="操作">
                   <template slot-scope="scope">
                     <el-button
-                      :to="'/Group/GroupIndex/' + scope.row.GroupID"
+                      :to="'/Group/GroupIndex/' + scope.row.groupID"
                       type="text"
                       >查看</el-button
                     >
-                    <el-button type="text" @click="delGroup(scope.row.GroupID)"
+                    <el-button type="text" @click="delGroup(scope.row.groupID)"
                       >删除</el-button
                     >
                   </template>
@@ -115,13 +115,13 @@
                 <el-table-column label="操作">
                   <template slot-scope="scope">
                     <el-button
-                      :to="'/Group/Forum/Forum/'+scope.row.ForumID"
+                      :to="'/Group/Forum/Forum/'+scope.row.forumID"
                       type="text"
                       >查看</el-button
                     >
                     <el-button
                       type="text"
-                      @click="delForum(scope.row.ForumID)"
+                      @click="delForum(scope.row.forumID)"
                       >删除</el-button
                     >
                   </template>
@@ -145,13 +145,13 @@
                 <el-table-column label="操作">
                   <template slot-scope="scope">
                     <el-button
-                      :to="'/Book/CheckBook' + scope.row.BookID"
+                      :to="'/Book/CheckBook' + scope.row.bookID"
                       type="text"
                       >查看</el-button
                     >
                     <el-button
                       type="text"
-                      @click="delBook(scope.row.BookID)"
+                      @click="delBook(scope.row.bookID)"
                       >编辑</el-button
                     >
                   </template>
@@ -177,13 +177,13 @@
                 <el-table-column label="操作">
                   <template slot-scope="scope">
                     <el-button
-                      :to="'/Book/CheckBookReview/' + scope.row.BookReviewID"
+                      :to="'/Book/CheckBookReview/' + scope.row.bookReviewID"
                       type="text"
                       >查看</el-button
                     >
                     <el-button
                       type="text"
-                      @click="delBookReview(scope.row.BookReviewID)"
+                      @click="delBookReview(scope.row.bookReviewID)"
                       >删除</el-button
                     >
                   </template>
@@ -212,16 +212,7 @@ export default {
   data: () => ({
     snackbar: false,
     message: "",
-    users: [
-      {
-        UserID: "19231074",
-        Username: "王小虎",
-        isTeacher: "1",
-        Email: "111@qq.com",
-        Birthday: "2000.1.1",
-        Signature: "色情暴力信息",
-      },
-    ],
+    users: [],
     blogs: [],
     groups: [],
     forums: [],
