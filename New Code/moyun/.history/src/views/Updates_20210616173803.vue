@@ -39,7 +39,7 @@
                                 <v-list-item-avatar color="grey darken-3">
                                   <v-img
                                     class="elevation-6"
-                                    :src="'/images/'+item.authorImage"
+                                    :src="'/images/' +item.authorImage"
                                   ></v-img>
                                 </v-list-item-avatar>
 
