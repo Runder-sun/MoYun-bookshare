@@ -259,8 +259,8 @@ export default({
       },
     },
 
-    created(){
-      this.show1;
+    created:function (){
+      this.show1();
     },
 
     methods: {
@@ -275,7 +275,7 @@ export default({
             console.log(res.data);
             if (res.data.success) {
               this.blog=res.data.blogInfo;
-              this.isCollect=res.data.IsCollect;
+              this.isCollect=res.data.isCollect;
             }
           }).catch(err=>{
             console.log(err)
@@ -291,6 +291,7 @@ export default({
       },
       postComment(){
         console.log(this.blog);
+        console.log(this.form.content);
         this.$http({
         method: "post",
         url: "/WriteBlogComment",
@@ -300,6 +301,7 @@ export default({
 
         },
           }).then((res) => {
+            console.log(res.data);
             if (res.data.success) {
               this.dialog1=false;
               this.snackbar2=true;
@@ -315,6 +317,7 @@ export default({
       },
       post(){
         //this.alert1=true
+        console.log(this.blog);
         this.$http({
         method: "post",
         url: "/ReprintBlog",

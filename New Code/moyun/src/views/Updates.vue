@@ -192,8 +192,8 @@ export default {
     bar,
   },
 
-  mounted(){
-    this.showUpdates;
+  created(){
+    this.showUpdates();
   },
   methods:{
     changeToBook(){

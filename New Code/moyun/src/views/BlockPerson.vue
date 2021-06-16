@@ -279,7 +279,7 @@ export default {
     },
 
     created(){
-      this.showGuys;
+      this.showGuys();
     },
 
     watch: {

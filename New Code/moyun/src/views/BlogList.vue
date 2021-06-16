@@ -160,8 +160,8 @@ export default({
       },
     },
 
-    mounted(){
-      this.show2;
+    created:function(){
+      this.show2();
     },
 
       methods: {
@@ -194,14 +194,15 @@ export default({
         this.snackbar = true
         this.resetForm()
       },
+      //初始化函数
       show2(){
+        console.log("here");
         this.$http({
           method:"get",
           url:"/BlogList",
         }).then((res)=>{
-            this.tableData = res.data.blogList;
-            alert("Handling..");
             console.log(res.data);
+            this.tableData = res.data.blogList;
             if(!res.data.success){
               alert("获取信息失败！");
             }
