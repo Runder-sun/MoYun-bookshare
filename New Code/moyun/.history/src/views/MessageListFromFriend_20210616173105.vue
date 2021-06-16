@@ -159,7 +159,6 @@
 import avatar from "../components/Avatar.vue";
 import bar from "../components/Bar.vue";
 export default {
-  inject: ["reload"],
   data: () => ({
     myInterval: null,
     messageBoxTitle: "System",
@@ -269,7 +268,7 @@ export default {
       }).then((res) => {
         if (res.data.success) {
           alert("Send Message Success");
-          this.reload();
+          this.$router.go(0);
         } else {
           alert("发送信息失败！");
         }

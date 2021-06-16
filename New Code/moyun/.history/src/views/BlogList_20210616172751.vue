@@ -233,9 +233,6 @@ export default({
         })
           .then((res)=>{
             this.tableData = res.data.blogList;
-            if(!res.data.success){
-              alert("获取信息失败！");
-            }
           })
           .catch((err)=>{
             console.log(err);

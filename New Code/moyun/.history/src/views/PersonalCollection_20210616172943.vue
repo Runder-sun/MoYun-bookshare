@@ -154,7 +154,7 @@ export default({
         }
       }).then((res) => {
           this.snackbar=true;
-          this.reload();
+          this.$router.go(0);
         })
         .catch((err) => {
           console.log(err);
