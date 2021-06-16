@@ -26,7 +26,7 @@
                         <v-col :key="i" cols="12" md="3">
                           <v-hover v-slot="{ hover }">
                             <v-card
-                              :elevation="hover ? 24 : 2"
+                              :elevation="hover ? 7 : 2"
                               :class="{ 'on-hover': hover }"
                               width="300"
                               :to="'/Group/GroupIndex/' + group.groupID"
@@ -80,7 +80,7 @@
                         <v-col :key="i" cols="12" md="3">
                           <v-hover v-slot="{ hover }">
                             <v-card
-                              :elevation="hover ? 24 : 2"
+                              :elevation="hover ? 7 : 2"
                               :class="{ 'on-hover': hover }"
                               width="300"
                               :to="'/Group/GroupIndex/' + group.groupID"

@@ -75,6 +75,7 @@ export default {
           if(res.data.success){
             this.$store.commit('setLogout')
             this.$router.push({path:"/"});
+            sessionStorage.clear();
           }
         })
         

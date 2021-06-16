@@ -15,7 +15,6 @@
             label
             text-color="white"
             @click:close="refuse(user)"
-            :to="'/PersonalInfo/' + user.userID"
           >
             <v-avatar
               left
@@ -81,7 +80,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" text @click="changeGroupInfo">
-              关闭
+              确认
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -109,7 +108,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="addTask"> 关闭 </v-btn>
+            <v-btn color="blue darken-1" text @click="addTask"> 确认 </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -284,55 +283,23 @@ export default {
     isMember: false,
     newTask: "",
     group: {
-      groupName: "这是圈子名称",
-      introduce: "这是圈子简介",
-      tag: "这是标签",
+      groupName: "",
+      introduce: "",
+      tag: "",
       isPrivate: false,
-      groupImage: "https://cdn.vuetifyjs.com/images/john.jpg",
+      groupImage: "",
     },
     members: [
-      {
-        headImage: "https://cdn.vuetifyjs.com/images/john.jpg",
-        username: "zy",
-      },
+      
     ],
     tasks: [
-      {
-        taskContent: "读书",
-        createTime: "2021.1.1",
-      },
+      
     ],
     hotForum: [
-      {
-        forumID: 1,
-        topic: "主题:今天宁吃了吗",
-        forumMessages: "内容",
-        createTime: "2020-1-1",
-      },
-      {
-        forumID: 1,
-        topic: "主题：这是一个主题",
-        forumMessages: "内容",
-        createTime: "2020-1-1",
-      },
-      {
-        forumID: 1,
-        topic: "主题",
-        forumMessages: "内容",
-        createTime: "2020-1-1",
-      },
-      {
-        forumID: 1,
-        topic: "主题",
-        forumMessages: "内容",
-        createTime: "2020-1-1",
-      },
+      
     ],
     groupApplyUser: [
-      {
-        headImage: "https://cdn.vuetifyjs.com/images/john.jpg",
-        username: "zy",
-      },
+      
     ],
     model: 1,
     snackbar: false,
@@ -370,6 +337,7 @@ export default {
             this.members = res.data.MemberUser;
             this.hotForum = res.data.HotForum;
             this.isCollect = res.data.isCollect;
+            this.tasks=res.data.TaskList
           }
         })
         .catch((err) => {
@@ -446,6 +414,9 @@ export default {
         method: "post",
         url: "/applyGroup",
         data: { GroupID: this.$route.params.id },
+      }).then(res=>{
+        this.message="申请成功！"
+        this.snackbar=true;
       });
     },
     removeMember(member) {
@@ -487,8 +458,7 @@ export default {
         url: "/addTask",
         data: { GroupID: this.$route.params.id, TaskContent: this.newTask },
       });
-      this.getInit();
-      newTask = "";
+      this.reload();
     },
     changeGroupInfo() {
       var a = {
