@@ -198,10 +198,10 @@ export default({
         this.$http({
           method:"get",
           url:"/BlogList",
-        })
-          .then((res)=>{
+        }).then((res)=>{
             this.tableData = res.data.blogList;
-            console.log(success);
+            alert("Handling..");
+            console.log(res.data);
             if(!res.data.success){
               alert("获取信息失败！");
             }

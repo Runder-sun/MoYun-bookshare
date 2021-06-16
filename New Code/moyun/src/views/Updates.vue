@@ -1,4 +1,4 @@
-<template>
+<template >
   <div class="updates">
     <bar></bar>
     <v-main >
@@ -192,7 +192,7 @@ export default {
     bar,
   },
 
-  created(){
+  mounted(){
     this.showUpdates;
   },
   methods:{
