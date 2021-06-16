@@ -59,10 +59,7 @@ export default {
           }
         }).then(res=>{
           if(res.data.success){
-            console.log(res.data)
             this.messages = res.data.ForumMessageList
-            this.forum=res.data.Forum
-            this.forumMessageUser=res.data.ForumMessageUser
           }
         }).catch(err=>{
           console.log(err)
@@ -94,7 +91,6 @@ export default {
       messages: [
       
     ],
-    topic:""
   }),
   components: {
     bar,

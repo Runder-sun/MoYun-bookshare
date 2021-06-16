@@ -84,13 +84,10 @@ export default {
     },
 
     getInit() {
-      const formData=new FormData();
-      formData.append("UserID",this.$route.params.id)
       this.$http({
-        
         method: "get",
         url: "/inspectUser",
-        params: formData
+        params: this.$route.params.id,
       })
         .then((res) => {
           if (res.data.success) {
