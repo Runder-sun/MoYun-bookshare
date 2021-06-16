@@ -3,29 +3,6 @@
     <v-app>
       <bar></bar>
       <v-container>
-        <v-card style="margin-top:30px">
-          <v-card-title>
-            <v-text-field
-              v-model="search"
-              label="搜索图书(按回车)"
-              single-line
-              hide-details
-              @keyup.enter="toSearch"
-
-            ></v-text-field>
-            <v-btn icon>
-              <v-icon @click="toSearch">mdi-magnify</v-icon>
-            </v-btn>
-          </v-card-title>
-
-          <v-row justify="center">
-            <v-chip-group active-class="primary--text">
-              <v-chip color="#B3E5FC" v-for="tag in tags" :key="tag">
-                {{ tag }}
-              </v-chip>
-            </v-chip-group>
-          </v-row>
-        </v-card>
 
           <v-card style="margin-top:30px">
             <v-toolbar flat>
@@ -33,6 +10,9 @@
 
               <v-spacer></v-spacer>
 
+              <v-btn text color="cyan" href="/Book/SearchBook">
+                搜索图书
+              </v-btn>
               <v-btn text color="cyan" href="/Book/AddBook">
                 添加新书
               </v-btn>
@@ -47,24 +27,24 @@
                         align="center"
                         justify="center"
                       >
-                        <template v-for="(group, i) in bookGroups">
+                        <template v-for="(book, i) in hotBook">
                           <v-col :key="i" cols="12" md="3">
                             <v-hover v-slot="{ hover }">
                               <v-card
                                 :elevation="hover ? 24 : 2"
                                 :class="{ 'on-hover': hover }"
                                 width="300"
-                                @click="toCheckBook"
+                                :to="'/Book/CheckBook/' + book.bookID"
                               >
-                                <v-img :src="group.img" height="225px">
+                                <v-img :src="'/home/moyun/file/'+book.bookImage" height="225px">
                                   <v-card-title class="title white--text">
                                     <v-row
                                       class="fill-height flex-column"
                                       justify="space-between"
                                     >
                                       <p class="mt-4 subheading text-left">
-                                        《{{ group.title }}》
-                                        <v-chip> {{ group.tag }} </v-chip>
+                                        《{{ book.bookName }}》
+                                        <v-chip> {{ book.kind }} </v-chip>
                                       </p>
                                       <div>
                                         <p
@@ -75,7 +55,7 @@
                                             text-left
                                           "
                                         >
-                                          {{ group.author }}
+                                          {{ book.author }}
                                         </p>
 
                                         <p
@@ -85,7 +65,7 @@
                                             text-left
                                           "
                                         >
-                                          评分：{{ group.scores }}
+                                          评分：{{ book.score }}
                                         </p>
                                       </div>
                                     </v-row>
@@ -104,22 +84,23 @@
                         align="center"
                         justify="center"
                       >
-                        <template v-for="(group, i) in bookGroups">
+                        <template v-for="(book, i) in bookCollectionBook">
                           <v-col :key="i" cols="12" md="3">
                             <v-hover v-slot="{ hover }">
                               <v-card
                                 :elevation="hover ? 24 : 2"
                                 :class="{ 'on-hover': hover }"
                                 width="300"
+                                :to="'/Book/CheckBook/' + book.bookID"
                               >
-                                <v-img :src="group.img" height="225px" @click="toCheckBook">
+                                <v-img :src="'/home/moyun/file/'+book.bookImage" height="225px" >
                                   <v-card-title class="title white--text">
                                     <v-row
                                       class="fill-height flex-column"
                                       justify="space-between"
                                     >
                                       <p class="mt-4 subheading text-left">
-                                        {{ group.title }}
+                                        {{ book.bookName }}
                                       </p>
                                     </v-row>
                                   </v-card-title>
@@ -158,76 +139,31 @@ export default {
       "IT",
       "数学",
     ],
-    bookGroups: [
-      {
-        title: "西游记",
-        author: "吴承恩",
-        scores: 8.2,
-        tag: "传说小说",
-        img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
-      },
-      {
-        title: "西游记",
-        author: "吴承恩",
-        scores: 8.2,
-        tag: "传说小说",
-        img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
-      },
-      {
-        title: "西游记",
-        author: "吴承恩",
-        scores: 8.2,
-        tag: "传说小说",
-        img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
-      },
-      {
-        title: "西游记",
-        author: "吴承恩",
-        scores: 8.2,
-        tag: "传说小说",
-        img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
-      },
-      {
-        title: "西游记",
-        author: "吴承恩",
-        scores: 8.2,
-        tag: "传说小说",
-        img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
-      },
-      {
-        title: "西游记",
-        author: "吴承恩",
-        scores: 8.2,
-        tag: "传说小说",
-        img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
-      },
-      {
-        title: "西游记",
-        author: "吴承恩",
-        scores: 8.2,
-        tag: "传说小说",
-        img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
-      },
-      {
-        title: "西游记",
-        author: "吴承恩",
-        scores: 8.2,
-        tag: "传说小说",
-        img: "https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80",
-      },
+    hotBook: [
     ],
+    bookCollectionBook: [
+    ],
+
   }),
   setup() {},
   components: {
     Bar,
   },
+  created() {
+    this.showBookWareHouse();
+  },
   methods: {
-    toSearch() {
-      this.$router.push({ path: "/Book/SearchBook" });
+    showBookWareHouse() {
+      this.$http({
+        method: "get",
+        url: "/bookWareHouse",
+      }).then((res) => {
+          this.hotBook = res.data.hotBook;
+          this.bookCollectionBook = res.data.bookCollectionBook;
+        }).catch((err) => {
+          console.log(err);
+      });
     },
-    toCheckBook(){
-       this.$router.push({ path: "/Book/CheckBook" });
-    }
   },
 };
 </script>

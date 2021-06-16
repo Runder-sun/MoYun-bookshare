@@ -143,7 +143,7 @@ export default {
     getCode() {
       if (this.code !== "") {
         this.$http({
-          method: "POST",
+          method: "post",
           url: "/ForgetPassword",
           data: {
             UserID: this.id,

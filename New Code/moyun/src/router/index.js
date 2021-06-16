@@ -104,12 +104,12 @@ const routes = [
     component:SearchBook
   },
   {
-    path:"/Book/WriteBookReview",
+    path:"/Book/WriteBookReview/:id",
     name:"WriteBookReview",
     component:WriteBookReview
   },
   {
-    path:"/Book/CheckBook",
+    path:"/Book/CheckBook/:id",
     name:"CheckBook",
     component:CheckBook
   },
@@ -129,7 +129,7 @@ const routes = [
     component: AddBook
   },
   {
-    path:"/Book/EditBook",
+    path:"/Book/EditBook/:id",
     name:"EditBook",
     component:EditBook
   },
@@ -169,12 +169,12 @@ const routes = [
     component:ScanBlog,
   },
   {
-    path:"/Book/CheckBookReview",
+    path:"/Book/CheckBookReview/:id",
     name:"CheckBookReview",
     component: CheckBookReview,
   },
   {
-    path:"/Book/EditBookReview",
+    path:"/Book/EditBookReview/:id",
     name:"EditBookReview",
     component: EditBookReview,
   },

@@ -11,7 +11,6 @@
 
           <template v-slot:extension>
             <v-tabs v-model="tab">
-              <v-tab>热门书评</v-tab>
               <v-tab>我的书评</v-tab>
               <v-tab>收藏书评</v-tab>
 
@@ -19,44 +18,15 @@
                 <v-container class="pa-4 text-center">
                   <v-row class="fill-height" align="center" justify="center">
                     <v-container>
-                      <el-table :data="commentsData" style="width: 100%" height="600" width="1600" :header-cell-style="{'text-align':'center'}"
+                      <el-table :data="myBookReview" style="width: 100%" height="600" width="1600" :header-cell-style="{'text-align':'center'}"
     :cell-style="{'text-align':'center'}">
-                        <el-table-column fixed prop="date" label="发布日期" width="150" ></el-table-column>
+                        <el-table-column fixed prop="reviewTime" label="发布日期" width="150"></el-table-column>
                         <el-table-column prop="title" label="题目" width="170"></el-table-column>
                         <el-table-column prop="author" label="作者" width="120"></el-table-column>
-                        <el-table-column prop="bookReview" label="书评内容" width="320"></el-table-column>
-                        <el-table-column prop="scores" label="评分" width="50"></el-table-column>
+                        <el-table-column prop="content" label="书评内容" width="320"></el-table-column>
+                        <el-table-column prop="score" label="评分" width="50"></el-table-column>
                         <el-table-column align="right">
-                          <template slot-scope="scope">
-                            <el-button
-                              type="warning"
-                              round
-                              @click="toCheckBookReview(scope.$index, scope.row)">查看</el-button
-                            >
-                          </template>
-                        </el-table-column>
-                      </el-table>
-                      <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
-                    </v-container>
-                  </v-row>
-                </v-container>
-              </v-tab-item>
-
-              <v-tab-item>
-                <v-container class="pa-4 text-center">
-                  <v-row class="fill-height" align="center" justify="center">
-                    <v-container>
-                      <el-table :data="commentsData" style="width: 100%" height="600" width="1600" :header-cell-style="{'text-align':'center'}"
-    :cell-style="{'text-align':'center'}">
-                        <el-table-column fixed prop="date" label="发布日期" width="150"></el-table-column>
-                        <el-table-column prop="title" label="题目" width="170"></el-table-column>
-                        <el-table-column prop="author" label="作者" width="120"></el-table-column>
-                        <el-table-column prop="bookReview" label="书评内容" width="320"></el-table-column>
-                        <el-table-column prop="scores" label="评分" width="50"></el-table-column>
-                        <el-table-column align="right">
-                          <template slot-scope="scope">
-                            <el-button type="warning" round @click="toCheckBookReview(scope.$index, scope.row)">查看</el-button>
-                          </template>
+                          <el-button type="warning" round class="check" @click="toCheckBookReview('bookReviewID')">查看</el-button>
                         </el-table-column>
                       </el-table>
                       <el-pagination background layout="prev, pager, next" :total="1000" >
@@ -70,18 +40,16 @@
                 <v-container class="pa-4 text-center">
                   <v-row class="fill-height" align="center" justify="center">
                     <v-container>
-                      <el-table :data="commentsData" style="width: 100%" height="600" width="1600" :header-cell-style="{'text-align':'center'}"
+                      <el-table :data="bookReviewCollection" style="width: 100%" height="600" width="1600" :header-cell-style="{'text-align':'center'}"
     :cell-style="{'text-align':'center'}" >
-                        <el-table-column fixed prop="date" label="发布日期" width="150"></el-table-column>
+                        <el-table-column fixed prop="ReviewTime" label="发布日期" width="150"></el-table-column>
                         <el-table-column prop="title" label="题目" width="170"></el-table-column>
                         <el-table-column prop="author" label="作者" width="120"></el-table-column>
-                        <el-table-column prop="bookReview" label="书评内容" width="320"></el-table-column>
-                        <el-table-column prop="scores" label="评分"  width="50" ></el-table-column>
+                        <el-table-column prop="content" label="书评内容" width="320"></el-table-column>
+                        <el-table-column prop="score" label="评分"  width="50" ></el-table-column>
                         <el-table-column align="right">
-                          <template slot-scope="scope">
-                            <el-button type="warning" round @click="toCheckBookReview(scope.$index, scope.row)">查看</el-button >
-                          </template>
-                        </el-table-column>
+              <el-button type="warning" round class="check" @click="toCheckBookReview('bookReviewID')">查看</el-button>
+          </el-table-column>
                       </el-table>
                       <el-pagination  background  layout="prev, pager, next"  :total="1000" >
                       </el-pagination>
@@ -103,64 +71,8 @@
 import Bar from "../components/Bar.vue";
 export default {
   data: () => ({
-    careBoolean:false,
-    
-    bookinfourl:"https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg",
-    bookinfosrcList: [
-      "https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg",
-      "https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg",
-    ],
-    commentsData: [
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-      {
-        date: "2016-05-03",
-        title: "《西游记读后感》",
-        author: "lx",
-        bookReview: "普陀区",
-        scores:8.0
-      },
-    ],
+    bookReviewCollection:[],
+    myBookReview:[],
     form: {
       name: "",
       region: "",
@@ -172,9 +84,23 @@ export default {
       desc: "",
     },
   }),
+  created() {
+    this.showBookReview();
+  },
   methods: {
-    toCheckBookReview(){
-        this.$router.push({ path: "/Book/CheckBookReview" });
+    showBookReview(){
+      this.$http({
+        method: "get",
+        url: "/bookReview",
+      }).then((res) => {
+          this.bookReviewCollection = res.data.bookReviewCollection;
+          this.myBookReview = res.data.myBookReview;
+        }).catch((err) => {
+          console.log(err);
+      });
+    },
+    toCheckBookReview(bookReviewID){
+        this.$router.push({ path: "/Book/CheckBookReview"+ bookReviewID});
     },
   },
   setup() {},

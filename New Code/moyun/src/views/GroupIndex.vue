@@ -3,18 +3,26 @@
     <bar></bar>
     <v-navigation-drawer v-model="drawer" absolute bottom temporary right>
       <v-list nav dense two-lines>
-        <v-chip-group column v-if="$store.state.person.userID == group.createID">
+        <v-chip-group
+          column
+          v-if="$store.state.person.userID == group.createID"
+        >
           <v-chip
-            v-for="(user,i) in groupApplyUser"
+            v-for="(user, i) in groupApplyUser"
             :key="i"
             class="ma-2"
             close
             label
             text-color="white"
             @click:close="refuse(user)"
-            :to="'/PersonalInfo/'+user.userID"
+            :to="'/PersonalInfo/' + user.userID"
           >
-            <v-avatar left size="10" :to="'/PersonalInfo/'+user.userID" class="lxtAva">
+            <v-avatar
+              left
+              size="10"
+              :to="'/PersonalInfo/' + user.userID"
+              class="lxtAva"
+            >
               <img :src="user.headImage" :alt="user.username" />
             </v-avatar>
             {{ user.username }}
@@ -25,8 +33,8 @@
         <v-divider></v-divider>
         <v-list-item-group active-class="deep-purple--text text--accent-4">
           <v-list-item v-for="(member, i) in members" :key="i">
-            <v-list-item-avatar :to="'/PersonalInfo/'+member.userID">
-              <img :src="'/home/moyun/file/'+member.headImage" />
+            <v-list-item-avatar :to="'/PersonalInfo/' + member.userID">
+              <img :src="'/home/moyun/file/' + member.headImage" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-text="member.username"></v-list-item-title>
@@ -50,7 +58,7 @@
           <v-card-text>
             <v-container>
               <v-row>
-                <v-col cols="12" >
+                <v-col cols="12">
                   <v-text-field
                     v-model="group.groupName"
                     color="blue darken-2"
@@ -62,7 +70,10 @@
                       <div>圈子简介</div>
                     </template>
                   </v-textarea>
-                  <v-checkbox v-model="group.isPrivate" label="私密"></v-checkbox>
+                  <v-checkbox
+                    v-model="group.isPrivate"
+                    label="私密"
+                  ></v-checkbox>
                 </v-col>
               </v-row>
             </v-container>
@@ -85,7 +96,7 @@
           <v-card-text>
             <v-container>
               <v-row>
-                <v-col cols="12" >
+                <v-col cols="12">
                   <v-text-field
                     v-model="newTask"
                     color="blue darken-2"
@@ -98,16 +109,14 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="addTask">
-              关闭
-            </v-btn>
+            <v-btn color="blue darken-1" text @click="addTask"> 关闭 </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
     </v-row>
     <v-container>
-      <v-card class="mx-auto" >
-        <v-toolbar class="lxtToolbar elevation-1" >
+      <v-card class="mx-auto">
+        <v-toolbar class="lxtToolbar elevation-1">
           <v-toolbar-title>圈子主页</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn v-if="!isMember" @click="apply" class="applyBtn"
@@ -130,21 +139,29 @@
 
         <v-list-item three-line>
           <v-list-item-avatar left size="200" color="grey">
-            <img :src="'/home/moyun/file/'+group.groupImage">
+            <img :src="'/home/moyun/file/' + group.groupImage" />
           </v-list-item-avatar>
           <v-list-item-content>
-            <div class="headline mb-3" style="margin-left:70px">{{group.groupName}}</div>
-            <v-list-item-title style="margin-left:70px"> {{group.tag}}</v-list-item-title>
-            <v-list-item-subtitle style="margin-left:70px">{{group.introduce}}</v-list-item-subtitle>
+            <div class="headline mb-3" style="margin-left: 70px">
+              {{ group.groupName }}
+            </div>
+            <v-list-item-title style="margin-left: 70px">
+              {{ group.tag }}</v-list-item-title
+            >
+            <v-list-item-subtitle style="margin-left: 70px">{{
+              group.introduce
+            }}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
-        <v-card-actions> 
+        <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn  icon v-if="$store.state.person.userID == group.createID" @click="dialog=!dialog">
-            <v-icon>
-              mdi-circle-edit-outline
-            </v-icon>
+          <v-btn
+            icon
+            v-if="$store.state.person.userID == group.createID"
+            @click="dialog = !dialog"
+          >
+            <v-icon> mdi-circle-edit-outline </v-icon>
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -153,12 +170,13 @@
         <v-card-title>
           任务版
           <v-spacer></v-spacer>
-          <v-btn icon v-if="$store.state.person.userID == group.createID" @click="dialog1=!dialog1">
-            <v-icon>
-              mdi-clipboard-plus-outline
-            </v-icon>
-            </v-btn
+          <v-btn
+            icon
+            v-if="$store.state.person.userID == group.createID"
+            @click="dialog1 = !dialog1"
           >
+            <v-icon> mdi-clipboard-plus-outline </v-icon>
+          </v-btn>
         </v-card-title>
         <v-divider></v-divider>
         <v-simple-table>
@@ -170,7 +188,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(task,i) in tasks" :key="i">
+              <tr v-for="(task, i) in tasks" :key="i">
                 <td class="text-center">{{ task.taskContent }}</td>
                 <td class="text-center">{{ task.createTime }}</td>
               </tr>
@@ -180,7 +198,7 @@
       </v-card>
 
       <v-card class="discussion">
-        <v-toolbar class=" elevation-1">
+        <v-toolbar class="elevation-1">
           <v-toolbar-title>热门讨论</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn
@@ -205,7 +223,14 @@
                           class="fill-height flex-column"
                           justify="space-between"
                         >
-                          <p class="mt-4 subheading text-center font-weight-medium">
+                          <p
+                            class="
+                              mt-4
+                              subheading
+                              text-center
+                              font-weight-medium
+                            "
+                          >
                             {{ forum.topic }}
                           </p>
                         </v-row>
@@ -247,7 +272,9 @@
 
 <script>
 import bar from "../components/Bar.vue";
+import qs from "qs";
 export default {
+  inject: ["reload"],
   data: () => ({
     drawer: null,
     dialog: false,
@@ -255,13 +282,13 @@ export default {
     //groupID: this.$route.params.id,
     isCollect: false,
     isMember: false,
-    newTask:"",
+    newTask: "",
     group: {
       groupName: "这是圈子名称",
       introduce: "这是圈子简介",
       tag: "这是标签",
-      isPrivate:false,
-      groupImage:"https://cdn.vuetifyjs.com/images/john.jpg",
+      isPrivate: false,
+      groupImage: "https://cdn.vuetifyjs.com/images/john.jpg",
     },
     members: [
       {
@@ -280,25 +307,25 @@ export default {
         forumID: 1,
         topic: "主题:今天宁吃了吗",
         forumMessages: "内容",
-        createTime:"2020-1-1"
+        createTime: "2020-1-1",
       },
       {
         forumID: 1,
         topic: "主题：这是一个主题",
         forumMessages: "内容",
-        createTime:"2020-1-1"
+        createTime: "2020-1-1",
       },
       {
         forumID: 1,
         topic: "主题",
         forumMessages: "内容",
-        createTime:"2020-1-1"
+        createTime: "2020-1-1",
       },
       {
         forumID: 1,
         topic: "主题",
         forumMessages: "内容",
-        createTime:"2020-1-1"
+        createTime: "2020-1-1",
       },
     ],
     groupApplyUser: [
@@ -321,15 +348,23 @@ export default {
   },
   methods: {
     getInit() {
-      var a={GroupID:this.$route.params.id,}
+      var a = { GroupID: this.$route.params.id };
+      const formData=new FormData();
+      formData.append("GroupID",this.$route.params.id)
       this.$http({
         method: "get",
         url: "/GroupInfo",
-        params:qs.stringify(a)
+        params: { GroupID: this.$route.params.id }
       })
         .then((res) => {
+          console.log(res.data)
           if (res.data.success) {
-            if (isGroupMember(this.$store.state.person.userID, res.data.MemberList)) {
+            if (
+              this.isGroupMember(
+                this.$store.state.person.userID,
+                res.data.MemberList
+              )
+            ) {
               this.isMember = true;
             } else {
               this.isMember = false;
@@ -359,13 +394,16 @@ export default {
       return null;
     },
     getApply() {
-      var a={GroupID:this.$route.params.id}
+      var a = { GroupID: this.$route.params.id };
+      const formData=new FormData();
+      formData.append("GroupID",this.$route.params.id)
       this.$http({
         method: "get",
         url: "/GroupApplyList",
-        params:qs.stringify(a)
+        params: { GroupID: this.$route.params.id }
       })
         .then((res) => {
+          console.log(res.data)
           if (res.data.success) {
             this.groupApplyUser = res.data.GroupApplyUser;
           }
@@ -377,152 +415,176 @@ export default {
     refuse(item) {
       this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
       this.groupApplyUser = [...this.groupApplyUser];
-      var a={GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),GroupID: this.$route.params.id}
+      var a = {
+        GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
+        GroupID: this.$route.params.id,
+      };
       this.$http({
         method: "post",
         url: "/refuseApply",
-        data: qs.stringify(a)
+        data: {
+          GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
+          GroupID: this.$route.params.id,
+        },
       });
     },
     acceptApply(item) {
       this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
       this.groupApplyUser = [...this.groupApplyUser];
-      var a={GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),GroupID: this.$route.params.id,UserID: item.userID,}
+      var a = {
+        GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
+        GroupID: this.$route.params.id,
+        UserID: item.userID,
+      };
       this.$http({
         method: "post",
         url: "/addMember",
-        data: qs.stringify(a)
+        data: {
+          GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
+          GroupID: this.$route.params.id,
+          UserID: item.userID,
+        },
       });
     },
     apply() {
-      var a={GroupID:this.$route.params.id}
+      var a = { GroupID: this.$route.params.id };
       this.$http({
         method: "post",
         url: "/applyGroup",
-        data: qs.stringify(a)
+        data: { GroupID: this.$route.params.id },
       });
     },
     removeMember(member) {
       this.members.splice(this.members.indexOf(member), 1);
       this.members = [...this.members];
-      var a={MemberID: member.userID}
+      var a = { MemberID: member.userID };
       this.$http({
         method: "post",
         url: "/deleteMember",
-        data: qs.stringify(a)
+        data: { MemberID: member.userID },
       });
     },
     collectGroup() {
-      var a={GroupID:this.$route.params.id}
+      var a = { GroupID: this.$route.params.id };
       this.$http({
         method: "post",
         url: "/CollectGroup",
-        data: qs.stringify(a)
+        data: { GroupID: this.$route.params.id },
       }).then((res) => {
         if (res.data.success) this.isCollect = true;
       });
     },
     cancelCollectGroup() {
-      var a={GroupID:this.$route.params.id}
+      var a = { GroupCollectionID: this.$route.params.id };
       this.$http({
         method: "post",
         url: "/cancelCollectGroup",
-        data: qs.stringify(a)
+        data: { GroupCollectionID: this.$route.params.id },
       }).then((res) => {
         if (res.data.success) this.isCollect = false;
       });
     },
     addTask() {
       //TODO:生成弹窗输入任务
-      var a={GroupID:this.$route.params.id,TaskContent:this.newTask}
+      var a = { GroupID: this.$route.params.id, TaskContent: this.newTask };
       this.dialog1 = false;
       this.$http({
         method: "post",
-        url:"/addTask",
-        data: qs.stringify(a)
+        url: "/addTask",
+        data: { GroupID: this.$route.params.id, TaskContent: this.newTask },
       });
-      this.getInit();
-      newTask="";
+      this.reload();
+      newTask = "";
     },
-    changeGroupInfo(){
-      var a={GroupID:this.$route.params.id,GroupName:this.group.groupName,Introduce:this.group.introduce,isPrivate:this.group.isPrivate,Tag:this.group.tag}
-      this.dialog = false
+    changeGroupInfo() {
+      var a = {
+        GroupID: this.$route.params.id,
+        GroupName: this.group.groupName,
+        Introduce: this.group.introduce,
+        isPrivate: this.group.isPrivate,
+        Tag: this.group.tag,
+      };
+      this.dialog = false;
       this.$http({
         method: "post",
-        url:"/changeGroupInfo",
-        data: qs.stringify(a)
-      })
-    }
+        url: "/changeGroupInfo",
+        data: {
+          GroupID: this.$route.params.id,
+          GroupName: this.group.groupName,
+          Introduce: this.group.introduce,
+          isPrivate: this.group.isPrivate,
+          Tag: this.group.tag,
+        },
+      });
+    },
   },
 };
 </script>
 
 <style scoped>
-.lxtAva{
-    border-radius: 137px;
-    background: #eee7e7;
-    box-shadow: inset -20px 20px 41px #b3adad,
-    inset 20px -20px 41px #ffffff;
+.lxtAva {
+  border-radius: 137px;
+  background: #eee7e7;
+  box-shadow: inset -20px 20px 41px #b3adad, inset 20px -20px 41px #ffffff;
 }
 
-.lxtToolbar{
-  margin-top:40px;
-  padding-right:10px;
+.lxtToolbar {
+  margin-top: 40px;
+  padding-right: 10px;
 }
 
-.lxtBtn{
+.lxtBtn {
   color: #493842;
   margin-right: 30px;
 
-box-shadow:  18px 18px 36px rgba(0, 0, 0, 0.1),
-             -18px -18px 36px #ffffff;
-    		transition: box-shadow 0.2s ease-out;         
-		background-color: #efeeee;
-		position: relative;  
-    		outline: none;
-		border: none;                   
+  box-shadow: 18px 18px 36px rgba(0, 0, 0, 0.1), -18px -18px 36px #ffffff;
+  transition: box-shadow 0.2s ease-out;
+  background-color: #efeeee;
+  position: relative;
+  outline: none;
+  border: none;
 }
 
-.applyBtn{
-    margin-right:35px;
-  		color: #2b7c4d;
-		box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
-			-9px -9px 18px rgba(255, 255, 255, 1);
-		border-radius: 3rem;
-		transition: box-shadow 0.2s ease-out;
-		background-color: #efeeee;
-		position: relative;
-		top: 0px;
-		width: 140px;
-		height: 70 px;
-		outline: none;
-		border: none;
+.applyBtn {
+  margin-right: 35px;
+  color: #2b7c4d;
+  box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
+    -9px -9px 18px rgba(255, 255, 255, 1);
+  border-radius: 3rem;
+  transition: box-shadow 0.2s ease-out;
+  background-color: #efeeee;
+  position: relative;
+  top: 0px;
+  width: 140px;
+  height: 70 px;
+  outline: none;
+  border: none;
 }
 
-.task{
-  margin-top:30px;
+.task {
+  margin-top: 30px;
 }
 
-.discussion{
-  margin-top:30px;
+.discussion {
+  margin-top: 30px;
 }
 
-.discussionBtn{
-  		color: #105a6d;
-		box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
-			-9px -9px 18px rgba(255, 255, 255, 1);
-		border-radius: 3rem;
-		transition: box-shadow 0.2s ease-out;
-		background-color: #efeeee;
-		position: relative;
-		top: 0px;
-		width: 140px;
-		height: 70 px;
-		outline: none;
-		border: none;
+.discussionBtn {
+  color: #105a6d;
+  box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
+    -9px -9px 18px rgba(255, 255, 255, 1);
+  border-radius: 3rem;
+  transition: box-shadow 0.2s ease-out;
+  background-color: #efeeee;
+  position: relative;
+  top: 0px;
+  width: 140px;
+  height: 70 px;
+  outline: none;
+  border: none;
 }
 
-.topic{
-  margin-top:20px;
+.topic {
+  margin-top: 20px;
 }
 </style>

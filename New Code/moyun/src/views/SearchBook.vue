@@ -4,25 +4,37 @@
     <v-container>
       <v-card>
         <v-card-title>
+          <v-tooltip top>
+            <template v-slot:activator="{ on, attrs }">
           <v-text-field
             v-model="search"
             append-icon="mdi-magnify"
             label="Search"
             single-line
             hide-details
+            @keyup.enter="searchBook"
+            v-bind="attrs"
+            v-on="on"
           ></v-text-field>
+          </template>
+          <span>请选择一个标签再进行搜索哦</span>
+          </v-tooltip>
         </v-card-title>
         <v-row justify="center">
           <v-chip-group active-class="primary--text">
-            <v-chip color="#B3E5FC" v-for="tag in tags" :key="tag">
-              {{ tag }}
+            <v-chip
+              v-for="(tag,i) in tags"
+              :key="i"
+              @click="choosedTag = tag.Tag"
+            >
+              {{ tag.Tag }}
             </v-chip>
           </v-chip-group>
         </v-row>
         <v-row class="searchText" justify="center">搜索结果</v-row>
         <v-data-table
           :headers="headers"
-          :items="groups"
+          :items="book"
           :search="search"
         ></v-data-table>
       </v-card>
@@ -37,6 +49,39 @@ export default {
   data() {
     return {
       search: "",
+      choosedTag:"",
+      tags: [
+        {
+          Tag: "文学",
+        },
+        {
+          Tag: "科幻",
+        },
+        {
+          Tag: "侦探",
+        },
+        {
+          Tag: "纪实",
+        },
+        {
+          Tag: "儿童",
+        },
+        {
+          Tag: "艺术",
+        },
+        {
+          Tag: "历史",
+        },
+        {
+          Tag: "武侠小说",
+        },
+        {
+          Tag: "地理",
+        },
+        {
+          Tag: "IT",
+        },
+      ],
       headers: [
         {
           text: "书名",
@@ -48,86 +93,31 @@ export default {
         { text: "作者", value: "author" },
         { text: "评分", value: "score" },
       ],
-      tags: [
-        "文学",
-        "科幻",
-        "侦探",
-        "纪实",
-        "儿童",
-        "艺术",
-        "历史",
-        "武侠小说",
-        "地理",
-        "医药健康",
-        "IT",
-        "数学",
-      ],
-      groups: [
-        {
-          name: "西游记",
-          tag: "文学",
-          author: "吴承恩",
-          score: 8.2,
-        },
-        {
-          name: "西游记",
-          tag: "文学",
-          author: "吴承恩",
-          score: 8.1,
-        },
-        {
-          name: "西游记",
-          tag: "文学",
-          author: "吴承恩",
-          score: 8.4,
-        },
-        {
-          name: "西游记",
-          tag: "文学",
-          author: "吴承恩",
-          score: 8.1,
-        },
-        {
-          name: "西游记",
-          tag: "文学",
-          author: "吴承恩",
-          score: 9.1,
-        },
-        {
-          name: "西游记",
-          tag: "文学",
-          author: "aaaa",
-          score: 8.1,
-        },
-        {
-          name: "西游记",
-          tag: "文学",
-          author: "吴承恩",
-          score: 8.1,
-        },
-        {
-          name: "西游记",
-          tag: "文学",
-          author: "吴承恩",
-          score: 8.1,
-        },
-        {
-          name: "西游记",
-          tag: "文学",
-          author: "吴承恩",
-          score: 8.1,
-        },
-        {
-          name: "西游记",
-          tag: "文学",
-          author: "吴承恩",
-          score: 8.1,
-        },
-      ],
+      book: [],
     };
   },
   components: {
     bar,
+  },
+  methods: {
+    searchBook() {
+      this.$http({
+        method: "post",
+        url: "/searchBook",
+        data: {
+          KeyWord: this.search,
+          Tag: this.choosedTag,
+        },
+      })
+        .then((res) => {
+          if (res.data.success) {
+            this.book = res.data.book;
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
   },
 };
 </script>

@@ -32,7 +32,7 @@
                               :to="'/Group/GroupIndex/' + group.groupID"
                             >
                               <v-img :src="'/home/moyun/file/'+group.groupImage" height="225px">
-                                <v-card-title class="title white--text">
+                                <v-card-title >
                                   <v-row
                                     class="fill-height flex-column"
                                     justify="space-between"
@@ -86,7 +86,7 @@
                               :to="'/Group/GroupIndex/' + group.groupID"
                             >
                               <v-img :src="'/home/moyun/file/'+group.groupImage" height="225px">
-                                <v-card-title class="title white--text">
+                                <v-card-title >
                                   <v-row
                                     class="fill-height flex-column"
                                     justify="space-between"
@@ -155,7 +155,7 @@ export default {
         url: "/GroupHome",
       }).then((res) => {
         console.log(res.data)
-          this.hotGroups = res.data.hotGroup;
+          this.hotGroups = res.data.HotGroup;
           this.myGroups = res.data.UserGroup;
         }).catch((err) => {
           console.log(err);
