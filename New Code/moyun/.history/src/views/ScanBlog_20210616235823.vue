@@ -260,7 +260,7 @@ export default({
     },
 
     created:function (){
-      this.show1();
+      this.show1;
     },
 
     methods: {
@@ -291,7 +291,6 @@ export default({
       },
       postComment(){
         console.log(this.blog);
-        console.log(this.form.content);
         this.$http({
         method: "post",
         url: "/WriteBlogComment",

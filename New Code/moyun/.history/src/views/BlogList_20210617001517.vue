@@ -160,8 +160,8 @@ export default({
       },
     },
 
-    created:function(){
-      this.show2();
+    created(){
+      this.show2;
     },
 
       methods: {

@@ -161,7 +161,7 @@ export default({
     },
 
     created:function(){
-      this.show2();
+      this.show2;
     },
 
       methods: {

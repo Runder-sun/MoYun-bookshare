@@ -260,7 +260,7 @@ export default({
     },
 
     created:function (){
-      this.show1();
+      this.show1;
     },
 
     methods: {

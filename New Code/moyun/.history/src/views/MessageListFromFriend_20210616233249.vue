@@ -193,8 +193,8 @@ export default {
   },
 
   created() {
-    this.showFriMsg();
-    this.initList();
+    this.showFriMsg;
+    this.initList;
   },
 
   computed: {

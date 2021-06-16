@@ -260,7 +260,7 @@ export default({
     },
 
     created:function (){
-      this.show1();
+      this.show1;
     },
 
     methods: {
@@ -290,7 +290,6 @@ export default({
         this.resetForm()
       },
       postComment(){
-        console.log(this.blog);
         console.log(this.form.content);
         this.$http({
         method: "post",

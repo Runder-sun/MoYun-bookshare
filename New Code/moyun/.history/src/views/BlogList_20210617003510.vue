@@ -161,7 +161,8 @@ export default({
     },
 
     created:function(){
-      this.show2();
+      console.log(this.snackbar);
+      this.show2;
     },
 
       methods: {
