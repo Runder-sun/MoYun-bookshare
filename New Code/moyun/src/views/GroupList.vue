@@ -224,7 +224,7 @@ export default {
         url: "/PersonalCollection",
       }).then((res) => {
         console.log(res.data)
-          this.collectGroups = res.data.groupCollection;
+          this.collectGroups = res.data.groupCollectionGroup;
         }).catch((err) => {
           console.log(err);
       });
