@@ -4,7 +4,7 @@
       <bar></bar>
       <v-container>
         <el-form ref="form" :rules="rules" :model="form" label-width="380px">
-          <v-cintainer>
+          <v-container>
             <el-form-item label="图书名称" prop="bookName">
               <el-input
                 v-model="form.bookName"
@@ -96,7 +96,7 @@
                 >添加并查看新书</el-button
               >
             </el-form-item>
-          </v-cintainer>
+          </v-container>
         </el-form>
       </v-container>
     </v-app>

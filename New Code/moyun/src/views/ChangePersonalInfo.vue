@@ -114,7 +114,7 @@ export default {
           this.$store.commit("setUserEmail", this.email);
           this.$store.commit("setUserSignature",this.signature);
           alert("更改成功");
-          this.$router.push({ path: "/PersonalInfo/"+this.$store.state.userID});
+          this.$router.push({ path: "/PersonalInfo/"+ this.$store.state.person.userID});
         }
       }).catch(err=>{
         console.log(err)
@@ -125,14 +125,14 @@ export default {
       this.$http({
         method: "get",
         url: "/inspectUser",
-        params: this.this.$store.state.userID,
+        params: { userID: this.$store.state.person.userID,}
       })
         .then((res) => {
           if (res.data.success) {
-            this.username = res.data.userinfo.username;
-            this.email = res.data.userinfo.email;
-            this.birth = res.data.userinfo.birthDay;
-            this.signature = res.data.userinfo.signature;
+            this.username = res.data.userInfo.username;
+            this.email = res.data.userInfo.email;
+            this.birth = res.data.userInfo.birthDay;
+            this.signature = res.data.userInfo.signature;
           }
         })
         .catch((err) => {
