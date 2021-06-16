@@ -165,7 +165,6 @@ public class BlogController {
         Blog blog0=blogService.getBlogByBlogID(BlogID);
         try {
             Blog blog=new Blog();
-            blog.setAuthorID(blog0.getAuthorID());
             blog.setBlogTitle(blog0.getBlogTitle());
             blog.setContent(blog0.getContent());
             blog.setAuthorID(UserID);
