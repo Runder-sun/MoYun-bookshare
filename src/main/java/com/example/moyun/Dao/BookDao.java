@@ -29,7 +29,7 @@ public interface BookDao {
 
     void collectBook(BookCollection bookCollection);
 
-    void cancelCollectBook(Integer BookCollectionID);
+    void cancelCollectBook(Integer BookID,String UserID);
 
     void plusReadTime(Integer BookID);
 

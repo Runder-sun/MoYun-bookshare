@@ -19,7 +19,7 @@
         from group_info
         where is_private=0
         order by member_num desc
-        limit 0,8
+        limit 0,3
     </select>
     <select id="getGroupCollectionByUserID" resultType="GroupCollection">
         select *
@@ -91,7 +91,7 @@
     </insert>
     <delete id="cancelCollectGroup" parameterType="GroupCollection">
         delete from group_collection
-        where group_collectionid=#{GroupCollectionID}
+        where groupid=#{GroupID} and userid=#{UserID}
     </delete>
     <delete id="deleteGroupCollection" parameterType="GroupCollection">
         delete from group_collection

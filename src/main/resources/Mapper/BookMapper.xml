@@ -18,7 +18,7 @@
         select *
         from book_info
         order by read_times desc
-        limit 0,8
+        limit 0,3
     </select>
     <select id="getBookCollectionByUserID" resultType="BookCollection">
         select *
@@ -45,7 +45,7 @@
     </insert>
     <delete id="cancelCollectBook" parameterType="BookCollection">
         delete from book_collection
-        where book_collectionid=#{BookCollectionID}
+        where bookid=#{BookID} and userid=#{UserID}
     </delete>
     <update id="plusReadTime" parameterType="Book">
         update book_info

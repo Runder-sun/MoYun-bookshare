@@ -67,8 +67,8 @@ public class BookReviewServiceImpl implements BookReviewService {
     }
 
     @Override
-    public void cancelCollectBookReview(Integer BookReviewCollectionID){
-        bookReviewDao.cancelCollectBookReview(BookReviewCollectionID);
+    public void cancelCollectBookReview(Integer BookReviewID,String UserID){
+        bookReviewDao.cancelCollectBookReview(BookReviewID,UserID);
     }
 
     @Override

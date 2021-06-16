@@ -48,7 +48,7 @@
     </insert>
     <delete id="cancelCollectBookReview" parameterType="BookReviewCollection">
         delete from book_review_collection
-        where book_review_collectionid=#{BookReviewCollectionID}
+        where book_reviewid=#{BookReviewID} and userid=#{UserID}
     </delete>
     <delete id="deleteRelatedComment" parameterType="BookReviewComment">
         delete from book_review_comment

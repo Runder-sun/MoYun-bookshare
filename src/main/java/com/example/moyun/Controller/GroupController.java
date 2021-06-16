@@ -259,11 +259,13 @@ public class GroupController {
     }
 
     @PostMapping("/cancelCollectGroup")//取消收藏圈子（已完成测试）
-    public Map<String,Object> cancelCollectGroup(@RequestBody Map<String,String> cancelCollectGroupMap){
+    public Map<String,Object> cancelCollectGroup(HttpServletRequest request,@RequestBody Map<String,String> cancelCollectGroupMap){
         Map<String,Object> map=new HashMap<>();
-        Integer GroupCollectionID=Integer.valueOf(cancelCollectGroupMap.get("GroupCollectionID"));
+        HttpSession session=request.getSession();
+        String UserID=String.valueOf(session.getAttribute("UserID"));
+        Integer GroupID=Integer.valueOf(cancelCollectGroupMap.get("GroupID"));
         try {
-            groupService.cancelCollectGroup(GroupCollectionID);
+            groupService.cancelCollectGroup(GroupID,UserID);
             map.put("success",true);
         }catch (Exception e){
             e.printStackTrace();

@@ -38,7 +38,7 @@ public interface BlogDao {
 
     void cancelLikeBlog(Integer BlogID);
 
-    void cancelCollectBlog(Integer BlogCollectionID);
+    void cancelCollectBlog(Integer BlogID,String UserID);
 
     void deleteBlogCollection(Integer BlogID);
 

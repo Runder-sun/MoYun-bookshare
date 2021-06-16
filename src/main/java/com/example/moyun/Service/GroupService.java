@@ -61,7 +61,7 @@ public interface GroupService {
     void collectGroup(GroupCollection groupCollection);
 
     //取消收藏
-    void cancelCollectGroup(Integer GroupCollectionID);
+    void cancelCollectGroup(Integer GroupID,String UserID);
 
     //删除圈子时同步删除圈子收藏
     void deleteGroupCollection(Integer GroupID);

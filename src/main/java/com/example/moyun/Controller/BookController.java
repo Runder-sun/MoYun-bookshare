@@ -198,11 +198,13 @@ public class BookController {
     }
 
     @PostMapping("/cancelCollectBook")//取消收藏书籍（已完成测试）
-    public Map<String,Object> cancelCollectBook(@RequestBody Map<String,String> cancelCollectMap){
+    public Map<String,Object> cancelCollectBook(HttpServletRequest request,@RequestBody Map<String,String> cancelCollectMap){
         Map<String,Object> map=new HashMap<>();
-        Integer BookCollectionID=Integer.valueOf(cancelCollectMap.get("BookCollectionID"));
+        HttpSession session=request.getSession();
+        String UserID= String.valueOf(session.getAttribute("UserID"));
+        Integer BookID=Integer.valueOf(cancelCollectMap.get("BookID"));
         try {
-            bookService.cancelCollectBook(BookCollectionID);
+            bookService.cancelCollectBook(BookID,UserID);
             map.put("success",true);
         }catch (Exception e){
             e.printStackTrace();

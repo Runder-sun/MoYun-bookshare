@@ -30,7 +30,7 @@ public interface BookReviewDao {
 
     void collectBookReview(Integer BookReviewID, String UserID, Timestamp CollectTime);
 
-    void cancelCollectBookReview(Integer BookReviewCollectionID);
+    void cancelCollectBookReview(Integer BookReviewID,String UserID);
 
     void deleteCollectBookReview(Integer BookReviewID);
 

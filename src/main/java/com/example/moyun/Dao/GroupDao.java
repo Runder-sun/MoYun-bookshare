@@ -44,7 +44,7 @@ public interface GroupDao {
 
     void collectGroup(GroupCollection groupCollection);
 
-    void cancelCollectGroup(Integer BlogCollectionID);
+    void cancelCollectGroup(Integer BlogID,String UserID);
 
     void deleteGroupCollection(Integer GroupID);
 

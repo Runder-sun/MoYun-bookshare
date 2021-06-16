@@ -212,11 +212,13 @@ public class BlogController {
     }
 
     @PostMapping("/CancelCollectBlog")//取消收藏日志（已完成测试）
-    public Map<String,Object> cancelCollectBlog(@RequestBody Map<String,String> cancelCollectBlogMap){
+    public Map<String,Object> cancelCollectBlog(HttpServletRequest request,@RequestBody Map<String,String> cancelCollectBlogMap){
         Map<String,Object> map=new HashMap<>();
-        Integer BlogCollectionID= Integer.valueOf(cancelCollectBlogMap.get("BlogCollectionID"));
+        HttpSession session=request.getSession();
+        String UserID= String.valueOf(session.getAttribute("UserID"));
+        Integer BlogID= Integer.valueOf(cancelCollectBlogMap.get("BlogID"));
         try {
-            blogService.cancelCollectBlog(BlogCollectionID);
+            blogService.cancelCollectBlog(BlogID,UserID);
             map.put("success",true);
         }catch (Exception e){
             e.printStackTrace();

@@ -39,7 +39,7 @@ public interface BookReviewService {
     void collectBookReview(Integer BookReviewID, String UserID, Timestamp CollectTime);
 
     //取消收藏书评
-    void cancelCollectBookReview(Integer BookReviewCollectionID);
+    void cancelCollectBookReview(Integer BookReviewID,String UserID);
 
     //删除书评时同步删除收藏书评记录
     void deleteCollectBookReview(Integer BookReviewID);

@@ -177,7 +177,7 @@ public class HomeController {
         return map;
     }
 
-    @GetMapping("/logout")//（已完成测试）
+    @PostMapping("/logout")//（已完成测试）
     public Map<String,Object> logout (HttpServletRequest request){
         Map<String ,Object> map=new HashMap<>();
         try {

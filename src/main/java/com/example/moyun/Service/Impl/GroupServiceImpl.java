@@ -104,8 +104,8 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public void cancelCollectGroup(Integer GroupCollectionID){
-        groupDao.cancelCollectGroup(GroupCollectionID);
+    public void cancelCollectGroup(Integer GroupID,String UserID){
+        groupDao.cancelCollectGroup(GroupID,UserID);
     }
 
     @Override

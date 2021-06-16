@@ -87,8 +87,8 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void cancelCollectBlog(Integer BlogCollectionID){
-        blogDao.cancelCollectBlog(BlogCollectionID);
+    public void cancelCollectBlog(Integer BlogID,String UserID){
+        blogDao.cancelCollectBlog(BlogID,UserID);
     }
 
     @Override

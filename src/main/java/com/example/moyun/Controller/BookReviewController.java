@@ -41,14 +41,7 @@ public class BookReviewController {
         try {
             List<BookReview> bookReviewCollection=bookReviewService.getBookReviewCollectionByUserID(UserID);
             List<BookReview> myBookReview=bookReviewService.getMyBookReview(UserID);
-            List<User> users=new ArrayList<>();
-            if(bookReviewCollection.size()!=0){
-                for (BookReview bookReview:bookReviewCollection){
-                    users.add(userService.getUserByUserID(bookReview.getUserID()));
-                }
-            }
             map.put("bookReviewCollection",bookReviewCollection);
-            map.put("bookReviewUser",users);
             map.put("MyBookReview",myBookReview);
             map.put("success",true);
         }catch (Exception e){
@@ -213,11 +206,13 @@ public class BookReviewController {
     }
 
     @PostMapping("/cancelCollectBookReview")//取消收藏书评（已完成测试）
-    public Map<String,Object> cancelCollectBookReview(@RequestBody Map<String,String> cancelCollectMap){
+    public Map<String,Object> cancelCollectBookReview(HttpServletRequest request,@RequestBody Map<String,String> cancelCollectMap){
         Map<String,Object> map=new HashMap<>();
-        Integer BookReviewCollectionID=Integer.valueOf(cancelCollectMap.get("BookReviewCollectionID"));
+        HttpSession session=request.getSession();
+        String UserID= String.valueOf(session.getAttribute("UserID"));
+        Integer BookReviewID=Integer.valueOf(cancelCollectMap.get("BookReviewID"));
         try {
-            bookReviewService.cancelCollectBookReview(BookReviewCollectionID);
+            bookReviewService.cancelCollectBookReview(BookReviewID,UserID);
             map.put("success",true);
         }catch (Exception e){
             e.printStackTrace();
@@ -241,11 +236,13 @@ public class BookReviewController {
                     users.add(userService.getUserByUserID(bookReviewComment.getUserID()));
                 }
             }
+            User user=userService.getUserByUserID(bookReview.getUserID());
             boolean isCollect=bookReviewService.isCollect(UserID,BookReviewID)!=null;
             map.put("bookReviewInfo",bookReview);
             map.put("bookReviewCommentList",bookReviewComments);
             map.put("bookReviewCommentUser",users);
             map.put("isCollect",isCollect);
+            map.put("user",user);
             map.put("success",true);
         }
         catch (Exception e){

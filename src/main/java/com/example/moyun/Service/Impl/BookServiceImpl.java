@@ -59,8 +59,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void cancelCollectBook(Integer BookCollectionID){
-        bookDao.cancelCollectBook(BookCollectionID);
+    public void cancelCollectBook(Integer BookID,String UserID){
+        bookDao.cancelCollectBook(BookID,UserID);
     }
 
     @Override

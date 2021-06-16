@@ -52,7 +52,7 @@
     </update>
     <delete id="cancelCollectBlog" parameterType="BlogCollection">
         delete from blog_collection
-        where blog_collectionid=#{BlogCollectionID}
+        where blogid=#{BlogID} and userid=#{UserID}
     </delete>
     <insert id="addBlogComment" parameterType="BlogComment">
         insert into blog_comment(blogid, userid, comment, comment_time)

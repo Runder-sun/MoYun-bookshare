@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @GetMapping("/inspectUser")//查看其他用户信息（已完成测试）
-    public Map<String,Object> inspectUser(HttpServletRequest request,@RequestParam("UserID")String UserID){
+    public Map<String,Object> inspectUser(HttpServletRequest request,@RequestParam("userID")String UserID){
         HttpSession session=request.getSession();
         String MyID= String.valueOf(session.getAttribute("UserID"));
         //String UserID=insmap.get("UserID");
@@ -166,6 +166,7 @@ public class UserController {
             List<Book> books=new ArrayList<>();
             List<User> users=new ArrayList<>();
             List<User> users1=new ArrayList<>();
+            List<Group> groups=new ArrayList<>();
             if(blogCollection.size()!=0){
                 for (BlogCollection blogCollection1:blogCollection){
                     blogs.add(blogService.getBlogByBlogID(blogCollection1.getBlogID()));
@@ -182,6 +183,11 @@ public class UserController {
                     users.add(userService.getUserByUserID(bookReview.getUserID()));
                 }
             }
+            if (groupCollection.size()!=0){
+                for (GroupCollection groupCollection1:groupCollection){
+                    groups.add(groupService.getGroupByGroupID(groupCollection1.getGroupID()));
+                }
+            }
             map.put("blogCollection",blogCollection);
             map.put("blogCollectionBlog",blogs);
             map.put("blogAuthor",users1);
@@ -190,6 +196,7 @@ public class UserController {
             map.put("bookReviewCollection",bookReviewCollection);
             map.put("bookReviewUser",users);
             map.put("groupCollection",groupCollection);
+            map.put("groupCollectionGroup",groups);
             map.put("success",true);
         }catch (Exception e){
             e.printStackTrace();

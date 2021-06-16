@@ -45,7 +45,7 @@ public interface BlogService {
     void collectBlog(BlogCollection blogCollection);
 
     //取消收藏日志
-    void cancelCollectBlog(Integer BlogCollectionID);
+    void cancelCollectBlog(Integer BlogID,String UserID);
 
     //点赞日志
     void likeBlog(Integer BlogID);

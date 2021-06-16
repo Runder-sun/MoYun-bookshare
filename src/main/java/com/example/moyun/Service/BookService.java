@@ -35,7 +35,7 @@ public interface BookService {
     void collectBook(BookCollection bookCollection);
 
     //取消收藏图书
-    void cancelCollectBook(Integer BookCollectionID);
+    void cancelCollectBook(Integer BookID,String UserID);
 
     //增加书籍的被阅读次数
     void plusReadTime(Integer BookID);
