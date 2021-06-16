@@ -354,7 +354,7 @@ export default {
     },
     getMemberApplyID(userID, memberList) {
       for (var i in memberList) {
-        if (userID === i.userID) {
+        if (userID === i.applyUserID) {
           return i.groupApplyID;
         }
       }
@@ -368,6 +368,7 @@ export default {
         params: { GroupID: this.$route.params.id }
       })
         .then((res) => {
+          console.log(res.data )
           if (res.data.success) {
             this.groupApplyUser = res.data.GroupApplyUser;
             this.groupApplyList=res.data.GroupApplyList;
@@ -384,11 +385,13 @@ export default {
         GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
         GroupID: this.$route.params.id,
       };
+      let groupApplyID= this.getMemberApplyID(item.userID, this.groupApplyList)
+      debugger
       this.$http({
         method: "post",
         url: "/refuseApply",
         data: {
-          GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
+          GroupApplyID: groupApplyID,
           GroupID: this.$route.params.id,
         },
       });
@@ -401,11 +404,13 @@ export default {
         GroupID: this.$route.params.id,
         UserID: item.userID,
       };
+      let groupApplyID= this.getMemberApplyID(item.userID, this.groupApplyList)
+      debugger
       this.$http({
         method: "post",
         url: "/addMember",
         data: {
-          GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
+          GroupApplyID: groupApplyID,
           GroupID: this.$route.params.id,
           UserID: item.userID,
         },

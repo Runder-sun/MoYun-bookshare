@@ -48,7 +48,7 @@
                         <el-table-column prop="content" label="书评内容" width="320"></el-table-column>
                         <el-table-column prop="score" label="评分"  width="50" ></el-table-column>
                         <el-table-column align="right">
-              <el-button type="warning" round class="check" @click="toCheckBookReview('bookReviewID')">查看</el-button>
+              <el-button type="warning" round class="check" @click="toCheckBookReview(scope.row.bookReviewID)">查看</el-button>
           </el-table-column>
                       </el-table>
                       <el-pagination  background  layout="prev, pager, next"  :total="1000" >
@@ -102,7 +102,7 @@ export default {
       });
     },
     toCheckBookReview(bookReviewID){
-        this.$router.push({ path: "/Book/CheckBookReview"+ bookReviewID});
+        this.$router.push({ path: "/Book/CheckBookReview/"+ bookReviewID});
     },
   },
   setup() {},
