@@ -297,10 +297,7 @@ export default {
       },
     ],
     tasks: [
-      {
-        taskContent: "读书",
-        createTime: "2021.1.1",
-      },
+      
     ],
     hotForum: [
       {
@@ -370,6 +367,7 @@ export default {
               this.isMember = false;
             }
             this.group = res.data.GroupInfo;
+            this.tasks = res.data.TaskList;
             this.members = res.data.MemberUser;
             this.hotForum = res.data.HotForum;
             this.isCollect = res.data.isCollect;
