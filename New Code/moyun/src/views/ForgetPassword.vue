@@ -141,7 +141,6 @@ export default {
         });
     },
     getCode() {
-      if (this.code !== "") {
         this.$http({
           method: "post",
           url: "/ForgetPassword",
@@ -157,7 +156,6 @@ export default {
           .catch((err) => {
             console.log(err);
           });
-      }
     },
     validate() {
       this.$refs.form.validate();
