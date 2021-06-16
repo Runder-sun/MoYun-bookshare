@@ -302,6 +302,7 @@ export default {
     groupApplyUser: [
       
     ],
+    groupApplyList:[],
     model: 1,
     snackbar: false,
     message: "",
@@ -369,6 +370,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.groupApplyUser = res.data.GroupApplyUser;
+            this.groupApplyList=res.data.GroupApplyList;
           }
         })
         .catch((err) => {
@@ -379,14 +381,14 @@ export default {
       this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
       this.groupApplyUser = [...this.groupApplyUser];
       var a = {
-        GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyUser),
+        GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
         GroupID: this.$route.params.id,
       };
       this.$http({
         method: "post",
         url: "/refuseApply",
         data: {
-          GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyUser),
+          GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
           GroupID: this.$route.params.id,
         },
       });
@@ -395,7 +397,7 @@ export default {
       this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
       this.groupApplyUser = [...this.groupApplyUser];
       var a = {
-        GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyUser),
+        GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
         GroupID: this.$route.params.id,
         UserID: item.userID,
       };
@@ -403,7 +405,7 @@ export default {
         method: "post",
         url: "/addMember",
         data: {
-          GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyUser),
+          GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
           GroupID: this.$route.params.id,
           UserID: item.userID,
         },
@@ -420,8 +422,10 @@ export default {
         url: "/applyGroup",
         data: { GroupID: this.$route.params.id },
       }).then(res=>{
+        if(res.data.success){
         this.message="申请成功！"
         this.snackbar=true;
+        }
       });
     },
     removeMember(member) {
