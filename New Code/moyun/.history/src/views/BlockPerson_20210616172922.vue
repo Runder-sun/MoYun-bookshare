@@ -215,8 +215,68 @@ import bar from "../components/Bar.vue";
 export default {
   inject: ["reload"],
   data: () => ({
-    followList: [],
-      blockList:[],
+    followList: [
+      {
+        id: 1,
+        name: "Jeff",
+        personPhoto: "../assets/UpdatesA1",
+      },
+      {
+        id: 2,
+        name: "Kitty",
+        personPhoto: "../assets/UpdatesA2",
+      },
+      {
+        id: 3,
+        name: "Ken",
+        personPhoto: "../assets/UpdatesA3",
+      },
+      {
+        id: 1,
+        name: "Jeffie",
+        personPhoto: "../assets/UpdatesA1",
+      },
+      {
+        id: 2,
+        name: "Kitten",
+        personPhoto: "../assets/UpdatesA2",
+      },
+      {
+        id: 3,
+        name: "Kenny",
+        personPhoto: "../assets/UpdatesA3",
+      },],
+      blockList:[{
+        id: 4,
+        name: "Micki",
+        personPhoto: "../assets/UpdatesB1",
+      },
+      {
+        id: 5,
+        name: "Kol",
+        personPhoto: "../assets/UpdatesB2",
+      },
+      {
+        id: 6,
+        name: "Kathy",
+        personPhoto: "../assets/UpdatesB3",
+      },
+      {
+        id: 4,
+        name: "Mickin",
+        personPhoto: "../assets/UpdatesB1",
+      },
+      {
+        id: 5,
+        name: "Kolin",
+        personPhoto: "../assets/UpdatesB2",
+      },
+      {
+        id: 6,
+        name: "Kath",
+        personPhoto: "../assets/UpdatesB3",
+      },
+    ],
     loading: false,
     loading1: false,
     search: '',

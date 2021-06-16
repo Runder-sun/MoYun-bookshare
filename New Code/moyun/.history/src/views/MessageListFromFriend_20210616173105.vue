@@ -37,7 +37,7 @@
             >
               <v-list-item-avatar>
                 <img
-                  :src="'/images/' + item.headImage"
+                  :src="'/images/'  + item.headImage"
                   :alt="item.username"
                 />
               </v-list-item-avatar>
@@ -85,7 +85,7 @@
                     >
                       <v-list-item-avatar>
                         <v-img
-                          :src="'/images/' + getUser[0].headImage"
+                          :src="'/images/'  + getUser[0].headImage"
                         ></v-img>
                       </v-list-item-avatar>
 
@@ -102,7 +102,7 @@
                     <v-list-item :key="item.title" v-else>
                       <v-list-item-avatar>
                         <v-img
-                          :src="'/images/' + sendUser[0].headImage"
+                          :src="'/images/'  + sendUser[0].headImage"
                         ></v-img>
                       </v-list-item-avatar>
 
@@ -159,7 +159,6 @@
 import avatar from "../components/Avatar.vue";
 import bar from "../components/Bar.vue";
 export default {
-  inject: ["reload"],
   data: () => ({
     myInterval: null,
     messageBoxTitle: "System",
@@ -269,7 +268,7 @@ export default {
       }).then((res) => {
         if (res.data.success) {
           alert("Send Message Success");
-          this.reload();
+          this.$router.go(0);
         } else {
           alert("发送信息失败！");
         }

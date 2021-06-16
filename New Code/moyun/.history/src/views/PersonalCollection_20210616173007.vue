@@ -82,7 +82,38 @@ export default({
       snackbar: false,
       snacktext: '取消收藏成功',
       timeout: 1000,
-        tableData: [],
+        tableData: [{
+          blogID:123,
+          blogTitle: "在墨韵收藏的第一篇日志",
+          writer:"AStudent",
+          recentFinishTime: "2021/5/21",
+        },{
+          blogID:123,
+          blogTitle: "在墨韵收藏的第一篇日志",
+          writer:"AStudent",
+          recentFinishTime: "2021/5/21",
+        },{
+          blogID:123,
+          blogTitle: "在墨韵收藏的第一篇日志",
+          writer:"AStudent",
+          recentFinishTime: "2021/5/21",
+        },{
+          blogID:123,
+          blogTitle: "在墨韵收藏的第一篇日志",
+          writer:"AStudent",
+          recentFinishTime: "2021/5/21",
+        },{
+          blogID:123,
+          blogTitle: "在墨韵收藏的第一篇日志",
+          writer:"AStudent",
+          recentFinishTime: "2021/5/21",
+        },{
+          blogID:123,
+          blogTitle: "在墨韵收藏的第一篇日志",
+          writer:"AStudent",
+          recentFinishTime: "2021/5/21",
+        },       
+        ],
         blogAuthor:[],
       }
     },

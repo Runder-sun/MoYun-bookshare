@@ -141,7 +141,40 @@ export default({
         terms: false,
         defaultForm,
         dialog: false,
-        tableData: [],
+        tableData: [{
+          blogID:1,
+          blogTitle: "在墨韵的第一天",
+          recentFinishTime: "2021/5/21",
+        },{
+          blogID:22,
+          blogTitle: "在墨韵的第一天",
+          recentFinishTime: "2021/5/21",
+        },{
+          blogID:3,
+          blogTitle: "在墨韵的第一天",
+          recentFinishTime: "2021/5/21",
+        },{
+          blogID:1,
+          blogTitle: "在墨韵的第一天",
+          recentFinishTime: "2021/5/21",
+        },{
+          blogID:1,
+          blogTitle: "在墨韵的第一天",
+          recentFinishTime: "2021/5/21",
+        },{
+          blogID:1,
+          blogTitle: "在墨韵的第一天",
+          recentFinishTime: "2021/5/21",
+        },{
+          blogID:1,
+          blogTitle: "在墨韵的第一天",
+          recentFinishTime: "2021/5/21",
+        },{
+          blogID:1,
+          blogTitle: "在墨韵的第一天",
+          recentFinishTime: "2021/5/21",
+        },       
+        ]
       }
     },
 
@@ -200,9 +233,6 @@ export default({
         })
           .then((res)=>{
             this.tableData = res.data.blogList;
-            if(!res.data.success){
-              alert("获取信息失败！");
-            }
           })
           .catch((err)=>{
             console.log(err);

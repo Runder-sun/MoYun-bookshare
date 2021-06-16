@@ -67,7 +67,7 @@ import Bar from "../components/Bar.vue";
 export default {
   data: () => ({
     valid: true,
-    sex:"",
+    sex:0,
     username:"",
     usernameRules:[(v) => !!v || "username is required"],
     email: "",
