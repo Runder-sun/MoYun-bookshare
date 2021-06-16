@@ -40,11 +40,12 @@
                 <v-col :key="i" cols="12" md="4" >
                   <v-hover v-slot="{ hover }">
                     <v-card
-                      :elevation="hover ? 24 : 2"
+                      :elevation="hover ? 8 : 2"
                       :class="{ 'on-hover': hover }"
                       :to="'/Group/GroupIndex/' + group.groupID"
                       width="300"
                       height="400"
+                      style="margin:40px"
                     >
                       <v-img :src="'/home/moyun/file/'+group.groupImage" height="225px">
                         <v-card-title >
@@ -88,8 +89,8 @@
         </div>
     </div>
     <div class="g-img3 myimg">
-      <div class="font-weight-bold words1">热门书籍</div>
-      <div class="font-weight-bold words2">为您推荐墨韵读书会热门书籍</div>
+      <div class="font-weight-bold words1">热门圈子</div>
+      <div class="font-weight-bold words2">为您推荐墨韵读书会热门读书圈</div>
     </div>
         <div class="groups2">
       <div style="height:1px"></div>
@@ -99,7 +100,7 @@
                 <v-col :key="i" cols="12" md="4">
                   <v-hover v-slot="{ hover }">
                     <v-card
-                      :elevation="hover ? 24 : 2"
+                      :elevation="hover ? 12 : 2"
                       :class="{ 'on-hover': hover }"
                       width="300"
                       height="400"

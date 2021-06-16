@@ -88,8 +88,8 @@
         </div>
     </div>
     <div class="g-img3 myimg">
-      <div class="font-weight-bold words1">热门书籍</div>
-      <div class="font-weight-bold words2">为您推荐墨韵读书会热门书籍</div>
+      <div class="font-weight-bold words1">热门圈子</div>
+      <div class="font-weight-bold words2">为您推荐墨韵读书会热门读书圈</div>
     </div>
         <div class="groups2">
       <div style="height:1px"></div>

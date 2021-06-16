@@ -40,7 +40,7 @@
                 <v-col :key="i" cols="12" md="4" >
                   <v-hover v-slot="{ hover }">
                     <v-card
-                      :elevation="hover ? 24 : 2"
+                      :elevation="hover ? 8 : 2"
                       :class="{ 'on-hover': hover }"
                       :to="'/Group/GroupIndex/' + group.groupID"
                       width="300"
@@ -87,68 +87,7 @@
           </v-row>
         </div>
     </div>
-    <div class="g-img3 myimg">
-      <div class="font-weight-bold words1">热门书籍</div>
-      <div class="font-weight-bold words2">为您推荐墨韵读书会热门书籍</div>
-    </div>
-        <div class="groups2">
-      <div style="height:1px"></div>
-      <div class="cardsMid">
-      <v-row align="center auto" justify="center">
-              <template v-for="(book, i) in books">
-                <v-col :key="i" cols="12" md="4">
-                  <v-hover v-slot="{ hover }">
-                    <v-card
-                      :elevation="hover ? 24 : 2"
-                      :class="{ 'on-hover': hover }"
-                      width="300"
-                      height="400"
-                    >
-                      <v-img
-                        :src="'/home/moyun/file/'+book.bookImage"
-                        height="225px"
-                        @click="toCheckBook"
-                      >
-                        <v-card-title >
-                          <v-row
-                            class="fill-height flex-column"
-                            justify="space-between"
-                          >
-                            <p class="mt-4 subheading text-left">
-                              {{ book.bookName }}
-                            </p>
-
-                            <div>
-                              <p
-                                class="
-                                  ma-0
-                                  body-1
-                                  font-weight-bold font-italic
-                                  text-left
-                                "
-                              >
-                                {{ book.author }}
-                              </p>
-                              <p
-                                class="
-                                  caption
-                                  font-weight-medium font-italic
-                                  text-left
-                                "
-                              >
-                                {{ book.kind }}
-                              </p>
-                            </div>
-                          </v-row>
-                        </v-card-title>
-                      </v-img>
-                    </v-card>
-                  </v-hover>
-                </v-col>
-              </template>
-            </v-row>
-        </div>
-    </div>
+    <div class="g-img3 myimg"></div>
   </div>
 </template>
 
@@ -170,23 +109,7 @@ export default {
       tag:"Story",
       introduce:"This is a story about a prince and his travel..."},
     ],
-    books: [{
-      bookImage:"1",
-      bookName:"1",
-      author:"123",
-      kind:"story",
-    },{
-      bookImage:"1",
-      bookName:"1",
-      author:"123",
-      kind:"story",
-    },{
-      bookImage:"1",
-      bookName:"1",
-      author:"123",
-      kind:"story",
-    },
-    ],
+    books: [],
     transparent: "rgba(255, 255, 255, 0)",
   }),
   components: {
@@ -330,13 +253,6 @@ export default {
   width:80vw;
     margin:0px auto;
   margin-top:25vh;
-}
-
-.groups2{
- background-color: #4f5153;
- width: 100vw;
-  height: 100vh;
-  justify-content: center;
 }
 
 </style>
