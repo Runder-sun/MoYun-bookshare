@@ -202,13 +202,13 @@ export default {
             method: "post",
             url: "/updateBook",
             data: {
-              bookName:this.form.bookName,
+              BookName:this.form.bookName,
               ISBN:this.form.ISBN,
-			  introduce:this.form.introduce,
-			  kind:this.form.kind,
-              author:this.form.author,
-              publisher:this.form.publisher,
-			  bookID:this.$route.params.id,
+			  Introduce:this.form.introduce,
+			  Kind:this.form.kind,
+              Author:this.form.author,
+              Publisher:this.form.publisher,
+			  BookID:this.$route.params.id,
             },
           })
             .then((res) => {

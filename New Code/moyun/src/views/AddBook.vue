@@ -220,13 +220,13 @@ export default {
             method: "post",
             url: "/uploadBook",
             data: {
-              bookName:this.form.bookName,
+              BookName:this.form.bookName,
               ISBN:this.form.ISBN,
-			  introduce:this.form.introduce,
-			  kind:this.form.kind,
-              author:this.form.author,
-              publisher:this.publisher,
-              files:this.files,
+			  Introduce:this.form.introduce,
+			  Kind:this.form.kind,
+              Author:this.form.author,
+              Publisher:this.publisher,
+              Files:this.files,
             },
           })
             .then((res) => {
