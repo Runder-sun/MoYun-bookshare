@@ -57,7 +57,7 @@
           <el-table-column prop="content" label="书评内容" width="200"></el-table-column>
           <el-table-column prop="score" label="评分" width="100"></el-table-column>
           <el-table-column align="right">
-              <el-button type="warning" round class="check" @click="toCheckBookReview('bookReviewID')">查看</el-button>
+              <el-button type="warning" round class="check" @click="toCheckBookReview(bookReviewID)">查看</el-button>
           </el-table-column>
         </el-table>
         <el-pagination background center layout="prev, pager, next" :total="1000" class="pages">
@@ -160,7 +160,7 @@ export default {
     cancelCare(){
         this.$http({
         method: "post",
-        url: "/cancelCollectionBook",
+        url: "/cancelCollectBook",
         data: {
           BookCollectionID:this.$route.params.id,
         },
