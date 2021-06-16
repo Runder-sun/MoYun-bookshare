@@ -406,6 +406,10 @@ export default {
           GroupID: this.$route.params.id,
           UserID: item.userID,
         },
+      }).then(res=>{
+        if(res.data.success){
+          this.reload()
+        }
       });
     },
     apply() {

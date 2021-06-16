@@ -199,6 +199,7 @@
         color="blue-grey"
         absolute
         rounded="pill"
+        top
       >
         {{ message }}
       </v-snackbar>
@@ -209,9 +210,11 @@
 <script>
 import bar from "../components/Bar.vue";
 export default {
+  inject: ["reload"],
   data: () => ({
     snackbar: false,
     message: "",
+    timer: null,
     users: [],
     blogs: [],
     groups: [],
@@ -252,11 +255,17 @@ export default {
         if (res.data.success) {
           this.message = "封禁成功！";
           this.snackbar = true;
-          
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         } else {
           this.message = "封禁失败！";
           this.snackbar = true;
-          
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         }
       }).catch(e=>{
         console.log(e)
@@ -273,10 +282,17 @@ export default {
         if (res.data.success) {
           this.message = "解封成功！";
           this.snackbar = true;
-          
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         } else {
           this.message = "解封失败！";
           this.snackbar = true;
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         }
       }).catch(e=>{
         console.log(e)
@@ -293,10 +309,17 @@ export default {
         if (res.data.success) {
           this.message = "删除成功！";
           this.snackbar = true;
-          
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         } else {
           this.message = "删除失败！";
           this.snackbar = true;
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         }
       }).catch(e=>{
         console.log(e)
@@ -313,10 +336,17 @@ export default {
         if (res.data.success) {
           this.message = "删除成功！";
           this.snackbar = true;
-          
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         } else {
           this.message = "删除失败！";
           this.snackbar = true;
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         }
       }).catch(e=>{
         console.log(e)
@@ -333,10 +363,17 @@ export default {
         if (res.data.success) {
           this.message = "删除成功！";
           this.snackbar = true;
-          
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         } else {
           this.message = "删除失败！";
           this.snackbar = true;
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         }
       }).catch(e=>{
         console.log(e)
@@ -353,10 +390,17 @@ export default {
         if (res.data.success) {
           this.message = "删除成功！";
           this.snackbar = true;
-          
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         } else {
           this.message = "删除失败！";
           this.snackbar = true;
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         }
       }).catch(e=>{
         console.log(e)
@@ -373,10 +417,17 @@ export default {
         if (res.data.success) {
           this.message = "删除成功！";
           this.snackbar = true;
-          
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         } else {
           this.message = "删除失败！";
           this.snackbar = true;
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.reload();
+            }, 1000);
         }
       }).catch(e=>{
         console.log(e)
