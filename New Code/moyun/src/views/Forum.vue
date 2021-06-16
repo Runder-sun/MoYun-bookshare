@@ -12,20 +12,24 @@
               <template>
                 <v-container>
                   <p>
-                    <v-avatar size="30">
-                      <img
-                        :src="
-                          '/images/' + forumMessageUser[i].headImage
-                        "
-                      />
+                    <v-avatar size="30" color="#96CDCD">
+                      <template v-if="forumMessageUser[i].headImage !== ''">
+                        <img
+                          :src="'/images/' + forumMessageUser[i].headImage"
+                        />
+                      </template>
+                      <template v-else>
+                        <span>{{forumMessageUser[i].userID.substr(0,1)}}</span>
+                      </template>
                     </v-avatar>
+
                     {{ forumMessageUser[i].username }} :
                   </p>
                 </v-container>
               </template>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-              {{ forumMessage.text }}
+              {{ forumMessage.comment }}
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
