@@ -46,7 +46,7 @@
                             close
                             @click:close="selected.splice(i, 1)"
                         >
-                            <v-avatar left :src="'/images/' +selection.headImage">                                
+                            <v-avatar left :src="'/home/moyun/file/'+selection.headImage">                                
                             </v-avatar>
                             {{ selection.username }}
                         </v-chip>
@@ -78,7 +78,7 @@
                         <v-list-item-avatar>
                             <v-img
                             :disabled="loading"
-                            :src="'/images/' +item.headImage"
+                            :src="'/home/moyun/file/'+item.headImage"
                             ></v-img>
                         </v-list-item-avatar>
                         <v-list-item-title v-text="item.username"></v-list-item-title>
@@ -176,7 +176,7 @@
                         <v-list-item-avatar>
                             <v-img
                             :disabled="loading1"
-                            :src="'/images/' +item.headImage"
+                            :src="'/home/moyun/file/'+item.headImage"
                             ></v-img>
                         </v-list-item-avatar>
                         <v-list-item-title v-text="item.username"></v-list-item-title>
