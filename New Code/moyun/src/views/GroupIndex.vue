@@ -354,7 +354,7 @@ export default {
     },
     getMemberApplyID(userID, memberList) {
       for (var i in memberList) {
-        if (userID === i.userID) {
+        if (userID === i.applyUserID) {
           return i.groupApplyID;
         }
       }
@@ -368,6 +368,7 @@ export default {
         params: { GroupID: this.$route.params.id }
       })
         .then((res) => {
+          console.log(res.data )
           if (res.data.success) {
             this.groupApplyUser = res.data.GroupApplyUser;
             this.groupApplyList=res.data.GroupApplyList;
