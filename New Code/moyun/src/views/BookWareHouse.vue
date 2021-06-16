@@ -36,7 +36,7 @@
                                 width="300"
                                 :to="'/Book/CheckBook/' + book.bookID"
                               >
-                                <v-img :src="'/home/moyun/file/'+book.bookImage" height="225px">
+                                <v-img :src="'/images/'+book.bookImage" height="225px">
                                   <v-card-title class="title white--text">
                                     <v-row
                                       class="fill-height flex-column"
@@ -93,7 +93,7 @@
                                 width="300"
                                 :to="'/Book/CheckBook/' + book.bookID"
                               >
-                                <v-img :src="'/home/moyun/file/'+book.bookImage" height="225px" >
+                                <v-img :src="'/images/'+book.bookImage" height="225px" >
                                   <v-card-title class="title white--text">
                                     <v-row
                                       class="fill-height flex-column"
@@ -159,8 +159,8 @@ export default {
         method: "get",
         url: "/bookWareHouse",
       }).then((res) => {
-          this.hotBook = res.data.hotBook;
-          this.bookCollectionBook = res.data.bookCollectionBook;
+          this.hotBook = res.data.HotBook;
+          this.bookCollectionBook = res.data.BookCollectionBook;
         }).catch((err) => {
           console.log(err);
       });

@@ -88,10 +88,10 @@ export default {
         method: "post",
         url: "/createBookReview",
         data: {
-          bookID:this.$route.params.id,
-          title:this.title,
-          content:this.content,
-          score:this.score,
+          BookID:this.$route.params.id,
+          Title:this.title,
+          Content:this.content,
+          Score:this.score,
         },
       })
         .then((res) => {

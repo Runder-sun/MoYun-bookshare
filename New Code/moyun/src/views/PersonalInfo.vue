@@ -14,12 +14,12 @@
 
       <v-img
         height="250"
-        :src="'/home/moyun/file/'+this.backGroundImage"
+        :src="'/images/'+this.backGroundImage"
       >
         <v-card-title class="white--text mt-8">
           <v-avatar size="56">
             <img
-                :src="'/home/moyun/file/'+this.headImage"
+                :src="'/images/'+this.headImage"
                 :alt="this.username"
               />
           </v-avatar>
@@ -28,8 +28,7 @@
       </v-img>
 
       <v-card-text>
-        <div class="my-4 text-subtitle-1">学号：{{userID}}</div>
-        <div v-if="$store.state.person.userID==this.userID" class="my-4 text-subtitle-1">密码：{{password}}</div> 
+        <div class="my-4 text-subtitle-1">学号：{{userID}}</div> 
         <div class="my-4 text-subtitle-1">生日：{{birthday}}</div>
         <div class="my-4 text-subtitle-1">邮箱：{{email}}</div>
         <div>
@@ -58,14 +57,13 @@ import Bar from "../components/Bar.vue";
 export default {
   data: () => ({
       loading: false,
-      email:"xiebudongle@qq.com",
-      birthday:2004-2-29,
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-      backGroundImage:"https://cdn.vuetifyjs.com/images/cards/cooking.png",
-      signature:"签名：什么时候能写完软工呢？",
-      password:"000000",
+      email:"",
+      birthday:null,
+      headImage:"",
+      backGroundImage:"",
+      signature:"",
       userID:"",
-      username:"John Doe"
+      username:""
   }),
 
   created() {
@@ -99,7 +97,6 @@ export default {
             this.email = res.data.userInfo.email;
             this.birthday = res.data.userInfo.birthday;
             this.userID = res.data.userInfo.userID;
-            this.password = res.data.userInfo.password;
             this.signature = res.data.userInfo.signature;
           }
         })

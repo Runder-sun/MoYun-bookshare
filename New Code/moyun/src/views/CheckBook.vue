@@ -17,7 +17,7 @@
             <v-img
               class="white--text align-end"
               height="250px"
-              :src="'/home/moyun/file/'+this.book.BookImage"
+              :src="'/images/'+this.book.BookImage"
             >
               <v-card-title>
                 <v-col>
@@ -103,7 +103,7 @@ export default {
       this.$http({
         method: "get",
         url: "/inspectBook",
-        params: { bookID :this.$route.params.id,}
+        params: { BookID :this.$route.params.id,}
       })
         .then((res) => {
           if (res.data.success) {

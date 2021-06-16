@@ -4,7 +4,7 @@
       <v-btn icon v-on="on">
         <v-avatar  size="40" color="#96CDCD">
           <template v-if="$store.state.person.headImage!==''">
-            <img :src="'/home/moyun/file/'+$store.state.person.headImage">
+            <img :src="'/images/'+$store.state.person.headImage">
             </template>
             <template v-else>
               <span>{{$store.state.person.userID.substr(0,1)}}</span>
@@ -17,7 +17,7 @@
         <div class="mx-auto text-center">
           <v-avatar color="#96CDCD">
             <template v-if="$store.state.person.headImage!==''">
-            <img :src="'/home/moyun/file/'+$store.state.person.headImage">
+            <img :src="'/images/'+$store.state.person.headImage">
             </template>
             <template v-else>
               <span>{{$store.state.person.userID.substr(0,1)}}</span>
@@ -66,17 +66,17 @@ export default {
         this.$router.push({path:"/BlogList"});
       },
       logout(){
-        this.$store.commit('setLogout')
-        this.$router.push({path:"/"});
-//        this.$http({
-//          method:'post',
-//          url:"/logout",
-//        }).then(res=>{
-//          if(res.data.success){
-//            this.$store.commit('setLogout')
-//            this.$router.push({path:"/"});
-//          }
-//        })
+//        this.$store.commit('setLogout')
+//        this.$router.push({path:"/"});
+        this.$http({
+          method:'post',
+          url:"/logout",
+        }).then(res=>{
+          if(res.data.success){
+            this.$store.commit('setLogout')
+            this.$router.push({path:"/"});
+          }
+        })
         
       }
   },

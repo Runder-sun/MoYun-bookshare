@@ -89,7 +89,7 @@ export default {
       this.$http({
         method: "get",
         url: "/inspectBookReview",
-        params: this.$route.params.id,
+        params: {BookReviewID:this.$route.params.id,}
       })
         .then((res) => {
           if (res.data.success) {
@@ -109,10 +109,10 @@ export default {
         method: "post",
         url: "/updateBookReview",
         data: {
-          bookReviewID: this.$route.params.id,
-          title: this.title,
-          content: this.content,
-          score: this.score,
+          BookReviewID: this.$route.params.id,
+          Title: this.title,
+          Content: this.content,
+          Score: this.score,
         },
       })
         .then((res) => {
