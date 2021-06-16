@@ -58,6 +58,7 @@ export default {
     }).then(res=>{
       if(res.data.success){
         this.$store.commit("setUserHeadImage", this.imageUrl1);
+        alert("保存个人头像图片成功");
       }
     });    
   },
@@ -73,6 +74,7 @@ export default {
         data: data,
     }).then(res=>{
       if(res.data.success){
+        alert("保存个人背景图片成功");
       }
     });    
   }

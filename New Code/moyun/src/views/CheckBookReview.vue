@@ -12,7 +12,7 @@
               </v-btn>
             <el-button type="info" round v-if="isCollect" @click="cancelCollect" class="applyBtn">取消收藏</el-button>
             <el-button color="#8fc19c" round v-else @click="collect" class="applyBtn">收藏书评</el-button>
-            <el-button 	color="#45a165" @click="toEditBookReview" class="applyBtn">修改书评</el-button>
+            <el-button 	color="#45a165" v-if="$store.state.person.userID==this.bookReviewInfo.userID" @click="toEditBookReview" class="applyBtn">修改书评</el-button>
           </v-toolbar>
 
           <v-list-item three-line>
@@ -85,7 +85,7 @@ import Bar from "../components/Bar.vue";
 export default {
   setup() {},
   created() {
-    this.initCheckBookReview();
+    this.getInit();
   },
   data: () => ({
     content:"",
@@ -170,7 +170,7 @@ export default {
         })
         this.content="";
       },
-    initCheckBookReview() {
+    getInit() {
       this.$http({
         method: "get",
         url: "/inspectBookReview",

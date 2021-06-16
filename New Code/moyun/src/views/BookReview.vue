@@ -92,7 +92,7 @@ export default {
     showBookReview(){
       this.$http({
         method: "get",
-        url: "/bookReview",
+        url: "/BookReview",
       }).then((res) => {
           console.log(res.data);
           this.bookReviewCollection = res.data.bookReviewCollection;
