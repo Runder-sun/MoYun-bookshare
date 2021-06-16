@@ -12,7 +12,6 @@
             label
             text-color="white"
             @click:close="refuse(user)"
-            :to="'/PersonalInfo/'+user.userID"
           >
             <v-avatar left size="10" :to="'/PersonalInfo/'+user.userID" class="lxtAva">
               <img :src="user.headImage" :alt="user.username" />
@@ -325,7 +324,7 @@ export default {
       this.$http({
         method: "get",
         url: "/GroupInfo",
-        params:qs.stringify(a)
+        params: this.$route.params.id,
       })
         .then((res) => {
           if (res.data.success) {
@@ -364,7 +363,7 @@ export default {
       this.$http({
         method: "get",
         url: "/GroupApplyList",
-        params:qs.stringify(a)
+        params: this.$route.params.id,
       })
         .then((res) => {
           if (res.data.success) {

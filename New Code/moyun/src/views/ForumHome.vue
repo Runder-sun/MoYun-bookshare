@@ -9,7 +9,7 @@
           <v-card-text>
             <v-container>
               <v-row>
-                <v-col cols="12">
+                <v-col cols="12" >
                   <v-text-field
                     v-model="newTopic"
                     color="blue darken-2"
@@ -22,20 +22,22 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="addForum"> 发起 </v-btn>
+            <v-btn color="blue darken-1" text @click="addForum">
+              发起
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
     </v-row>
     <v-app>
       <bar></bar>
-
+      
       <v-container>
         <v-card>
           <v-toolbar flat>
             <v-toolbar-title>讨论区</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn text @click="dialog = !dialog">发起讨论</v-btn>
+            <v-btn text @click="dialog=!dialog">发起讨论</v-btn>
           </v-toolbar>
           <v-card flat>
             <v-container class="pa-4 text-center">
@@ -48,7 +50,7 @@
                         :class="{ 'on-hover': hover }"
                         :to="'/Group/Forum/Forum/' + forum.forumID"
                       >
-                        <v-card-title>
+                        <v-card-title >
                           <v-row
                             class="fill-height flex-column"
                             justify="space-between"
@@ -67,16 +69,6 @@
           </v-card>
         </v-card>
       </v-container>
-      <v-snackbar
-        v-model="snackbar"
-        :timeout="3000"
-        color="blue-grey"
-        absolute
-        rounded="pill"
-        top
-      >
-        {{ message }}
-      </v-snackbar>
     </v-app>
   </div>
 </template>
@@ -84,50 +76,23 @@
 <script>
 import Bar from "../components/Bar.vue";
 export default {
-  inject: ["reload"],
-  created() {
-    this.getInit();
-  },
   methods: {
-    getInit() {
-      this.$http({
-        method: "get",
-        url: "/ForumHome",
-        params: {
-          GroupID: this.$route.params.id,
-        },
-      }).then((res) => {
-        this.forums = res.data.GroupForum;
-      });
-    },
-    addForum() {
-      this.dialog = false;
+    addForum(){
+      this.dialog=false;
       this.$http({
         method: "post",
-        url: "/addForum",
+        url:"/addForum",
         data: {
-          GroupID: this.$route.params.id,
-          Topic: this.newTopic,
-        },
-      }).then((res) => {
-        if (res.data.success) {
-          this.message = "成功!";
-          this.snackbar = true;
-          this.timer = setTimeout(() => {
-            //设置延迟执行
-            this.reload();
-          }, 1000);
+          GroupID:this.$route.params.id,
+          Topic:this.newTopic,
         }
       });
-      this.newTopic = "";
+      this.newTopic="";
     },
   },
   data: () => ({
-    dialog: false,
-    newTopic: "",
-    timer: null,
-    snackbar: false,
-    message: "",
+    dialog:false,
+    newTopic:"",
     forums: [
       {
         topic: "Rock",

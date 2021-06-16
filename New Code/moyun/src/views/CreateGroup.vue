@@ -4,10 +4,20 @@
     <v-container>
       <div class="card">
         <div class="front">
-          <v-form>
+          <el-upload
+            class="avatar-uploader"
+            action="up"
+            drag
+            :auto-upload="false"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="createGroup"
+          >
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i> </el-upload
+          ><v-form>
             <v-container fluid>
               <v-col cols="12">
-                <v-file-input show-size counter chips multiple label="上传圈子头像" v-model="files"></v-file-input>
                 <v-text-field
                   v-model="groupName"
                   :rules="groupNameRules"
@@ -73,7 +83,6 @@ export default {
     snackbar: false,
     message: "error",
     timer: null,
-    files:null,
     form:{
       GroupName: "",
       Tag: "",
@@ -117,9 +126,26 @@ export default {
     bar,
   },
   methods: {
-    
-    createGroup() {
-      
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.message="上传头像图片只能是 JPG 格式!"
+        this.snackbar = true
+      }
+      if (!isLt2M) {
+        this.message="上传头像图片大小不能超过 2MB!"
+        this.snackbar = true
+      }
+
+      return isJPG && isLt2M;
+    },
+    createGroup(file) {
+      this.beforeAvatarUpload(file)
       if (this.checkbox) this.isPrivate = 1;
       else this.isPrivate = 0;
       let data = new FormData();
@@ -133,9 +159,8 @@ export default {
       this.$http({
         method: "post",
         url: "/addGroup",
-        data: data,
+        data: fd,
       }).then((res) => {
-        console.log(res.data)
         if (res.data.success) {
           this.message="创建成功！"
           this.snackbar=true
