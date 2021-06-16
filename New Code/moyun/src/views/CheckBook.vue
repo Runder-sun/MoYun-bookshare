@@ -131,13 +131,13 @@ export default {
       console.log(file);
     },
     toWriteBookReview(){
-      this.$router.push({ path: "/Book/WriteBookReview" +this.book.bookID});
+      this.$router.push({ path: "/Book/WriteBookReview/" +this.book.bookID});
     },
     toEditBook(){
         this.$router.push({ path: "/Book/EditBook/" +this.book.bookID});
     },
     toCheckBookReview(bookReviewID){
-        this.$router.push({ path: "/Book/CheckBookReview"+ bookReviewID});
+        this.$router.push({ path: "/Book/CheckBookReview/"+ bookReviewID});
     },
     deleteBook(){
         this.$http({
