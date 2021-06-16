@@ -8,7 +8,7 @@
                       <v-container fluid>
                         <v-col cols="12">
                           <v-textarea color="teal" 
-                            v-model="blog[0].blogTitle" 
+                            v-model="blog[0].title" 
                             :counter="30" 
                             required
                             :rules="titleRules">
@@ -124,10 +124,9 @@ import bar from "../components/Bar.vue"
           params:{
             BlogID : this.$route.params.id,
           }
-        }).then((res)=>{
-           if(res.data.success){
-              this.blog=res.data.Blog;
-           }
+        })
+          .then((res)=>{
+            this.blog=res.data.Blog;
           })
           .catch((err)=>{
             console.log(err);
