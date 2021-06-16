@@ -284,55 +284,23 @@ export default {
     isMember: false,
     newTask: "",
     group: {
-      groupName: "这是圈子名称",
-      introduce: "这是圈子简介",
-      tag: "这是标签",
+      groupName: "",
+      introduce: "",
+      tag: "",
       isPrivate: false,
-      groupImage: "https://cdn.vuetifyjs.com/images/john.jpg",
+      groupImage: "",
     },
     members: [
-      {
-        headImage: "https://cdn.vuetifyjs.com/images/john.jpg",
-        username: "zy",
-      },
+      
     ],
     tasks: [
-      {
-        taskContent: "读书",
-        createTime: "2021.1.1",
-      },
+      
     ],
     hotForum: [
-      {
-        forumID: 1,
-        topic: "主题:今天宁吃了吗",
-        forumMessages: "内容",
-        createTime: "2020-1-1",
-      },
-      {
-        forumID: 1,
-        topic: "主题：这是一个主题",
-        forumMessages: "内容",
-        createTime: "2020-1-1",
-      },
-      {
-        forumID: 1,
-        topic: "主题",
-        forumMessages: "内容",
-        createTime: "2020-1-1",
-      },
-      {
-        forumID: 1,
-        topic: "主题",
-        forumMessages: "内容",
-        createTime: "2020-1-1",
-      },
+      
     ],
     groupApplyUser: [
-      {
-        headImage: "https://cdn.vuetifyjs.com/images/john.jpg",
-        username: "zy",
-      },
+      
     ],
     model: 1,
     snackbar: false,

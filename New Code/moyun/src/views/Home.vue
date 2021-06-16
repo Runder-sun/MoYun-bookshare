@@ -159,35 +159,10 @@ import avatar from "../components/Avatar.vue";
 export default {
   data: () => ({
     groups: [
-      {groupID:1,
-      groupImage:"../asset/prince.jpg",
-      tag:"Story",
-      introduce:"This is a story about a prince and his travel..."},
-      {groupID:2,
-      groupImage:"../asset/prince.jpg",
-      tag:"Story",
-      introduce:"This is a story about a prince and his travel..."},
-      {groupID:3,
-      groupImage:"../asset/prince.jpg",
-      tag:"Story",
-      introduce:"This is a story about a prince and his travel..."},
+      
     ],
-    books: [{
-      bookImage:"1",
-      bookName:"1",
-      author:"123",
-      kind:"story",
-    },{
-      bookImage:"1",
-      bookName:"1",
-      author:"123",
-      kind:"story",
-    },{
-      bookImage:"1",
-      bookName:"1",
-      author:"123",
-      kind:"story",
-    },
+    books: [
+     
     ],
     transparent: "rgba(255, 255, 255, 0)",
   }),

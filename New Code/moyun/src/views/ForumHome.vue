@@ -129,9 +129,7 @@ export default {
     snackbar: false,
     message: "",
     forums: [
-      {
-        topic: "Rock",
-      },
+    
     ],
   }),
   components: {
