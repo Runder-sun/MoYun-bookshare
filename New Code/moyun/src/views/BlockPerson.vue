@@ -313,7 +313,7 @@ export default {
       showGuys(){
         this.$http({
         method: "get",
-        url: "/FollowListAndBalcklist",
+        url: "/FollowListAndBlacklist",
       })
         .then((res) => {
           this.blockListProperty=res.data.Blacklist;

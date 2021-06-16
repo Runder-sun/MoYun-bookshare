@@ -385,11 +385,13 @@ export default {
         GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
         GroupID: this.$route.params.id,
       };
+      let groupApplyID= this.getMemberApplyID(item.userID, this.groupApplyList)
+      debugger
       this.$http({
         method: "post",
         url: "/refuseApply",
         data: {
-          GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
+          GroupApplyID: groupApplyID,
           GroupID: this.$route.params.id,
         },
       });
@@ -402,11 +404,13 @@ export default {
         GroupID: this.$route.params.id,
         UserID: item.userID,
       };
+      let groupApplyID= this.getMemberApplyID(item.userID, this.groupApplyList)
+      debugger
       this.$http({
         method: "post",
         url: "/addMember",
         data: {
-          GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
+          GroupApplyID: groupApplyID,
           GroupID: this.$route.params.id,
           UserID: item.userID,
         },
