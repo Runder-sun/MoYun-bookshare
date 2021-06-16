@@ -263,6 +263,7 @@
       color="blue-grey"
       absolute
       rounded="pill"
+      top
     >
       {{ message }}
     </v-snackbar>
@@ -378,14 +379,14 @@ export default {
       this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
       this.groupApplyUser = [...this.groupApplyUser];
       var a = {
-        GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
+        GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyUser),
         GroupID: this.$route.params.id,
       };
       this.$http({
         method: "post",
         url: "/refuseApply",
         data: {
-          GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
+          GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyUser),
           GroupID: this.$route.params.id,
         },
       });
@@ -394,7 +395,7 @@ export default {
       this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
       this.groupApplyUser = [...this.groupApplyUser];
       var a = {
-        GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
+        GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyUser),
         GroupID: this.$route.params.id,
         UserID: item.userID,
       };
@@ -402,7 +403,7 @@ export default {
         method: "post",
         url: "/addMember",
         data: {
-          GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
+          GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyUser),
           GroupID: this.$route.params.id,
           UserID: item.userID,
         },
