@@ -84,6 +84,7 @@
         </v-toolbar>
         <template>
         <el-table
+
             :data="tableData"
             stripe
             style="width: 100%"
@@ -159,8 +160,8 @@ export default({
       },
     },
 
-    created(){
-      this.show;
+    mounted(){
+      this.show2;
     },
 
       methods: {
@@ -193,13 +194,14 @@ export default({
         this.snackbar = true
         this.resetForm()
       },
-      show(){
+      show2(){
         this.$http({
           method:"get",
           url:"/BlogList",
-        })
-          .then((res)=>{
+        }).then((res)=>{
             this.tableData = res.data.blogList;
+            alert("Handling..");
+            console.log(res.data);
             if(!res.data.success){
               alert("获取信息失败！");
             }

@@ -1,4 +1,4 @@
-<template>
+<template >
   <div class="updates">
     <bar></bar>
     <v-main >
@@ -192,7 +192,7 @@ export default {
     bar,
   },
 
-  created(){
+  mounted(){
     this.showUpdates;
   },
   methods:{
@@ -264,6 +264,8 @@ export default {
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
+      width:400%;
+    height:400%;
 }
 
 @keyframes gradient {

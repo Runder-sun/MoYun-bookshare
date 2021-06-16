@@ -260,18 +260,19 @@ export default({
     },
 
     created(){
-      this.show;
+      this.show1;
     },
 
     methods: {
-      show(){
+      show1(){
         this.$http({
         method: "get",
         url: "/inspectBlog",
         params:{
-          BlogID: this.$router.param.id,
+          BlogID: this.$route.params.id,
         }
           }).then((res) => {
+            console.log(res.data);
             if (res.data.success) {
               this.blog=res.data.blogInfo;
               this.isCollect=res.data.IsCollect;
@@ -289,6 +290,7 @@ export default({
         this.resetForm()
       },
       postComment(){
+        console.log(this.blog);
         this.$http({
         method: "post",
         url: "/WriteBlogComment",

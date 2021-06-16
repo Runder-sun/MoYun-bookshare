@@ -231,7 +231,7 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-      if (this.$router.params.id !== 0) {
+      if (this.$route.params.id !== 0) {
         this.$http({
           method: "get",
           url: "/ChatMessageList",

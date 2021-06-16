@@ -82,8 +82,8 @@ export default({
       snackbar: false,
       snacktext: '取消收藏成功',
       timeout: 1000,
-        tableData: [],
-        blogAuthor:[],
+      tableData: [],
+      blogAuthor:[],
       }
     },
     components:{
@@ -97,12 +97,11 @@ export default({
       this.$http({
         method: "get",
         url: "/PersonalCollection",
-      })
-        .then((res) => {
+      }).then((res) => {
           this.tableData=res.data.blogCollectionBlog;
           this.blogAuthor=res.data.blogAuthor
-          for(var a in tableData){
-            for (var b in blogAuthor){
+          for(var a in this.tableData){
+            for (var b in this.blogAuthor){
               if(a.authorID===b.userID){
                 a.append(writer,b.username);
               }

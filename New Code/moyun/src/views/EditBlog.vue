@@ -122,7 +122,7 @@ import bar from "../components/Bar.vue"
           method:"get",
           url:"/inspectBlog",
           params:{
-            BlogID : this.$router.params.id,
+            BlogID : this.$route.params.id,
           }
         })
           .then((res)=>{
