@@ -53,7 +53,7 @@
     :cell-style="{'text-align':'center'}">
           <el-table-column fixed prop="reviewTime" label="发布日期" width="150" ></el-table-column>
           <el-table-column prop="title" label="题目" width="200"></el-table-column>
-          <el-table-column prop="author" label="作者" width="120"></el-table-column>
+          <el-table-column prop="userID" label="作者" width="120"></el-table-column>
           <el-table-column prop="content" label="书评内容" width="200"></el-table-column>
           <el-table-column prop="score" label="评分" width="100"></el-table-column>
           <el-table-column align="right">
@@ -164,7 +164,7 @@ export default {
         method: "post",
         url: "/cancelCollectBook",
         data: {
-          BookCollectionID:this.$route.params.id,
+          BookID:this.$route.params.id,
         },
       })
         .then((res) => {
