@@ -71,6 +71,7 @@
 import Bar from "../components/Bar.vue";
 export default {
   data: () => ({
+    tab:[],
     bookReviewCollection:[],
     myBookReview:[],
     form: {

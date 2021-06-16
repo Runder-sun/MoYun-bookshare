@@ -105,8 +105,8 @@ export default {
         method: "post",
         url: "/searchBook",
         data: {
-          KeyWord: this.search,
-          Tag: this.choosedTag,
+          keyWord: this.search,
+          tag: this.choosedTag,
         },
       })
         .then((res) => {

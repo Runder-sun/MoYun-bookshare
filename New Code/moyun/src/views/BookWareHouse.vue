@@ -125,6 +125,7 @@ import Bar from "../components/Bar.vue";
 
 export default {
   data: () => ({
+    tab:[],
     tags: [
       "文学",
       "科幻",
