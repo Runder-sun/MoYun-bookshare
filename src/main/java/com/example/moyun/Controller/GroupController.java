@@ -49,11 +49,11 @@ public class GroupController {
     }
 
     @GetMapping("/GroupInfo")//圈子信息（已完成测试）
-    public Map<String,Object> groupInfo(HttpServletRequest request,@RequestBody Map<String,String> groupInfoMap){
+    public Map<String,Object> groupInfo(HttpServletRequest request,@RequestParam("GroupID")Integer GroupID){
         HttpSession session=request.getSession();
         String UserID= String.valueOf(session.getAttribute("UserID"));
         Map<String,Object> map=new HashMap<>();
-        Integer GroupID=Integer.valueOf(groupInfoMap.get("GroupID"));
+        //Integer GroupID=Integer.valueOf(groupInfoMap.get("GroupID"));
         try {
             Group group=groupService.getGroupByGroupID(GroupID);
             List<GroupMember> groupMemberList=groupService.getGroupMemberListByGroupID(GroupID);
@@ -273,9 +273,9 @@ public class GroupController {
     }
 
     @GetMapping("/GroupApplyList")//获取申请列表（已完成测试）
-    public Map<String,Object> groupApplyList(@RequestBody Map<String,String> groupApplyListMap){
+    public Map<String,Object> groupApplyList(@RequestParam("GroupID")Integer GroupID){
         Map<String,Object> map=new HashMap<>();
-        Integer GroupID=Integer.valueOf(groupApplyListMap.get("GroupID"));
+        //Integer GroupID=Integer.valueOf(groupApplyListMap.get("GroupID"));
        try {
            List<GroupApply> groupApplyList=groupService.getGroupApplyListByGroupID(GroupID);
            List<User> users=new ArrayList<>();
@@ -318,9 +318,9 @@ public class GroupController {
     }
 
     @GetMapping("/searchGroup")//所有圈子（即搜索圈子）(已完成测试)
-    public Map<String,Object> searchGroup(@RequestBody Map<String,String> allGroupMap){
-        String GroupName=allGroupMap.get("GroupName");
-        String Tag= allGroupMap.get("Tag");
+    public Map<String,Object> searchGroup(@RequestParam("GroupName")String GroupName,@RequestParam("Tag")String Tag){
+        //String GroupName=allGroupMap.get("GroupName");
+        //String Tag= allGroupMap.get("Tag");
         Map<String,Object> map=new HashMap<>();
         try {
             List<Group> groups=groupService.searchGroup(GroupName,Tag);

@@ -6,10 +6,7 @@ import com.example.moyun.Entity.User;
 import com.example.moyun.Service.ForumService;
 import com.example.moyun.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,9 +24,9 @@ public class ForumController {
     private UserService userService;
 
     @GetMapping("/ForumHome")//讨论区主页（已完成测试）
-    public Map<String,Object> forumHome(@RequestBody Map<String,String> forumHomeMap){
+    public Map<String,Object> forumHome(@RequestParam("GroupID")Integer GroupID){
         Map<String,Object> map=new HashMap<>();
-        Integer GroupID=Integer.valueOf(forumHomeMap.get("GroupID"));
+        //Integer GroupID=Integer.valueOf(forumHomeMap.get("GroupID"));
         try {
             List<Forum> GroupForum=forumService.getForumByGroupID(GroupID);
             map.put("GroupForum",GroupForum);
@@ -42,9 +39,9 @@ public class ForumController {
     }
 
     @GetMapping("/getForumMessage")//获取讨论消息（已完成测试）
-    public Map<String,Object> getForumMessage(@RequestBody Map<String,String> forumMessageMap){
+    public Map<String,Object> getForumMessage(@RequestParam("ForumID")Integer ForumID){
         Map<String,Object> map=new HashMap<>();
-        Integer ForumID= Integer.valueOf(forumMessageMap.get("ForumID"));
+        //Integer ForumID= Integer.valueOf(forumMessageMap.get("ForumID"));
        try {
            Forum forum=forumService.getForumByForumID(ForumID);
            List<ForumMessage> forumMessageList=forumService.getForumMessageListByForumID(ForumID);

@@ -9,10 +9,7 @@ import com.example.moyun.Service.BookService;
 import com.example.moyun.Service.UserMessageService;
 import com.example.moyun.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -230,10 +227,10 @@ public class BookReviewController {
     }
 
     @GetMapping("/inspectBookReview")//查看书评（已完成测试）
-    public Map<String,Object> inspectReview(HttpServletRequest request,@RequestBody Map<String,String>insmap) {
+    public Map<String,Object> inspectReview(HttpServletRequest request, @RequestParam("BookReviewID")Integer BookReviewID) {
         HttpSession session=request.getSession();
         String UserID=String.valueOf(session.getAttribute("UserID"));
-        Integer BookReviewID= Integer.valueOf(insmap.get("BookReviewID"));
+        // Integer BookReviewID= Integer.valueOf(insmap.get("BookReviewID"));
         Map<String,Object> map=new HashMap<>();
         try {
             BookReview bookReview=bookReviewService.getBookReviewByBookReviewID(BookReviewID);

@@ -5,10 +5,7 @@ import com.example.moyun.Service.BlogService;
 import com.example.moyun.Service.UserMessageService;
 import com.example.moyun.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -47,10 +44,10 @@ public class BlogController {
     }
 
     @GetMapping("/inspectBlog")//查看日志信息（已完成测试）
-    public Map<String,Object> inspectBlog(HttpServletRequest request,@RequestBody Map<String,String> insmap){
+    public Map<String,Object> inspectBlog(HttpServletRequest request, @RequestParam("BlogID")Integer BlogID){
         HttpSession session=request.getSession();
         String UserID= String.valueOf(session.getAttribute("UserID"));
-        Integer BlogID= Integer.valueOf(insmap.get("BlogID"));
+        // Integer BlogID= Integer.valueOf(insmap.get("BlogID"));
         Map<String,Object> map=new HashMap<>();
         try{
             Blog blog=blogService.getBlogByBlogID(BlogID);

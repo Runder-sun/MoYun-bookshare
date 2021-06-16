@@ -4,10 +4,7 @@ import com.example.moyun.Entity.*;
 import com.example.moyun.Service.UserMessageService;
 import com.example.moyun.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,11 +23,11 @@ public class MessageController {
     private UserService userService;
 
     @GetMapping("/ChatMessageList")//用户间私信列表（已完成测试）
-    public Map<String,Object> getChatMessageList(HttpServletRequest request, @RequestBody Map<String,String> chatMessageMap){
+    public Map<String,Object> getChatMessageList(HttpServletRequest request, @RequestParam("GetID")String GetID){
         Map<String,Object> map=new HashMap<>();
         HttpSession session=request.getSession();
         String SendID= String.valueOf(session.getAttribute("UserID"));
-        String GetID=chatMessageMap.get("GetID");
+        //String GetID=chatMessageMap.get("GetID");
         try {
             User send=userService.getUserByUserID(SendID);
             User get= userService.getUserByUserID(GetID);
