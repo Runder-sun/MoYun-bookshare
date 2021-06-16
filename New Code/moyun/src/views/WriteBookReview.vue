@@ -80,8 +80,28 @@ export default {
     select: null,
     items: ["5", "4", "3", "2", "1"],
   }),
-  
+  created() {
+    this.initCheckBookReview();
+  },
   methods: {
+    initCheckBookReview() {
+      this.$http({
+        method: "get",
+        url: "/inspectBookReview",
+        params: this.$route.params.id,
+      })
+        .then((res) => {
+          if (res.data.success) {
+            this.title = res.data.bookReviewInfo.title;
+            this.score = res.data.bookReviewInfo.score;
+            this.content = res.data.bookReviewInfo.content;
+            
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     writeReview() {
       this.$refs.form.validate()
       this.$http({

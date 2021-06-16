@@ -4,7 +4,7 @@
       <bar></bar>
       <v-container>
         <el-form ref="form" :rules="rules" :model="form" label-width="380px">
-          <v-container>
+          <v-cintainer>
             <el-form-item label="图书名称" prop="bookName">
               <el-input
                 v-model="form.bookName"
@@ -58,7 +58,7 @@
                 >保存更改</el-button
               >
             </el-form-item>
-          </v-container>
+          </v-cintainer>
         </el-form>
       </v-container>
     </v-app>
@@ -136,7 +136,7 @@ export default {
         },
         {
           min: 2,
-          max: 30,
+          max: 50,
           message: "长度在 2 到 30 个字符",
           trigger: "blur",
         },
@@ -149,7 +149,7 @@ export default {
         },
         {
           min: 2,
-          max: 30,
+          max: 100,
           message: "长度在 2 到 30 个字符",
           trigger: "blur",
         },
@@ -170,7 +170,7 @@ export default {
     },
   }),
   created() {
-    this.getEditInit();
+    this.getEdInit();
   },
 
   methods: {
@@ -178,7 +178,7 @@ export default {
       this.$http({
         method: "get",
         url: "/inspectBook",
-        params: {bookID:this.$route.params.id,}
+        params: this.$route.params.id,
       })
         .then((res) => {
           if (res.data.success) {
@@ -207,8 +207,8 @@ export default {
 			  introduce:this.form.introduce,
 			  kind:this.form.kind,
               author:this.form.author,
-              publisher:this.form.publisher,
-			  bookID:this.$route.params.id,
+              publisher:this.publisher,
+			  bookId:this.$route.params.id,
             },
           })
             .then((res) => {

@@ -87,17 +87,17 @@ export default {
       this.$http({
         method: "get",
         url: "/inspectUser",
-        params: { userID:this.$route.params.id,}
+        params: this.$route.params.id,
       })
         .then((res) => {
           if (res.data.success) {
-            this.backGroundImage = res.data.userInfo.backGroundImage;
-            this.headImage = res.data.userInfo.headImage;
-            this.email = res.data.userInfo.email;
-            this.birthday = res.data.userInfo.birthday;
-            this.userID = res.data.userInfo.userID;
-            this.password = res.data.userInfo.password;
-            this.signature = res.data.userInfo.signature;
+            this.backGroundImage = res.data.userinfo.backGroundImage;
+            this.headImage = res.data.userinfo.headImage;
+            this.email = res.data.userinfo.email;
+            this.birthday = res.data.userinfo.birthday;
+            this.userID = res.data.userinfo.userID;
+            this.password = res.data.userinfo.password;
+            this.signature = res.data.userinfo.signature;
           }
         })
         .catch((err) => {

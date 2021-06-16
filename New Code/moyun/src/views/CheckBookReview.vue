@@ -17,7 +17,7 @@
             </template>
             <el-button type="info" round v-if="isCollect" @click="cancelCollect" class="applyBtn">取消收藏</el-button>
             <el-button color="#8fc19c" round v-else @click="collect" class="applyBtn">收藏书评</el-button>
-            <el-button 	color="#45a165" @click="toEditBookReview" class="applyBtn">修改书评</el-button>
+            <el-button 	color="#45a165" @click="toEditBook" class="applyBtn">修改书评</el-button>
           </v-toolbar>
 
           <v-list-item three-line>
@@ -41,6 +41,7 @@
           <v-toolbar class="elevation-1">
             <v-toolbar-title>书评评论区</v-toolbar-title>
             <v-spacer></v-spacer>
+            <el-button color="#44887a" @click="addmessage" class="applyBtn">我要评论</el-button>
           </v-toolbar>
             <v-container class="pa-4 text-center">
                <v-card>>
@@ -137,7 +138,7 @@ export default {
         method: "post",
         url: "/cancelCollectBookReview",
         data: {
-          bookReviewCollectionID:this.$route.params.id,
+          bookReviewID:this.$route.params.id,
         },
       })
         .then((res) => {
@@ -171,8 +172,8 @@ export default {
           method:'post',
           url:"/commentReview",
           data:{
-            reviewID:this.$route.params.id,
-            content:this.content,
+            ReviewID:this.$route.params.id,
+            Content:this.content,
           }
         }).then(res=>{
           this.getInit()
@@ -183,7 +184,7 @@ export default {
       this.$http({
         method: "get",
         url: "/inspectBookReview",
-        params:{ bookReviewID:this.$route.params.id,}
+        params: this.$route.params.id,
       })
         .then((res) => {
           if (res.data.success) {

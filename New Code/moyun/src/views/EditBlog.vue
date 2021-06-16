@@ -125,9 +125,7 @@ import bar from "../components/Bar.vue"
           this.$http({
           method:"get",
           url:"/inspectBlog",
-          data:{
-            bookID : this.$router.params.id,
-          }
+          params: this.$router.params.id,
         })
           .then((res)=>{
             this.blog=res.data.blog;

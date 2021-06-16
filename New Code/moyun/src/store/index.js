@@ -11,7 +11,7 @@ export default new Vuex.Store({
     person: {
       userID: "",
       username: "",
-      isTeacher: 0,
+      isTeacher: 1,
       email: "",
       signature: "",
       headImage: "",

@@ -125,7 +125,6 @@ import Bar from "../components/Bar.vue";
 
 export default {
   data: () => ({
-    tab:[],
     tags: [
       "文学",
       "科幻",
@@ -140,10 +139,8 @@ export default {
       "IT",
       "数学",
     ],
-    hotBook: [
-    ],
-    bookCollectionBook: [
-    ],
+    hotBook: [],
+    bookCollectionBook: [],
 
   }),
   setup() {},

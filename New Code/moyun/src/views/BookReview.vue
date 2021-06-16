@@ -71,9 +71,60 @@
 import Bar from "../components/Bar.vue";
 export default {
   data: () => ({
-    tab:[],
     bookReviewCollection:[],
     myBookReview:[],
+    
+    commentsData: [
+      {
+        date: "2016-05-03",
+        title: "《西游记读后感》",
+        author: "lx",
+        bookReview: "普陀区",
+        scores:8.0
+      },
+      {
+        date: "2016-05-03",
+        title: "《西游记读后感》",
+        author: "lx",
+        bookReview: "普陀区",
+        scores:8.0
+      },
+      {
+        date: "2016-05-03",
+        title: "《西游记读后感》",
+        author: "lx",
+        bookReview: "普陀区",
+        scores:8.0
+      },
+      {
+        date: "2016-05-03",
+        title: "《西游记读后感》",
+        author: "lx",
+        bookReview: "普陀区",
+        scores:8.0
+      },
+      {
+        date: "2016-05-03",
+        title: "《西游记读后感》",
+        author: "lx",
+        bookReview: "普陀区",
+        scores:8.0
+      },
+      {
+        date: "2016-05-03",
+        title: "《西游记读后感》",
+        author: "lx",
+        bookReview: "普陀区",
+        scores:8.0
+      },
+      {
+        date: "2016-05-03",
+        title: "《西游记读后感》",
+        author: "lx",
+        bookReview: "普陀区",
+        scores:8.0
+      },
+    ],
     form: {
       name: "",
       region: "",
@@ -100,8 +151,8 @@ export default {
           console.log(err);
       });
     },
-    toCheckBookReview(bookReviewID){
-        this.$router.push({ path: "/Book/CheckBookReview"+ bookReviewID});
+    toCheckBookReview(){
+        this.$router.push({ path: "/Book/CheckBookReview" });
     },
   },
   setup() {},

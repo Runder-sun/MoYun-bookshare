@@ -248,7 +248,7 @@ export default({
         }).then((res)=>{
             if(res.data.success){
               this.submit();
-              this.$router.go(0);
+              this.$router.push({path:"/BlogList"});
             }
             else{
               alert("发表失败！");
