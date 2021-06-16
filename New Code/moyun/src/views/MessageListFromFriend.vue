@@ -64,7 +64,7 @@
                       justify="center">
                       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-                      <v-toolbar-title>System Messages</v-toolbar-title>
+                      <v-toolbar-title>{{this.messageBoxTitle}}</v-toolbar-title>
 
                       <v-spacer></v-spacer>
 
@@ -161,6 +161,7 @@ import avatar from "../components/Avatar.vue"
 import bar from "../components/Bar.vue"
   export default {
     data: () => ({
+        myInterval:null,
         messageBoxTitle:'System',
         password: 'Password',
         divider:true,
@@ -179,75 +180,10 @@ import bar from "../components/Bar.vue"
             'mdi-emoticon-sad',
             'mdi-emoticon-tongue',
         ],
-        sendUser :[{
-          userID:"12334",
-          headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-          username:"Joe"
-        }],
-        getUser :[{
-          userID:"12345",
-          headImage:'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-          username:'Sans'
-        }],
-        messageTargetList: [
-          {
-            uid:"1",
-            userID:"123",
-            username:"Jhosephin",
-            headImage:"https://cdn.vuetifyjs.com/images/lists/1.jpg"
-          },
-          {
-            uid:"1",
-            userID:"123",
-            username:"Katinn",
-            headImage:"https://cdn.vuetifyjs.com/images/lists/1.jpg"
-          },
-          {
-            uid:"1",
-            userID:"123",
-            username:"Jhosephin",
-            headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
-          },
-          {
-            uid:"1",
-            userID:"123",
-            username:"Katinn",
-            headImage:"https://cdn.vuetifyjs.com/images/lists/1.jpg"
-          },
-          {
-            uid:"1",
-            userID:"123",
-            username:"Jhosephin",
-            headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
-          },
-          {
-            uid:"1",
-            userID:"123",
-            username:"Katinn",
-            headImage:"https://cdn.vuetifyjs.com/images/lists/1.jpg"
-          },
-          {
-            uid:"1",
-            userID:"123",
-            username:"Jhosephin",
-            headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
-          },
-
-        ],
-      friends: [
-        {
-          sendID:"12334",
-          getID:"12345",
-          message:"wanna hang out????"
-        
-        },
-        {
-          getID:"12334",
-          sendID:"12345",
-          message:"Sure"
-        
-        },
-      ],
+        sendUser :[],
+        getUser :[],
+        messageTargetList: [],
+        friends: [],
         systemMessageList:[],
         userMessageList:[],
     }),
@@ -259,6 +195,7 @@ import bar from "../components/Bar.vue"
 
     created(){
       this.showFriMsg;
+      this.initList;
     },
 
     computed: {
@@ -308,6 +245,7 @@ import bar from "../components/Bar.vue"
               this.getUser=res.data.getUser;
               if(res.data.success){
                 this.friends=this.userMessageList;
+                this.messageBoxTitle=this.getUser.username;
               }
             })
             .catch((err) => {
@@ -341,6 +279,19 @@ import bar from "../components/Bar.vue"
             this.clearMessage()
         },
        },
+
+        initList () {
+          this.myInterval = window.setInterval(() => {
+            setTimeout(() => {
+              this.showFriMsg();
+            }, 1)
+          }, 5000);
+        },
+
+        destroyed(){
+          clearInterval(this.myInterval)
+        },
+
 
         
   }

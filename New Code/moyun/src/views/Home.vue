@@ -27,22 +27,24 @@
         </template>
       </v-row>
     </v-app-bar>
-    <v-img src="../assets/widthPic.jpg" dark></v-img>
-    <h1 class="textCenter">墨韵</h1>
-    <v-main>
-      <v-container fluid>
-        <h2 class="text-center">
-          热门圈子
-          <v-container class="pa-4 text-center">
-            <v-row class="fill-height" align="center" justify="center">
+    <v-img :src="require('@/assets/墨韵.jpg')" class="mainPage"></v-img>
+    <div class=" g-img1 ">
+      <div class="font-weight-bold words1">热门圈子</div>
+      <div class="font-weight-bold words2">为您推荐墨韵读书会热门读书圈</div>
+    </div>
+    <div class="groups">
+      <div style="height:1px"></div>
+      <div class="cardsMid">
+      <v-row align="auto">
               <template v-for="(group, i) in groups">
-                <v-col :key="i" cols="12" md="2">
+                <v-col :key="i" cols="12" md="4" >
                   <v-hover v-slot="{ hover }">
                     <v-card
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
                       :to="'/Group/GroupIndex/' + group.groupID"
                       width="300"
+                      height="400"
                     >
                       <v-img :src="'/home/moyun/file/'+group.groupImage" height="225px">
                         <v-card-title >
@@ -80,24 +82,27 @@
                       </v-img>
                     </v-card>
                   </v-hover>
-                </v-col>
-              </template>
-            </v-row>
-          </v-container>
-        </h2>
-      </v-container>
-      <v-container fluid>
-        <h2 class="text-center">
-          热门书籍
-          <v-container class="pa-4 text-center">
-            <v-row class="fill-height" align="center" justify="center">
+              </v-col>
+            </template>
+          </v-row>
+        </div>
+    </div>
+    <div class="g-img3 myimg">
+      <div class="font-weight-bold words1">热门书籍</div>
+      <div class="font-weight-bold words2">为您推荐墨韵读书会热门书籍</div>
+    </div>
+        <div class="groups2">
+      <div style="height:1px"></div>
+      <div class="cardsMid">
+      <v-row align="center auto" justify="center">
               <template v-for="(book, i) in books">
-                <v-col :key="i" cols="12" md="2">
+                <v-col :key="i" cols="12" md="4">
                   <v-hover v-slot="{ hover }">
                     <v-card
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
                       width="300"
+                      height="400"
                     >
                       <v-img
                         :src="'/home/moyun/file/'+book.bookImage"
@@ -142,10 +147,8 @@
                 </v-col>
               </template>
             </v-row>
-          </v-container>
-        </h2>
-      </v-container>
-    </v-main>
+        </div>
+    </div>
   </div>
 </template>
 
@@ -153,8 +156,37 @@
 import avatar from "../components/Avatar.vue";
 export default {
   data: () => ({
-    groups: [],
-    books: [],
+    groups: [
+      {groupID:1,
+      groupImage:"../asset/prince.jpg",
+      tag:"Story",
+      introduce:"This is a story about a prince and his travel..."},
+      {groupID:2,
+      groupImage:"../asset/prince.jpg",
+      tag:"Story",
+      introduce:"This is a story about a prince and his travel..."},
+      {groupID:3,
+      groupImage:"../asset/prince.jpg",
+      tag:"Story",
+      introduce:"This is a story about a prince and his travel..."},
+    ],
+    books: [{
+      bookImage:"1",
+      bookName:"1",
+      author:"123",
+      kind:"story",
+    },{
+      bookImage:"1",
+      bookName:"1",
+      author:"123",
+      kind:"story",
+    },{
+      bookImage:"1",
+      bookName:"1",
+      author:"123",
+      kind:"story",
+    },
+    ],
     transparent: "rgba(255, 255, 255, 0)",
   }),
   components: {
@@ -185,6 +217,15 @@ export default {
 </script>
 
 <style scoped>
+.mainPage{
+  height:100vh;
+  width:100vw;
+}
+
+.myimg {
+  width: 100vw;
+  height: 100vh;
+}
 .home {
   width: 100%;
   height: 100vh;
@@ -225,4 +266,77 @@ export default {
   margin-top: 20%;
   font-size: 15px;
 }
+
+.groupTitle{
+  height:100vh;
+  background-image: url('../assets/UpdatesB3.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center center;
+}
+
+.words1 {
+    text-align: center;
+    margin:0 auto;
+    font-size: 70px;
+    position: 40vh;
+    line-height:60vh;
+    font-family: "宋体";
+    color: #fff;
+    
+}
+
+.words2 {
+    text-align: center;
+    margin:0 auto;
+    font-size: 40px;
+
+    position: 50vh;
+    font-family: "宋体";
+    color: #fff;
+}
+
+.g-img1 {
+   width: 100vw;
+  height: 100vh;
+    background-image: url('../assets/set9.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+} 
+
+.g-img2 {
+    background-image: url('../assets/set7.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+} 
+
+.g-img3 {
+    background-image: url('../assets/set7.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+} 
+.groups{
+ background-color: #6d7175;
+ width: 100vw;
+  height: 100vh;
+  justify-content: center;
+}
+
+.cardsMid{
+  height: 80vh;
+  width:80vw;
+    margin:0px auto;
+  margin-top:25vh;
+}
+
+.groups2{
+ background-color: #4f5153;
+ width: 100vw;
+  height: 100vh;
+  justify-content: center;
+}
+
 </style>

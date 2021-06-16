@@ -274,6 +274,7 @@
 import bar from "../components/Bar.vue";
 import qs from "qs";
 export default {
+  inject: ["reload"],
   data: () => ({
     drawer: null,
     dialog: false,
@@ -296,10 +297,7 @@ export default {
       },
     ],
     tasks: [
-      {
-        taskContent: "读书",
-        createTime: "2021.1.1",
-      },
+      
     ],
     hotForum: [
       {
@@ -348,15 +346,18 @@ export default {
   methods: {
     getInit() {
       var a = { GroupID: this.$route.params.id };
+      const formData=new FormData();
+      formData.append("GroupID",this.$route.params.id)
       this.$http({
         method: "get",
         url: "/GroupInfo",
         params: { GroupID: this.$route.params.id }
       })
         .then((res) => {
+          console.log(res.data)
           if (res.data.success) {
             if (
-              isGroupMember(
+              this.isGroupMember(
                 this.$store.state.person.userID,
                 res.data.MemberList
               )
@@ -366,6 +367,7 @@ export default {
               this.isMember = false;
             }
             this.group = res.data.GroupInfo;
+            this.tasks = res.data.TaskList;
             this.members = res.data.MemberUser;
             this.hotForum = res.data.HotForum;
             this.isCollect = res.data.isCollect;
@@ -391,12 +393,15 @@ export default {
     },
     getApply() {
       var a = { GroupID: this.$route.params.id };
+      const formData=new FormData();
+      formData.append("GroupID",this.$route.params.id)
       this.$http({
         method: "get",
         url: "/GroupApplyList",
         params: { GroupID: this.$route.params.id }
       })
         .then((res) => {
+          console.log(res.data)
           if (res.data.success) {
             this.groupApplyUser = res.data.GroupApplyUser;
           }
@@ -486,7 +491,7 @@ export default {
         url: "/addTask",
         data: { GroupID: this.$route.params.id, TaskContent: this.newTask },
       });
-      this.getInit();
+      this.reload();
       newTask = "";
     },
     changeGroupInfo() {
