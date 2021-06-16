@@ -173,11 +173,12 @@ export default {
           if (res.data.success) {
             this.$store.commit("setLogin");
             this.$store.commit("setUserID",this.id);
-            this.$store.commit("setIsTeacher",res.data.user.isTeacher);
+            
             if (res.data.isAdmin) {
               this.$store.commit("setAdmin");
               this.$router.push({ path: "/Admin" });
             } else {
+              this.$store.commit("setIsTeacher",res.data.user.isTeacher);
               this.$router.push({ path: "/" });
             }
           }
