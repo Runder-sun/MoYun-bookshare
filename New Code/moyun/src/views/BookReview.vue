@@ -94,6 +94,7 @@ export default {
         method: "get",
         url: "/bookReview",
       }).then((res) => {
+          console.log(res.data);
           this.bookReviewCollection = res.data.bookReviewCollection;
           this.myBookReview = res.data.MyBookReview;
         }).catch((err) => {

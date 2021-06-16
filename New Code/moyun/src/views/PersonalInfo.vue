@@ -32,7 +32,7 @@
         <div class="my-4 text-subtitle-1">生日：{{birthday}}</div>
         <div class="my-4 text-subtitle-1">邮箱：{{email}}</div>
         <div>
-          {{signature}}
+          签名：{{signature}}
         </div>
       </v-card-text>
 
