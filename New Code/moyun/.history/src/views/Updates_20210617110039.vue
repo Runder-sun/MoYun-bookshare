@@ -241,21 +241,20 @@ export default {
         for(var blog in this.blogDT){
           for(var user in this.blogDTUsers){
             if (blog.authorID===user.userID){
-              blog.append(author,user.username);
-              blog.append(authorImage,user.headImage);
+              this.blog.append(author,user.username);
+              this.blog.append(authorImage,user.headImage);
             }
           }
         }
-        console.log(this.blogDT);
+        console.log(this.blog);
         for(var rw in this.bookReviewDT){
           for(var user in this.bookReviewDT){
             if (rw.authorID===user.userID){
-              rw.append(author,user.username);
-              rw.append(authorImage,user.headImage);
+              this.rw.append(author,user.username);
+              this.rw.append(authorImage,user.headImage);
             }
           }
         }
-        console.log(this.bookReviewDT);
       },
   }
 };
