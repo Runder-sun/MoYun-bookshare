@@ -4,28 +4,20 @@
     <v-container>
       <v-card>
         <v-card-title>
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
           <v-text-field
             v-model="search"
             append-icon="mdi-magnify"
             label="Search"
             single-line
             hide-details
-            @keyup.enter="searchBook"
-            v-bind="attrs"
-            v-on="on"
           ></v-text-field>
-          </template>
-          <span>请选择一个标签再进行搜索哦</span>
-          </v-tooltip>
         </v-card-title>
         <v-row justify="center">
           <v-chip-group active-class="primary--text">
             <v-chip
               v-for="(tag,i) in tags"
               :key="i"
-              @click="choosedTag = tag.Tag"
+              @click="search = tag.Tag"
             >
               {{ tag.Tag }}
             </v-chip>
@@ -36,7 +28,11 @@
           :headers="headers"
           :items="book"
           :search="search"
-        ></v-data-table>
+        >
+        <template v-slot:item.action="{ item }">
+          <v-btn text color="cyan" :to="'/Book/CheckBook/' + item.bookID"> 查看 </v-btn>
+        </template>
+        </v-data-table>
       </v-card>
     </v-container>
   </div>
@@ -87,30 +83,32 @@ export default {
           text: "书名",
           align: "start",
           filterable: false,
-          value: "name",
+          value: "bookName",
         },
-        { text: "类别", value: "tag" },
+        { text: "类别", value: "kind" },
         { text: "作者", value: "author" },
         { text: "评分", value: "score" },
       ],
-      book: [],
+      book: [
+
+      ],
     };
   },
   components: {
     bar,
   },
+  created() {
+    this.searchBook();
+  },
   methods: {
     searchBook() {
       this.$http({
-        method: "post",
+        method: "get",
         url: "/searchBook",
-        data: {
-          KeyWord: this.search,
-          Tag: this.choosedTag,
-        },
       })
         .then((res) => {
           if (res.data.success) {
+            console.log(res.data)
             this.book = res.data.book;
           }
         })

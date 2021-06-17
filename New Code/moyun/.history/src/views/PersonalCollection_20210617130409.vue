@@ -114,13 +114,12 @@ export default({
         });
       },
     handleDelete(index,id){
-      console.log(id);
       //this.snackbar=true;
         this.$http({
         method: "post",
-        url: "/CancelCollectBlog",
+        url: "/cancelCollectBlog",
         data:{
-          BlogID: id,
+          blogID: id,
         }
       }).then((res) => {
           this.snackbar=true;

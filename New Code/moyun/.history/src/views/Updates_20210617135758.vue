@@ -31,12 +31,12 @@
                     <v-list-item class="grow">
                       <v-list-item-title
                         class="title font-weight-bold black--text"
-                        >{{ blogDTUsers[index].username }}</v-list-item-title
+                        >{{ item.author }}</v-list-item-title
                       >
                       <v-list-item-avatar color="grey darken-3">
                         <v-img
                           class="elevation-6"
-                          :src="'/images/' + this.blogDTUsers[index].headImage"
+                          :src="'/images/' + item.authorImage"
                         ></v-img>
                       </v-list-item-avatar>
                     </v-list-item>
@@ -74,12 +74,12 @@
                     <v-list-item class="grow">
                       <v-list-item-title
                         class="title font-weight-bold black--text"
-                        >{{ bookReviewDTUsers[index].username }}</v-list-item-title
+                        >{{ item.author }}</v-list-item-title
                       >
                       <v-list-item-avatar color="grey darken-3">
                         <v-img
                           class="elevation-6"
-                          :src="'/images/' + bookReviewDTUsers[index].headImage"
+                          :src="'/images/' + item.authorImage"
                         ></v-img>
                       </v-list-item-avatar>
                     </v-list-item>
@@ -168,16 +168,61 @@ export default {
     Bookflag: true,
     fab: false,
     blogDT: [
-
+      {
+        authorID: "19231087",
+        blogID: 4,
+        blogTitle: "test for 1097",
+        content: "this is a test blog",
+        isReprint: 0,
+        likes: 0,
+        recentFinishTime: "2021-06-15T12:25:50.000+00:00",
+      },
     ],
     bookReviewDT: [
-
+      {
+        bookID: 1,
+        bookReviewID: 1,
+        content: "111111",
+        likes: 1,
+        reviewTime: "2021-06-16T10:24:30.000+00:00",
+        score: 9,
+        title: "222",
+        userID: "19231087",
+      },
     ],
 
     blogDTUsers: [
-
+      {
+        backgroundImage: null,
+        birthday: "2000-07-06",
+        email: "1271784138@qq.com",
+        headImage: "origin.jpg",
+        isForbidden: 0,
+        isTeacher: 0,
+        password: "8496a05416bd7cca52a2c732a0085924",
+        sex: 0,
+        signature: "难知如阴",
+        uid: 1,
+        userID: "19231087",
+        username: "ashen",
+      },
     ],
-    bookReviewDTUsers: [],
+    bookReviewDTUsers: [
+      {
+        backgroundImage: null,
+        birthday: "2000-07-06",
+        email: "1271784138@qq.com",
+        headImage: "origin.jpg",
+        isForbidden: 0,
+        isTeacher: 0,
+        password: "8496a05416bd7cca52a2c732a0085924",
+        sex: 0,
+        signature: "难知如阴",
+        uid: 1,
+        userID: "19231087",
+        username: "ashen",
+      },
+    ],
   }),
   components: {
     bar,
@@ -219,14 +264,14 @@ export default {
           console.log(err);
         });
 
-//      for (var blog in this.blogDT) {
-//        for (var user in this.blogDTUsers) {
-//          if (blog.authorID === user.userID) {
-//            blog.append(author, user.username);
-//            blog.append(authorImage, user.headImage);
-//          }
-//        }
-//      }
+      for (var blog in this.blogDT) {
+        for (var user in this.blogDTUsers) {
+          if (blog.authorID === user.userID) {
+            blog.append(author, user.username);
+            blog.append(authorImage, user.headImage);
+          }
+        }
+      }
       console.log(this.blogDT);
     },
     showRW() {
@@ -242,14 +287,14 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-//      for (var rw in this.bookReviewDT) {
-//        for (var user in this.bookReviewDT) {
-//          if (rw.userID === user.userID) {
-//            rw.append(author, user.username);
-//            rw.append(authorImage, user.headImage);
-//          }
-//        }
-//      }
+      for (var rw in this.bookReviewDT) {
+        for (var user in this.bookReviewDT) {
+          if (rw.userID === user.userID) {
+            rw.append(author, user.username);
+            rw.append(authorImage, user.headImage);
+          }
+        }
+      }
       console.log(this.bookReviewDT);
     },
   },
@@ -261,8 +306,8 @@ export default {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  width:100vw;
-  height:100vh;
+  width: 400%;
+  height: 400%;
 }
 
 @keyframes gradient {
