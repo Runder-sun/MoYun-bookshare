@@ -117,7 +117,7 @@
                     </v-list-item>
                   </template>
                 </v-list>
-                <v-card-action style="margin-bottom:10px">
+                <v-card-action>
                   <v-form align="bottom" absolute bottom>
                     <v-container>
                       <v-row>
@@ -259,8 +259,7 @@ export default {
     },
 
     sendMessage() {
-      if(this.message!==''){
-        this.$http({
+      this.$http({
         method: "post",
         url: "/SendMessage",
         data: {
@@ -275,10 +274,6 @@ export default {
           alert("发送信息失败！");
         }
       });
-      }
-      else {
-        alert("消息为空，无法发送！");
-      }
       this.resetIcon();
       this.clearMessage();
     },
