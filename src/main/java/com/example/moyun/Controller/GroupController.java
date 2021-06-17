@@ -174,7 +174,7 @@ public class GroupController {
             GroupMember groupMember=new GroupMember();
             groupMember.setGroupID(GroupId);
             groupMember.setUserID(UserID);
-            groupService.updateGroupApply(GroupApplyID);
+            groupService.deleteGroupApply(GroupApplyID);
             groupService.addGroupMember(groupMember);
             map.put("success",true);
         }catch (Exception e){

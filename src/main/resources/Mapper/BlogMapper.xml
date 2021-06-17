@@ -16,7 +16,7 @@
     </delete>
     <select id="getBlogCollectionByUserID" resultType="BlogCollection">
         select *
-        from blog_collection ,blog_info
+        from blog_collection
         where userid=#{UserID}
     </select>
     <select id="getBlogListByUserID" resultType="Blog">
