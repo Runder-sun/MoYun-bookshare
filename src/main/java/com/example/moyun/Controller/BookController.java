@@ -52,23 +52,23 @@ public class BookController {
     @PostMapping("/uploadBook")//上传书籍(已完成测试)
     public Map<String ,Object> uploadBook(HttpServletRequest request, @RequestParam("BookName") String BookName,@RequestParam("Author") String Author,
                                           @RequestParam("Publisher") String Publisher,@RequestParam("ISBN") String ISBN,@RequestParam("Kind") String Kind ,
-                                          @RequestParam("Introduce") String Introduce, @RequestParam("files") MultipartFile[] files ){
+                                          @RequestParam("Introduce") String Introduce, @RequestParam("BookFile") MultipartFile file1,@RequestParam("ImageFile")MultipartFile file2 ){
         HttpSession session=request.getSession();
         String UserID=String.valueOf(session.getAttribute("UserID"));
         Map<String,Object> map=new HashMap<>();
-        if (files[0].isEmpty()||files[1].isEmpty()){
+        if (file1.isEmpty()||file2.isEmpty()){
             map.put("success",false);
             map.put("message","上传失败");
         }
-        String filename1=files[0].getOriginalFilename();
-        String filename2=files[1].getOriginalFilename();
+        String filename1=file1.getOriginalFilename();
+        String filename2=file2.getOriginalFilename();
         String newName1= UUID.randomUUID()+filename1;
         String newName2= UUID.randomUUID()+filename2;
         File dest1=new File(newName1);
         File dest2=new File(newName2);
         try {
-            files[0].transferTo(dest1);
-            files[1].transferTo(dest2);
+            file1.transferTo(dest1);
+            file2.transferTo(dest2);
             String Link=dest1.getPath();
             String BookImage=dest2.getPath();
             try{
@@ -213,13 +213,30 @@ public class BookController {
         return map;
     }
 
-    @PostMapping("/searchBook")//查找书籍(已完成测试)
+    /*@PostMapping("/searchBook")//查找书籍(已完成测试)
     public Map<String,Object> searchBook(@RequestBody Map<String,String> smap){
         String KeyWord=smap.get("KeyWord");
         String Tag=smap.get("Tag");
         Map<String,Object> map=new HashMap<>();
         try {
             List<Book> books=bookService.searchBook(KeyWord,Tag);
+            map.put("book",books);
+            map.put("success",true);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            map.put("success",false);
+        }
+        return map;
+    }
+
+     */
+
+    @GetMapping("/searchBook")//查找书籍(已完成测试)
+    public Map<String,Object> searchBook(){
+        Map<String,Object> map=new HashMap<>();
+        try {
+            List<Book> books=bookService.getAllBook();
             map.put("book",books);
             map.put("success",true);
         }

@@ -142,4 +142,9 @@ public class GroupServiceImpl implements GroupService {
     public GroupCollection isCollect(String UserID,Integer GroupID){
         return groupDao.isCollect(UserID,GroupID);
     }
+
+    @Override
+    public List<Group> searchAllGroup(){
+        return groupDao.searchAllGroup();
+    }
 }

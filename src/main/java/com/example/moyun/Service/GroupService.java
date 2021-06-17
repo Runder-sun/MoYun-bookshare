@@ -83,4 +83,7 @@ public interface GroupService {
 
     //判断是否收藏
     GroupCollection isCollect(String UserID,Integer GroupID);
+
+    //搜索时获取所有圈子
+    List<Group> searchAllGroup();
 }

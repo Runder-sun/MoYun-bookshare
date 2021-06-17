@@ -59,4 +59,6 @@ public interface GroupDao {
     List<Group> searchGroup(String GroupName,String Tag);
 
     GroupCollection isCollect(String UserID,Integer GroupID);
+
+    List<Group> searchAllGroup();
 }

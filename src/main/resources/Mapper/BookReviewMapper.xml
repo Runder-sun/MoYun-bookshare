@@ -90,8 +90,7 @@
     <select id="getBookReviewDT" resultType="BookReview">
         select *
         from book_review
-        where userid=#{UserID}
-           or userid in (
+        where userid in (
             select followedid from (
                 select followedid from follow_list where followerid=#{UserID}
                 ) as test

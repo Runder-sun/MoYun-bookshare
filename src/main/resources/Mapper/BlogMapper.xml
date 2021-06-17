@@ -75,8 +75,7 @@
     <select id="getBlogDT" resultType="Blog">
         select *
         from blog_info
-        where authorid=#{UserID}
-           or authorid in (
+        where authorid in (
                select followedid from (
                    select followedid from follow_list where followerid=#{UserID}
                    ) as test

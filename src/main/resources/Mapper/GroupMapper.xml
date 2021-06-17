@@ -124,4 +124,9 @@
         from group_collection
         where userid=#{UserID} and groupid=#{GroupID}
     </select>
+    <select id="searchAllGroup" resultType="Group">
+        select *
+        from group_info
+        where is_private=0
+    </select>
 </mapper>

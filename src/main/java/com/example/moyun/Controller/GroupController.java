@@ -319,13 +319,31 @@ public class GroupController {
         return map;
     }
 
-    @GetMapping("/searchGroup")//所有圈子（即搜索圈子）(已完成测试)
+    /* @GetMapping("/searchGroup")//所有圈子（即搜索圈子）(已完成测试)
     public Map<String,Object> searchGroup(@RequestParam("GroupName")String GroupName,@RequestParam("Tag")String Tag){
         //String GroupName=allGroupMap.get("GroupName");
         //String Tag= allGroupMap.get("Tag");
         Map<String,Object> map=new HashMap<>();
         try {
             List<Group> groups=groupService.searchGroup(GroupName,Tag);
+            map.put("group",groups);
+            map.put("success",true);
+        }catch (Exception e){
+            e.printStackTrace();
+            map.put("success",false);
+        }
+        return map;
+    }
+
+     */
+
+    @GetMapping("/searchGroup")//所有圈子（即搜索圈子）(已完成测试)
+    public Map<String,Object> searchGroup(){
+        //String GroupName=allGroupMap.get("GroupName");
+        //String Tag= allGroupMap.get("Tag");
+        Map<String,Object> map=new HashMap<>();
+        try {
+            List<Group> groups=groupService.searchAllGroup();
             map.put("group",groups);
             map.put("success",true);
         }catch (Exception e){
