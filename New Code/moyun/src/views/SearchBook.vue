@@ -97,10 +97,13 @@ export default {
   components: {
     bar,
   },
+  created() {
+    this.searchBook();
+  },
   methods: {
     searchBook() {
       this.$http({
-        method: "post",
+        method: "get",
         url: "/searchBook",
       })
         .then((res) => {
