@@ -194,7 +194,6 @@ export default {
 
   created:function(){
     this.showUpdates();
-    this.showRW();
   },
   methods:{
     changeToBook(){

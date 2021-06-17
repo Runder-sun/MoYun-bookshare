@@ -142,7 +142,7 @@
                 <v-btn
                         fab
                         dark
-                        v-if="isCollect"
+                        v-if="isCollect===1"
                         color="indigo"
                         style="space around"
                         v-on:click="collect"
@@ -374,7 +374,7 @@ export default({
 
           },
             }).then((res) => {
-              alert("取消收藏");
+              alert("收藏");
               if (res.data.success) {
                 this.isCollect=!this.isCollect;
               }
