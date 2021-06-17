@@ -37,9 +37,14 @@
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-text="member.username"></v-list-item-title>
+              <v-spacer></v-spacer>
               <v-btn
                 v-if="$store.state.person.userID == group.createID"
+                text
+                color="red"
                 right
+                small
+                max-width="20px"
                 @click="removeMember(member)"
                 >删除</v-btn
               >
@@ -118,7 +123,7 @@
         <v-toolbar class="lxtToolbar elevation-1">
           <v-toolbar-title>圈子主页</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn v-if="!isMember" @click="apply" class="applyBtn"
+          <v-btn v-if="!(isMember||$store.state.person.isTeacher)" @click="apply" class="applyBtn"
             >申请加入</v-btn
           >
           <template v-if="isCollect">
