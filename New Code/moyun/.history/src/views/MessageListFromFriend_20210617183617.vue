@@ -35,7 +35,11 @@
               v-bind:key="index"
               style="margin-left=5px"
             >
-              <v-list-item-avatar color="grey darken-1">
+              <v-list-item-avatar>
+                <img
+                  :src="'/images/' + item.headImage"
+                  :alt="item.username"
+                />
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="font-italic">{{
@@ -79,9 +83,9 @@
                       :key="item.title"
                       v-if="getUser.userID === item.getID"
                     >
-                      <v-list-item-avatar color="grey darken-1">
+                      <v-list-item-avatar>
                         <v-img
-                          :src="getUser.headImage"
+                          :src="'/images/' + getUser.headImage"
                         ></v-img>
                       </v-list-item-avatar>
 
@@ -96,9 +100,9 @@
                     </v-list-item>
 
                     <v-list-item :key="item.title" v-else>
-                      <v-list-item-avatar color="grey darken-1">
+                      <v-list-item-avatar>
                         <v-img
-                          :src=" sendUser.headImage"
+                          :src="'/images/' + sendUser.headImage"
                         ></v-img>
                       </v-list-item-avatar>
 

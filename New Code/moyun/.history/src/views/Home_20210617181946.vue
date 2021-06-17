@@ -110,7 +110,7 @@
                     >
                       <v-img
                         :src="'/'+book.bookImage"
-                        height="400px"
+                        height="225px"
                         
                       >
                         <v-card-title class="white--text mt-8">
