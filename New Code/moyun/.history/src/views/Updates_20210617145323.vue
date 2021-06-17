@@ -168,16 +168,61 @@ export default {
     Bookflag: true,
     fab: false,
     blogDT: [
-
+      {
+        authorID: "19231087",
+        blogID: 4,
+        blogTitle: "test for 1097",
+        content: "this is a test blog",
+        isReprint: 0,
+        likes: 0,
+        recentFinishTime: "2021-06-15T12:25:50.000+00:00",
+      },
     ],
     bookReviewDT: [
-
+      {
+        bookID: 1,
+        bookReviewID: 1,
+        content: "111111",
+        likes: 1,
+        reviewTime: "2021-06-16T10:24:30.000+00:00",
+        score: 9,
+        title: "222",
+        userID: "19231087",
+      },
     ],
 
     blogDTUsers: [
-
+      {
+        backgroundImage: null,
+        birthday: "2000-07-06",
+        email: "1271784138@qq.com",
+        headImage: "origin.jpg",
+        isForbidden: 0,
+        isTeacher: 0,
+        password: "8496a05416bd7cca52a2c732a0085924",
+        sex: 0,
+        signature: "难知如阴",
+        uid: 1,
+        userID: "19231087",
+        username: "ashen",
+      },
     ],
-    bookReviewDTUsers: [],
+    bookReviewDTUsers: [
+      {
+        backgroundImage: null,
+        birthday: "2000-07-06",
+        email: "1271784138@qq.com",
+        headImage: "origin.jpg",
+        isForbidden: 0,
+        isTeacher: 0,
+        password: "8496a05416bd7cca52a2c732a0085924",
+        sex: 0,
+        signature: "难知如阴",
+        uid: 1,
+        userID: "19231087",
+        username: "ashen",
+      },
+    ],
   }),
   components: {
     bar,
