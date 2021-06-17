@@ -26,7 +26,7 @@
             </v-avatar>
             {{ user.username }}
             <v-spacer></v-spacer>
-            <v-btn text color="cyan" @click="acceptApply(user,groupApplyUser[i])"> 同意</v-btn>
+            <v-btn text color="cyan" @click="acceptApply(user,groupApplyList[i])"> 同意</v-btn>
           </v-chip>
         </v-chip-group>
         <v-divider></v-divider>
@@ -407,6 +407,9 @@ export default {
       };
       let groupApplyID= this.getMemberApplyID(item.userID, this.groupApplyList)
       console.log(item.userID)
+      console.log(user.groupApplyID)
+      console.log(user.applyUserID)
+      console.log(this.$route.params.id)
       debugger
       this.$http({
         method: "post",
