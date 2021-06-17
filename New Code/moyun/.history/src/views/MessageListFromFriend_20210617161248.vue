@@ -276,9 +276,6 @@ export default {
         }
       });
       }
-      else {
-        alert("消息为空，无法发送！");
-      }
       this.resetIcon();
       this.clearMessage();
     },
