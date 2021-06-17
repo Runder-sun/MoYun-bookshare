@@ -97,7 +97,7 @@ export default {
   methods: {
     searchGroup() {
       this.$http({
-        method: "post",
+        method: "get",
         url: "/searchGroup",
       })
         .then((res) => {
