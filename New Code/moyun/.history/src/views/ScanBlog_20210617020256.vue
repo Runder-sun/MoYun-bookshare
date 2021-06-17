@@ -290,8 +290,6 @@ export default({
         this.resetForm()
       },
       postComment(){
-        var a=this.blog.blogID;
-        console.log(a);
         console.log(this.blog);
         console.log(this.form.content);
         this.$http({
