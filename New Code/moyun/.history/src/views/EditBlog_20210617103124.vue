@@ -129,7 +129,8 @@ import bar from "../components/Bar.vue"
            if(res.data.success){
               this.blog=res.data.blogInfo;
            }
-          }).catch((err)=>{
+          })
+          .catch((err)=>{
             console.log(err);
           })
       }

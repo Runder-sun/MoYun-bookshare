@@ -14,7 +14,7 @@
             close
             label
             text-color="white"
-            @click:close="refuse(user)"
+            @click:close="refuse(user,groupApplyList[i])"
           >
             <v-avatar
               left
@@ -26,7 +26,7 @@
             </v-avatar>
             {{ user.username }}
             <v-spacer></v-spacer>
-            <v-btn text color="cyan" @click="acceptApply(user)"> 同意</v-btn>
+            <v-btn text color="cyan" @click="acceptApply(user,groupApplyUser[i])"> 同意</v-btn>
           </v-chip>
         </v-chip-group>
         <v-divider></v-divider>
@@ -378,25 +378,25 @@ export default {
           console.log(err);
         });
     },
-    refuse(item) {
+    refuse(item,user) {
       this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
       this.groupApplyUser = [...this.groupApplyUser];
-      var a = {
-        GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
-        GroupID: this.$route.params.id,
-      };
+      //var a = {
+      //  GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
+      //  GroupID: this.$route.params.id,
+      //};
       let groupApplyID= this.getMemberApplyID(item.userID, this.groupApplyList)
       debugger
       this.$http({
         method: "post",
         url: "/refuseApply",
         data: {
-          GroupApplyID: groupApplyID,
+          GroupApplyID: user.groupApplyID,
           GroupID: this.$route.params.id,
         },
       });
     },
-    acceptApply(item) {
+    acceptApply(item,user) {
       this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
       this.groupApplyUser = [...this.groupApplyUser];
       var a = {
@@ -405,12 +405,13 @@ export default {
         UserID: item.userID,
       };
       let groupApplyID= this.getMemberApplyID(item.userID, this.groupApplyList)
+      console.log(groupApplyID)
       debugger
       this.$http({
         method: "post",
         url: "/addMember",
         data: {
-          GroupApplyID: groupApplyID,
+          GroupApplyID: user.groupApplyID,
           GroupID: this.$route.params.id,
           UserID: item.userID,
         },
