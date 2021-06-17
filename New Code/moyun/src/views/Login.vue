@@ -47,7 +47,7 @@
       <div class="back" :class="isTop ? 'contain-After' : ''" id="2">
         <v-container>
           <v-form ref="form" lazy-validation>
-            <img src="../assets/logo.png" id="logo" /><br />
+            <img src="../assets/moyunlogo.png" id="logo" /><br />
             <v-container>
               <v-row justify="center">
                 <v-col cols="12" sm="10">

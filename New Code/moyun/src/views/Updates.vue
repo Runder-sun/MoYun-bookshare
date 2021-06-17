@@ -36,7 +36,7 @@
                       <v-list-item-avatar color="grey darken-3">
                         <v-img
                           class="elevation-6"
-                          :src="'/images/' + blogDTUsers[index].headImage"
+                          :src="'/' + blogDTUsers[index].headImage"
                         ></v-img>
                       </v-list-item-avatar>
                     </v-list-item>
@@ -57,7 +57,7 @@
                   max-width="800"
                   :elevation="hover ? 24 : 2"
                   :class="{ 'on-hover': hover }"
-                  :to="'/images/' + item.bookReviewID"
+                  :to="'/' + item.bookReviewID"
                 >
                   <v-card-title class="title font-weight-bold black--text" >
                     <v-icon large left color="grey darken-2">
@@ -79,8 +79,7 @@
                       <v-list-item-avatar color="grey darken-3">
                         <v-img
                           class="elevation-6"
-                          
-                          :src="'/images/' + bookReviewDTUsers[index].headImage"
+                          :src="'/' + bookReviewDTUsers[index].headImage"
                         ></v-img>
                       </v-list-item-avatar>
                     </v-list-item>

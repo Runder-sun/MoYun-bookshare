@@ -31,8 +31,8 @@
                               width="300"
                               :to="'/Group/GroupIndex/' + group.groupID"
                             >
-                              <v-img :src="'/images/'+group.groupImage" height="225px">
-                                <v-card-title >
+                              <v-img :src="'/'+group.groupImage" height="225px">
+                                <v-card-title  class="white--text mt-8">
                                   <v-row
                                     class="fill-height flex-column"
                                     justify="space-between"
@@ -85,8 +85,8 @@
                               width="300"
                               :to="'/Group/GroupIndex/' + group.groupID"
                             >
-                              <v-img :src="'/images/'+group.groupImage" height="225px">
-                                <v-card-title >
+                              <v-img :src="'/'+group.groupImage" height="225px">
+                                <v-card-title class="white--text mt-8">
                                   <v-row
                                     class="fill-height flex-column"
                                     justify="space-between"
@@ -139,7 +139,7 @@
                               width="300"
                               :to="'/Group/GroupIndex/' + group.groupID"
                             >
-                              <v-img :src="'/images/'+group.groupImage" height="225px">
+                              <v-img :src="'/'+group.groupImage" height="225px">
                                 <v-card-title >
                                   <v-row
                                     class="fill-height flex-column"
