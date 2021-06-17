@@ -246,7 +246,7 @@ export default {
             }
           }
         }
-        console.log(this.blogDT);
+
         for(var rw in this.bookReviewDT){
           for(var user in this.bookReviewDT){
             if (rw.authorID===user.userID){
@@ -255,7 +255,6 @@ export default {
             }
           }
         }
-        console.log(this.bookReviewDT);
       },
   }
 };

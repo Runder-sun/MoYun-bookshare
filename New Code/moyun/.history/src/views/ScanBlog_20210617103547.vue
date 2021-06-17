@@ -346,21 +346,20 @@ export default({
         this.dialog=false
       },
       collect(){
-        console.log(this.isCollect);
-        if(!this.isCollect){
+        if(this.isCollect===false){
           this.$http({
           method: "post",
           url: "/CollectBlog",
           data: {
             BlogID: this.blog.blogID,
+
           },
             }).then((res) => {
-              alert("收藏");
               if (res.data.success) {
-                this.blog.isCollect=!this.isCollect;
+                this.blog.isCollect=0;
               }
               else{
-                alert("收藏失败！");
+                alert("收藏失败！")
               }
             }).catch(err=>{
               console.log(err)
@@ -375,9 +374,8 @@ export default({
 
           },
             }).then((res) => {
-              alert("收藏");
               if (res.data.success) {
-                this.isCollect=!this.isCollect;
+                this.blog.isCollect=1;
               }
               else{
                 alert("取消收藏失败！")

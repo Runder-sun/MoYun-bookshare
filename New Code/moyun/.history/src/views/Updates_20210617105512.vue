@@ -217,20 +217,19 @@ export default {
         this.$http({
         method: "get",
         url: "/blogDT",
-      }).then((res) => {
-        console.log(res.data);
+      })
+        .then((res) => {
           this.blogDT=res.data.blogDT;
           this.blogDTUsers=res.data.blogDTUser;
         })
         .catch((err) => {
           console.log(err);
         });
-
         this.$http({
         method: "get",
         url: "/bookReviewDT",
-      }).then((res) => {
-        console.log(res.data);
+      })
+        .then((res) => {
           this.bookReviewDT=res.data.bookReviewDT;
           this.bookReviewDTUsers=res.data.bookReviewDTUser;
         })
@@ -246,7 +245,7 @@ export default {
             }
           }
         }
-        console.log(this.blogDT);
+
         for(var rw in this.bookReviewDT){
           for(var user in this.bookReviewDT){
             if (rw.authorID===user.userID){
@@ -255,7 +254,6 @@ export default {
             }
           }
         }
-        console.log(this.bookReviewDT);
       },
   }
 };

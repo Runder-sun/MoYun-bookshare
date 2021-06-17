@@ -277,15 +277,14 @@ export default {
       this.resetIcon();
       this.clearMessage();
     },
+  },
 
-      initList() {
-        this.myInterval = window.setInterval(() => {
-          setTimeout(() => {
-            this.showFriMsg();
-          }, 1);
-        }, 5000);
-      },
-
+  initList() {
+    this.myInterval = window.setInterval(() => {
+      setTimeout(() => {
+        this.showFriMsg();
+      }, 1);
+    }, 5000);
   },
 
   destroyed() {

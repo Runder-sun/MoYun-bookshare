@@ -26,7 +26,7 @@
             </v-avatar>
             {{ user.username }}
             <v-spacer></v-spacer>
-            <v-btn text color="cyan" @click="acceptApply(user,groupApplyUser[i])"> 同意</v-btn>
+            <v-btn text color="cyan" @click="acceptApply(user,groupApplyList[i])"> 同意</v-btn>
           </v-chip>
         </v-chip-group>
         <v-divider></v-divider>
@@ -300,7 +300,6 @@ export default {
       
     ],
     groupApplyUser: [
-      
     ],
     groupApplyList:[],
     model: 1,
@@ -379,8 +378,7 @@ export default {
         });
     },
     refuse(item,user) {
-      this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
-      this.groupApplyUser = [...this.groupApplyUser];
+      
       //var a = {
       //  GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
       //  GroupID: this.$route.params.id,
@@ -394,18 +392,24 @@ export default {
           GroupApplyID: user.groupApplyID,
           GroupID: this.$route.params.id,
         },
+      }).then(res=>{
+        this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
+        this.groupApplyUser = [...this.groupApplyUser];
       });
+      
     },
     acceptApply(item,user) {
-      this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
-      this.groupApplyUser = [...this.groupApplyUser];
+      
       var a = {
         GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
         GroupID: this.$route.params.id,
         UserID: item.userID,
       };
       let groupApplyID= this.getMemberApplyID(item.userID, this.groupApplyList)
-      console.log(groupApplyID)
+      console.log(item.userID)
+      console.log(user.groupApplyID)
+      console.log(user.applyUserID)
+      console.log(this.$route.params.id)
       debugger
       this.$http({
         method: "post",
@@ -417,9 +421,12 @@ export default {
         },
       }).then(res=>{
         if(res.data.success){
+          this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
+          this.groupApplyUser = [...this.groupApplyUser];
           this.reload()
         }
       });
+      
     },
     apply() {
       var a = { GroupID: this.$route.params.id };
@@ -435,14 +442,17 @@ export default {
       });
     },
     removeMember(member) {
-      this.members.splice(this.members.indexOf(member), 1);
-      this.members = [...this.members];
+      
       var a = { MemberID: member.userID };
       this.$http({
         method: "post",
         url: "/deleteMember",
         data: { MemberID: member.userID },
+      }).then(res=>{
+        this.members.splice(this.members.indexOf(member), 1);
+      this.members = [...this.members];
       });
+      
     },
     collectGroup() {
       var a = { GroupID: this.$route.params.id };
