@@ -31,12 +31,12 @@
                     <v-list-item class="grow">
                       <v-list-item-title
                         class="title font-weight-bold black--text"
-                        >{{ blogDTUser[index].username }}</v-list-item-title
+                        >{{ item.author }}</v-list-item-title
                       >
                       <v-list-item-avatar color="grey darken-3">
                         <v-img
                           class="elevation-6"
-                          :src="'/images/' + this.blogDTUser[index].headImage"
+                          :src="'/images/' + item.authorImage"
                         ></v-img>
                       </v-list-item-avatar>
                     </v-list-item>
@@ -74,12 +74,12 @@
                     <v-list-item class="grow">
                       <v-list-item-title
                         class="title font-weight-bold black--text"
-                        >{{ bookReviewDTUser[index].username }}</v-list-item-title
+                        >{{ item.author }}</v-list-item-title
                       >
                       <v-list-item-avatar color="grey darken-3">
                         <v-img
                           class="elevation-6"
-                          :src="'/images/' + this.bookReviewDTUser[index].headImage"
+                          :src="'/images/' + item.authorImage"
                         ></v-img>
                       </v-list-item-avatar>
                     </v-list-item>
