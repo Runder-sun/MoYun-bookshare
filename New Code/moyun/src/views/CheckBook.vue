@@ -52,10 +52,10 @@
         <el-table :data="bookReviewList" style="width: 100%" height="400" stripe :header-cell-style="{'text-align':'center'}"
     :cell-style="{'text-align':'center'}">
           <el-table-column fixed prop="reviewTime" label="发布日期" width="150" ></el-table-column>
-          <el-table-column prop="title" label="题目" width="200"></el-table-column>
+          <el-table-column prop="title" label="题目" width="170"></el-table-column>
           <el-table-column prop="userID" label="作者" width="120"></el-table-column>
-          <el-table-column prop="content" label="书评内容" width="200"></el-table-column>
-          <el-table-column prop="score" label="评分" width="100"></el-table-column>
+          <el-table-column prop="content" label="书评内容" width="320"></el-table-column>
+          <el-table-column prop="score" label="评分" width="50"></el-table-column>
           <el-table-column align="right">
                <template slot-scope="scope">
               <el-button type="warning" round class="check" @click="toCheckBookReview(scope.row.bookReviewID)">查看</el-button>

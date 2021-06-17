@@ -7,7 +7,7 @@
           <v-container>
             <el-form-item label="图书名称" prop="bookName">
               <el-input
-                v-model="form.bookName"
+                v-model="this.form.bookName"
                 placeholder="请输入图书名称"
                 clearable
               ></el-input>
@@ -15,7 +15,7 @@
             <el-form-item label="图书分类" prop="kind">
               <v-col cols="12" sm="6">
                 <v-select
-                  v-model="form.kind"
+                  v-model="this.form.kind"
                   :items="kinds"
                   attach
                   chips
@@ -26,21 +26,21 @@
             </el-form-item>
             <el-form-item label="作者" prop="author">
               <el-input
-                v-model="form.author"
+                v-model="this.form.author"
                 placeholder="请输入作者"
                 clearable
               ></el-input>
             </el-form-item>
             <el-form-item label="ISBN号" prop="ISBN">
               <el-input
-                v-model="form.ISBN"
+                v-model="this.form.ISBN"
                 placeholder="请输入ISBN号"
                 clearable
               ></el-input>
             </el-form-item>
             <el-form-item label="出版社" prop="publisher">
               <el-input
-                v-model="form.publisher"
+                v-model="this.form.publisher"
                 placeholder="请输入出版社"
                 clearable
               ></el-input>
@@ -48,48 +48,16 @@
             <el-form-item label="简介" prop="introduce">
               <el-input
                 type="textarea"
-                v-model="form.introduce"
+                v-model="this.form.introduce"
                 placeholder="请输入简介"
                 clearable
               ></el-input>
             </el-form-item>
             <el-form-item label="上传封面" prop="filebookcover">
-              <el-upload
-                class="upload-demo"
-                ref="upload"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
-                :auto-upload="false"
-				:on-success="handleAvatarSuccess1"
-                :before-upload="beforeAvatarUpload1"
-              >
-                <el-button slot="trigger" size="small" type="primary"
-                  >选取文件</el-button
-                >
-                <div slot="tip" class="el-upload__tip">
-                  只能上传jpg/png文件，且不超过2MB
-                </div>
-              </el-upload>
+              <v-file-input show-size counter chips multiple label="上传图书封面" v-model="this.form.files.filebookcover"></v-file-input>
             </el-form-item>
             <el-form-item label="上传电子书" prop="fileebook">
-              <el-upload
-                class="upload-demo"
-                ref="upload"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
-                :auto-upload="false"
-				:on-success="handleAvatarSuccess2"
-                :before-upload="beforeAvatarUpload2"
-              >
-                <el-button slot="trigger" size="small" type="primary"
-                  >选取文件</el-button
-                >
-                <div slot="tip" class="el-upload__tip">
-                  只能上传pdf文件，且不超过500kb
-                </div>
-              </el-upload>
+              <v-file-input show-size counter chips multiple label="上传电子书" v-model="this.form.files.fileebook"></v-file-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="onSubmitAndCheck('form')"
@@ -122,20 +90,18 @@ export default {
       "数学",
     ],
     value: [],
-    form: {
+      form:{
       bookName: "",
       author: "",
       ISBN: "",
       publisher: "",
       introduce: "",
-      delivery: false,
       kind:"",
-      resource: "",
 	  files:[
 		  {fileebook:null},
 		  {filebookcover:null},
 	  ],
-    },
+      },
     rules: {
       bookName: [
         {
@@ -216,18 +182,10 @@ export default {
     onSubmitAndCheck(ruleForm) {
       this.$refs[ruleForm].validate((valid) => {
         if (valid) {
-		  this.$http({
+      this.$http({
             method: "post",
             url: "/uploadBook",
-            data: {
-              BookName:this.form.bookName,
-              ISBN:this.form.ISBN,
-			  Introduce:this.form.introduce,
-			  Kind:this.form.kind,
-              Author:this.form.author,
-              Publisher:this.publisher,
-              Files:this.files,
-            },
+            data: this.form,
           })
             .then((res) => {
               this.message = res.data.message;
@@ -251,43 +209,6 @@ export default {
     },
     handlePreview(file) {
       console.log(file);
-    },
-
-	handleAvatarSuccess1(res, file) {
-      this.form.files.filebookcover=file
-    },
-    beforeAvatarUpload1(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.message="上传头像图片只能是 JPG 格式!"
-        this.snackbar = true
-      }
-      if (!isLt2M) {
-        this.message="上传头像图片大小不能超过 2MB!"
-        this.snackbar = true
-      }
-
-      return isJPG && isLt2M;
-    },
-	handleAvatarSuccess2(res, file) {
-      this.form.files.fileebook=file
-    },
-    beforeAvatarUpload2(file) {
-      const isPDF = file.type === "pdf";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.message="上传电子书文件只能是 JPG 格式!"
-        this.snackbar = true
-      }
-      if (!isLt2M) {
-        this.message="上传电子书文件不能超过 2MB!"
-        this.snackbar = true
-      }
-
-      return isPDF && isLt2M;
     },
   },
   components: {
