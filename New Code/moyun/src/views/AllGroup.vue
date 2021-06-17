@@ -4,63 +4,27 @@
     <v-container>
       <v-card>
         <v-card-title>
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
           <v-text-field
             v-model="search"
             append-icon="mdi-magnify"
             label="Search"
             single-line
             hide-details
-            @keyup.enter="searchGroup"
-            v-bind="attrs"
-            v-on="on"
           ></v-text-field>
-          </template>
-          <span>请选择一个标签再进行搜索哦</span>
-          </v-tooltip>
         </v-card-title>
         <v-row justify="center">
           <v-chip-group active-class="primary--text">
-            <v-chip
-              v-for="(tag,i) in tags"
-              :key="i"
-              @click="choosedTag = tag.Tag"
-            >
+            <v-chip v-for="(tag, i) in tags" :key="i" @click="search = tag.Tag">
               {{ tag.Tag }}
             </v-chip>
           </v-chip-group>
         </v-row>
-        <v-container>
-          <el-table :data="groups" border style="width: 100%">
-            <el-table-column fixed sortable prop="GroupID" label="圈子编号">
-            </el-table-column>
-            <el-table-column prop="GroupName" sortable label="名称">
-            </el-table-column>
-            <el-table-column prop="Tag" label="标签" sortable>
-            </el-table-column>
-            <el-table-column prop="CreateID" label="创建者ID" sortable>
-            </el-table-column>
-            <el-table-column prop="CreateTime" label="创建时间" sortable>
-            </el-table-column>
-            <el-table-column prop="MemberNum" label="人数" sortable>
-            </el-table-column>
-            <el-table-column prop="Introduce" label="简介" sortable>
-            </el-table-column>
-            <el-table-column label="操作">
-              <template slot-scope="scope">
-                <el-button
-                  :to="'/Group/GroupIndex/' + scope.row.GroupID"
-                  type="text"
-                  >查看</el-button
-                >
-                <el-button @click="join(scope.row.GroupID)" type="text"
-                  >申请加入</el-button
-                >
-              </template>
-            </el-table-column>
-          </el-table>
-        </v-container>
+        <v-data-table :headers="headers" :items="groups" :search="search">
+          <template v-slot:item.action="{ item }">
+          <v-btn text color="cyan" :to="'/Group/GroupIndex/' + item.groupID"> 查看 </v-btn>
+        </template>
+        </v-data-table>
+        
       </v-card>
     </v-container>
   </div>
@@ -106,25 +70,40 @@ export default {
           Tag: "IT",
         },
       ],
-      groups: [],
+      groups: [
+        
+      ],
+      headers: [
+        {
+          text: "名称",
+          align: "start",
+          value: "groupName",
+        },
+        { text: "圈子ID", value: "groupID" },
+        { text: "标签", value: "tag" },
+        { text: "人数", value: "memberNum" },
+        { text: "简介", value: "introduce" },
+        { text: "创建者ID", value: "createID" },
+        { text: "操作", value: "action" },
+      ],
     };
   },
   components: {
     bar,
+  },
+  created() {
+    this.searchGroup();
   },
   methods: {
     searchGroup() {
       this.$http({
         method: "post",
         url: "/searchGroup",
-        data: {
-          GroupName: this.search,
-          Tag: this.choosedTag,
-        },
       })
         .then((res) => {
+          console.log(res.data);
           if (res.data.success) {
-            this.group = res.data.group;
+            this.groups = res.data.group;
           }
         })
         .catch((e) => {
