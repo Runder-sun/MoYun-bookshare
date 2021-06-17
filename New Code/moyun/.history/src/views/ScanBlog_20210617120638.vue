@@ -355,6 +355,7 @@ export default({
             BlogID: this.blog.blogID,
           },
             }).then((res) => {
+              alert("收藏");
               if (res.data.success) {
                 this.isCollect=!this.isCollect;
               }
