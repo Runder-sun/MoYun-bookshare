@@ -47,7 +47,7 @@
                             close
                             @click:close="selected.splice(i, 1)"
                         >
-                            <v-avatar left :src="'/images/' +selection.headImage">                                
+                            <v-avatar left :src="selection.headImage">                                
                             </v-avatar>
                             {{ selection.username }}
                         </v-chip>
@@ -79,7 +79,7 @@
                         <v-list-item-avatar>
                             <v-img
                             :disabled="loading"
-                            :src="'/images/' +item.headImage"
+                            :src="item.headImage"
                             ></v-img>
                         </v-list-item-avatar>
                         <v-list-item-title v-text="item.username"></v-list-item-title>                       
@@ -180,7 +180,7 @@
                         <v-list-item-avatar>
                             <v-img
                             :disabled="loading1"
-                            :src="'/images/' +item.headImage"
+                            :src=" item.headImage"
                             ></v-img>
                         </v-list-item-avatar>
                         <v-list-item-title v-text="item.username"></v-list-item-title>
@@ -223,63 +223,63 @@ export default {
       {
       userID:1,
       username:"Jeff",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/set7.jpg"
     },{
       userID:2,
       username:"Tay",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/UpdatesB1.jpg"
     },{
       userID:3,
       username:"Ann",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/realLogo.png"
     },{
       userID:4,
       username:"Vincent",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/UpdatesA3.jpg"
     },
     {
       userID:5,
       username:"Vivian",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/set7.jpg"
     },{
       userID:6,
       username:"Kathorine",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/UpdatesB1.jpg"
     },{
       userID:7,
       username:"Victoria",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/UpdatesB2.jpg"
     },
     ],
       blockList:[
         {
       userID:12,
       username:"Josh",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/widthPic.jpg"
     },{
       userID:22,
       username:"Candice",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/bg.jpg"
     },{
       userID:32,
       username:"Anncy",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/UpdatesA2.jpg"
     },{
       userID:42,
       username:"Walmart",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/UpdatesB2.jpg"
     },{
       userID:5,
       username:"Trump",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/realLogo.png"
     },{
       userID:6,
       username:"Kathy",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/UpdatesA3.jpg"
     },{
       userID:7,
       username:"Amber",
-      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
+      headImage:"../assets/set9.jpg"
     },
       ],
     loading: false,
