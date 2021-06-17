@@ -84,7 +84,7 @@ import bar from "../components/Bar.vue"
 				v => !!v || '内容不能为空',
 			],
     }),
-    created:function(){
+    created(){
       this.show();
     },
     components:{
@@ -125,11 +125,12 @@ import bar from "../components/Bar.vue"
             BlogID : this.$route.params.id,
           }
         }).then((res)=>{
-            console.log(res.data);
            if(res.data.success){
+              console.log(res.data);
               this.blog=res.data.blogInfo;
            }
-          }).catch((err)=>{
+          })
+          .catch((err)=>{
             console.log(err);
           })
       }
