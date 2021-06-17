@@ -31,7 +31,7 @@
                     <v-list-item class="grow">
                       <v-list-item-title
                         class="title font-weight-bold black--text"
-                        >{{ this.blogDTUsers[index].username }}</v-list-item-title
+                        >{{ blogDTUsers[index].username }}</v-list-item-title
                       >
                       <v-list-item-avatar color="grey darken-3">
                         <v-img
@@ -214,7 +214,6 @@ export default {
           console.log(res.data);
           this.blogDT = res.data.blogDT;
           this.blogDTUsers = res.data.blogDTUser;
-          console.log(this.blogDTUsers);
         })
         .catch((err) => {
           console.log(err);
@@ -262,8 +261,8 @@ export default {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  width:100%;
-  height:100%;
+  width:100vw;
+  height:100vh;
 }
 
 @keyframes gradient {
