@@ -90,10 +90,11 @@
                     <v-divider></v-divider>
 
                     <v-card-actions>
+                    <v-spacer></v-spacer>
                     <v-btn
-
+                        fixed
                         bottom
-
+                        
                         :disabled="!selected.length"
                         :loading="loading"
                         color="purple"
