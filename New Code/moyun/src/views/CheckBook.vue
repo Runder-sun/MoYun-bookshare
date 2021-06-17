@@ -10,7 +10,7 @@
           <el-button type="success" round v-if="isCollect" @click="cancelCare">取消收藏</el-button>
           <el-button type="success" round v-else @click="care">收藏</el-button>
           <el-button type="info" round v-if="$store.state.person.userID == this.bookAdder.userID" @click="toEditBook">编辑</el-button>
-          <el-button type="warning" v-if="$store.state.person.userID == this.bookAdder.userID" round @click="deleteBook">删除</el-button>
+          <el-button type="warning" v-if="$store.state.person.userID == this.bookAdder.userID" round @click="deleteBook(this.book.bookID)">删除</el-button>
           <el-button type="danger" round @click="downloadBook(this.book.link)">阅读</el-button>
           
         </v-toolbar>
@@ -141,11 +141,11 @@ export default {
     toCheckBookReview(bookReviewID){
         this.$router.push({ path: "/Book/CheckBookReview/"+ bookReviewID});
     },
-    deleteBook(){
+    deleteBook(bookID){
         this.$http({
-        method: "get",
+        method: "post",
         url: "/deleteBook",
-        params: {bookID: this.$route.params.id,}
+        params: {bookID: bookID}
       })
         .then((res) => {
           if (res.data.success) {

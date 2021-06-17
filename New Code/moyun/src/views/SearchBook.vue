@@ -108,6 +108,7 @@ export default {
       })
         .then((res) => {
           if (res.data.success) {
+            console.log(res.data)
             this.book = res.data.book;
           }
         })
