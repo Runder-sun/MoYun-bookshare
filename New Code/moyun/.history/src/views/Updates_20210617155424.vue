@@ -31,12 +31,12 @@
                     <v-list-item class="grow">
                       <v-list-item-title
                         class="title font-weight-bold black--text"
-                        >{{ blogDTUsers[index].username }}</v-list-item-title
+                        >{{ this.blogDTUsers[index].username }}</v-list-item-title
                       >
                       <v-list-item-avatar color="grey darken-3">
                         <v-img
                           class="elevation-6"
-                          :src="'/images/' + blogDTUsers[index].headImage"
+                          :src="'/images/' + this.blogDTUsers[index].headImage"
                         ></v-img>
                       </v-list-item-avatar>
                     </v-list-item>
@@ -76,7 +76,7 @@
                         class="title font-weight-bold black--text"
                         >{{ bookReviewDTUsers[index].username }}</v-list-item-title
                       >
-                      <v-list-item-avatar >
+                      <v-list-item-avatar color="grey darken-3">
                         <v-img
                           class="elevation-6"
                           :src="'/images/' + bookReviewDTUsers[index].headImage"
@@ -167,10 +167,16 @@ export default {
   data: () => ({
     Bookflag: true,
     fab: false,
-    blogDT: [],
-    bookReviewDT: [],
+    blogDT: [
 
-    blogDTUsers: [],
+    ],
+    bookReviewDT: [
+
+    ],
+
+    blogDTUsers: [
+
+    ],
     bookReviewDTUsers: [],
   }),
   components: {

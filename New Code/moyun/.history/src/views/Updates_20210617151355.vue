@@ -36,7 +36,7 @@
                       <v-list-item-avatar color="grey darken-3">
                         <v-img
                           class="elevation-6"
-                          :src="'/images/' + blogDTUsers[index].headImage"
+                          :src="'/images/' + this.blogDTUsers[index].headImage"
                         ></v-img>
                       </v-list-item-avatar>
                     </v-list-item>
@@ -76,7 +76,7 @@
                         class="title font-weight-bold black--text"
                         >{{ bookReviewDTUsers[index].username }}</v-list-item-title
                       >
-                      <v-list-item-avatar >
+                      <v-list-item-avatar color="grey darken-3">
                         <v-img
                           class="elevation-6"
                           :src="'/images/' + bookReviewDTUsers[index].headImage"
@@ -167,10 +167,16 @@ export default {
   data: () => ({
     Bookflag: true,
     fab: false,
-    blogDT: [],
-    bookReviewDT: [],
+    blogDT: [
 
-    blogDTUsers: [],
+    ],
+    bookReviewDT: [
+
+    ],
+
+    blogDTUsers: [
+
+    ],
     bookReviewDTUsers: [],
   }),
   components: {
@@ -208,7 +214,6 @@ export default {
           console.log(res.data);
           this.blogDT = res.data.blogDT;
           this.blogDTUsers = res.data.blogDTUser;
-          console.log(this.blogDTUsers);
         })
         .catch((err) => {
           console.log(err);
@@ -256,8 +261,8 @@ export default {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  width:100%;
-  height:100%;
+  width:100vw;
+  height:100vh;
 }
 
 @keyframes gradient {

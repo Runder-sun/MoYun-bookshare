@@ -76,7 +76,7 @@
                         class="title font-weight-bold black--text"
                         >{{ bookReviewDTUsers[index].username }}</v-list-item-title
                       >
-                      <v-list-item-avatar >
+                      <v-list-item-avatar color="grey darken-3">
                         <v-img
                           class="elevation-6"
                           :src="'/images/' + bookReviewDTUsers[index].headImage"

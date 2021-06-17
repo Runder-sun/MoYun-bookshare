@@ -150,7 +150,7 @@
                         >
                             <v-avatar left src="https://cdn.vuetifyjs.com/images/john.jpg">                                
                             </v-avatar>
-                            {{ selection1.username }}
+                            {{ selection1.name }}
                         </v-chip>
                         </v-col>
 
@@ -219,10 +219,8 @@ import bar from "../components/Bar.vue";
 export default {
   inject: ["reload"],
   data: () => ({
-    followList: [
-    ],
-      blockList:[
-      ],
+    followList: [],
+      blockList:[],
     loading: false,
     loading1: false,
     search: '',

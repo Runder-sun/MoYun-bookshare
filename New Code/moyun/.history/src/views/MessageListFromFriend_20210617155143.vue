@@ -54,7 +54,7 @@
         <v-main app>
           <v-container fluid class="pa-4 text-center" direction="horizontal">
             <v-row>
-              <v-card width="1200px" class="mx-auto" style="margin-top: 50px" min-height="600"> 
+              <v-card width="1200px" class="mx-auto" style="margin-top: 50px">
                 <v-toolbar dense text-align="center" justify="center">
                   <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
@@ -81,17 +81,17 @@
 
                     <v-list-item
                       :key="item.title"
-                      v-if="getUser.userID === item.getID"
+                      v-if="getUser[0].userID === item.getID"
                     >
                       <v-list-item-avatar>
                         <v-img
-                          :src="'/images/' + getUser.headImage"
+                          :src="'/images/' + getUser[0].headImage"
                         ></v-img>
                       </v-list-item-avatar>
 
                       <v-list-item-content>
                         <v-list-item-title
-                          v-html="getUser.username"
+                          v-html="getUser[0].username"
                         ></v-list-item-title>
                         <v-list-item-subtitle
                           v-html="item.message"
@@ -102,13 +102,13 @@
                     <v-list-item :key="item.title" v-else>
                       <v-list-item-avatar>
                         <v-img
-                          :src="'/images/' + sendUser.headImage"
+                          :src="'/images/' + sendUser[0].headImage"
                         ></v-img>
                       </v-list-item-avatar>
 
                       <v-list-item-content>
                         <v-list-item-title
-                          v-html="sendUser.username"
+                          v-html="sendUser[0].username"
                         ></v-list-item-title>
                         <v-list-item-subtitle
                           v-html="item.message"
@@ -117,7 +117,7 @@
                     </v-list-item>
                   </template>
                 </v-list>
-                <v-card-action style="margin-bottom:10px">
+                <v-card-action>
                   <v-form align="bottom" absolute bottom>
                     <v-container>
                       <v-row>
@@ -259,8 +259,7 @@ export default {
     },
 
     sendMessage() {
-      if(this.message!==''){
-        this.$http({
+      this.$http({
         method: "post",
         url: "/SendMessage",
         data: {
@@ -275,10 +274,6 @@ export default {
           alert("发送信息失败！");
         }
       });
-      }
-      else {
-        alert("消息为空，无法发送！");
-      }
       this.resetIcon();
       this.clearMessage();
     },

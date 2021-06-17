@@ -82,7 +82,7 @@
                             :src="'/images/' +item.headImage"
                             ></v-img>
                         </v-list-item-avatar>
-                        <v-list-item-title v-text="item.username"></v-list-item-title>                       
+                        <v-list-item-title v-text="item.username"></v-list-item-title>
                         </v-list-item>
                     </template>
                     </v-list>
@@ -90,6 +90,7 @@
                     <v-divider></v-divider>
 
                     <v-card-actions>
+                    <v-spacer></v-spacer>
                     <v-btn
 
                         bottom
@@ -150,7 +151,7 @@
                         >
                             <v-avatar left src="https://cdn.vuetifyjs.com/images/john.jpg">                                
                             </v-avatar>
-                            {{ selection1.username }}
+                            {{ selection1.name }}
                         </v-chip>
                         </v-col>
 
@@ -219,10 +220,8 @@ import bar from "../components/Bar.vue";
 export default {
   inject: ["reload"],
   data: () => ({
-    followList: [
-    ],
-      blockList:[
-      ],
+    followList: [],
+      blockList:[],
     loading: false,
     loading1: false,
     search: '',
@@ -320,7 +319,6 @@ export default {
         url: "/FollowListAndBlacklist",
       })
         .then((res) => {
-          console.log(res.data);
           this.blockListProperty=res.data.Blacklist;
           this.blockList=res.data.BlacklistUser;
           this.followListProperty=res.data.FollowList;
@@ -335,7 +333,7 @@ export default {
         var neededID;
         for(var toCancel in this.selected){
             for(var property in this.followListProperty){
-              if(property.followedID===toCancel.userID){
+              if(property.followedID===this.toCancel.userID){
                 neededID=property.followListID;
                 this.$http({
                   method: "post",
@@ -344,9 +342,7 @@ export default {
                     FollowListID:neededID,
                   },
                 }).then((res) => {
-                  console.log(res.data);
-                  if (res.data.success) {
-                    alert("Failed!");
+                  if (res.data.success===1) {
                     }
                 }).catch(err=>{
                   console.log(err);
@@ -367,7 +363,7 @@ export default {
                   method: "post",
                   url: "/cancelBlackList",
                   data: {
-                    BlacklistID:neededID,
+                    BlackListID:neededID,
                   },
                 }).then((res) => {
                   if (res.data.success) {
@@ -394,8 +390,8 @@ export default {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  width:100%;
-  height:100%;
+  width:100vw;
+  height:100vh;
 }
 
 @keyframes gradient {

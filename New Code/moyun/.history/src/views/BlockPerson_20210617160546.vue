@@ -150,7 +150,7 @@
                         >
                             <v-avatar left src="https://cdn.vuetifyjs.com/images/john.jpg">                                
                             </v-avatar>
-                            {{ selection1.username }}
+                            {{ selection1.name }}
                         </v-chip>
                         </v-col>
 
@@ -220,9 +220,16 @@ export default {
   inject: ["reload"],
   data: () => ({
     followList: [
+      {username:"123",
+      headImage:"123"},
+      {username:"123",
+      headImage:"123"},
+      {username:"123",
+      headImage:"123"},
+      {username:"123",
+      headImage:"123"},
     ],
-      blockList:[
-      ],
+      blockList:[],
     loading: false,
     loading1: false,
     search: '',
