@@ -180,16 +180,16 @@ export default {
       "mdi-emoticon-sad",
       "mdi-emoticon-tongue",
     ],
-    sendUser: {
+    sendUser: [{
       userID:33,
-      username:"我:",
+      username:"Me",
       headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-    },
-    getUser: {
+    }],
+    getUser: [{
       userID:34,
-      username:"亲故:",
+      username:"MessageTarget",
       headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-    },
+    }],
     messageTargetList: [
       {
       userID:1,
@@ -222,24 +222,7 @@ export default {
       headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
     },
     ],
-    friends: [{
-      getID:33,
-      sendID:34,
-      message:"What do u think...",
-    },{
-      getID:34,
-      sendID:33,
-      message:"Hmmmmm",
-    },
-    {
-      getID:33,
-      sendID:34,
-      message:"不然今晚不出门了？",
-    },{
-      getID:34,
-      sendID:33,
-      message:"coooooool",
-    },],
+    friends: [],
     systemMessageList: [{
       getID:33,
       sendID:34,
@@ -284,6 +267,7 @@ export default {
 
   created:function() {
     this.showFriMsg();
+    this.initList();
   },
 
   computed: {
@@ -371,8 +355,20 @@ export default {
       this.resetIcon();
       this.clearMessage();
     },
+
+      initList() {
+        this.myInterval = window.setInterval(() => {
+          setTimeout(() => {
+            this.showFriMsg();
+          }, 1);
+        }, 5000);
+      },
+
   },
 
+  destroyed() {
+    clearInterval(this.myInterval);
+  },
 };
 </script>
 

@@ -182,12 +182,12 @@ export default {
     ],
     sendUser: {
       userID:33,
-      username:"我:",
+      username:"我",
       headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
     },
     getUser: {
       userID:34,
-      username:"亲故:",
+      username:"亲故",
       headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
     },
     messageTargetList: [
@@ -284,6 +284,7 @@ export default {
 
   created:function() {
     this.showFriMsg();
+    this.initList();
   },
 
   computed: {
@@ -371,8 +372,20 @@ export default {
       this.resetIcon();
       this.clearMessage();
     },
+
+      initList() {
+        this.myInterval = window.setInterval(() => {
+          setTimeout(() => {
+            this.showFriMsg();
+          }, 1);
+        }, 5000);
+      },
+
   },
 
+  destroyed() {
+    clearInterval(this.myInterval);
+  },
 };
 </script>
 

@@ -92,7 +92,7 @@
                       <v-list-item-content>
                         <v-list-item-title
                           v-html="getUser.username"
-                        ></v-list-item-title>
+                        >我觉得可以</v-list-item-title>
                         <v-list-item-subtitle
                           v-html="item.message"
                         ></v-list-item-subtitle>
@@ -180,16 +180,16 @@ export default {
       "mdi-emoticon-sad",
       "mdi-emoticon-tongue",
     ],
-    sendUser: {
+    sendUser: [{
       userID:33,
-      username:"我:",
+      username:'我',
       headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-    },
-    getUser: {
+    }],
+    getUser: [{
       userID:34,
-      username:"亲故:",
+      username:'亲故',
       headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
-    },
+    }],
     messageTargetList: [
       {
       userID:1,
@@ -284,6 +284,7 @@ export default {
 
   created:function() {
     this.showFriMsg();
+    this.initList();
   },
 
   computed: {
@@ -371,8 +372,20 @@ export default {
       this.resetIcon();
       this.clearMessage();
     },
+
+      initList() {
+        this.myInterval = window.setInterval(() => {
+          setTimeout(() => {
+            this.showFriMsg();
+          }, 1);
+        }, 5000);
+      },
+
   },
 
+  destroyed() {
+    clearInterval(this.myInterval);
+  },
 };
 </script>
 

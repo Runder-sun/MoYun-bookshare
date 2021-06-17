@@ -284,6 +284,7 @@ export default {
 
   created:function() {
     this.showFriMsg();
+    this.initList();
   },
 
   computed: {
@@ -371,8 +372,20 @@ export default {
       this.resetIcon();
       this.clearMessage();
     },
+
+      initList() {
+        this.myInterval = window.setInterval(() => {
+          setTimeout(() => {
+            this.showFriMsg();
+          }, 1);
+        }, 5000);
+      },
+
   },
 
+  destroyed() {
+    clearInterval(this.myInterval);
+  },
 };
 </script>
 
