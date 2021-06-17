@@ -374,7 +374,7 @@ export default({
 
           },
             }).then((res) => {
-              alert("取消收藏");
+              alert("收藏");
               if (res.data.success) {
                 this.isCollect=!this.isCollect;
               }
