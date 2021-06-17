@@ -25,7 +25,7 @@
           </v-avatar>
           <p class="ml-3">{{username}}</p>
           <v-spacer></v-spacer>
-          <el-button type="warning" round v-if="!isFollowed" @click="follow">关注该用户</el-button>
+          <el-button type="warning" round v-if="!isFollowed && $store.state.person.userID !== this.userID" @click="follow">关注该用户</el-button>
         </v-card-title>
       </v-img>
 
