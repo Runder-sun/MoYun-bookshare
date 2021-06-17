@@ -157,7 +157,8 @@ export default {
         });
     },
     downloadBook(link){
-       window.open("http://39.105.38.175/download/"+link);
+      let url="http://39.105.38.175/download/"+link
+       window.open(url);
     },
     cancelCare(){
         this.$http({
