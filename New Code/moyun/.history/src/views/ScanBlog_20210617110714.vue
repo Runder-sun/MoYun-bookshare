@@ -346,18 +346,18 @@ export default({
         this.dialog=false
       },
       collect(){
-        console.log(this.isCollect);
         if(!this.isCollect){
           this.$http({
           method: "post",
           url: "/CollectBlog",
           data: {
             BlogID: this.blog.blogID,
+
           },
             }).then((res) => {
               alert("收藏");
               if (res.data.success) {
-                this.blog.isCollect=!this.isCollect;
+                this.blog.isCollect=0;
               }
               else{
                 alert("收藏失败！");
@@ -377,7 +377,7 @@ export default({
             }).then((res) => {
               alert("收藏");
               if (res.data.success) {
-                this.isCollect=!this.isCollect;
+                this.blog.isCollect=1;
               }
               else{
                 alert("取消收藏失败！")
