@@ -178,7 +178,7 @@ export default {
       this.$http({
         method: "post",
         url: "/inspectBook",
-        get: {bookID:this.$route.params.id,}
+        data: {bookID:this.$route.params.id,}
       })
         .then((res) => {
           if (res.data.success) {
