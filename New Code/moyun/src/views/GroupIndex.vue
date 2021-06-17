@@ -379,8 +379,7 @@ export default {
         });
     },
     refuse(item,user) {
-      this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
-      this.groupApplyUser = [...this.groupApplyUser];
+      
       //var a = {
       //  GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
       //  GroupID: this.$route.params.id,
@@ -395,10 +394,11 @@ export default {
           GroupID: this.$route.params.id,
         },
       });
-    },
-    acceptApply(item,user) {
       this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
       this.groupApplyUser = [...this.groupApplyUser];
+    },
+    acceptApply(item,user) {
+      
       var a = {
         GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
         GroupID: this.$route.params.id,
@@ -417,9 +417,12 @@ export default {
         },
       }).then(res=>{
         if(res.data.success){
+          
           this.reload()
         }
       });
+      this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
+      this.groupApplyUser = [...this.groupApplyUser];
     },
     apply() {
       var a = { GroupID: this.$route.params.id };
