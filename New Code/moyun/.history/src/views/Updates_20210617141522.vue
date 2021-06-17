@@ -264,14 +264,14 @@ export default {
           console.log(err);
         });
 
-//      for (var blog in this.blogDT) {
-//        for (var user in this.blogDTUsers) {
-//          if (blog.authorID === user.userID) {
-//            blog.append(author, user.username);
-//            blog.append(authorImage, user.headImage);
-//          }
-//        }
-//      }
+      for (var blog in this.blogDT) {
+        for (var user in this.blogDTUsers) {
+          if (blog.authorID === user.userID) {
+            blog.append(author, user.username);
+            blog.append(authorImage, user.headImage);
+          }
+        }
+      }
       console.log(this.blogDT);
     },
     showRW() {
@@ -287,14 +287,14 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-//      for (var rw in this.bookReviewDT) {
-//        for (var user in this.bookReviewDT) {
-//          if (rw.userID === user.userID) {
-//            rw.append(author, user.username);
-//            rw.append(authorImage, user.headImage);
-//          }
-//        }
-//      }
+      for (var rw in this.bookReviewDT) {
+        for (var user in this.bookReviewDT) {
+          if (rw.userID === user.userID) {
+            rw.append(author, user.username);
+            rw.append(authorImage, user.headImage);
+          }
+        }
+      }
       console.log(this.bookReviewDT);
     },
   },
