@@ -11,7 +11,7 @@
           <el-button type="success" round v-else @click="care">收藏</el-button>
           <el-button type="info" round v-if="$store.state.person.userID == this.bookAdder.userID" @click="toEditBook">编辑</el-button>
           <el-button type="warning" v-if="$store.state.person.userID == this.bookAdder.userID" round @click="deleteBook">删除</el-button>
-          <el-button type="danger" round @click="downloadBook">下载</el-button>
+          <el-button type="danger" round @click="downloadBook(this.book.link)">阅读</el-button>
           
         </v-toolbar>
             <v-img
@@ -156,8 +156,8 @@ export default {
           console.log(err);
         });
     },
-    downloadBook(){
-       alert("下载成功");
+    downloadBook(link){
+       window.open("http://39.105.38.175/download/"+link);
     },
     cancelCare(){
         this.$http({
