@@ -10,8 +10,8 @@
           <el-button type="success" round v-if="isCollect" @click="cancelCare">取消收藏</el-button>
           <el-button type="success" round v-else @click="care">收藏</el-button>
           <el-button type="info" round v-if="$store.state.person.userID == this.bookAdder.userID" @click="toEditBook">编辑</el-button>
-          <el-button type="warning" v-if="$store.state.person.userID == this.bookAdder.userID" round @click="deleteBook(this.book.bookID)">删除</el-button>
-          <el-button type="danger" round @click="downloadBook(this.book.link)">阅读</el-button>
+          <el-button type="warning" v-if="$store.state.person.userID == this.bookAdder.userID" round @click="deleteBook(book.bookID)">删除</el-button>
+          <el-button type="danger" round @click="downloadBook(book.link)">阅读</el-button>
           
         </v-toolbar>
             <v-img
@@ -78,7 +78,9 @@
 import Bar from "../components/Bar.vue";
 export default {
   data: () => ({
-    book:{},
+    book:{
+
+    },
     bookAdder:{
       userID:"2"
     },
@@ -145,7 +147,7 @@ export default {
         this.$http({
         method: "post",
         url: "/deleteBook",
-        params: {bookID: bookID}
+        data: {BookID: bookID}
       })
         .then((res) => {
           if (res.data.success) {
