@@ -17,7 +17,7 @@
             <v-img
               class="white--text align-end"
               height="250px"
-              :src="'/images/'+this.book.bookImage"
+              :src="'/'+this.book.bookImage"
             >
               <v-card-title>
                 <v-col>

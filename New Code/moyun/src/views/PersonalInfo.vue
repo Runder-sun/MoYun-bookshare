@@ -14,12 +14,12 @@
 
       <v-img
         height="250"
-        :src="'/images/'+this.backGroundImage"
+        :src="'/'+this.backGroundImage"
       >
         <v-card-title class="white--text mt-8">
           <v-avatar size="56">
             <img
-                :src="'/images/'+this.headImage"
+                :src="'/'+this.headImage"
                 :alt="this.username"
               />
           </v-avatar>
@@ -120,6 +120,7 @@ export default {
             this.userID = res.data.userInfo.userID;
             this.signature = res.data.userInfo.signature;
             this.isFollowed = res.data.isFollowed;
+            this.$store.commit("setUserHeadImage",res.data.userInfo.headImage );
           }
         })
         .catch((err) => {

@@ -48,7 +48,7 @@
                       width="300"
                       height="400"
                     >
-                      <v-img :src="'/images/'+group.groupImage" height="225px">
+                      <v-img :src="'/'+group.groupImage" height="225px">
                         <v-card-title >
                           <v-row
                             class="fill-height flex-column"
@@ -109,7 +109,7 @@
                       @click="toCheckBook(book)"
                     >
                       <v-img
-                        :src="'/images/'+book.bookImage"
+                        :src="'/'+book.bookImage"
                         height="225px"
                         
                       >

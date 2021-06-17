@@ -47,7 +47,7 @@
               
             <p >
               <v-avatar size="30">
-              <img :src="'/images/'+bookReviewCommentUser[i].headImage"/>
+              <img :src="'/'+bookReviewCommentUser[i].headImage"/>
             </v-avatar>
               {{bookReviewCommentUser[i].username}}
               ——

@@ -22,7 +22,7 @@
               :to="'/PersonalInfo/' + user.userID"
               class="lxtAva"
             >
-              <img :src="'/images/'+user.headImage" :alt="user.username" />
+              <img :src="'/'+user.headImage" :alt="user.username" />
             </v-avatar>
             {{ user.username }}
             <v-spacer></v-spacer>
@@ -33,7 +33,7 @@
         <v-list-item-group active-class="deep-purple--text text--accent-4">
           <v-list-item v-for="(member, i) in members" :key="i">
             <v-list-item-avatar :to="'/PersonalInfo/' + member.userID">
-              <img :src="'/images/' + member.headImage" />
+              <img :src="'/' + member.headImage" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-text="member.username"></v-list-item-title>
@@ -138,7 +138,7 @@
 
         <v-list-item three-line>
           <v-list-item-avatar left size="200" color="grey">
-            <img :src="'/images/' + group.groupImage" />
+            <img :src="'/' + group.groupImage" />
           </v-list-item-avatar>
           <v-list-item-content>
             <div class="headline mb-3" style="margin-left: 70px">
