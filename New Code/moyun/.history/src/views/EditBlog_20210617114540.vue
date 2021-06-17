@@ -73,7 +73,7 @@ import bar from "../components/Bar.vue"
     data: () => ({
       blog:[
         {
-          blogTitle:1,
+          Title:1,
           content:2,
         }
       ],

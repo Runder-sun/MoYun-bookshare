@@ -73,13 +73,13 @@ import bar from "../components/Bar.vue"
     data: () => ({
       blog:[
         {
-          blogTitle:1,
+          Title:1,
           content:2,
         }
       ],
       validSave:true,
       validCancel:true,
-      save:true,
+
       snackbar: false,
       titleRules: [
 				v => !!v || '题目不能为空',

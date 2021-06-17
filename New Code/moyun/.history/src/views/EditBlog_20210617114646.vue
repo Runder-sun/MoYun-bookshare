@@ -8,7 +8,7 @@
                       <v-container fluid>
                         <v-col cols="12">
                           <v-textarea color="teal" 
-                            v-model="blog.blogTitle" 
+                            v-model="this.blog.blogTitle" 
                             :counter="30" 
                             required
                             :rules="titleRules">
@@ -17,7 +17,7 @@
                             </template>
                           </v-textarea>
                           <v-textarea color="teal" 
-                            v-model="blog.content" 
+                            v-model="this.blog.content" 
                             :counter="300" 
                             required
                             :rules="contentRules">
