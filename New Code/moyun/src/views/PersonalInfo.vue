@@ -14,16 +14,18 @@
 
       <v-img
         height="250"
-        :src="'/images/'+this.backGroundImage"
+        :src="'/'+this.backGroundImage"
       >
         <v-card-title class="white--text mt-8">
           <v-avatar size="56">
             <img
-                :src="'/images/'+this.headImage"
+                :src="'/'+this.headImage"
                 :alt="this.username"
               />
           </v-avatar>
           <p class="ml-3">{{username}}</p>
+          <v-spacer></v-spacer>
+          <el-button type="warning" round v-if="!isFollowed && $store.state.person.userID !== this.userID" @click="follow">关注该用户</el-button>
         </v-card-title>
       </v-img>
 
@@ -56,6 +58,7 @@
 import Bar from "../components/Bar.vue";
 export default {
   data: () => ({
+      isFollowed:false,
       loading: false,
       email:"",
       birthday:null,
@@ -71,6 +74,24 @@ export default {
   },
 
   methods: {
+    follow(){
+      this.$http({
+        method: "post",
+        url: "/addFollow",
+        data: {
+          FollowedID:this.$route.params.id,
+        },
+      })
+        .then((res) => {
+          if (res.data.success) {
+            this.isFollowed = true;
+            alert("关注成功");
+          } 
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     toChangePersonalInfo() {
       this.$router.push({ path: "/ChangePersonalInfo" });
     },
@@ -98,6 +119,8 @@ export default {
             this.birthday = res.data.userInfo.birthday;
             this.userID = res.data.userInfo.userID;
             this.signature = res.data.userInfo.signature;
+            this.isFollowed = res.data.isFollowed;
+            this.$store.commit("setUserHeadImage",res.data.userInfo.headImage );
           }
         })
         .catch((err) => {

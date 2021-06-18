@@ -13,9 +13,9 @@
                 <v-container>
                   <p>
                     <v-avatar size="30" color="#96CDCD">
-                      <template v-if="forumMessageUser[i].headImage !==undefined">
+                      <template v-if="forumMessageUser[i].headImage !==null">
                         <img
-                          :src="'/images/' + forumMessageUser[i].headImage"
+                          :src="'/' + forumMessageUser[i].headImage"
                         />
                       </template>
                       <template v-else>

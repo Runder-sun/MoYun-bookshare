@@ -9,15 +9,15 @@
           <v-spacer></v-spacer>
           <el-button type="success" round v-if="isCollect" @click="cancelCare">取消收藏</el-button>
           <el-button type="success" round v-else @click="care">收藏</el-button>
-          <el-button type="info" round v-if="$store.state.person.userID==this.bookAdder.userID" @click="toEditBook">编辑</el-button>
-          <el-button type="warning" v-if="$store.state.person.userID==this.bookAdder.userID" round @click="deleteBook">删除</el-button>
-          <el-button type="danger" round @click="downloadBook">下载</el-button>
+          <el-button type="info" round v-if="$store.state.person.userID == this.bookAdder.userID" @click="toEditBook">编辑</el-button>
+          <el-button type="warning" v-if="$store.state.person.userID == this.bookAdder.userID" round @click="deleteBook(book.bookID)">删除</el-button>
+          <el-button type="danger" round @click="downloadBook(book.link)">阅读</el-button>
           
         </v-toolbar>
             <v-img
               class="white--text align-end"
               height="250px"
-              :src="'/images/'+this.book.BookImage"
+              :src="'/'+this.book.bookImage"
             >
               <v-card-title>
                 <v-col>
@@ -32,7 +32,7 @@
 
             <v-card-subtitle class="pb-0 text-right" >
               <p>{{this.book.publisher}}</p>
-              <p>ISBN号：{{this.book.ISBN}}</p>
+              <p>ISBN号：{{this.book.isbn}}</p>
             </v-card-subtitle>
 
             <v-card-text class="text--primary short">
@@ -52,12 +52,14 @@
         <el-table :data="bookReviewList" style="width: 100%" height="400" stripe :header-cell-style="{'text-align':'center'}"
     :cell-style="{'text-align':'center'}">
           <el-table-column fixed prop="reviewTime" label="发布日期" width="150" ></el-table-column>
-          <el-table-column prop="title" label="题目" width="200"></el-table-column>
-          <el-table-column prop="author" label="作者" width="120"></el-table-column>
-          <el-table-column prop="content" label="书评内容" width="200"></el-table-column>
-          <el-table-column prop="score" label="评分" width="100"></el-table-column>
+          <el-table-column prop="title" label="题目" width="170"></el-table-column>
+          <el-table-column prop="userID" label="作者" width="120"></el-table-column>
+          <el-table-column prop="content" label="书评内容" width="320"></el-table-column>
+          <el-table-column prop="score" label="评分" width="50"></el-table-column>
           <el-table-column align="right">
-              <el-button type="warning" round class="check" @click="toCheckBookReview('bookReviewID')">查看</el-button>
+               <template slot-scope="scope">
+              <el-button type="warning" round class="check" @click="toCheckBookReview(scope.row.bookReviewID)">查看</el-button>
+              </template>
           </el-table-column>
         </el-table>
         <el-pagination background center layout="prev, pager, next" :total="1000" class="pages">
@@ -76,7 +78,9 @@
 import Bar from "../components/Bar.vue";
 export default {
   data: () => ({
-    book:[],
+    book:{
+
+    },
     bookAdder:{
       userID:"2"
     },
@@ -101,9 +105,9 @@ export default {
   methods: {
     initCheckBook() {
       this.$http({
-        method: "get",
+        method: "post",
         url: "/inspectBook",
-        params: { BookID :this.$route.params.id,}
+        data: { BookID :this.$route.params.id,}
       })
         .then((res) => {
           if (res.data.success) {
@@ -131,19 +135,19 @@ export default {
       console.log(file);
     },
     toWriteBookReview(){
-      this.$router.push({ path: "/Book/WriteBookReview" +this.book.bookID});
+      this.$router.push({ path: "/Book/WriteBookReview/" +this.book.bookID});
     },
     toEditBook(){
         this.$router.push({ path: "/Book/EditBook/" +this.book.bookID});
     },
     toCheckBookReview(bookReviewID){
-        this.$router.push({ path: "/Book/CheckBookReview"+ bookReviewID});
+        this.$router.push({ path: "/Book/CheckBookReview/"+ bookReviewID});
     },
-    deleteBook(){
+    deleteBook(bookID){
         this.$http({
-        method: "get",
+        method: "post",
         url: "/deleteBook",
-        params: {bookID: this.$route.params.id,}
+        data: {BookID: bookID}
       })
         .then((res) => {
           if (res.data.success) {
@@ -154,15 +158,16 @@ export default {
           console.log(err);
         });
     },
-    downloadBook(){
-       alert("下载成功");
+    downloadBook(link){
+      let url="http://39.105.38.175/download/"+link
+       window.open(url);
     },
     cancelCare(){
         this.$http({
         method: "post",
-        url: "/cancelCollectionBook",
+        url: "/cancelCollectBook",
         data: {
-          bookCollectionID:this.$route.params.id,
+          BookID:this.$route.params.id,
         },
       })
         .then((res) => {
@@ -179,7 +184,7 @@ export default {
         method: "post",
         url: "/collectBook",
         data: {
-          bookID:this.$route.params.id,
+          BookID:this.$route.params.id,
         },
       })
         .then((res) => {

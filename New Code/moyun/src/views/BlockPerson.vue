@@ -15,6 +15,7 @@
                         max-height="30000"
                         :elevation="hover ? 12 : 2"
                         :class="{ 'on-hover': hover }"
+                        min-height="600"
                     >
                     <v-toolbar
                     flat
@@ -46,7 +47,7 @@
                             close
                             @click:close="selected.splice(i, 1)"
                         >
-                            <v-avatar left :src="'/images/' +selection.headImage">                                
+                            <v-avatar left :src="selection.headImage">                                
                             </v-avatar>
                             {{ selection.username }}
                         </v-chip>
@@ -78,10 +79,10 @@
                         <v-list-item-avatar>
                             <v-img
                             :disabled="loading"
-                            :src="'/images/' +item.headImage"
+                            :src="item.headImage"
                             ></v-img>
                         </v-list-item-avatar>
-                        <v-list-item-title v-text="item.username"></v-list-item-title>
+                        <v-list-item-title v-text="item.username"></v-list-item-title>                       
                         </v-list-item>
                     </template>
                     </v-list>
@@ -89,8 +90,10 @@
                     <v-divider></v-divider>
 
                     <v-card-actions>
-                    <v-spacer></v-spacer>
                     <v-btn
+
+                        bottom
+
                         :disabled="!selected.length"
                         :loading="loading"
                         color="purple"
@@ -113,6 +116,7 @@
                         width="500"
                         :elevation="hover ? 12 : 2"
                         :class="{ 'on-hover': hover }"
+                        min-height="600"
                     >
                     <v-toolbar
                     flat
@@ -146,7 +150,7 @@
                         >
                             <v-avatar left src="https://cdn.vuetifyjs.com/images/john.jpg">                                
                             </v-avatar>
-                            {{ selection1.name }}
+                            {{ selection1.username }}
                         </v-chip>
                         </v-col>
 
@@ -176,7 +180,7 @@
                         <v-list-item-avatar>
                             <v-img
                             :disabled="loading1"
-                            :src="'/images/' +item.headImage"
+                            :src=" item.headImage"
                             ></v-img>
                         </v-list-item-avatar>
                         <v-list-item-title v-text="item.username"></v-list-item-title>
@@ -215,8 +219,69 @@ import bar from "../components/Bar.vue";
 export default {
   inject: ["reload"],
   data: () => ({
-    followList: [],
-      blockList:[],
+    followList: [
+      {
+      userID:1,
+      username:"Jeff",
+      headImage:"../assets/set7.jpg"
+    },{
+      userID:2,
+      username:"Tay",
+      headImage:"../assets/UpdatesB1.jpg"
+    },{
+      userID:3,
+      username:"Ann",
+      headImage:"../assets/realLogo.png"
+    },{
+      userID:4,
+      username:"Vincent",
+      headImage:"../assets/UpdatesA3.jpg"
+    },
+    {
+      userID:5,
+      username:"Vivian",
+      headImage:"../assets/set7.jpg"
+    },{
+      userID:6,
+      username:"Kathorine",
+      headImage:"../assets/UpdatesB1.jpg"
+    },{
+      userID:7,
+      username:"Victoria",
+      headImage:"../assets/UpdatesB2.jpg"
+    },
+    ],
+      blockList:[
+        {
+      userID:12,
+      username:"Josh",
+      headImage:"../assets/widthPic.jpg"
+    },{
+      userID:22,
+      username:"Candice",
+      headImage:"../assets/bg.jpg"
+    },{
+      userID:32,
+      username:"Anncy",
+      headImage:"../assets/UpdatesA2.jpg"
+    },{
+      userID:42,
+      username:"Walmart",
+      headImage:"../assets/UpdatesB2.jpg"
+    },{
+      userID:5,
+      username:"Trump",
+      headImage:"../assets/realLogo.png"
+    },{
+      userID:6,
+      username:"Kathy",
+      headImage:"../assets/UpdatesA3.jpg"
+    },{
+      userID:7,
+      username:"Amber",
+      headImage:"../assets/set9.jpg"
+    },
+      ],
     loading: false,
     loading1: false,
     search: '',
@@ -276,8 +341,8 @@ export default {
       },
     },
 
-    created(){
-      this.showGuys;
+    created:function(){
+      //this.showGuys();
     },
 
     watch: {
@@ -311,9 +376,10 @@ export default {
       showGuys(){
         this.$http({
         method: "get",
-        url: "/FollowListAndBalcklist",
+        url: "/FollowListAndBlacklist",
       })
         .then((res) => {
+          console.log(res.data);
           this.blockListProperty=res.data.Blacklist;
           this.blockList=res.data.BlacklistUser;
           this.followListProperty=res.data.FollowList;
@@ -328,7 +394,7 @@ export default {
         var neededID;
         for(var toCancel in this.selected){
             for(var property in this.followListProperty){
-              if(property.followedID===this.toCancel.userID){
+              if(property.followedID===toCancel.userID){
                 neededID=property.followListID;
                 this.$http({
                   method: "post",
@@ -337,7 +403,9 @@ export default {
                     FollowListID:neededID,
                   },
                 }).then((res) => {
-                  if (res.data.success===1) {
+                  console.log(res.data);
+                  if (res.data.success) {
+                    alert("Failed!");
                     }
                 }).catch(err=>{
                   console.log(err);
@@ -358,7 +426,7 @@ export default {
                   method: "post",
                   url: "/cancelBlackList",
                   data: {
-                    BlackListID:neededID,
+                    BlacklistID:neededID,
                   },
                 }).then((res) => {
                   if (res.data.success) {
@@ -382,11 +450,25 @@ export default {
 
 <style scoped>
 .block{
-    background:url("../assets/widthPic.jpg");
-    width:100%;
-    height:100%;
-    background-size:100% 100%;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  width:100%;
+  height:100%;
 }
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 
 	.card {
 		position: absolute;

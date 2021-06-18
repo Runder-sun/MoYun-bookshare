@@ -3,19 +3,45 @@
     <v-app>
       <bar></bar>
       <v-container>
-        <el-form ref="form" :rules="rules" :model="form" label-width="380px">
-          <v-container>
-            <el-form-item label="图书名称" prop="bookName">
-              <el-input
-                v-model="form.bookName"
-                placeholder="请输入图书名称"
-                clearable
-              ></el-input>
-            </el-form-item>
-            <el-form-item label="图书分类" prop="kind">
-              <v-col cols="12" sm="6">
+      <div class="cardlx">
+        <div class="front">
+          <v-form>
+            <v-container fluid>
+              <v-col cols="12">
+                <v-file-input show-size counter chips multiple label="上传图书图片" v-model="ImageFile"></v-file-input>
+                <v-file-input show-size counter chips multiple label="上传电子书资源" v-model="BookFile"></v-file-input>
+                <v-text-field
+                  v-model="bookName"
+                  :rules="bookNameRules"
+                  color="blue darken-2"
+                  label="图书名称"
+                  required
+                ></v-text-field>
+                <v-text-field
+                  v-model="author"
+                  :rules="authorRules"
+                  color="blue darken-2"
+                  label="作者"
+                  required
+                ></v-text-field>
+                <v-text-field
+                  v-model="ISBN"
+                  :rules="ISBNRules"
+                  color="blue darken-2"
+                  label="ISBN号"
+                  required
+                ></v-text-field>
+                <v-text-field
+                  v-model="publisher"
+                  :rules="publisherRules"
+                  color="blue darken-2"
+                  label="出版社"
+                  required
+                ></v-text-field>
+                <v-col cols="12" sm="6">
                 <v-select
-                  v-model="form.kind"
+                  :rules="kindRules"
+                  v-model="kind"
                   :items="kinds"
                   attach
                   chips
@@ -23,82 +49,30 @@
                 >
                 </v-select>
               </v-col>
-            </el-form-item>
-            <el-form-item label="作者" prop="author">
-              <el-input
-                v-model="form.author"
-                placeholder="请输入作者"
-                clearable
-              ></el-input>
-            </el-form-item>
-            <el-form-item label="ISBN号" prop="ISBN">
-              <el-input
-                v-model="form.ISBN"
-                placeholder="请输入ISBN号"
-                clearable
-              ></el-input>
-            </el-form-item>
-            <el-form-item label="出版社" prop="publisher">
-              <el-input
-                v-model="form.publisher"
-                placeholder="请输入出版社"
-                clearable
-              ></el-input>
-            </el-form-item>
-            <el-form-item label="简介" prop="introduce">
-              <el-input
-                type="textarea"
-                v-model="form.introduce"
-                placeholder="请输入简介"
-                clearable
-              ></el-input>
-            </el-form-item>
-            <el-form-item label="上传封面" prop="filebookcover">
-              <el-upload
-                class="upload-demo"
-                ref="upload"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
-                :auto-upload="false"
-				:on-success="handleAvatarSuccess1"
-                :before-upload="beforeAvatarUpload1"
-              >
-                <el-button slot="trigger" size="small" type="primary"
-                  >选取文件</el-button
-                >
-                <div slot="tip" class="el-upload__tip">
-                  只能上传jpg/png文件，且不超过2MB
-                </div>
-              </el-upload>
-            </el-form-item>
-            <el-form-item label="上传电子书" prop="fileebook">
-              <el-upload
-                class="upload-demo"
-                ref="upload"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
-                :auto-upload="false"
-				:on-success="handleAvatarSuccess2"
-                :before-upload="beforeAvatarUpload2"
-              >
-                <el-button slot="trigger" size="small" type="primary"
-                  >选取文件</el-button
-                >
-                <div slot="tip" class="el-upload__tip">
-                  只能上传pdf文件，且不超过500kb
-                </div>
-              </el-upload>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary" @click="onSubmitAndCheck('form')"
-                >添加并查看新书</el-button
-              >
-            </el-form-item>
-          </v-container>
-        </el-form>
-      </v-container>
+                <v-textarea v-model="introduce" :rules="introduceRules" color="teal">
+                  <template v-slot:label>
+                    <div>该书简介</div>
+                  </template>
+                </v-textarea>
+              </v-col>
+              <v-btn class="button" large @click="onSubmitAndCheck">
+                <p class="create">上传图书</p>
+              </v-btn>
+            </v-container>
+          </v-form>
+        </div>
+        <v-snackbar
+        v-model="snackbar"
+        :timeout="3000"
+        color="blue-grey"
+        absolute
+        rounded="pill"
+        top
+      >
+        {{ message }}
+      </v-snackbar>
+      </div>
+    </v-container>
     </v-app>
   </div>
 </template>
@@ -121,128 +95,62 @@ export default {
       "IT",
       "数学",
     ],
-    value: [],
-    form: {
+      
+      snackbar: false,
+    message: "error",
+
       bookName: "",
       author: "",
       ISBN: "",
       publisher: "",
       introduce: "",
-      delivery: false,
       kind:"",
-      resource: "",
-	  files:[
-		  {fileebook:null},
-		  {filebookcover:null},
-	  ],
-    },
-    rules: {
-      bookName: [
-        {
-          required: true,
-          message: "请输入图书名称",
-          trigger: "blur",
-        },
-        {
-          min: 2,
-          max: 30,
-          message: "长度在 2 到 30 个字符",
-          trigger: "blur",
-        },
-      ],
-      kind: [
-        {
-          required: true,
-          message: "请选择图书分类",
-          trigger: "blur",
-        },
-      ],
-      author: [
-        {
-          required: true,
-          message: "请输入作者",
-          trigger: "blur",
-        },
-        {
-          min: 2,
-          max: 30,
-          message: "长度在 2 到 30 个字符",
-          trigger: "blur",
-        },
-      ],
-      ISBN: [
-        {
-          required: true,
-          message: "请输入ISBN号",
-          trigger: "blur",
-        },
-        {
-          min: 2,
-          max: 50,
-          message: "长度在 2 到 30 个字符",
-          trigger: "blur",
-        },
-      ],
-      publisher: [
-        {
-          required: true,
-          message: "请输入出版社",
-          trigger: "blur",
-        },
-        {
-          min: 2,
-          max: 100,
-          message: "长度在 2 到 30 个字符",
-          trigger: "blur",
-        },
-      ],
-      introduce: [
-        {
-          required: true,
-          message: "请输入简介",
-          trigger: "blur",
-        },
-        {
-          min: 2,
-          max: 300,
-          message: "长度在 2 到 300个字符",
-          trigger: "blur",
-        },
-      ],
-    },
+      ImageFile:null,
+		  BookFile:null,
+
+      bookNameRules: [(v) => !!v || "请填写图书名称"],
+      publisherRules: [(v) => !!v || "请填写图书出版商"],
+      introduceRules: [(v) => !!v || "请填写图书简介"],
+      kindRules: [(v) => !!v || "请选择图书分类"],
+      authorRules: [(v) => !!v || "请填写图书作者"],
+      ISBNRules: [(v) => !!v || "请填写图书ISBN号"],
   }),
 
   methods: {
-    onSubmitAndCheck(ruleForm) {
-      this.$refs[ruleForm].validate((valid) => {
-        if (valid) {
-		  this.$http({
-            method: "post",
-            url: "/uploadBook",
-            data: {
-              BookName:this.form.bookName,
-              ISBN:this.form.ISBN,
-			  Introduce:this.form.introduce,
-			  Kind:this.form.kind,
-              Author:this.form.author,
-              Publisher:this.publisher,
-              Files:this.files,
-            },
-          })
-            .then((res) => {
-              this.message = res.data.message;
-              if (res.data.success) {
-                alert("上传成功");
-              }
-			  else{
-				  alert("上传失败");
-			  }
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+    onSubmitAndCheck() {
+      let data = new FormData();
+      for(let file of this.ImageFile){
+        data.append("ImageFile", file,file.name)
+      }
+      for(let file of this.BookFile){
+        data.append("BookFile", file,file.name)
+      }
+      data.append('BookName',this.bookName)
+      data.append('Author',this.author)
+      data.append('ISBN',this.ISBN)
+      data.append('Publisher',this.publisher)
+      data.append('Introduce',this.introduce)
+      data.append('Kind',this.kind)
+      this.$http({
+        method: "post",
+        url: "/uploadBook",
+        data: data,
+      }).then((res) => {
+        console.log(res.data)
+        if (res.data.success) {
+          this.message="创建成功！"
+          this.snackbar=true
+          this.timer = setTimeout(() => {
+              //设置延迟执行
+              this.$router.push({ path: "/Book/BookWareHouse" });
+            }, 1000);
+        }else{
+          this.message="创建失败！"
+          this.snackbar=true
         }
       });
+      this.message="创建成功！"
+          this.snackbar=true
     },
 
 
@@ -252,46 +160,97 @@ export default {
     handlePreview(file) {
       console.log(file);
     },
-
-	handleAvatarSuccess1(res, file) {
-      this.form.files.filebookcover=file
-    },
-    beforeAvatarUpload1(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.message="上传头像图片只能是 JPG 格式!"
-        this.snackbar = true
-      }
-      if (!isLt2M) {
-        this.message="上传头像图片大小不能超过 2MB!"
-        this.snackbar = true
-      }
-
-      return isJPG && isLt2M;
-    },
-	handleAvatarSuccess2(res, file) {
-      this.form.files.fileebook=file
-    },
-    beforeAvatarUpload2(file) {
-      const isPDF = file.type === "pdf";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.message="上传电子书文件只能是 JPG 格式!"
-        this.snackbar = true
-      }
-      if (!isLt2M) {
-        this.message="上传电子书文件不能超过 2MB!"
-        this.snackbar = true
-      }
-
-      return isPDF && isLt2M;
-    },
   },
   components: {
     Bar,
   },
 };
 </script>
+
+<style>
+.createGroup {
+  background-color: #efeeee;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardlx {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 800px;
+  width: 600px;
+  z-index: 1;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.cardlx .front {
+  position: absolute;
+  text-align: center;
+  box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.1),
+    -12px -12px 24px rgba(255, 255, 255, 1);
+  border-radius: 3rem;
+  background-color: #efeeee;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.cardlx .front {
+  z-index: 1;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #5d5d6d;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  top: 10px;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #2a436e;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+.button {
+  color: #596275;
+  box-shadow: 9px 9px 18px rgba(0, 0, 0, 0.1),
+    -9px -9px 18px rgba(255, 255, 255, 1);
+  border-radius: 3rem;
+  transition: box-shadow 0.2s ease-out;
+  background-color: #efeeee;
+  position: relative;
+  top: 0px;
+  margin-top: 20px;
+  width: 130px;
+  height: 55px;
+  outline: none;
+  border: none;
+}
+.button:hover {
+  font-size: 19px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2),
+    -1px -1px 2px rgba(255, 255, 255, 0.8);
+  border-radius: 3rem;
+  transition: box-shadow 0.2s ease-out;
+  transition: font-size 0.2s ease-out;
+}
+.create {
+  font-size: 20px;
+  margin-top: 15px;
+}
+</style>

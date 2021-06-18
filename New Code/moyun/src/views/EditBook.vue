@@ -176,14 +176,14 @@ export default {
   methods: {
     getEditInit() {
       this.$http({
-        method: "get",
+        method: "post",
         url: "/inspectBook",
-        params: {bookID:this.$route.params.id,}
+        data: {BookID:this.$route.params.id,}
       })
         .then((res) => {
           if (res.data.success) {
             this.form.bookName = res.data.book.bookName;
-            this.form.ISBN = res.data.book.ISBN;
+            this.form.ISBN = res.data.book.isbn;
             this.form.publisher = res.data.book.publisher;
             this.form.introduce = res.data.book.introduce;
             this.form.kind = res.data.book.kind;

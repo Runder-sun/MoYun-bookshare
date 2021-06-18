@@ -10,11 +10,11 @@
         <el-menu-item :to="'/'">首页</el-menu-item>
         <el-submenu index="2">
           <template slot="title">书库</template>
-          <el-menu-item index="/Book/BookReview">书评</el-menu-item>
-          <el-menu-item index="/Book/BookWareHouse">书籍</el-menu-item>
+          <el-menu-item @click="toBookReview">书评</el-menu-item>
+          <el-menu-item  @click="toBookWareHouse">书籍</el-menu-item>
         </el-submenu>
-        <el-menu-item index="/Group/GroupList">圈子</el-menu-item>
-        <el-menu-item index="/updates">动态</el-menu-item>
+        <el-menu-item  @click="toGroupList">圈子</el-menu-item>
+        <el-menu-item  @click="toUpdates">动态</el-menu-item>
       </el-menu>
       <v-row justify="end">
         <template v-if="this.$store.state.login">
@@ -43,12 +43,13 @@
                     <v-card
                       :elevation="hover ? 24 : 2"
                       :class="{ 'on-hover': hover }"
-                      :to="'/Group/GroupIndex/' + group.groupID"
+                      
+                      @click="toGroupIndex(group)"
                       width="300"
                       height="400"
                     >
-                      <v-img :src="'/images/'+group.groupImage" height="225px">
-                        <v-card-title >
+                      <v-img :src="'/'+group.groupImage" height="400px">
+                        <v-card-title class="white--text mt-8">
                           <v-row
                             class="fill-height flex-column"
                             justify="space-between"
@@ -104,13 +105,15 @@
                       :class="{ 'on-hover': hover }"
                       width="300"
                       height="400"
+                      
+                      @click="toCheckBook(book)"
                     >
                       <v-img
-                        :src="'/images/'+book.bookImage"
-                        height="225px"
-                        :to="'/Book/CheckBook/'+book.bookID"
+                        :src="'/'+book.bookImage"
+                        height="400px"
+                        
                       >
-                        <v-card-title >
+                        <v-card-title class="white--text mt-8">
                           <v-row
                             class="fill-height flex-column"
                             justify="space-between"
@@ -180,6 +183,7 @@ export default {
         url: "/Home",
       })
         .then((res) => {
+          console.log(res.data)
           this.books = res.data.hotBook;
           this.groups = res.data.hotGroup;
         })
@@ -187,6 +191,48 @@ export default {
           console.log(err);
         });
     },
+    toBookReview(){
+      if(this.$store.state.login){
+        this.$router.push({path:"/Book/BookReview"})
+      }else{
+        this.$router.push({path:"/Login"})
+      }
+    },
+    toBookWareHouse(){
+      if(this.$store.state.login){
+        this.$router.push({path:"/Book/BookWareHouse"})
+      }else{
+        this.$router.push({path:"/Login"})
+      }
+    },
+    toGroupList(){
+      if(this.$store.state.login){
+        this.$router.push({path:"/Group/GroupList"})
+      }else{
+        this.$router.push({path:"/Login"})
+      }
+    },
+    toUpdates(){
+      if(this.$store.state.login){
+        this.$router.push({path:"/updates"})
+      }else{
+        this.$router.push({path:"/Login"})
+      }
+    },
+    toGroupIndex(group){
+      if(this.$store.state.login){
+        this.$router.push({path:'/Group/GroupIndex/' + group.groupID})
+      }else{
+        this.$router.push({path:"/Login"})
+      }
+    },
+    toCheckBook(book){
+      if(this.$store.state.login){
+        this.$router.push({path:'/Book/CheckBook/'+book.bookID})
+      }else{
+        this.$router.push({path:"/Login"})
+      }
+    }
   },
 };
 </script>

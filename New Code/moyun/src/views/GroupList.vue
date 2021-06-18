@@ -18,7 +18,7 @@
             <v-tabs v-model="tab">
               <v-tab>热门圈子</v-tab>
               <v-tab>我的圈子</v-tab>
-
+              <v-tab>收藏圈子</v-tab>
               <v-tab-item>
                   <v-container class="pa-4 text-center">
                     <v-row class="fill-height" align="center" justify="center">
@@ -31,8 +31,8 @@
                               width="300"
                               :to="'/Group/GroupIndex/' + group.groupID"
                             >
-                              <v-img :src="'/images/'+group.groupImage" height="225px">
-                                <v-card-title >
+                              <v-img :src="'/'+group.groupImage" height="225px">
+                                <v-card-title  class="white--text mt-8">
                                   <v-row
                                     class="fill-height flex-column"
                                     justify="space-between"
@@ -85,7 +85,61 @@
                               width="300"
                               :to="'/Group/GroupIndex/' + group.groupID"
                             >
-                              <v-img :src="'/images/'+group.groupImage" height="225px">
+                              <v-img :src="'/'+group.groupImage" height="225px">
+                                <v-card-title class="white--text mt-8">
+                                  <v-row
+                                    class="fill-height flex-column"
+                                    justify="space-between"
+                                  >
+                                    <p class="mt-4 subheading text-left">
+                                      {{ group.groupName }}
+                                    </p>
+
+                                    <div>
+                                      <p
+                                        class="
+                                          ma-0
+                                          body-1
+                                          font-weight-bold font-italic
+                                          text-left
+                                        "
+                                      >
+                                        {{ group.tag }}
+                                      </p>
+                                      <p
+                                        class="
+                                          caption
+                                          font-weight-medium font-italic
+                                          text-left
+                                        "
+                                      >
+                                        {{ group.introduce }}
+                                      </p>
+                                    </div>
+                                  </v-row>
+                                </v-card-title>
+                              </v-img>
+                            </v-card>
+                          </v-hover>
+                        </v-col>
+                      </template>
+                    </v-row>
+                  </v-container>
+              </v-tab-item>
+
+              <v-tab-item>
+                  <v-container class="pa-4 text-center">
+                    <v-row class="fill-height" align="center" justify="center">
+                      <template v-for="(group, i) in collectGroups">
+                        <v-col :key="i" cols="12" md="3">
+                          <v-hover v-slot="{ hover }">
+                            <v-card
+                              :elevation="hover ? 7 : 2"
+                              :class="{ 'on-hover': hover }"
+                              width="300"
+                              :to="'/Group/GroupIndex/' + group.groupID"
+                            >
+                              <v-img :src="'/'+group.groupImage" height="225px">
                                 <v-card-title >
                                   <v-row
                                     class="fill-height flex-column"
@@ -126,6 +180,7 @@
                     </v-row>
                   </v-container>
               </v-tab-item>
+              
             </v-tabs>
           </template>
         </v-toolbar>
@@ -141,12 +196,14 @@ export default {
     tab:null,
     hotGroups: [],
     myGroups: [],
+    collectGroups:[],
   }),
   components: {
     Bar,
   },
   created() {
     this.showGroupList();
+    this.showCollectionList();
   },
   methods: {
     showGroupList() {
@@ -157,6 +214,17 @@ export default {
         console.log(res.data)
           this.hotGroups = res.data.HotGroup;
           this.myGroups = res.data.UserGroup;
+        }).catch((err) => {
+          console.log(err);
+      });
+    },
+    showCollectionList() {
+      this.$http({
+        method: "get",
+        url: "/PersonalCollection",
+      }).then((res) => {
+        console.log(res.data)
+          this.collectGroups = res.data.groupCollectionGroup;
         }).catch((err) => {
           console.log(err);
       });

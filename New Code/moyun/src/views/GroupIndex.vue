@@ -14,7 +14,7 @@
             close
             label
             text-color="white"
-            @click:close="refuse(user)"
+            @click:close="refuse(user, groupApplyList[i])"
           >
             <v-avatar
               left
@@ -22,24 +22,35 @@
               :to="'/PersonalInfo/' + user.userID"
               class="lxtAva"
             >
-              <img :src="'/images/'+user.headImage" :alt="user.username" />
+              <img :src="'/'+user.headImage" :alt="user.username" />
             </v-avatar>
             {{ user.username }}
             <v-spacer></v-spacer>
-            <v-btn text color="cyan" @click="acceptApply(user)"> 同意</v-btn>
+            <v-btn
+              text
+              color="cyan"
+              @click="acceptApply(user, groupApplyList[i])"
+            >
+              同意</v-btn
+            >
           </v-chip>
         </v-chip-group>
         <v-divider></v-divider>
         <v-list-item-group active-class="deep-purple--text text--accent-4">
           <v-list-item v-for="(member, i) in members" :key="i">
             <v-list-item-avatar :to="'/PersonalInfo/' + member.userID">
-              <img :src="'/images/' + member.headImage" />
+              <img :src="'/' + member.headImage" />
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title v-text="member.username"></v-list-item-title>
+              <v-spacer></v-spacer>
               <v-btn
                 v-if="$store.state.person.userID == group.createID"
+                text
+                color="red"
                 right
+                small
+                max-width="20px"
                 @click="removeMember(member)"
                 >删除</v-btn
               >
@@ -118,7 +129,10 @@
         <v-toolbar class="lxtToolbar elevation-1">
           <v-toolbar-title>圈子主页</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn v-if="!isMember" @click="apply" class="applyBtn"
+          <v-btn
+            v-if="!(isMember || $store.state.person.isTeacher)"
+            @click="apply"
+            class="applyBtn"
             >申请加入</v-btn
           >
           <template v-if="isCollect">
@@ -138,7 +152,7 @@
 
         <v-list-item three-line>
           <v-list-item-avatar left size="200" color="grey">
-            <img :src="'/images/' + group.groupImage" />
+            <img :src="'/' + group.groupImage" />
           </v-list-item-avatar>
           <v-list-item-content>
             <div class="headline mb-3" style="margin-left: 70px">
@@ -263,6 +277,7 @@
       color="blue-grey"
       absolute
       rounded="pill"
+      top
     >
       {{ message }}
     </v-snackbar>
@@ -289,18 +304,11 @@ export default {
       isPrivate: false,
       groupImage: "",
     },
-    members: [
-      
-    ],
-    tasks: [
-      
-    ],
-    hotForum: [
-      
-    ],
-    groupApplyUser: [
-      
-    ],
+    members: [],
+    tasks: [],
+    hotForum: [],
+    groupApplyUser: [],
+    groupApplyList: [],
     model: 1,
     snackbar: false,
     message: "",
@@ -319,7 +327,7 @@ export default {
       this.$http({
         method: "get",
         url: "/GroupInfo",
-        params: { GroupID: this.$route.params.id }
+        params: { GroupID: this.$route.params.id },
       })
         .then((res) => {
           if (res.data.success) {
@@ -337,7 +345,7 @@ export default {
             this.members = res.data.MemberUser;
             this.hotForum = res.data.HotForum;
             this.isCollect = res.data.isCollect;
-            this.tasks=res.data.TaskList
+            this.tasks = res.data.TaskList;
           }
         })
         .catch((err) => {
@@ -352,7 +360,7 @@ export default {
     },
     getMemberApplyID(userID, memberList) {
       for (var i in memberList) {
-        if (userID === i.userID) {
+        if (userID === i.applyUserID) {
           return i.groupApplyID;
         }
       }
@@ -363,49 +371,70 @@ export default {
       this.$http({
         method: "get",
         url: "/GroupApplyList",
-        params: { GroupID: this.$route.params.id }
+        params: { GroupID: this.$route.params.id },
       })
         .then((res) => {
+          console.log(res.data);
           if (res.data.success) {
             this.groupApplyUser = res.data.GroupApplyUser;
+            this.groupApplyList = res.data.GroupApplyList;
           }
         })
         .catch((err) => {
           console.log(err);
         });
     },
-    refuse(item) {
-      this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
-      this.groupApplyUser = [...this.groupApplyUser];
-      var a = {
-        GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
-        GroupID: this.$route.params.id,
-      };
+    refuse(item, user) {
+      //var a = {
+      //  GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
+      //  GroupID: this.$route.params.id,
+      //};
+      let groupApplyID = this.getMemberApplyID(
+        item.userID,
+        this.groupApplyList
+      );
+      debugger;
       this.$http({
         method: "post",
         url: "/refuseApply",
         data: {
-          GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
+          GroupApplyID: user.groupApplyID,
           GroupID: this.$route.params.id,
         },
+      }).then((res) => {
+        this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
+        this.groupApplyUser = [...this.groupApplyUser];
       });
     },
-    acceptApply(item) {
-      this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
-      this.groupApplyUser = [...this.groupApplyUser];
+    acceptApply(item, user) {
       var a = {
-        GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
+        GroupApplyID: this.getMemberApplyID(item.userID, this.groupApplyList),
         GroupID: this.$route.params.id,
         UserID: item.userID,
       };
+      let groupApplyID = this.getMemberApplyID(
+        item.userID,
+        this.groupApplyList
+      );
+      console.log(item.userID);
+      console.log(user.groupApplyID);
+      console.log(user.applyUserID);
+      console.log(this.$route.params.id);
+      debugger;
       this.$http({
         method: "post",
         url: "/addMember",
         data: {
-          GroupApplyID: this.getMemberApplyID(item.userID, this.memberList),
+          GroupApplyID: user.groupApplyID,
           GroupID: this.$route.params.id,
           UserID: item.userID,
         },
+      }).then((res) => {
+        if (res.data.success) {
+          this.groupApplyUser.splice(this.groupApplyUser.indexOf(item), 1);
+          this.groupApplyUser = [...this.groupApplyUser];
+          this.reload();
+        }
       });
     },
     apply() {
@@ -414,19 +443,24 @@ export default {
         method: "post",
         url: "/applyGroup",
         data: { GroupID: this.$route.params.id },
-      }).then(res=>{
-        this.message="申请成功！"
-        this.snackbar=true;
+      }).then((res) => {
+        if (res.data.success) {
+          this.message = "申请成功！";
+          this.snackbar = true;
+        }
       });
     },
     removeMember(member) {
-      this.members.splice(this.members.indexOf(member), 1);
-      this.members = [...this.members];
       var a = { MemberID: member.userID };
       this.$http({
         method: "post",
         url: "/deleteMember",
         data: { MemberID: member.userID },
+      }).then((res) => {
+        if (res.data.success) {
+          this.members.splice(this.members.indexOf(member), 1);
+          this.members = [...this.members];
+        }
       });
     },
     collectGroup() {
