@@ -4,7 +4,7 @@
       <div class="front">
         <v-container>
           <v-form ref="form" v-model="valid" lazy-validation>
-            <img src="../assets/logo.png" id="logo" /><br />
+            <img src="../assets/realMo.png" id="logo" /><br />
             <v-row justify="center">
               <v-col cols="12" sm="10">
                 <v-text-field
