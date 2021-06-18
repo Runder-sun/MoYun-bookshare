@@ -49,7 +49,7 @@
                       height="400"
                     >
                       <v-img :src="'/'+group.groupImage" height="400px">
-                        <v-card-title class="white--text mt-8">
+                        <v-card-title >
                           <v-row
                             class="fill-height flex-column"
                             justify="space-between"

@@ -35,7 +35,11 @@
               v-bind:key="index"
               style="margin-left=5px"
             >
-              <v-list-item-avatar color="grey darken-1">
+              <v-list-item-avatar>
+                <img
+                  :src="'/images/' + item.headImage"
+                  :alt="item.username"
+                />
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="font-italic">{{
@@ -79,9 +83,9 @@
                       :key="item.title"
                       v-if="getUser.userID === item.getID"
                     >
-                      <v-list-item-avatar color="grey darken-1">
+                      <v-list-item-avatar>
                         <v-img
-                          :src="getUser.headImage"
+                          :src="'/images/' + getUser.headImage"
                         ></v-img>
                       </v-list-item-avatar>
 
@@ -96,9 +100,9 @@
                     </v-list-item>
 
                     <v-list-item :key="item.title" v-else>
-                      <v-list-item-avatar color="grey darken-1">
+                      <v-list-item-avatar>
                         <v-img
-                          :src=" sendUser.headImage"
+                          :src="'/images/' + sendUser.headImage"
                         ></v-img>
                       </v-list-item-avatar>
 
@@ -176,66 +180,49 @@ export default {
       "mdi-emoticon-sad",
       "mdi-emoticon-tongue",
     ],
-    sendUser: {
+    sendUser: [{
       userID:33,
-      username:"我:",
-      headImage:"../assets/UpdatesA3.jpg",
-    },
-    getUser: {
+      username:"Me",
+      headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
+    }],
+    getUser: [{
       userID:34,
-      username:"亲故:",
-      headImage:"../assets/UpdatesA2.jpg",
-    },
+      username:"MessageTarget",
+      headImage:"https://cdn.vuetifyjs.com/images/john.jpg",
+    }],
     messageTargetList: [
       {
       userID:1,
       username:"Jeff",
-      headImage:"../assets/UpdatesB2.jpg"
+      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
     },{
       userID:2,
       username:"Tay",
-      headImage:"../assets/UpdatesB1.jpg"
+      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
     },{
       userID:3,
       username:"Ann",
-      headImage:"../assets/UpdatesB3.jpg"
+      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
     },{
       userID:4,
       username:"Vincent",
-      headImage:"../assets/UpdatesB1.jpg"
+      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
     },
     {
       userID:5,
       username:"Vivian",
-      headImage:"../assets/UpdatesB3.jpg"
+      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
     },{
       userID:6,
       username:"Kathorine",
-      headImage:"../assets/UpdatesB2.jpg"
+      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
     },{
       userID:7,
       username:"Victoria",
-      headImage:"../assets/UpdatesB1.jpg"
+      headImage:"https://cdn.vuetifyjs.com/images/john.jpg"
     },
     ],
-    friends: [{
-      getID:33,
-      sendID:34,
-      message:"What do u think...",
-    },{
-      getID:34,
-      sendID:33,
-      message:"Hmmmmm",
-    },
-    {
-      getID:33,
-      sendID:34,
-      message:"不然今晚不出门了？",
-    },{
-      getID:34,
-      sendID:33,
-      message:"coooooool",
-    },],
+    friends: [],
     systemMessageList: [{
       getID:33,
       sendID:34,
@@ -254,24 +241,7 @@ export default {
       sendID:33,
       message:"coooooool",
     },],
-    userMessageList: [{
-      getID:33,
-      sendID:34,
-      message:"What do u think...",
-    },{
-      getID:34,
-      sendID:33,
-      message:"Hmmmmm",
-    },
-    {
-      getID:33,
-      sendID:34,
-      message:"不然今晚不出门了？",
-    },{
-      getID:34,
-      sendID:33,
-      message:"coooooool",
-    },],
+    userMessageList: [],
   }),
 
   components: {
@@ -279,7 +249,8 @@ export default {
   },
 
   created:function() {
-    //this.showFriMsg();
+    this.showFriMsg();
+    this.initList();
   },
 
   computed: {
@@ -367,8 +338,20 @@ export default {
       this.resetIcon();
       this.clearMessage();
     },
+
+      initList() {
+        this.myInterval = window.setInterval(() => {
+          setTimeout(() => {
+            this.showFriMsg();
+          }, 1);
+        }, 5000);
+      },
+
   },
 
+  destroyed() {
+    clearInterval(this.myInterval);
+  },
 };
 </script>
 

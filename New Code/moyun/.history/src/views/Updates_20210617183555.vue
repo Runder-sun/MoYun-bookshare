@@ -79,7 +79,7 @@
                       <v-list-item-avatar color="grey darken-3">
                         <v-img
                           class="elevation-6"
-                          :src=" bookReviewDTUsers[index].headImage"
+                          :src="'/' + bookReviewDTUsers[index].headImage"
                         ></v-img>
                       </v-list-item-avatar>
                     </v-list-item>

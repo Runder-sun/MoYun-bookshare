@@ -35,7 +35,8 @@
               v-bind:key="index"
               style="margin-left=5px"
             >
-              <v-list-item-avatar color="grey darken-1">
+              <v-list-item-avatar color="grey darken-4">
+
               </v-list-item-avatar>
               <v-list-item-content>
                 <v-list-item-title class="font-italic">{{
@@ -79,7 +80,7 @@
                       :key="item.title"
                       v-if="getUser.userID === item.getID"
                     >
-                      <v-list-item-avatar color="grey darken-1">
+                      <v-list-item-avatar color="grey lighten-4">
                         <v-img
                           :src="getUser.headImage"
                         ></v-img>
@@ -96,7 +97,7 @@
                     </v-list-item>
 
                     <v-list-item :key="item.title" v-else>
-                      <v-list-item-avatar color="grey darken-1">
+                      <v-list-item-avatar color="grey lighten-4">
                         <v-img
                           :src=" sendUser.headImage"
                         ></v-img>

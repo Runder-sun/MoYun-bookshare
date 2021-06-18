@@ -169,7 +169,7 @@ export default {
     fab: false,
     blogDT: [
       {
-        blogID: 1,
+        blogID: "1",
         blogTitle: "Just another day in paradise",
         content: `t takes some effort to reach the stunning Nā Pali Coast on the Hawaiian island of Kauai. Located on the island's northwest side and stretching about 16 miles, Nā Pali isn't accessible by car. You have to hike in, fly in by`,
         authorID: "Jeff",
@@ -179,7 +179,7 @@ export default {
         authorImage:"../assets/UpdatesA1.jpg"
       },
       {
-        blogID: 2,
+        blogID: "2",
         blogTitle: "Been Reading History",
         content: `Frenchman Jacques Marquette and French-Canadian Louis Jolliet set their canoes down on the river Native Americans called the "Mesipi," near what will be Prairie du Chien, Wisconsin. These early European explorers will map the huge waterway's course to within 435 miles of the Gulf of Mexico.
 `,
@@ -190,7 +190,7 @@ export default {
         authorImage:"../assets/UpdatesA1.jpg"
       },
       {
-        blogID: 3,
+        blogID: "3",
         blogTitle: "Put your flippers in the air…",
         content: `it's World Sea Turtle Day! The gentle giant seen here doing the wave was snapped mid-dive, headed to the seafloor near the Great Barrier Reef to munch some marine grass. The green sea turtle is among the larger of the seven sea turtle species, with some individuals reaching 5 feet in length and weighing 700 pounds. They live throughout the world's subtropical waters, and like other sea turtles, they migrate long distances for food. Despite all that traveling, they return to hatch their eggs on the same select nesting beaches where they were born.`,
         authorID: "Kol",
@@ -200,7 +200,7 @@ export default {
         authorImage:"../assets/UpdatesA2.jpg"
       },
       {
-        blogID: 4,
+        blogID: "4",
         blogTitle: "Thinking about life..",
         content: `Guys I'm back to Moyun now after a while of being sober!`,
         authorID: "Joe",

@@ -19,7 +19,12 @@
                 label="日志名称"
                 style="width: 35%">
                 </el-table-column>
-
+                <el-table-column 
+                sortable           
+                prop="writer"
+                label="日志作者"
+                style="width: 25%">
+                </el-table-column>
                 <el-table-column 
                 sortable           
                 prop="recentFinishTime"

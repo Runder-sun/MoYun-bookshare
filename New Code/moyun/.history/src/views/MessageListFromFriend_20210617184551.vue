@@ -79,7 +79,7 @@
                       :key="item.title"
                       v-if="getUser.userID === item.getID"
                     >
-                      <v-list-item-avatar color="grey darken-1">
+                      <v-list-item-avatar color="grey lighten-4">
                         <v-img
                           :src="getUser.headImage"
                         ></v-img>
@@ -96,7 +96,7 @@
                     </v-list-item>
 
                     <v-list-item :key="item.title" v-else>
-                      <v-list-item-avatar color="grey darken-1">
+                      <v-list-item-avatar color="grey lighten-4">
                         <v-img
                           :src=" sendUser.headImage"
                         ></v-img>

@@ -36,7 +36,7 @@
                       <v-list-item-avatar color="grey darken-3">
                         <v-img
                           class="elevation-6"
-                          :src="blogDTUsers[index].headImage"
+                          :src="'/images/' + blogDTUsers[index].headImage"
                         ></v-img>
                       </v-list-item-avatar>
                     </v-list-item>
@@ -57,9 +57,9 @@
                   max-width="800"
                   :elevation="hover ? 24 : 2"
                   :class="{ 'on-hover': hover }"
-                  :to=" item.bookReviewID"
+                  :to="'/images/' + item.bookReviewID"
                 >
-                  <v-card-title class="title font-weight-bold black--text" >
+                  <v-card-title class="title font-weight-bold black--text">
                     <v-icon large left color="grey darken-2">
                       mdi-twitter
                     </v-icon>
@@ -76,10 +76,10 @@
                         class="title font-weight-bold black--text"
                         >{{ bookReviewDTUsers[index].username }}</v-list-item-title
                       >
-                      <v-list-item-avatar color="grey darken-3">
+                      <v-list-item-avatar >
                         <v-img
                           class="elevation-6"
-                          :src=" bookReviewDTUsers[index].headImage"
+                          :src="'/images/' + bookReviewDTUsers[index].headImage"
                         ></v-img>
                       </v-list-item-avatar>
                     </v-list-item>
@@ -176,7 +176,7 @@ export default {
         personPhoto: "../assets/UpdatesA1",
         recentFinishTime: "2021-04-28",
         author:"Jeff",
-        authorImage:"../assets/UpdatesA1.jpg"
+        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
       },
       {
         blogID: 2,
@@ -187,7 +187,7 @@ export default {
         personPhoto: "../assets/UpdatesA1",
         recentFinishTime: "2021-04-28",
         author:"Kathy",
-        authorImage:"../assets/UpdatesA1.jpg"
+        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
       },
       {
         blogID: 3,
@@ -197,7 +197,7 @@ export default {
         personPhoto: "../assets/UpdatesA1",
         recentFinishTime: "2021-04-28",
         author:"Kol",
-        authorImage:"../assets/UpdatesA2.jpg"
+        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
       },
       {
         blogID: 4,
@@ -207,7 +207,7 @@ export default {
         personPhoto: "../assets/UpdatesA1",
         recentFinishTime: "2021-04-28",
         author:"Sik",
-        authorImage:"../assets/UpdatesA3.jpg"
+        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
       },
     ],
       bookReviewDT : [
@@ -218,7 +218,7 @@ export default {
         content: `This is a book about Jesus and how mankind react to atheism,deeply revealling the truth of religious...`,
         userID:'1',
         author:'Kathy',
-        authorImage:"../assets/UpdatesB1.jpg"
+        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
       },
       {
         bookReviewID: 2,
@@ -227,7 +227,7 @@ export default {
         content: `Kai Bird’s “The Outlier” takes a close look at the Carter administration and concludes that the 39th president deserves a better reputation.`,
         userID:'1',
         author:'Vince',
-        authorImage:"../assets/UpdatesB2.jpg"
+        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
       },
       {
         bookReviewID: 3,
@@ -236,7 +236,7 @@ export default {
         content: `Set in the Deep South just after the war, “The Sweetness of Water,” by Nathan Harris, includes death and violence. But its plotlines suggest a vision of race and sexual relations rarely depicted in fiction about the period.`,
         userID:'1',
         author:'Cardi',
-        authorImage:"../assets/UpdatesB2.jpg"
+        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
       },
       {
         bookReviewID: 4,
@@ -245,52 +245,20 @@ export default {
         content: `And whom would you trust along the way? These questions are the foundation of Caitlin Wahrer’s suspense novel, “The Damage.”`,
         userID:'1',
         author:'Jeff',
-        authorImage:"../assets/UpdatesB3.jpg"
+        authorImage:"https://cdn.vuetifyjs.com/images/john.jpg"
       },
     ],
 
-    blogDTUsers:[{
-      userID:1,
-      username:"Jeff",
-      headImage:"../assets/UpdatesB2.jpg"
-    },{
-      userID:2,
-      username:"Tay",
-      headImage:"../assets/UpdatesB2.jpg"
-    },{
-      userID:3,
-      username:"Ann",
-      headImage:"../assets/UpdatesB3.jpg"
-    },{
-      userID:4,
-      username:"Vincent",
-      headImage:"../assets/UpdatesB1.jpg"
-    },],
-    bookReviewDTUsers:[{
-      userID:1,
-      username:"Jeff",
-      headImage:"../assets/UpdatesB1.jpg"
-    },{
-      userID:2,
-      username:"Tay",
-      headImage:"../assets/UpdatesB3.jpg"
-    },{
-      userID:3,
-      username:"Ann",
-      headImage:"../assets/UpdatesB1.jpg"
-    },{
-      userID:4,
-      username:"Vincent",
-      headImage:"../assets/UpdatesB3.jpg"
-    },],
+    blogDTUsers:[],
+    bookReviewDTUsers:[],
   }),
   components: {
     bar,
   },
 
   created: function () {
-   // this.showUpdates();
-   // this.showRW();
+    this.showUpdates();
+    this.showRW();
   },
   methods: {
     changeToBook() {
