@@ -88,6 +88,7 @@ export default {
         { text: "类别", value: "kind" },
         { text: "作者", value: "author" },
         { text: "评分", value: "score" },
+        { text: "操作", value: "action" },
       ],
       book: [
 
